@@ -1,0 +1,1 @@
+This is my first ERP program I will try to write as training for a future job offer I had recently.  In this project I will try and create my own classes like UserManager, UserRole and SignInManager, to learn and understand the way they work. At the same time I will use Linq or Fluent API for the Database Queries and learn Microsoft SQL SSMS RDBMS.
