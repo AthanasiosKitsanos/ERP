@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "Qta74JfjoD27TOnzooUnLWDh3szoBCXrIwzurEc153E=",
+  "Source": "ErpProject",
+  "BasePath": "_content/ErpProject",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ErpProject\\wwwroot",
+      "Source": "ErpProject",
+      "ContentRoot": "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\wwwroot\\",
+      "BasePath": "_content/ErpProject",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}

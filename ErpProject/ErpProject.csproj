@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ErpApplication\" />
+    <Folder Include="ErpApplication\Interfaces\" />
+    <Folder Include="ErpApplication\Services\" />
+    <Folder Include="ErpCore\" />
+    <Folder Include="ErpCore\Helpers\" />
+    <Folder Include="ErpCore\Middleware\" />
+    <Folder Include="ErpDomain\" />
+    <Folder Include="ErpDomain\DTOs\" />
+    <Folder Include="ErpDomain\Models\" />
+    <Folder Include="ErpInfrastructure\" />
+    <Folder Include="ErpInfrastructure\ContextDb\" />
+    <Folder Include="ErpInfrastructure\Migrations\" />
+    <Folder Include="ErpInfrastructure\Repositories\" />
+    <Folder Include="ErpTests\" />
+    <Folder Include="ErpWeb\" />
+    <Folder Include="ErpWeb\Controllers\" />
+    <Folder Include="ErpWeb\Views\" />
+    <Folder Include="ErpWeb\wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
