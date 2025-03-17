@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ErpProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d8023ee0909c1b6362e06c716b2edc945c41871")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4b60c893096209e373f451a808f0f49685a7971")]
 [assembly: System.Reflection.AssemblyProductAttribute("ErpProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ErpProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
