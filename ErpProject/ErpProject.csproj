@@ -28,6 +28,7 @@
   <ItemGroup>
     <Folder Include="ContextDb\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\" />
   </ItemGroup>
 
