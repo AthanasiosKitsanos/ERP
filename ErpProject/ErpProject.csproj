@@ -17,7 +17,7 @@
     <Folder Include="ErpDomain\DTOs\" />
     <Folder Include="ErpDomain\Models\" />
     <Folder Include="ErpInfrastructure\" />
-    <Folder Include="ErpInfrastructure\ContextDb\" />
+    <Folder Include="ErpInfrastructure\Data\" />
     <Folder Include="ErpInfrastructure\Migrations\" />
     <Folder Include="ErpInfrastructure\Repositories\" />
     <Folder Include="ErpTests\" />
