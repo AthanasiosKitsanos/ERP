@@ -8,7 +8,7 @@ namespace MainProgram;
 
 class MainProgram
 {
-    public static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
