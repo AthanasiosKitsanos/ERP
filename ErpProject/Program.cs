@@ -19,14 +19,18 @@ class MainProgram
         using(var scope = app.Services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<ErpDbContext>();
-            var adminRole = new Roles { RoleName = "Admin" };
-            var managerRole = new Roles { RoleName = "Manager" };
-            var userRole = new Roles { RoleName = "User" };
+            
+            var active = new AccountStatus { StatusName = "Active" };
 
-            context.Roles.Add(adminRole);
-            context.Roles.Add(managerRole);
-            context.Roles.Add(userRole);
+            var inactive = new AccountStatus { StatusName = "Inactive" };
+
+            var blocked = new AccountStatus { StatusName = "Blocked" };
+
+            context.AccountStatus.Add(active);
+            context.AccountStatus.Add(inactive);
+            context.AccountStatus.Add(blocked);
             context.SaveChanges();
+
         }
 
         app.Run();
