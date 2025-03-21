@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using ErpProject.Models.EmployeeProfile;
+using ErpProject.Models.Payments;
 
 namespace ErpProject.ContextDb;
 
@@ -11,6 +12,7 @@ public class ErpDbContext: DbContext
 
     }
 
+    /// <summary>Employee Profile</summary>
     public DbSet<Employee> Employees { get; set; }
     public DbSet<EmploymentDetails> EmploymentDetails { get; set; }
     public DbSet<AdditionalDetails> AdditionalDetails { get; set; }
@@ -19,6 +21,10 @@ public class ErpDbContext: DbContext
     public DbSet<RoleEpmloyee> RoleEpmloyee { get; set; }
     public DbSet<EmployeeCredentials> EmployeeCredentials { get; set; }
     public DbSet<AccountStatus> AccountStatus { get; set; }
+
+    /// <summary>Payments</summary>
+    public DbSet<PayGrades> PayGrades { get; set; }
+    public DbSet<PayGradePerName> PayGradePerName { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

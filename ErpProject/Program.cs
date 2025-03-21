@@ -2,6 +2,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using ErpProject.ContextDb;
 using ErpProject.Models.EmployeeProfile;
+using ErpProject.Models.Payments;
 using System.Threading.Tasks;
 
 namespace MainProgram;
