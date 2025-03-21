@@ -30,7 +30,6 @@ class MainProgram
             context.AccountStatus.Add(inactive);
             context.AccountStatus.Add(blocked);
             context.SaveChanges();
-
         }
 
         app.Run();
