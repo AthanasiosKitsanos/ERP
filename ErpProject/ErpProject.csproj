@@ -30,4 +30,8 @@
     <Folder Include="Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Helpers\AgeCalculator.cs" />
+  </ItemGroup>
+
 </Project>
