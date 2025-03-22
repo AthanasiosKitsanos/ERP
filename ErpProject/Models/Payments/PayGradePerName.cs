@@ -1,12 +1,14 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpProject.Models.Payments;
 
 public class PayGradePerName
 {
     [Key]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string GradeName { get; set; } = string.Empty;
 

@@ -1,12 +1,14 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpProject.Models.EmployeeProfile;
 
 public class Employee
 {
     [Key]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string FirstName { get; set; } = string.Empty;
 

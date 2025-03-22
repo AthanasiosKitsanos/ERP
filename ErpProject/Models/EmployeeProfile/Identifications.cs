@@ -8,7 +8,8 @@ namespace ErpProject.Models.EmployeeProfile;
 public class Identifications
 {
     [Key]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string TIN { get; set; } = string.Empty;
 
@@ -16,7 +17,7 @@ public class Identifications
 
     public string TaxInformation { get; set; } = string.Empty;
 
-    public string EmployeeId { get; set; } = string.Empty;
+    public int EmployeeId { get; set; }
 
     [ForeignKey(nameof(EmployeeId))]
     public Employee Employee { get; set; }= null!;

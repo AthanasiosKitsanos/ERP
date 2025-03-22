@@ -23,8 +23,16 @@ public class ErpDbContext: DbContext
     public DbSet<AccountStatus> AccountStatus { get; set; }
 
     /// <summary>Payments</summary>
-    public DbSet<PayGrades> PayGrades { get; set; }
-    public DbSet<PayGradePerName> PayGradePerName { get; set; }
+    // public DbSet<PayGrades> PayGrades { get; set; }
+    // public DbSet<PayGradePerName> PayGradePerName { get; set; }
+    // public DbSet<Allowances> Allowances { get; set; }
+    // public DbSet<Deductions> Deductions { get; set; }
+    // public DbSet<SalaryStructure> SalaryStructure { get; set; }
+    // public DbSet<Commissions> Commissions { get; set; }
+    // public DbSet<OverTime> OverTime { get; set; }
+    // public DbSet<PaymentStatus> PaymentStatus { get; set; }
+    // public DbSet<PayrollProseccing> PayrollProseccing { get; set; }
+    // public DbSet<PaymentRelations> PaymentRelations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

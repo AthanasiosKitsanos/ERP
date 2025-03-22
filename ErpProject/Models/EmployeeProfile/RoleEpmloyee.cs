@@ -1,18 +1,21 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpProject.Models.EmployeeProfile;
 
 public class RoleEpmloyee
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-    public string RoleId { get; set; } = string.Empty;
+    public int RoleId { get; set; }
 
     [ForeignKey(nameof(RoleId))]
     public Roles Role { get; set; } = null!;
 
-    public string EmployeeId { get; set; } = string.Empty;
+    public int EmployeeId { get; set; }
 
     [ForeignKey(nameof(EmployeeId))]
     public Employee Employee { get; set; } = null!;

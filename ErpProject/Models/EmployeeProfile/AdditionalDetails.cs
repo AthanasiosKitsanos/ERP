@@ -7,7 +7,8 @@ namespace ErpProject.Models.EmployeeProfile;
 public class AdditionalDetails
 {
     [Key]
-    public string Id { get; set; } = string.Empty;
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string EmergencyNumbers { get; set; } = string.Empty;
 
@@ -19,7 +20,7 @@ public class AdditionalDetails
     [MaxLength(8000)]
     public byte[] PersonalDocuments { get; set; } = null!;
 
-    public string EmployeeId { get; set; } = string.Empty;
+    public int EmployeeId { get; set; }
 
     [ForeignKey(nameof(EmployeeId))]
     public Employee Employee { get; set; } = null!;

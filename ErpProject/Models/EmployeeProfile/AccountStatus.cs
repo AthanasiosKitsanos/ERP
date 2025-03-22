@@ -1,10 +1,14 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpProject.Models.EmployeeProfile;
 
 public class AccountStatus
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; } 
 
     public string StatusName { get; set; } = string.Empty;
 }

@@ -7,7 +7,8 @@ namespace ErpProject.Models.EmployeeProfile;
 public class EmploymentDetails
 {
     [Key]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
     public string Position { get; set; } = string.Empty;
 
@@ -21,7 +22,7 @@ public class EmploymentDetails
 
     public string WorkLocation { get; set; } = string.Empty;
 
-    public string EmployeeId { get; set; } = string.Empty;
+    public int EmployeeId { get; set; }
 
     [ForeignKey(nameof(EmployeeId))]
     public Employee Employee { get; set; } = null!;
