@@ -5,83 +5,117 @@ using ErpProject.ContextDb;
 using ErpProject.Models.EmployeeProfile;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ErpProject.Helpers.Settings;
+using ErpProject.Helpers.InitializeFolder;
 
 namespace ErpProject.Data;
 
 public class SeedData
 {
-    public static async Task InitializeAsync(IServiceProvider services)
+    private readonly ErpDbContext _context;
+    private readonly ILogger<SeedData> _logger;
+
+    private readonly CreateFirstElements _createFirstElements;
+
+    public SeedData(ErpDbContext context, ILogger<SeedData> logger, CreateFirstElements createFirstElements)
     {
-        // var context = services.GetRequiredService<ErpDbContext>();
+        _context = context;
+        _logger = logger;
+        _createFirstElements = createFirstElements;
+    }
 
-        // string[] roles = new string[] { "Owner", "Admin", "Manager", "Employee" };
+    public async Task InitializeAsync()
+    {
+        var settingsEmployee = FirstUserSettings.GetJsonInfo();
+        var employeeExists = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
 
-        // foreach(var role in roles)
-        // {
-        //     var roleExists = await context.Roles.FirstOrDefaultAsync(r => r.RoleName == role);
+        if(employeeExists is null)
+        {
+            var employee = new Employee
+            {
+                FirstName = settingsEmployee.FirstName,
+                LastName = settingsEmployee.LastName,
+                Email = settingsEmployee.Email,
+                DateOfBirth = settingsEmployee.DateOfBirth,
+                Nationality = settingsEmployee.Nationality,
+                Gender = settingsEmployee.Gender,
+                PhoneNumber = settingsEmployee.PhoneNumber,
+            };
 
-        //     if(roleExists is null)
-        //     {
-        //         await context.Roles.AddAsync(new Roles { RoleName = role });
-        //         await context.SaveChangesAsync();
-        //     }
-        // }
+            employee.Age = AgeCalculator.CalculateAge(employee.DateOfBirth);
 
+            await _context.Employees.AddAsync(employee);
+            await _context.SaveChangesAsync();
 
+            if(_context.Employees.Any(e => e.Email == employee.Email))
+            {
+                _logger.LogInformation("Employee created");
+            }
+            else
+            {
+                _logger.LogError("Error creating employee");
+            }
 
-        // List<AccountStatus> accountStatus = context.AccountStatus.ToList();
-        // foreach(var status in accountStatus)
-        // {
-        //     context.AccountStatus.Remove(status);
-        //     await context.SaveChangesAsync();
-        // }
+            var result = await _createFirstElements.AddRoleToEmployeeAsync(employee, "Admin");
+            if(result)
+            {
+                _logger.LogInformation("Role added to employee");
+            }
+            else
+            {
+                _logger.LogError("Error adding role to employee");
+            }
 
-        // List<AdditionalDetails> additionalDetails = context.AdditionalDetails.ToList();
-        // foreach(var details in additionalDetails)
-        // {
-        //     context.AdditionalDetails.Remove(details);
-        //     await context.SaveChangesAsync();
-        // }
+            var settingsDetails = FirstUserEmploymentDetails.GetJsonInfo();
 
-        // List<Employee> employees = context.Employees.ToList();
-        // foreach(var emp in employees)
-        // {
-        //     context.Employees.Remove(emp);
-        //     await context.SaveChangesAsync();
-        // }
+            var employmentDetails = new EmploymentDetails
+            {
+                Position = settingsDetails.Position,
+                Department = settingsDetails.Department,
+                EmploymentStatus = settingsDetails.EmploymentStatus,
+                HireDate = settingsDetails.HireDate,
+                ContractType = settingsDetails.ContractType,
+                WorkLocation = settingsDetails.WorkLocation,
+                EmployeeId = employee.Id
+            };
 
-        // List<EmployeeCredentials> employeeCredentials = context.EmployeeCredentials.ToList();
-        // foreach(var cred in employeeCredentials)
-        // {
-        //     context.EmployeeCredentials.Remove(cred);
-        //     await context.SaveChangesAsync();
-        // }
+            await _context.EmploymentDetails.AddAsync(employmentDetails);
+            await _context.SaveChangesAsync();
 
-        // List<EmploymentDetails> employmentDetails = context.EmploymentDetails.ToList();
-        // foreach(var empDetails in employmentDetails)
-        // {
-        //     context.EmploymentDetails.Remove(empDetails);
-        //     await context.SaveChangesAsync();
-        // }
+            if(_context.EmploymentDetails.Any(e => e.EmployeeId == employee.Id))
+            {
+                _logger.LogInformation("Employment details created");
+            }
+            else
+            {
+                _logger.LogError("Error creating employment details");
+            }
 
-        // List<Identifications> identifications = context.Identifications.ToList();
-        // foreach(var id in identifications)
-        // {
-        //     context.Identifications.Remove(id);
-        //     await context.SaveChangesAsync();
-        // }
-        // List<RoleEpmloyee> roleEpmloyee = context.RoleEpmloyee.ToList();
-        // foreach(var roleEmp in roleEpmloyee)
-        // {
-        //     context.RoleEpmloyee.Remove(roleEmp);
-        //     await context.SaveChangesAsync();
-        // }
-        
-        // List<Roles> roles = context.Roles.ToList();
-        // foreach(var role in roles)
-        // {
-        //     context.Roles.Remove(role);
-        //     await context.SaveChangesAsync();
-        // }
+            var settingsAdditionalDetails = FirstUserAdditinalDetails.GetJsonInfo();
+
+            var additionalDetails = new AdditionalDetails
+            {
+                EmergencyNumbers = settingsAdditionalDetails.EmergencyNumbers,
+                Education = settingsAdditionalDetails.Education,
+                Certifications = Encoding.ASCII.GetBytes("My Certification"),
+                PersonalDocuments = Encoding.ASCII.GetBytes("My Personal Documents"),
+                EmployeeId = employee.Id
+            };
+
+            await _context.AdditionalDetails.AddAsync(additionalDetails);
+            await _context.SaveChangesAsync();
+
+            if(_context.AdditionalDetails.Any(e => e.EmployeeId == employee.Id))
+            {
+                _logger.LogInformation("Additional details created");
+            }
+            else
+            {
+                _logger.LogError("Error creating additional details");
+            }
+
+            // TODO: Add the user to the Identity methods to add to the database
+            // and create a method that checks if the TIN is a valid number
+        }
     }
 }
