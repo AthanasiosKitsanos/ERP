@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ErpProject.Extentions;
 using ErpProject.Data;
 
+
 namespace MainProgram;
 
 class MainProgram
@@ -22,8 +23,9 @@ class MainProgram
         using(var scope = app.Services.CreateScope())
         {
             var services = scope.ServiceProvider;
+            var newAdditions = services.GetRequiredService<SeedData>();
             
-            await SeedData.InitializeAsync(services);
+            await newAdditions.InitializeAsync();
         }
 
         app.Run();
