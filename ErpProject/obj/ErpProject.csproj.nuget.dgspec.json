@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj": {}
+    "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj": {}
   },
   "projects": {
-    "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj": {
+    "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj",
+        "projectUniqueName": "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj",
         "projectName": "ErpProject",
-        "projectPath": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj",
+        "projectPath": "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\ErpProject.csproj",
         "packagesPath": "C:\\Users\\thano\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\obj\\",
+        "outputPath": "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\ErpProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thano\\AppData\\Roaming\\NuGet\\NuGet.Config"
