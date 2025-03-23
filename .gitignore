@@ -1,1 +1,8 @@
+# Ignoring settings.json as it contains environment-specific configurations
 ErpProject/settings.json
+ErpProject/bin/
+# Ignoring the obj directory as it contains build artifacts
+ErpProject/obj/
+
+# Ignoring the testing project directory as it contains temporary test files and outputs
+TestingProject/
