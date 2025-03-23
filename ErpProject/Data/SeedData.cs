@@ -13,19 +13,21 @@ namespace ErpProject.Data;
 public class SeedData
 {
     private readonly ErpDbContext _context;
-    private readonly ILogger<SeedData> _logger;
-
     private readonly CreateFirstElements _createFirstElements;
 
-    public SeedData(ErpDbContext context, ILogger<SeedData> logger, CreateFirstElements createFirstElements)
+    public SeedData(ErpDbContext context, CreateFirstElements createFirstElements)
     {
         _context = context;
-        _logger = logger;
         _createFirstElements = createFirstElements;
     }
 
+    /// <summary>
+    /// Initializes the database with the first user
+    /// </summary>
+    /// <returns>void</returns>
     public async Task InitializeAsync()
     {
+        // First User Creation
         var settingsEmployee = FirstUserSettings.GetJsonInfo();
         var employeeExists = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
 
@@ -47,25 +49,10 @@ public class SeedData
             await _context.Employees.AddAsync(employee);
             await _context.SaveChangesAsync();
 
-            if(_context.Employees.Any(e => e.Email == employee.Email))
-            {
-                _logger.LogInformation("Employee created");
-            }
-            else
-            {
-                _logger.LogError("Error creating employee");
-            }
+            // Assigning the role to the employee
+            await _createFirstElements.AddRoleToEmployeeAsync(employee, "Admin");
 
-            var result = await _createFirstElements.AddRoleToEmployeeAsync(employee, "Admin");
-            if(result)
-            {
-                _logger.LogInformation("Role added to employee");
-            }
-            else
-            {
-                _logger.LogError("Error adding role to employee");
-            }
-
+            // Adding more Employement Details
             var settingsDetails = FirstUserEmploymentDetails.GetJsonInfo();
 
             var employmentDetails = new EmploymentDetails
@@ -82,15 +69,7 @@ public class SeedData
             await _context.EmploymentDetails.AddAsync(employmentDetails);
             await _context.SaveChangesAsync();
 
-            if(_context.EmploymentDetails.Any(e => e.EmployeeId == employee.Id))
-            {
-                _logger.LogInformation("Employment details created");
-            }
-            else
-            {
-                _logger.LogError("Error creating employment details");
-            }
-
+            // Adding more Additional Details
             var settingsAdditionalDetails = FirstUserAdditinalDetails.GetJsonInfo();
 
             var additionalDetails = new AdditionalDetails
@@ -104,15 +83,6 @@ public class SeedData
 
             await _context.AdditionalDetails.AddAsync(additionalDetails);
             await _context.SaveChangesAsync();
-
-            if(_context.AdditionalDetails.Any(e => e.EmployeeId == employee.Id))
-            {
-                _logger.LogInformation("Additional details created");
-            }
-            else
-            {
-                _logger.LogError("Error creating additional details");
-            }
 
             // TODO: Add the user to the Identity methods to add to the database
             // and create a method that checks if the TIN is a valid number
