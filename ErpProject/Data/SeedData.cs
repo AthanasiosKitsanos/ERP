@@ -14,11 +14,13 @@ public class SeedData
 {
     private readonly ErpDbContext _context;
     private readonly CreateFirstElements _createFirstElements;
+    private readonly CreateFirstElements _createElements;
 
-    public SeedData(ErpDbContext context, CreateFirstElements createFirstElements)
+    public SeedData(ErpDbContext context, CreateFirstElements createFirstElements, CreateFirstElements createElements)
     {
         _context = context;
         _createFirstElements = createFirstElements;
+        _createElements = createElements;
     }
 
     /// <summary>
@@ -27,6 +29,8 @@ public class SeedData
     /// <returns>void</returns>
     public async Task InitializeAsync()
     {
+        await _createElements.CreateRolesAsync();
+
         // First User Creation
         var settingsEmployee = FirstUserSettings.GetJsonInfo();
         var employeeExists = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
