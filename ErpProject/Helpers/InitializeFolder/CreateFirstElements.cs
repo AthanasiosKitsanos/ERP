@@ -11,12 +11,10 @@ namespace ErpProject.Helpers.InitializeFolder;
 public class CreateFirstElements
 {
     private readonly ErpDbContext _context;
-    private readonly ILogger<CreateFirstElements> _logger;
 
-    public CreateFirstElements(ErpDbContext context, ILogger<CreateFirstElements> logger)
+    public CreateFirstElements(ErpDbContext context)
     {
         _context = context;
-        _logger = logger;
     }
 
     /// <summary>Creates the fisrt roles in the database</summary>
@@ -33,11 +31,6 @@ public class CreateFirstElements
             {
                 await _context.Roles.AddAsync(new Roles { RoleName = role });
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Role created");
-            }
-            else
-            {
-                _logger.LogInformation("Role already exists");
             }
         }
     }
