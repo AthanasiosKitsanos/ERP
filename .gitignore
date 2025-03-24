@@ -2,7 +2,8 @@
 ErpProject/settings.json
 ErpProject/bin/
 # Ignoring the obj directory as it contains build artifacts
-ErpProject/obj/
+ErpProject/obj
 
 # Ignoring the testing project directory as it contains temporary test files and outputs
 TestingProject/
+ErpProject/obj/Debug/net9.0/ErpProject.AssemblyInfoInputs.cache
