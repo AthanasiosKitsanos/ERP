@@ -43,13 +43,13 @@ public class SeedData
 
             if(password is not null)
             {
-                var hashedPassword = Hashing.HashPassword(password);
+                //var hashedPassword = Hashing.HashPassword(password);
 
-                if(hashedPassword is not null)
-                {
-                    await _context.EmployeeCredentials.Where(ec => ec.EmployeeId == employee.Id).ExecuteUpdateAsync(ec => ec.SetProperty(e => e.Password, hashedPassword));
-                    await _context.SaveChangesAsync();
-                }
+                // if(hashedPassword is not null)
+                // {
+                //     await _context.EmployeeCredentials.Where(ec => ec.EmployeeId == employee.Id).ExecuteUpdateAsync(ec => ec.SetProperty(e => e.Password, hashedPassword));
+                //     await _context.SaveChangesAsync();
+                // }
             }
         }
     }
