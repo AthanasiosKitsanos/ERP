@@ -32,60 +32,29 @@ public class SeedData
 
         // First User Creation
         var settingsEmployee = FirstUserSettings.GetJsonInfo();
-        var employeeExists = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
+        var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
 
-        if(employeeExists is null)
+        if(employee is not null)
         {
-            var employee = new Employee
-            {
-                FirstName = settingsEmployee.FirstName,
-                LastName = settingsEmployee.LastName,
-                Email = settingsEmployee.Email,
-                DateOfBirth = settingsEmployee.DateOfBirth,
-                Nationality = settingsEmployee.Nationality,
-                Gender = settingsEmployee.Gender,
-                PhoneNumber = settingsEmployee.PhoneNumber,
-            };
-
-            employee.Age = AgeCalculator.CalculateAge(employee.DateOfBirth);
-
-            await _context.Employees.AddAsync(employee);
-            await _context.SaveChangesAsync();
-
-            // Assigning the role to the employee
-            await _createElements.AddRoleToEmployeeAsync(employee, "Admin");
-
-            // Adding more Employement Details
-            var settingsDetails = FirstUserEmploymentDetails.GetJsonInfo();
-
-            var employmentDetails = new EmploymentDetails
-            {
-                Position = settingsDetails.Position,
-                Department = settingsDetails.Department,
-                EmploymentStatus = settingsDetails.EmploymentStatus,
-                HireDate = settingsDetails.HireDate,
-                ContractType = settingsDetails.ContractType,
-                WorkLocation = settingsDetails.WorkLocation,
-                EmployeeId = employee.Id
-            };
-
-            await _context.EmploymentDetails.AddAsync(employmentDetails);
-            await _context.SaveChangesAsync();
-
             // Adding more Additional Details
             var settingsAdditionalDetails = FirstUserAdditinalDetails.GetJsonInfo();
 
-            var additionalDetails = new AdditionalDetails
-            {
-                EmergencyNumbers = settingsAdditionalDetails.EmergencyNumbers,
-                Education = settingsAdditionalDetails.Education,
-                Certifications = Encoding.ASCII.GetBytes("My Certification"),
-                PersonalDocuments = Encoding.ASCII.GetBytes("My Personal Documents"),
-                EmployeeId = employee.Id
-            };
+            var addDetailsExist = await _context.AdditionalDetails.AnyAsync(a => a.EmployeeId == employee.Id);
 
-            await _context.AdditionalDetails.AddAsync(additionalDetails);
-            await _context.SaveChangesAsync();
+            if(!addDetailsExist)
+            {
+                var additionalDetails = new AdditionalDetails
+                {
+                    EmergencyNumbers = settingsAdditionalDetails.EmergencyNumbers,
+                    Education = settingsAdditionalDetails.Education,
+                    Certifications = Encoding.ASCII.GetBytes("My Certification"),
+                    PersonalDocuments = Encoding.ASCII.GetBytes("My Personal Documents"),
+                    EmployeeId = employee.Id
+                };
+
+                await _context.AdditionalDetails.AddAsync(additionalDetails);
+                await _context.SaveChangesAsync();
+            }
 
             // TODO: Add the user to the Identity methods to add to the database
             // and create a method that checks if the TIN is a valid number
@@ -104,8 +73,11 @@ public class SeedData
 
             if(isValidTin)
             {
-                await _context.Identifications.AddAsync(identification);
-                await _context.SaveChangesAsync();
+                if(!_context.Identifications.Any(i => i.TIN == identification.TIN))
+                {
+                    await _context.Identifications.AddAsync(identification);
+                    await _context.SaveChangesAsync();
+                }
             }
 
             var accountStatus = await _context.AccountStatus.AnyAsync();
@@ -124,6 +96,12 @@ public class SeedData
                 EmployeeId = employee.Id,
                 AccountStatusId = await _context.AccountStatus.Where(s => s.StatusName == "Active").Select(s => s.Id).FirstOrDefaultAsync()
             };
+
+            if(!_context.EmployeeCredentials.Any(e => e.Username == credentials.Username))
+            {
+                await _context.EmployeeCredentials.AddAsync(credentials);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

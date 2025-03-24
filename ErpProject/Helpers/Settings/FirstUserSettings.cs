@@ -76,7 +76,7 @@ public class FirstUserAdditinalDetails
     public static FirstUserAdditinalDetails GetJsonInfo()
     {
         var configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("settings.json", optional: false, reloadOnChange: true).Build();
-        var setttings = configuration.GetSection("FirstUserAdditinalDetails").Get<FirstUserAdditinalDetails>();
+        var setttings = configuration.GetSection("FirstUserAdditionalDetails").Get<FirstUserAdditinalDetails>();
 
         return setttings!;
     }
