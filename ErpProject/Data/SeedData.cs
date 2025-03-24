@@ -7,19 +7,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ErpProject.Helpers.Settings;
 using ErpProject.Helpers.InitializeFolder;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ErpProject.Data;
 
 public class SeedData
 {
     private readonly ErpDbContext _context;
-    private readonly CreateFirstElements _createFirstElements;
     private readonly CreateFirstElements _createElements;
 
-    public SeedData(ErpDbContext context, CreateFirstElements createFirstElements, CreateFirstElements createElements)
+    public SeedData(ErpDbContext context, CreateFirstElements createElements)
     {
         _context = context;
-        _createFirstElements = createFirstElements;
         _createElements = createElements;
     }
 
@@ -54,7 +53,7 @@ public class SeedData
             await _context.SaveChangesAsync();
 
             // Assigning the role to the employee
-            await _createFirstElements.AddRoleToEmployeeAsync(employee, "Admin");
+            await _createElements.AddRoleToEmployeeAsync(employee, "Admin");
 
             // Adding more Employement Details
             var settingsDetails = FirstUserEmploymentDetails.GetJsonInfo();
@@ -90,6 +89,41 @@ public class SeedData
 
             // TODO: Add the user to the Identity methods to add to the database
             // and create a method that checks if the TIN is a valid number
+
+            var settingsIdentification = FirstUserIdentification.GetJsonInfo();
+
+            var identification = new Identifications
+            {
+                TIN = settingsIdentification.TIN,
+                WorkAuth = settingsIdentification.WorkAuth,
+                TaxInformation = settingsIdentification.TaxInformation,
+                EmployeeId = employee.Id
+            };
+
+            var isValidTin = TinValidation.IsValidTin(identification.TIN);
+
+            if(isValidTin)
+            {
+                await _context.Identifications.AddAsync(identification);
+                await _context.SaveChangesAsync();
+            }
+
+            var accountStatus = await _context.AccountStatus.AnyAsync();
+
+            if(!accountStatus)
+            {
+                await _createElements.CreateAccountStatusAsync();
+            }
+
+            var settingsCredentials = FirstUserCredentials.GetJsonInfo();
+
+            var credentials = new EmployeeCredentials
+            {
+                Username = settingsCredentials.Username,
+                Password = settingsCredentials.Password,
+                EmployeeId = employee.Id,
+                AccountStatusId = await _context.AccountStatus.Where(s => s.StatusName == "Active").Select(s => s.Id).FirstOrDefaultAsync()
+            };
         }
     }
 }

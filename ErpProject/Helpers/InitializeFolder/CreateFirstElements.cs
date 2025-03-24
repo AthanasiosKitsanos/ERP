@@ -96,5 +96,31 @@ public class CreateFirstElements
         return roleId;
     }
 
+    public async Task CreateAccountStatusAsync()
+    {
+        string[] statusArray = new string[] { "Active", "Inactive", "Blocked" };
 
+        foreach(var status in statusArray)
+        {
+            var result = await AccountStatusNameExistsAsync(status);
+
+            if(!result)
+            {
+                await _context.AccountStatus.AddAsync(new AccountStatus { StatusName = status });
+                await _context.SaveChangesAsync();
+            }
+        }
+    }
+
+    public async Task<bool> AccountStatusNameExistsAsync(string status)
+    {
+        var statusExists = await _context.AccountStatus.FirstOrDefaultAsync(s => s.StatusName == status);
+
+        if(statusExists is null)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

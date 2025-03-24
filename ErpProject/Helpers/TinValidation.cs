@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ErpProject.Helpers;
 
-public class TinValidation
+public static class TinValidation
 {
-    public bool IsValidTin(string tin)
+    public static bool IsValidTin(string tin)
     {
         var isValid = ValidateNumberIntegrity(tin);
 
@@ -34,7 +34,7 @@ public class TinValidation
         return true;
     }
 
-    public bool ValidateNumberIntegrity(string tinNumber)
+    public static bool ValidateNumberIntegrity(string tinNumber)
     {
         int count = 0;
 

@@ -81,3 +81,35 @@ public class FirstUserAdditinalDetails
         return setttings!;
     }
 }
+
+public class FirstUserIdentification
+{
+    public string TIN { get; set; } = string.Empty;
+
+    public bool WorkAuth { get; set; }
+
+    public string TaxInformation { get; set; } = string.Empty;
+
+    public static FirstUserIdentification GetJsonInfo()
+    {
+        var configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("settings.json", optional: false, reloadOnChange: true).Build();
+        var setttings = configuration.GetSection("FirstUserIdentification").Get<FirstUserIdentification>();
+
+        return setttings!;
+    }
+}
+
+public class FirstUserCredentials
+{
+    public string Username { get; set; } = string.Empty;
+
+    public string Password { get; set; } = string.Empty;
+
+    public static FirstUserCredentials GetJsonInfo()
+    {
+        var configuration = new ConfigurationBuilder().SetBasePath(AppDomain.CurrentDomain.BaseDirectory).AddJsonFile("settings.json", optional: false, reloadOnChange: true).Build();
+        var setttings = configuration.GetSection("FirstUserCredentials").Get<FirstUserCredentials>();
+
+        return setttings!;
+    }
+}
