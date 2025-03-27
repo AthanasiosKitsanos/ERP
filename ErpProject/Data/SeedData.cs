@@ -28,8 +28,6 @@ public class SeedData
     /// <returns>void</returns>
     public async Task InitializeAsync()
     {
-        await _createElements.CreateRolesAsync();
-
         // First User Creation
         var settingsEmployee = FirstUserSettings.GetJsonInfo();
         var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Email == settingsEmployee.Email);
@@ -43,13 +41,13 @@ public class SeedData
 
             if(password is not null)
             {
-                //var hashedPassword = Hashing.HashPassword(password);
+                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
-                // if(hashedPassword is not null)
-                // {
-                //     await _context.EmployeeCredentials.Where(ec => ec.EmployeeId == employee.Id).ExecuteUpdateAsync(ec => ec.SetProperty(e => e.Password, hashedPassword));
-                //     await _context.SaveChangesAsync();
-                // }
+                if(hashedPassword is not null)
+                {
+                    await _context.EmployeeCredentials.Where(ec => ec.EmployeeId == employee.Id).ExecuteUpdateAsync(ec => ec.SetProperty(e => e.Password, hashedPassword));
+                    await _context.SaveChangesAsync();
+                }
             }
         }
     }

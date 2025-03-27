@@ -10,7 +10,7 @@ namespace MainProgram;
 
 class MainProgram
 {
-    public static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -20,13 +20,13 @@ class MainProgram
 
         var app = builder.Build();
 
-        using(var scope = app.Services.CreateScope())
-        {
-            var services = scope.ServiceProvider;
-            var newAdditions = services.GetRequiredService<SeedData>();
+        // using(var scope = app.Services.CreateScope())
+        // {
+        //     var services = scope.ServiceProvider;
+        //     var newAdditions = services.GetRequiredService<SeedData>();
             
-            await newAdditions.InitializeAsync();
-        }
+        //     await newAdditions.InitializeAsync();
+        // }
 
         app.Run();
     }
