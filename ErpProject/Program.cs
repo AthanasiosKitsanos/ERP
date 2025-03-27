@@ -18,6 +18,8 @@ class MainProgram
 
         builder.Services.AddCustomServices();
 
+        builder.Services.AddControllersWithViews();
+
         var app = builder.Build();
 
         // using(var scope = app.Services.CreateScope())
@@ -27,6 +29,13 @@ class MainProgram
             
         //     await newAdditions.InitializeAsync();
         // }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapControllerRoute(name: "default", pattern: "{controller=HomePage}/{action=Index}/{id?}");
 
         app.Run();
     }
