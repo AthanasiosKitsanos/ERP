@@ -17,6 +17,13 @@ public class EmploymentDetailsService : IEmploymentDetailsService
         _dbContext = dbContext;
         _empService = empService;
     }
+
+    /// <summary>
+    /// adds details to the EmploymetDetails table
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <param name="id"></param>
+    /// <returns>True if created, else false</returns>
     public async Task<bool> AddEmploymentDetailsAsync(EmploymentDetailsDTO dto, int id)
     {
         var employee = await _empService.GetEmployeeByIdAsync(id);
@@ -44,6 +51,11 @@ public class EmploymentDetailsService : IEmploymentDetailsService
 
     }
 
+    /// <summary>
+    /// Gets the Employment Details based on the Id of the employee
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>An EmployementDetails object</returns>
     public async Task<EmploymentDetails> GetEmploymentDetailsAsync(int id)
     {
         var employmentDetails = await _dbContext.EmploymentDetails.Where(ed => ed.EmployeeId == id).Select(ed => ed).FirstOrDefaultAsync();

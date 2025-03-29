@@ -10,10 +10,12 @@ namespace ErpProject.Controllers;
 public class EmployeeController: Controller
 {
     public readonly IEmployeeService _empService;
+    public readonly IEmploymentDetailsService _edService;
 
-    public EmployeeController(IEmployeeService empService)
+    public EmployeeController(IEmployeeService empService, IEmploymentDetailsService edService)
     {
         _empService = empService;
+        _edService = edService;
     }
 
     [HttpGet]
@@ -27,6 +29,19 @@ public class EmployeeController: Controller
         }
 
         return View(employeeList);
+    }
+
+    [HttpGet("details/{id}")]
+    public async Task<IActionResult> Details(int id)
+    {
+        var details = await _edService.GetEmploymentDetailsAsync(id);
+
+        if(details is null)
+        {
+            return NotFound();
+        }
+
+        return View();
     }
 
     [HttpPost]

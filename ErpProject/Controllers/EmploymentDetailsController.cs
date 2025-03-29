@@ -16,21 +16,8 @@ public class EmploymentDetailsController: Controller
         _edService = edService;
     }
 
-    [HttpGet("details/{id}")]
-    public async Task<IActionResult> Details(int id)
-    {
-        var employmentDetails = await _edService.GetEmploymentDetailsAsync(id);
-
-        if(employmentDetails is null)
-        {
-            return NotFound();
-        }
-
-        return View(employmentDetails);
-    }
-
-    [HttpPost("create/{id}")]
-    public async Task<IActionResult> Create(EmploymentDetailsDTO dto, int id)
+    [HttpPost("employmentdetailsform/{id}")]
+    public async Task<IActionResult> EmploymentDetailsForm(EmploymentDetailsDTO dto, int id)
     {
         var result = await _edService.AddEmploymentDetailsAsync(dto, id);
 

@@ -10,4 +10,6 @@ public interface IEmployeeService
     public Task<List<Employee>> GetEmployeesAsync();
 
     public Task<Employee> GetEmployeeByIdAsync(int id);
+    
+    public Task<bool> UpdateEmployeeDetailsAsync(EmployeeDTO empDTO, int id);
 }

@@ -19,7 +19,7 @@ public class EmployeeService: IEmployeeService
     }
 
     /// <summary>
-    /// Register a new Employee to the Database
+    /// Registers a new Employee to the Employee Table
     /// </summary>
     /// <param name="newEmployee"></param>
     /// <returns>True, if registration was a success</returns>
@@ -52,7 +52,7 @@ public class EmployeeService: IEmployeeService
     }
 
     /// <summary>
-    /// /// Gets all the elements from the Employee Entity
+    /// /// Gets all the elements from the Employee Table
     /// </summary>
     /// <returns>A List of the Employee Element</returns>
     public async Task<List<Employee>> GetEmployeesAsync()
@@ -81,5 +81,11 @@ public class EmployeeService: IEmployeeService
             return null!;
         }
         return employee;
+    }
+
+    public async Task<bool> UpdateEmployeeDetailsAsync(EmployeeDTO empDTO, int id)
+    {
+        return true;
+        
     }
 }
