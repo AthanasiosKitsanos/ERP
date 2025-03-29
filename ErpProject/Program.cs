@@ -35,7 +35,8 @@ class MainProgram
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.MapControllerRoute(name: "default", pattern: "{controller=HomePage}/{action=Index}/{id?}");
+        app.MapControllers();
+        app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
     }

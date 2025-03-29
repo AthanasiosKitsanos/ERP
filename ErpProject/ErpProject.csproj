@@ -27,11 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\HomePage\" />
+    <None Include="Helpers\AgeCalculator.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Helpers\AgeCalculator.cs" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>

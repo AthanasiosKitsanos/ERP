@@ -2,25 +2,22 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.DTOModels.EmployeeDTO;
 using ErpProject.Models.EmployeeProfile;
-using ErpProject.Services;
-using ErpProject.Services.EmployeeServices;
+using ErpProject.Interfaces;
 
 
 namespace ErpProject.Controllers;
 
-[ApiController]
-[Route("employee")]
 public class EmployeeController: Controller
 {
-    public readonly EmployeeService _empService;
+    public readonly IEmployeeService _empService;
 
-    public EmployeeController(EmployeeService empService)
+    public EmployeeController(IEmployeeService empService)
     {
         _empService = empService;
     }
 
-    [HttpGet("details")]
-    public async Task<IActionResult> DetailsAsync()
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
         var employeeList = await _empService.GetEmployeesAsync();
 
@@ -32,8 +29,8 @@ public class EmployeeController: Controller
         return View(employeeList);
     }
 
-    [HttpGet("details/{id}")]
-    public async Task<IActionResult> GetEmployeeDetailsAsync(int id)
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
     {
         var employee = await _empService.GetEmployeeByIdAsync(id);
 
@@ -45,8 +42,8 @@ public class EmployeeController: Controller
         return View(employee);
     }
 
-    [HttpPost("register")]
-    public async Task<IActionResult> RegisterNewEmployeeAsync(EmployeeDTO newEmployee)
+    [HttpPost]
+    public async Task<IActionResult> Register(EmployeeDTO newEmployee)
     {
         if(!ModelState.IsValid)
         {
