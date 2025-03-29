@@ -7,5 +7,15 @@
 
 @foreach(Employee employee in Model)
 {
-    
+    <div>
+        <ul style="list-style: none;">
+            <li>
+                @employee.FirstName
+            </li>
+
+            <li>
+                <a asp-controller="EmploymentDetails" asp-action="Details" asp-route-id="@employee.Id">More details</a>
+            </li>
+        </ul>
+    </div>
 }

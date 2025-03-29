@@ -2,7 +2,7 @@ using System;
 using ErpProject.Models.DTOModels.EmployeeDTO;
 using ErpProject.Models.EmployeeProfile;
 
-namespace ErpProject.Interfaces;
+namespace ErpProject.Interfaces.EmployeeInterfaces;
 
 public interface IEmployeeService
 {

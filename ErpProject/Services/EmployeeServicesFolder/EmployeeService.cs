@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.ContextDb;
 using ErpProject.Helpers;
-using ErpProject.Interfaces;
+using ErpProject.Interfaces.EmployeeInterfaces;
 
 namespace ErpProject.Services.EmployeeServices;
 

@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.DTOModels.EmployeeDTO;
 using ErpProject.Models.EmployeeProfile;
-using ErpProject.Interfaces;
+using ErpProject.Interfaces.EmployeeInterfaces;
 
 
 namespace ErpProject.Controllers;
@@ -27,19 +27,6 @@ public class EmployeeController: Controller
         }
 
         return View(employeeList);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Details(int id)
-    {
-        var employee = await _empService.GetEmployeeByIdAsync(id);
-
-        if(employee is null)
-        {
-            return NotFound();
-        }
-
-        return View(employee);
     }
 
     [HttpPost]
