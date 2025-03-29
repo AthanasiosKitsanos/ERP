@@ -85,7 +85,10 @@ public class EmployeeService: IEmployeeService
 
     public async Task<bool> UpdateEmployeeDetailsAsync(EmployeeDTO empDTO, int id)
     {
-        return true;
-        
+        int affectedRows = await _dbContext.Employees.Where(e => e.Id == id).ExecuteUpdateAsync(setters => 
+                                                    setters.SetProperty(e => e.Email, emp => string.IsNullOrEmpty(empDTO.Email) ? emp.Email : empDTO.Email)
+                                                    .SetProperty(e => e.PhoneNumber, emp => string.IsNullOrEmpty(empDTO.PhoneNumber) ? emp.PhoneNumber : empDTO.PhoneNumber));
+
+        return affectedRows > 0;                                                    
     }
 }
