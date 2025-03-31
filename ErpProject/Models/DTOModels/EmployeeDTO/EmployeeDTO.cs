@@ -14,6 +14,8 @@ public class EmployeeDTO
 
     public string Age { get; set; } = string.Empty;
 
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
     public DateTime DateOfBirth { get; set; }
 
     public string Nationality { get; set; } = string.Empty;

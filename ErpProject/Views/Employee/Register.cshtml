@@ -1,1 +1,54 @@
-﻿
+﻿@using ErpProject.Models.DTOModels.EmployeeDTO
+@model EmployeeDTO
+
+<div>
+    <form asp-controller="Employee" asp-action="Register" method="post">
+        <ul style="list-style: none;">
+            <li>
+                <label>First Name</label>
+                <input type="text" asp-for="@Model.FirstName">
+                <span asp-validation-for="@Model.FirstName"></span>
+            </li>
+
+            <li>
+                <label>Last Name</label>
+                <input type="text" asp-for="@Model.LastName">
+                <span asp-validation-for="@Model.LastName"></span>
+            </li>
+
+            <li>
+                <label>Email</label>
+                <input type="email" asp-for="@Model.Email">
+                <span asp-validation-for="@Model.Email"></span>
+            </li>
+
+            <li>
+                <label>Date of Birth</label>
+                <input type="date" asp-for="@Model.DateOfBirth">
+                <span asp-validation-for="@Model.DateOfBirth"></span>
+            </li>
+
+            <li>
+                <label>Nationality</label>
+                <input type="text" asp-for="@Model.Nationality">
+                <span asp-validation-for="@Model.Nationality"></span>
+            </li>
+
+            <li>
+                <label>Gender</label>
+                <input type="text" asp-for="@Model.Gender">
+                <span asp-validation-for="@Model.Gender"></span>
+            </li>
+
+            <li>
+                <label>Phone Number</label>
+                <input type="text" asp-for="@Model.PhoneNumber">
+                <span asp-validation-for="@Model.PhoneNumber"></span>
+            </li>
+
+            <li>
+                <button type="submit">Register</button>
+            </li>
+        </ul>
+    </form>
+</div>

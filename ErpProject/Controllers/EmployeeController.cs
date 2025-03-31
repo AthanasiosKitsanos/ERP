@@ -2,26 +2,24 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.DTOModels.EmployeeDTO;
 using ErpProject.Models.EmployeeProfile;
-using ErpProject.Interfaces.EmployeeInterfaces;
+using ErpProject.Services.EmployeeServices;
 
 
 namespace ErpProject.Controllers;
 
+[Route("employee")]
 public class EmployeeController: Controller
 {
-    public readonly IEmployeeService _empService;
-    public readonly IEmploymentDetailsService _edService;
-
-    public EmployeeController(IEmployeeService empService, IEmploymentDetailsService edService)
+    private readonly EmployeeService _employeeService;
+    public EmployeeController(EmployeeService employeeService)
     {
-        _empService = empService;
-        _edService = edService;
+        _employeeService = employeeService;
     }
 
-    [HttpGet]
+    [HttpGet("index")]
     public async Task<IActionResult> Index()
     {
-        var employeeList = await _empService.GetEmployeesAsync();
+        var employeeList = await _employeeService.GetEmployeesAsync();
 
         if(employeeList is null)
         {
@@ -31,20 +29,13 @@ public class EmployeeController: Controller
         return View(employeeList);
     }
 
-    [HttpGet("details/{id}")]
-    public async Task<IActionResult> Details(int id)
+    [HttpGet("register")]
+    public IActionResult Register()
     {
-        var details = await _edService.GetEmploymentDetailsAsync(id);
-
-        if(details is null)
-        {
-            return NotFound();
-        }
-
         return View();
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(EmployeeDTO newEmployee)
     {
         if(!ModelState.IsValid)
@@ -52,13 +43,53 @@ public class EmployeeController: Controller
             return View("Register", newEmployee);
         }
 
-        var result = await _empService.RegisterNewEmployeeAsync(newEmployee);
+        var result = await _employeeService.RegisterNewEmployeeAsync(newEmployee);
+
+        if(!result)
+        {
+            return View();
+        }
+
+        return View(newEmployee);
+    }
+
+    [HttpGet("update/{id}")]
+    public IActionResult Update(int id)
+    {
+        var employeeDTO = new EmployeeDTO();
+
+        return View(employeeDTO);
+    }
+
+    [HttpPost("update/{id}")]
+    public async Task<IActionResult> Update(EmployeeDTO dto, int id)
+    {
+        if(!ModelState.IsValid)
+        {
+            return View("Update");
+        }
+
+        var result = await _employeeService.UpdateEmployeeAsync(dto, id);
 
         if(!result)
         {
             return View("Error");
         }
 
-        return View("New Registration added.", newEmployee);
+        return RedirectToAction("Index");
     }
+
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _employeeService.DeleteEmployeeAsync(id);
+
+        if(!result)
+        {
+            return NotFound("There was a problem deleting the employee");
+        }
+
+        return View();
+    }
+    
 }

@@ -1,31 +1,21 @@
 using System;
-using ErpProject.Interfaces.EmployeeInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Models.DTOModels.EmployeeDTO;
+using ErpProject.Models.EmployeeProfile;
 
 
 namespace ErpProject.Controllers;
 
+[Route("employee")]
 public class EmploymentDetailsController: Controller
 {
-    private readonly IEmploymentDetailsService _edService;
+   private readonly EmploymentDetails _employmentDetailsService;
 
-    public EmploymentDetailsController(IEmploymentDetailsService edService)
-    {
-        _edService = edService;
-    }
+   public EmploymentDetailsController(EmploymentDetails employmentDetailsService)
+   {
+      _employmentDetailsService = employmentDetailsService;
+   }
 
-    [HttpPost("employmentdetailsform/{id}")]
-    public async Task<IActionResult> EmploymentDetailsForm(EmploymentDetailsDTO dto, int id)
-    {
-        var result = await _edService.AddEmploymentDetailsAsync(dto, id);
-
-        if(!result)
-        {
-            return View("No details were added.");
-        }
-
-        return View();
-    }
+   //[]
 }

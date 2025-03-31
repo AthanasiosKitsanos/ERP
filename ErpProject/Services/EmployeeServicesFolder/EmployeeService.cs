@@ -5,11 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.ContextDb;
 using ErpProject.Helpers;
-using ErpProject.Interfaces.EmployeeInterfaces;
 
 namespace ErpProject.Services.EmployeeServices;
 
-public class EmployeeService: IEmployeeService
+public class EmployeeService
 {
     private readonly ErpDbContext _dbContext;
     
@@ -73,7 +72,7 @@ public class EmployeeService: IEmployeeService
     /// <param name="id"></param>
     /// <returns>An Employee class</returns>
     public async Task<Employee> GetEmployeeByIdAsync(int id)
-    {
+    {   
         var employee = await _dbContext.Employees.Where(e => e.Id == id).Select(e => e).FirstOrDefaultAsync();
 
         if(employee is null)
@@ -83,12 +82,39 @@ public class EmployeeService: IEmployeeService
         return employee;
     }
 
-    public async Task<bool> UpdateEmployeeDetailsAsync(EmployeeDTO empDTO, int id)
+    /// <summary>
+    /// Deletes Employee from database
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>True if deletion is a success or False if it is not</returns>
+    public async Task<bool> DeleteEmployeeAsync(int id)
     {
-        int affectedRows = await _dbContext.Employees.Where(e => e.Id == id).ExecuteUpdateAsync(setters => 
-                                                    setters.SetProperty(e => e.Email, emp => string.IsNullOrEmpty(empDTO.Email) ? emp.Email : empDTO.Email)
-                                                    .SetProperty(e => e.PhoneNumber, emp => string.IsNullOrEmpty(empDTO.PhoneNumber) ? emp.PhoneNumber : empDTO.PhoneNumber));
+        var employee = await GetEmployeeByIdAsync(id);
 
-        return affectedRows > 0;                                                    
+        if(employee is null)
+        {
+            return false;
+        }
+
+        _dbContext.Employees.Remove(employee);
+        await _dbContext.SaveChangesAsync();
+
+        return true;
+    }
+
+    /// <summary>
+    /// Updated the Email and PhoneNumber of an Employee
+    /// </summary>
+    /// <param name="dto"></param>
+    /// <param name="id"></param>
+    /// <returns>True if at least one Row is affected</returns>
+    public async Task<bool> UpdateEmployeeAsync(EmployeeDTO dto, int id)
+    {
+        int affectedRows = await _dbContext.Employees.Where(e => e.Id == id)
+                                               .ExecuteUpdateAsync(e => 
+                                               e.SetProperty(emp => emp.Email, empdto => string.IsNullOrEmpty(dto.Email) ? empdto.Email : dto.Email)
+                                               .SetProperty(emp => emp.PhoneNumber, empdto => string.IsNullOrEmpty(dto.PhoneNumber) ? empdto.PhoneNumber : dto.PhoneNumber));
+        
+        return affectedRows > 0;
     }
 }
