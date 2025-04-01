@@ -1,5 +1,5 @@
-﻿@using ErpProject.Models.DTOModels.EmployeeDTO
-@model EmployeeDTO
+﻿@using ErpProject.Models.DTOModels.Employee
+@model UpdateDTO
 
 <div>
     <form asp-controller="Employee" asp-action="Update" method="post">
@@ -11,10 +11,9 @@
 
             <li>
                 <label>Phone Number</label>
-                <input type="text" asp-for="@Model.PhoneNumber" placeholder="@Model.PhoneNumber">
+                <input type="text" asp-for="@Model.PhoneNumber">
             </li>
 
-    using ErpProject.Models.EmployeeProfile;
             <li>
                 <button type="submit">Update</button>
             </li>

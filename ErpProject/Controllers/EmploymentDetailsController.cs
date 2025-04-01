@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.Services.EmployeeServices;
-using ErpProject.Models.DTOModels.EmployeeDTO;
+using ErpProject.Models.DTOModels.Employee;
 using ErpProject.Models.EmployeeProfile;
 
 

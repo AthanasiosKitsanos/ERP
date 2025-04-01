@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ErpProject.Models.DTOModels.EmployeeDTO;
+namespace ErpProject.Models.DTOModels.Employee;
 
-public class EmployeeDTO
+public class RegisterDTO
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -22,6 +22,8 @@ public class EmployeeDTO
 
     public string Gender { get; set; } = string.Empty;
 
+    [Phone]
+    [StringLength(13, MinimumLength = 10)]
     public string PhoneNumber { get; set; } = string.Empty;
 
     public string PhotographPath { get; set; } = string.Empty;
