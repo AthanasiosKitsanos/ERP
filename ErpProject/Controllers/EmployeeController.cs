@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.DTOModels.Employee;
 using ErpProject.Models.EmployeeProfile;
 using ErpProject.Services.EmployeeServices;
+using System.Threading.Tasks;
 
 
 namespace ErpProject.Controllers;
@@ -43,14 +44,14 @@ public class EmployeeController: Controller
             return View("Register", newEmployee);
         }
 
-        var result = await _employeeService.RegisterNewEmployeeAsync(newEmployee);
+        var resultId = await _employeeService.RegisterNewEmployeeAsync(newEmployee);
 
-        if(!result)
+        if(resultId <= 0)
         {
             return View();
         }
 
-        return View(newEmployee);
+        return RedirectToAction("AddRole", "Roles", new {id = resultId});
     }
 
     [HttpGet("update/{id}")]
@@ -78,7 +79,20 @@ public class EmployeeController: Controller
         return RedirectToAction("Index");
     }
 
-    [HttpDelete("delete/{id}")]
+    [HttpGet("delete/{id}")]
+    public async Task<IActionResult> Delete(Employee employee, int id)
+    {   
+        employee = await _employeeService.GetEmployeeByIdAsync(id);
+
+        if(employee is null)
+        {
+            return View("Index");
+        }
+
+        return View(employee);
+    }
+
+    [HttpPost("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var result = await _employeeService.DeleteEmployeeAsync(id);
@@ -88,7 +102,7 @@ public class EmployeeController: Controller
             return NotFound("There was a problem deleting the employee");
         }
 
-        return View();
+        return RedirectToAction("Index");
     }
     
 }

@@ -1,5 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ErpProject.Models.EmployeeProfile
+@model Employee
+
+<ul style="list-style: none;">
+    <li>
+        You are about to delete @Model.FirstName @Model.LastName
+    </li>
+
+    <li>
+        Are you sure?
+    </li>
+    
+    <li>
+        <form method="post">
+            <button type="submit" asp-controller="Employee" asp-action="Delete" asp-route-id="@Model.Id">Delete</button>
+        </form>
+    </li>
+
+    <li>
+        <a asp-controller="Employee" asp-action="Index">Return to Employee List</a>
+    </li>
+</ul>

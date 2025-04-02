@@ -22,11 +22,11 @@ public class EmployeeService
     /// </summary>
     /// <param name="newEmployee"></param>
     /// <returns>True, if registration was a success</returns>
-    public async Task<bool> RegisterNewEmployeeAsync(RegisterDTO newEmployee)
+    public async Task<int> RegisterNewEmployeeAsync(RegisterDTO newEmployee)
     {
         if(newEmployee is null)
         {
-            return false;
+            return -1;
         }
 
         var exists = await _dbContext.Employees.AnyAsync(e => e.Email == newEmployee.Email);
@@ -49,10 +49,10 @@ public class EmployeeService
             await _dbContext.Employees.AddAsync(newEntry);
             await _dbContext.SaveChangesAsync();
 
-            return true;
+            return newEntry.Id;
         }
 
-        return false;
+        return -1;
     }
 
     /// <summary>
@@ -88,26 +88,6 @@ public class EmployeeService
     }
 
     /// <summary>
-    /// Deletes Employee from database
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns>True if deletion is a success or False if it is not</returns>
-    public async Task<bool> DeleteEmployeeAsync(int id)
-    {
-        var employee = await GetEmployeeByIdAsync(id);
-
-        if (employee is null)
-        {
-            return false;
-        }
-
-        _dbContext.Employees.Remove(employee);
-        await _dbContext.SaveChangesAsync();
-
-        return true;
-    }
-
-    /// <summary>
     /// Updated the Email and PhoneNumber of an Employee
     /// </summary>
     /// <param name="dto"></param>
@@ -126,6 +106,23 @@ public class EmployeeService
                 .SetProperty(emp => emp.Email, empdto => string.IsNullOrEmpty(dto.Email) ? empdto.Email : dto.Email)
                 .SetProperty(emp => emp.PhoneNumber, empdto => string.IsNullOrEmpty(dto.PhoneNumber) ? empdto.PhoneNumber : dto.PhoneNumber)
             );
+
+        return affectedRows > 0;
+    }
+
+    /// <summary>
+    /// Deletes the employee and every relation with it
+    /// </summary>
+    /// <param name="id">The id of the Employee</param>
+    /// <returns>True if deletion was a success, else false</returns>
+    public async Task<bool> DeleteEmployeeAsync(int id)
+    {
+        if(id <= 0)
+        {
+            return false;
+        }
+
+        int affectedRows = await _dbContext.Employees.Where(e => e.Id == id).ExecuteDeleteAsync();
 
         return affectedRows > 0;
     }

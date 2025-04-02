@@ -36,6 +36,10 @@
                     <td>@employee.PhoneNumber</td>
                     <td><a asp-controller="Employee" asp-action="Update" asp-route-id="@employee.Id">Edit</a></td>
                     <td><a asp-controller="Employee" asp-action="Details" asp-route-id="@employee.Id">Details</a></td>
+                    <td>
+                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id">Delete</a>
+                    </td>
+                    
                 </tr>
             }
         </tbody>
