@@ -1,6 +1,13 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using ErpProject.Models.EmployeeProfile;
+using ErpProject.Models.EmployeeModel;
+using ErpProject.Models.AccountStatusModel;
+using ErpProject.Models.EmploymentDetailsModel;
+using ErpProject.Models.AdditionalDetailsModel;
+using ErpProject.Models.IdentificationsModel;
+using ErpProject.Models.RolesModel;
+using ErpProject.Models.RolesEmployeeModel;
+using ErpProject.Models.EmployeeCredentilasModel;
 using ErpProject.Models.Payments;
 
 namespace ErpProject.ContextDb;

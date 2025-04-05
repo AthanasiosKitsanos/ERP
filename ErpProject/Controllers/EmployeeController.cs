@@ -1,7 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using ErpProject.Models.DTOModels.Employee;
-using ErpProject.Models.EmployeeProfile;
+using ErpProject.Models.EmployeeModel;
 using ErpProject.Services.EmployeeServices;
 using System.Threading.Tasks;
 
@@ -37,21 +36,24 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterDTO newEmployee)
+    public async Task<IActionResult> Register(Employee newEmployee)
     {
         if(!ModelState.IsValid)
         {
             return View("Register", newEmployee);
         }
 
-        var resultId = await _employeeService.RegisterNewEmployeeAsync(newEmployee);
+        var result = await _employeeService.RegisterNewEmployeeAsync(newEmployee);
 
-        if(resultId <= 0)
+        if(!result)
         {
-            return View();
+            return View(newEmployee);
         }
 
-        return RedirectToAction("AddRole", "Roles", new {id = resultId});
+        //int newEmployeeId = await _employeeService.GetIdFromEmployeeAsync(newEmployee.Email);
+
+        return RedirectToAction("Index");
+        //return RedirectToAction("AddRole", "Roles", new {id = newEmployeeId});
     }
 
     [HttpGet("update/{id}")]
@@ -61,7 +63,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("update/{id}")]
-    public async Task<IActionResult> Update(UpdateDTO dto, int id)
+    public async Task<IActionResult> Update(Employee dto, int id)
     {
         if(!ModelState.IsValid)
         {
@@ -92,17 +94,17 @@ public class EmployeeController: Controller
         return View(employee);
     }
 
-    [HttpPost("delete/{id}")]
-    public async Task<IActionResult> Delete(int id)
-    {
-        var result = await _employeeService.DeleteEmployeeAsync(id);
+    // [HttpPost("delete/{id}")]
+    // public async Task<IActionResult> Delete(int id)
+    // {
+    //     var result = await _employeeService.DeleteEmployeeAsync(id);
 
-        if(!result)
-        {
-            return NotFound("There was a problem deleting the employee");
-        }
+    //     if(!result)
+    //     {
+    //         return NotFound("There was a problem deleting the employee");
+    //     }
 
-        return RedirectToAction("Index");
-    }
+    //     return RedirectToAction("Index");
+    // }
     
 }

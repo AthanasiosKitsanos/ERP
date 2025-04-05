@@ -2,7 +2,6 @@ using System;
 using ErpProject.Helpers;
 using System.Text;
 using ErpProject.ContextDb;
-using ErpProject.Models.EmployeeProfile;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ErpProject.Helpers.Settings;

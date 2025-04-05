@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ErpProject.Models.EmployeeProfile;
+using ErpProject.Models.RolesModel;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Services.RoleServices;
@@ -24,7 +24,7 @@ public class RolesController : Controller
 
         if(rolesList is null)
         {
-            return View("AddRole", new AddRoleViewModel(){EmployeeId = id, Roles = rolesList});
+            return View("AddRole", new AddRoleViewModel(){EmployeeId = id, Roles = rolesList!});
         }
 
         var model = new AddRoleViewModel
