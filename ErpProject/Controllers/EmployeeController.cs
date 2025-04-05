@@ -36,7 +36,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(Employee newEmployee)
+    public async Task<IActionResult> RegisterEmployee(Employee newEmployee)
     {
         if(!ModelState.IsValid)
         {
@@ -63,7 +63,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("update/{id}")]
-    public async Task<IActionResult> Update(Employee dto, int id)
+    public async Task<IActionResult> UpdateEmployee(Employee dto, int id)
     {
         if(!ModelState.IsValid)
         {
@@ -82,29 +82,29 @@ public class EmployeeController: Controller
     }
 
     [HttpGet("delete/{id}")]
-    public async Task<IActionResult> Delete(Employee employee, int id)
+    public async Task<IActionResult> Delete(int id)
     {   
-        employee = await _employeeService.GetEmployeeByIdAsync(id);
+        Employee employee = await _employeeService.GetEmployeeByIdAsync(id);
 
         if(employee is null)
         {
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         return View(employee);
     }
 
-    // [HttpPost("delete/{id}")]
-    // public async Task<IActionResult> Delete(int id)
-    // {
-    //     var result = await _employeeService.DeleteEmployeeAsync(id);
+    [HttpPost("delete/{id}")]
+    public async Task<IActionResult> DeleteEmployee(int id)
+    {
+        var result = await _employeeService.DeleteEmployeeAsync(id);
 
-    //     if(!result)
-    //     {
-    //         return NotFound("There was a problem deleting the employee");
-    //     }
+        if(!result)
+        {
+            return NotFound("There was a problem deleting the employee");
+        }
 
-    //     return RedirectToAction("Index");
-    // }
+        return RedirectToAction("Index");
+    }
     
 }

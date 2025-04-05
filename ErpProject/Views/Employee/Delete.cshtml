@@ -1,7 +1,7 @@
 ﻿@using ErpProject.Models.EmployeeModel
 @model Employee
 
-<ul style="list-style: none;">
+<ul class="delete">
     <li>
         You are about to delete @Model.FirstName @Model.LastName
     </li>
@@ -11,12 +11,9 @@
     </li>
     
     <li>
-        <form method="post">
-            <button type="submit" asp-controller="Employee" asp-action="Delete" asp-route-id="@Model.Id">Delete</button>
+        <form method="post" asp-action="DeleteEmployee" asp-route-id="@Model.Id">
+            <button type="submit">Delete</button>
+            <a asp-action="Index">Cancel</a>
         </form>
-    </li>
-
-    <li>
-        <a asp-controller="Employee" asp-action="Index">Return to Employee List</a>
     </li>
 </ul>

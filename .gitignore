@@ -7,3 +7,4 @@ ErpProject/bin/
 TestingProject/
 # Ignoring the obj directory as it contains build artifacts
 ErpProject/obj
+.vscode/launch.json
