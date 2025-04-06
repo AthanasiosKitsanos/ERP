@@ -34,10 +34,12 @@ public class EmployeeService
             return false;
         }
 
-        string emailQuery = @"SELECT COUNT(1) FROM Employees WHERE Email = @Email";
+        string emailQuery = @"SELECT COUNT(1)
+                                FROM Employees 
+                                WHERE Email = @Email";
 
-        string registerQuery = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath) " +
-                       "VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @PhotographPath)";
+        string registerQuery = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath)
+                                VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @PhotographPath)";
 
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -82,7 +84,8 @@ public class EmployeeService
     {
         List<Employee> employeeList = new List<Employee>();
 
-        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber FROM Employees";
+        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
+                        FROM Employees";
 
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -138,7 +141,9 @@ public class EmployeeService
     {
         Employee employee = null!;
 
-        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber FROM Employees WHERE Id = @Id";
+        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
+                        FROM Employees 
+                        WHERE Id = @Id";
 
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -210,7 +215,9 @@ public class EmployeeService
                 return false;
             }
 
-            string query = $"UPDATE Employees SET {string.Join(", ", fields)} WHERE Id = @Id";
+            string query = $@"UPDATE Employees 
+                            SET {string.Join(", ", fields)} 
+                            WHERE Id = @Id";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -243,7 +250,9 @@ public class EmployeeService
 
         int id = 0;
 
-        string query = @"SELECT Id FROM Employees WHERE Email = @Email";
+        string query = @"SELECT Id 
+                        FROM Employees 
+                        WHERE Email = @Email";
 
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -279,7 +288,9 @@ public class EmployeeService
             return false;
         }
 
-        string query = @"DELETE FROM Employees WHERE Id = @Id";
+        string query = @"DELETE 
+                        FROM Employees 
+                        WHERE Id = @Id";
 
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {

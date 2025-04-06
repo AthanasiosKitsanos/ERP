@@ -21,7 +21,8 @@ public class RoleService
     {
         List<Roles> roleList = new List<Roles>();
 
-        string query = "SELECT RoleName FROM Roles";
+        string query = @"SELECT RoleName 
+                        FROM Roles";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -71,7 +72,9 @@ public class RoleService
         {
             await connection.OpenAsync();
 
-            string getRoleId = "SELECT Id FROM Roles WHERE RoleName = @RoleName";
+            string getRoleId = @"SELECT Id 
+                                FROM Roles 
+                                WHERE RoleName = @RoleName";
 
             using(SqlCommand command = new SqlCommand(getRoleId, connection))
             {
@@ -86,7 +89,8 @@ public class RoleService
                 }
             }
 
-            string addRole = "INSERT INTO RoleEmployee (RoleId, EmployeeId) VALUES (@RoleId, @EmployeeId)";
+            string addRole = @"INSERT INTO RoleEmployee (RoleId, EmployeeId) 
+                            VALUES (@RoleId, @EmployeeId)";
 
             using(SqlCommand command = new SqlCommand(addRole, connection))
             {
