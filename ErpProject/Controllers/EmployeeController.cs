@@ -54,7 +54,7 @@ public class EmployeeController: Controller
         int newEmployeeId = await _employeeService.GetIdFromEmployeeAsync(newEmployee.Email);
 
         //return RedirectToAction("Index");
-        return RedirectToAction("Index", "Roles", new {id = newEmployeeId});
+        return RedirectToAction("RoleRegistration", "Roles", new {id = newEmployeeId});
     }
 
     [HttpGet("update/{id}")]
@@ -73,7 +73,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("update/{id}")]
-    public async Task<IActionResult> UpdateEmployee(UpdateDTO dto)
+    public async Task<IActionResult> Update(UpdateDTO dto)
     {
         if(!ModelState.IsValid)
         {
