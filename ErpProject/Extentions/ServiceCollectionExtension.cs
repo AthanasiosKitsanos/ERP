@@ -1,10 +1,8 @@
 using System;
-using ErpProject.Data;
-using ErpProject.Helpers.InitializeFolder;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Services.RoleServices;
 using ErpProject.ContextDb;
-using ErpProject.Models.Connection;
+using ErpProject.Helpers.Connection;
 
 namespace ErpProject.Extentions;
 
