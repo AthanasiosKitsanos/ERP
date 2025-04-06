@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ErpProject.ContextDb;
 using ErpProject.Models.RolesModel;
 using ErpProject.Models.RolesEmployeeModel;
-using ErpProject.Models.Connection;
+using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 
 namespace ErpProject.Services.RoleServices;
@@ -86,7 +86,7 @@ public class RoleService
                 }
             }
 
-            string addRole = "INSERT INTO RoleEmployee (RoleId, EmployeeId) VALUES (@RoleId, @EmplpoyeeId)";
+            string addRole = "INSERT INTO RoleEmployee (RoleId, EmployeeId) VALUES (@RoleId, @EmployeeId)";
 
             using(SqlCommand command = new SqlCommand(addRole, connection))
             {
