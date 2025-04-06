@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ErpProject.ContextDb;
 using System.Threading.Tasks;
 using ErpProject.Extentions;
-using ErpProject.Data;
 
 
 namespace MainProgram;
@@ -21,14 +20,6 @@ class MainProgram
         builder.Services.AddControllersWithViews();
 
         var app = builder.Build();
-
-        // using(var scope = app.Services.CreateScope())
-        // {
-        //     var services = scope.ServiceProvider;
-        //     var newAdditions = services.GetRequiredService<SeedData>();
-            
-        //     await newAdditions.InitializeAsync();
-        // }
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
