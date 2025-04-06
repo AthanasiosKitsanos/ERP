@@ -7,6 +7,7 @@ using ErpProject.Helpers;
 using ErpProject.Models.Connection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.SqlTypes;
+using ErpProject.Models.DTOModels.Update;
 
 namespace ErpProject.Services.EmployeeServices;
 
@@ -177,24 +178,48 @@ public class EmployeeService
     /// <param name="dto"></param>
     /// <param name="id"></param>
     /// <returns>True if at least one Row is affected</returns>
-    public async Task<bool> UpdateEmployeeAsync(Employee dto, int id)
+    public async Task<bool> UpdateEmployeeAsync(UpdateDTO dto, int id)
     {
         if (dto is null)
         {
             return false;
         }
 
-        string query = @"UPDATE Employees SET Email = @Email, PhoneNumber = @PhoneNumber WHERE Id = @Id";
-
         using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
-            connection.Open();
+            await connection.OpenAsync();
+
+            List<string> fields = new List<string>();
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+            if(!string.IsNullOrEmpty(dto.Email))
+            {
+                fields.Add("Email = @Email");
+                parameters["@Email"] = dto.Email;
+            }
+
+            if(!string.IsNullOrEmpty(dto.PhoneNumber))
+            {
+                fields.Add("PhoneNumber = @PhoneNumber");
+                parameters["@PhoneNumber"] = dto.PhoneNumber;
+            }
+
+            if(fields.Count == 0)
+            {
+                return false;
+            }
+
+            string query = $"UPDATE Employees SET {string.Join(", ", fields)} WHERE Id = @Id";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Email", dto.Email);
-                command.Parameters.AddWithValue("@PhoneNumber", dto.PhoneNumber);
                 command.Parameters.AddWithValue("@Id", id);
+
+                foreach(var param in parameters)
+                {
+                    command.Parameters.AddWithValue(param.Key, param.Value);
+                }
 
                 int affectedRows = await command.ExecuteNonQueryAsync();
 

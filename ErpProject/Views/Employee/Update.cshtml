@@ -1,17 +1,19 @@
-﻿@using ErpProject.Models.EmployeeModel
-@model Employee
+﻿@using ErpProject.Models.DTOModels.Update
+@model UpdateDTO
 
 <div>
-    <form asp-action="UpdateEmployee" method="post">
+    <form asp-action="UpdateEmployee" asp-route-id="@Model.Id" method="post">
         <ul style="list-style: none;">
             <li>
                 <label>Email</label>
                 <input type="text" asp-for="@Model.Email">
+                <span asp-validation-for="@Model.Email"></span>
             </li>
 
             <li>
                 <label>Phone Number</label>
                 <input type="text" asp-for="@Model.PhoneNumber">
+                <span asp-validation-for="@Model.PhoneNumber"></span>
             </li>
 
             <li>

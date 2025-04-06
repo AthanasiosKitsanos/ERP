@@ -1,6 +1,11 @@
 ﻿@using ErpProject.Models.EmployeeModel
 @model Employee
 
+@section Styles
+{
+    <link rel="stylesheet" href="~/CSS/ul/css" asp-append-version="true">
+}
+
 <ul class="delete">
     <li>
         You are about to delete @Model.FirstName @Model.LastName

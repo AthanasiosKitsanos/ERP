@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.EmployeeModel;
 using ErpProject.Services.EmployeeServices;
 using System.Threading.Tasks;
+using ErpProject.Models.DTOModels.Update;
 
 
 namespace ErpProject.Controllers;
@@ -36,7 +37,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterEmployee(Employee newEmployee)
+    public async Task<IActionResult> Register(Employee newEmployee)
     {
         if(!ModelState.IsValid)
         {
@@ -59,23 +60,27 @@ public class EmployeeController: Controller
     [HttpGet("update/{id}")]
     public IActionResult Update(int id)
     {
-        return View();
+        UpdateDTO update = new UpdateDTO();
+
+        update.Id = id;
+
+        return View(update);
     }
 
     [HttpPost("update/{id}")]
-    public async Task<IActionResult> UpdateEmployee(Employee dto, int id)
+    public async Task<IActionResult> UpdateEmployee(UpdateDTO dto)
     {
         if(!ModelState.IsValid)
         {
-            return View();
+            return View("Update", dto);
         }
 
-        var result = await _employeeService.UpdateEmployeeAsync(dto, id);
+        var result = await _employeeService.UpdateEmployeeAsync(dto, dto.Id);
 
         if(!result)
         {
             ModelState.AddModelError("", "No changes were made. Check if the employee exists.");
-            return View();
+            return View("Update", dto);
         }
 
         return RedirectToAction("Index");
