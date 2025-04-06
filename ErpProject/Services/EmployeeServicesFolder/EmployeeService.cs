@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ErpProject.ContextDb;
 using ErpProject.Helpers;
-using ErpProject.Models.Connection;
+using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.SqlTypes;
 using ErpProject.Models.DTOModels.Update;
