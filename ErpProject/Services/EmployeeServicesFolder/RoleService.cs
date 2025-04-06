@@ -3,27 +3,52 @@ using Microsoft.EntityFrameworkCore;
 using ErpProject.ContextDb;
 using ErpProject.Models.RolesModel;
 using ErpProject.Models.RolesEmployeeModel;
+using ErpProject.Models.Connection;
+using Microsoft.Data.SqlClient;
 
 namespace ErpProject.Services.RoleServices;
 
 public class RoleService
 {
-    private readonly ErpDbContext _context;
+    private readonly Connection _connection;
 
-    public RoleService(ErpDbContext context)
+    public RoleService(Connection connection)
     {
-        _context = context;
+        _connection = connection;
     }
 
     public async Task<List<Roles>> GetAllRolesAsync()
     {
-        var roleList = await _context.Roles.Select(r => r).ToListAsync();
+        List<Roles> roleList = new List<Roles>();
 
-        if(roleList is null)
+        string query = "SELECT RoleName FROM Roles";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
-            return null!;
+            await connection.OpenAsync();
+            
+            using(SqlCommand command = new SqlCommand(query, connection))
+            {
+                using(SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    Dictionary<string, int> collumnMap = new Dictionary<string, int>
+                    {
+                        {"RoleName", reader.GetOrdinal("RoleName")}
+                    };
+
+                    while(await reader.ReadAsync())
+                    {
+                        Roles role = new Roles
+                        {
+                            RoleName = reader.GetString(collumnMap["RoleName"])
+                        };
+
+                        roleList.Add(role);
+                    }
+                }
+            }
         }
-    
+
         return roleList;
     }
 
@@ -35,22 +60,43 @@ public class RoleService
     /// <returns>True of the role is added. else false</returns>
     public async Task<bool> AddRoleToEmployeeAsync(int id, string roleName)
     {
-        var roleId = await _context.Roles.Where(r => r.RoleName == roleName).Select(r => r.Id).FirstOrDefaultAsync();
-
-        if(roleId <= 0)
+        if(id <=0 || string.IsNullOrEmpty(roleName))
         {
             return false;
         }
 
-        var roleToEmployee = new RoleEpmloyee
+        int roleId = 0;
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
-            EmployeeId = id,
-            RoleId = roleId
-        };
+            await connection.OpenAsync();
 
-        await _context.RoleEpmloyee.AddAsync(roleToEmployee);
-        var result = await _context.SaveChangesAsync();
+            string getRoleId = "SELECT Id FROM Roles WHERE RoleName = @RoleName";
 
-        return result > 0;
+            using(SqlCommand command = new SqlCommand(getRoleId, connection))
+            {
+                command.Parameters.AddWithValue("@RoleName", roleName);
+
+                using(SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if(await reader.ReadAsync())
+                    {
+                        roleId = reader.GetInt32(reader.GetOrdinal("Id"));
+                    }
+                }
+            }
+
+            string addRole = "INSERT INTO RoleEmployee (RoleId, EmployeeId) VALUES (@RoleId, @EmplpoyeeId)";
+
+            using(SqlCommand command = new SqlCommand(addRole, connection))
+            {
+                command.Parameters.AddWithValue("@RoleId", roleId);
+                command.Parameters.AddWithValue("@EmployeeId", id);
+
+                await command.ExecuteNonQueryAsync();
+
+                return true;
+            }   
+        } 
     }
 }

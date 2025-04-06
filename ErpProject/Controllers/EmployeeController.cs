@@ -51,16 +51,21 @@ public class EmployeeController: Controller
             return View(newEmployee);
         }
 
-        //int newEmployeeId = await _employeeService.GetIdFromEmployeeAsync(newEmployee.Email);
+        int newEmployeeId = await _employeeService.GetIdFromEmployeeAsync(newEmployee.Email);
 
-        return RedirectToAction("Index");
-        //return RedirectToAction("AddRole", "Roles", new {id = newEmployeeId});
+        //return RedirectToAction("Index");
+        return RedirectToAction("Index", "Roles", new {id = newEmployeeId});
     }
 
     [HttpGet("update/{id}")]
     public IActionResult Update(int id)
     {
         UpdateDTO update = new UpdateDTO();
+
+        if(update is null)
+        {
+            return NotFound();
+        }
 
         update.Id = id;
 

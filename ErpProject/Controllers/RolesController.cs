@@ -17,44 +17,36 @@ public class RolesController : Controller
         _roleService = roleService; 
     }
 
-    [HttpGet("addrole/{id}")]
-    public async Task<IActionResult> AddRole(int id)
+    [HttpGet("index/{id}")]
+    public async Task<IActionResult> Index(int id)
     {
-        var rolesList = await _roleService.GetAllRolesAsync();
-
-        if(rolesList is null)
-        {
-            return View("AddRole", new AddRoleViewModel(){EmployeeId = id, Roles = rolesList!});
-        }
-
-        var model = new AddRoleViewModel
+        AddRoleViewModel model = new AddRoleViewModel
         {
             EmployeeId = id,
-            Roles = rolesList
+            Roles = await _roleService.GetAllRolesAsync()
         };
-        
+
+        if(model is null)
+        {
+            return NotFound();
+        }
+
         return View(model);
     }
 
-    [HttpPost("addrole/{id}")]
+    [HttpPost("index/{id}")]
     public async Task<IActionResult> AddRole(AddRoleViewModel model)
     {
-        if(model is null)
-        {
-            return View("AddRole", new AddRoleViewModel());
-        }
-
         if(!ModelState.IsValid)
         {
-            return View("AddRole", model);
+            return RedirectToAction("Index", model.EmployeeId);
         }
 
-        var result = await  _roleService.AddRoleToEmployeeAsync(model.EmployeeId, model.SelectedRole);
+        var result = await _roleService.AddRoleToEmployeeAsync(model.EmployeeId, model.SelectedRole);
 
         if(!result)
         {
-            ModelState.AddModelError("", "Failed to assign role to Employee");
-            return View("Error", new {id = model.EmployeeId});
+            return RedirectToAction("Index", model.EmployeeId);
         }
 
         return RedirectToAction("Index", "Employee");

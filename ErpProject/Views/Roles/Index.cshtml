@@ -1,7 +1,7 @@
 ﻿@using ErpProject.Models.PartialModels.AddRoleViewModel
 @model AddRoleViewModel
 
-<form method="post" asp-controller="Roles" asp-action="AddRole">
+<form method="post" asp-action="AddRole">
     <input type="hidden" asp-for="EmployeeId">
     
     <label for="role">Select Role</label>
@@ -12,7 +12,6 @@
                 <option value="@role.RoleName">@role.RoleName</option>
             }
     </select>
-
-    using ErpProject.Models.EmployeeProfile;
+    
     <button type="submit">Add Role</button>
 </form>
