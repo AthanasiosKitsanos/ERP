@@ -1,0 +1,17 @@
+﻿@using ErpProject.Models.PartialModels.AddRoleViewModel
+@model AddRoleViewModel
+
+<form method="post" asp-action="RoleRegistration">
+    <input type="hidden" asp-for="EmployeeId">
+    
+    <label for="role">Select Role</label>
+    <select id="role" asp-for="SelectedRole">
+        <option value="">--Selected Role--</option>
+            @foreach(var role in Model.Roles!)
+            {
+                <option value="@role.RoleName">@role.RoleName</option>
+            }
+    </select>
+    
+    <button type="submit">Add Role</button>
+</form>
