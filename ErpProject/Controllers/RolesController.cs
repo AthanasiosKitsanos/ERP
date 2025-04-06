@@ -17,8 +17,8 @@ public class RolesController : Controller
         _roleService = roleService; 
     }
 
-    [HttpGet("index/{id}")]
-    public async Task<IActionResult> Index(int id)
+    [HttpGet("roleregistration/{id}")]
+    public async Task<IActionResult> RoleRegistration(int id)
     {
         AddRoleViewModel model = new AddRoleViewModel
         {
@@ -34,8 +34,8 @@ public class RolesController : Controller
         return View(model);
     }
 
-    [HttpPost("index/{id}")]
-    public async Task<IActionResult> AddRole(AddRoleViewModel model)
+    [HttpPost("roleregistration/{id}")]
+    public async Task<IActionResult> RoleRegistration(AddRoleViewModel model)
     {
         if(!ModelState.IsValid)
         {
