@@ -1,49 +1,48 @@
-﻿@using ErpProject.Models.EmployeeModel
-@model Employee
-
+﻿@using ErpProject.Models.DTOModels
+@model ViewModelDTO
 <div>
     <form asp-action="Register" method="post">
         <ul style="list-style: none;">
             <li>
                 <label>First Name</label>
-                <input type="text" asp-for="FirstName">
-                <span asp-validation-for="FirstName"></span>
+                <input type="text" asp-for="@Model.Employee.FirstName">
+                <span asp-validation-for="@Model.Employee.FirstName"></span>
             </li>
 
             <li>
                 <label>Last Name</label>
-                <input type="text" asp-for="LastName">
-                <span asp-validation-for="LastName"></span>
+                <input type="text" asp-for="@Model.Employee.LastName">
+                <span asp-validation-for="@Model.Employee.LastName"></span>
             </li>
 
             <li>
                 <label>Email</label>
-                <input type="email" asp-for="Email">
-                <span asp-validation-for="Email"></span>
+                <input type="email" asp-for="@Model.Employee.Email">
+                <span asp-validation-for="@Model.Employee.Email"></span>
             </li>
 
             <li>
                 <label>Date of Birth</label>
-                <input type="date" asp-for="DateOfBirth">
-                <span asp-validation-for="DateOfBirth"></span>
+                <input type="date" asp-for="@Model.Employee.DateOfBirth">
+                <span asp-validation-for="@Model.Employee.DateOfBirth"></span>
             </li>
 
             <li>
                 <label>Nationality</label>
-                <input type="text" asp-for="Nationality">
-                <span asp-validation-for="Nationality"></span>
+                <input type="text" asp-for="@Model.Employee.Nationality">
+                <span asp-validation-for="@Model.Employee.Nationality"></span>
             </li>
 
             <li>
                 <label>Gender</label>
-                <input type="text" asp-for="Gender">
-                <span asp-validation-for="Gender"></span>
+                <input type="text" asp-for="@Model.Employee.Gender">
+                <span asp-validation-for="@Model.Employee.Gender"></span>
             </li>
 
             <li>
                 <label>Phone Number</label>
-                <input type="text" asp-for="PhoneNumber">
-                <span asp-validation-for="PhoneNumber"></span>
+                <input type="text" asp-for="@Model.Employee.PhoneNumber">
+                <span asp-validation-for="@Model.Employee.PhoneNumber"></span>
             </li>
 
             <li>

@@ -7,7 +7,8 @@ using ErpProject.Helpers;
 using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.SqlTypes;
-using ErpProject.Models.DTOModels.Update;
+using ErpProject.Models.DTOModels;
+using System.Transactions;
 
 namespace ErpProject.Services.EmployeeServices;
 
@@ -23,79 +24,25 @@ public class EmployeeService
     }
 
     /// <summary>
-    /// Registers a new Employee to the Employee Table
+    /// Asynchronously retrieves a list of employees from the database.
     /// </summary>
-    /// <param name="newEmployee"></param>
-    /// <returns>True, if registration was a success</returns>
-    public async Task<bool> RegisterNewEmployeeAsync(Employee newEmployee)
-    {
-        if (newEmployee is null)
-        {
-            return false;
-        }
-
-        string emailQuery = @"SELECT COUNT(1)
-                                FROM Employees 
-                                WHERE Email = @Email";
-
-        string registerQuery = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath)
-                                VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @PhotographPath)";
-
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
-        {
-            await connection.OpenAsync();
-
-            using (SqlCommand command = new SqlCommand(emailQuery, connection))
-            {
-                command.Parameters.AddWithValue("@Email", newEmployee.Email);
-
-                int emailExistsCount = (int)(await command.ExecuteScalarAsync() ?? 0);
-
-                if (emailExistsCount > 0)
-                {
-                    return false;
-                }
-            }
-
-            using (SqlCommand command = new SqlCommand(registerQuery, connection))
-            {
-                command.Parameters.AddWithValue("@FirstName", newEmployee.FirstName);
-                command.Parameters.AddWithValue("@LastName", newEmployee.LastName);
-                command.Parameters.AddWithValue("@Email", newEmployee.Email);
-                command.Parameters.AddWithValue("@Age", AgeCalculator.CalculateAge(newEmployee.DateOfBirth));
-                command.Parameters.AddWithValue("@DateOfBirth", newEmployee.DateOfBirth);
-                command.Parameters.AddWithValue("@Nationality", newEmployee.Nationality);
-                command.Parameters.AddWithValue("@Gender", newEmployee.Gender);
-                command.Parameters.AddWithValue("@PhoneNumber", newEmployee.PhoneNumber);
-                command.Parameters.AddWithValue("@PhotographPath", newEmployee.PhotographPath);
-
-                int affectedRows = await command.ExecuteNonQueryAsync();
-
-                return affectedRows > 0;
-            }
-        }
-    }
-
-    /// <summary>
-    /// /// Gets all the elements from the Employee Table
-    /// </summary>
-    /// <returns>A List of the Employee in the Employee Table</returns>
+    /// <returns> Task that represents an asynchronous operation, which resolves to a list of Employees objects.</returns>
     public async Task<List<Employee>> GetEmployeesAsync()
     {
         List<Employee> employeeList = new List<Employee>();
 
-        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
-                        FROM Employees";
+        string getEmployee = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
+                            FROM Employees";
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using(SqlCommand command = new SqlCommand(getEmployee, connection))
             {
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    Dictionary<string, int> collumnMap = new Dictionary<string, int>
+                    Dictionary<string, int> param = new Dictionary<string, int>
                     {
                         {"Id", reader.GetOrdinal("Id")},
                         {"FirstName", reader.GetOrdinal("FirstName")},
@@ -108,19 +55,19 @@ public class EmployeeService
                         {"PhoneNumber", reader.GetOrdinal("PhoneNumber")}
                     };
 
-                    while (await reader.ReadAsync())
+                    while(await reader.ReadAsync())
                     {
-                        var employee = new Employee
+                        Employee employee = new Employee
                         {
-                            Id = reader.GetInt32(collumnMap["Id"]),
-                            FirstName = reader.GetString(collumnMap["FirstName"]),
-                            LastName = reader.GetString(collumnMap["LastName"]),
-                            Email = reader.GetString(collumnMap["Email"]),
-                            Age = reader.GetString(collumnMap["Age"]),
-                            DateOfBirth = reader.GetDateTime(collumnMap["DateOfBirth"]),
-                            Nationality = reader.GetString(collumnMap["Nationality"]),
-                            Gender = reader.GetString(collumnMap["Gender"]),
-                            PhoneNumber = reader.GetString(collumnMap["PhoneNumber"])
+                            Id = reader.GetInt32(param["Id"]),
+                            FirstName = reader.GetString(param["FirstName"]),
+                            LastName = reader.GetString(param["LastName"]),
+                            Email = reader.GetString(param["Email"]),
+                            Age =  reader.GetString(param["Age"]),
+                            DateOfBirth = reader.GetDateTime(param["DateOfBirth"]),
+                            Nationality = reader.GetString(param["Nationality"]),
+                            Gender = reader.GetString(param["Gender"]),
+                            PhoneNumber = reader.GetString(param["PhoneNumber"])
                         };
 
                         employeeList.Add(employee);
@@ -133,42 +80,39 @@ public class EmployeeService
     }
 
     /// <summary>
-    /// Gets an Employee element from the Employee Table
+    /// Asynchronously retrieves an Employee from the database.
     /// </summary>
-    /// <param name="id">Integer</param>
-    /// <returns>An Employee class</returns>
+    /// <param name="id">The unique identifier of the Employee to retrieve.</param>
+    /// <returns>Null if no Employee is found</returns>
     public async Task<Employee> GetEmployeeByIdAsync(int id)
     {
-        Employee employee = null!;
+        Employee employee = new Employee();
 
-        string query = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
-                        FROM Employees 
-                        WHERE Id = @Id";
+        string getEmployee = @"SELECT Id, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber 
+                            FROM Employees
+                            WHERE Id = @Id";
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using(SqlCommand command = new SqlCommand(getEmployee, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
 
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    if (await reader.ReadAsync())
+                    if(await reader.ReadAsync())
                     {
-                        employee = new Employee
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                            Email = reader.GetString(reader.GetOrdinal("Email")),
-                            Age = reader.GetString(reader.GetOrdinal("Age")),
-                            DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
-                            Nationality = reader.GetString(reader.GetOrdinal("Nationality")),
-                            Gender = reader.GetString(reader.GetOrdinal("Gender")),
-                            PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"))
-                        };
+                        employee.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                        employee.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                        employee.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                        employee.Email = reader.GetString(reader.GetOrdinal("Email"));
+                        employee.Age = reader.GetString(reader.GetOrdinal("Age"));
+                        employee.DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth"));
+                        employee.Nationality = reader.GetString(reader.GetOrdinal("Nationality"));
+                        employee.Gender = reader.GetString(reader.GetOrdinal("Gender"));
+                        employee.PhoneNumber = reader.GetString(reader.GetOrdinal("PhoneNumber"));
                     }
                 }
             }
@@ -177,132 +121,124 @@ public class EmployeeService
         return employee;
     }
 
-    /// <summary>
-    /// Updated the Email and PhoneNumber of an Employee
-    /// </summary>
-    /// <param name="dto"></param>
-    /// <param name="id"></param>
-    /// <returns>True if at least one Row is affected</returns>
-    public async Task<bool> UpdateEmployeeAsync(UpdateDTO dto, int id)
+    public async Task<bool> EmailExistsAsync(string email)
     {
-        if (dto is null)
+        if(string.IsNullOrEmpty(email))
         {
             return false;
         }
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
-        {
-            await connection.OpenAsync();
-
-            List<string> fields = new List<string>();
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-            if(!string.IsNullOrEmpty(dto.Email))
-            {
-                fields.Add("Email = @Email");
-                parameters["@Email"] = dto.Email;
-            }
-
-            if(!string.IsNullOrEmpty(dto.PhoneNumber))
-            {
-                fields.Add("PhoneNumber = @PhoneNumber");
-                parameters["@PhoneNumber"] = dto.PhoneNumber;
-            }
-
-            if(fields.Count == 0)
-            {
-                return false;
-            }
-
-            string query = $@"UPDATE Employees 
-                            SET {string.Join(", ", fields)} 
-                            WHERE Id = @Id";
-
-            using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@Id", id);
-
-                foreach(var param in parameters)
-                {
-                    command.Parameters.AddWithValue(param.Key, param.Value);
-                }
-
-                int affectedRows = await command.ExecuteNonQueryAsync();
-
-                return affectedRows > 0;
-            }
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="email"></param>
-    /// <returns>Return the Id of the Employee</returns>
-    /// <exception cref="ArgumentNullException">The email must not be null</exception>
-    public async Task<int> GetIdFromEmployeeAsync(string email)
-    {
-        if (string.IsNullOrEmpty(email))
-        {
-            throw new ArgumentNullException("Email must not be empty or null", nameof(email));
-        }
-
-        int id = 0;
-
-        string query = @"SELECT Id 
+        string getEmail = @"SELECT COUNT(Email) 
                         FROM Employees 
                         WHERE Email = @Email";
-
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using(SqlCommand command = new SqlCommand(getEmail, connection))
             {
                 command.Parameters.AddWithValue("@Email", email);
 
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        id = reader.GetInt32(reader.GetOrdinal("Id"));
-                    }
-                }
+                int count = Convert.ToInt32(await command.ExecuteScalarAsync());
+
+                return count > 0;
             }
         }
-
-        return id;
     }
 
     /// <summary>
-    /// Deletes an Employee for the Database
+    /// Asynchronously deletes an Employee from the database.
     /// </summary>
-    /// <param name="id">id (int)</param>
-    /// <returns>True, if deletion is successfull</returns>
+    /// <param name="id">The unique identifier of the Employee to retrieve.</param>
+    /// <returns>True if deletion was a success, else False</returns>
     public async Task<bool> DeleteEmployeeAsync(int id)
     {
-
-        if (id <= 0)
-        {
-            return false;
-        }
-
-        string query = @"DELETE 
-                        FROM Employees 
+        string delete = @"DELETE FROM Employees
                         WHERE Id = @Id";
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using(SqlCommand command =  new SqlCommand(delete, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
 
                 int affectedRows = await command.ExecuteNonQueryAsync();
 
                 return affectedRows > 0;
+            }
+        }
+    }
+
+    public async Task<bool> RegisterNewEmployeeAsync(EmployeeDTO employee, SqlConnection connection, SqlTransaction transaction)
+    {
+        if(employee is null)
+        {
+            return false;
+        }
+
+        bool emailExists = await EmailExistsAsync(employee.Email);
+
+        if(emailExists)
+        {
+            return false;
+        }
+        
+        string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath)
+                            VALUES (FirstName = @FirstName, LastName = @LastName, Age = @Age, DateOfBirth = @DateOfBirth, Nationality = @Nationality, Gender = @Gender, PhoneNumber = @PhoneNumber, PhotographPath = @PhotographPath)";
+
+        using(SqlCommand command = new SqlCommand(addEmployee, connection, transaction))
+        {
+            command.Parameters.AddWithValue("@FirstName", employee.FirstName);
+            command.Parameters.AddWithValue("@LastName", employee.LastName);
+            command.Parameters.AddWithValue("@Email", employee.Email);
+            command.Parameters.AddWithValue("@Age", AgeCalculator.CalculateAge(employee.DateOfBirth));
+            command.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth);
+            command.Parameters.AddWithValue("@Nationality", employee.Nationality);
+            command.Parameters.AddWithValue("@Gender", employee.Gender);
+            command.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
+            command.Parameters.AddWithValue("@PhotographPath", string.Empty);
+
+            int affectedRows = await command.ExecuteNonQueryAsync();
+
+            return affectedRows > 0;
+        }
+    }
+
+    public async Task<bool> RegistrationCompleteAsync(ViewModelDTO model)
+    {
+        if(model is null)
+        {
+            return false;
+        }
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlTransaction transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    await RegisterNewEmployeeAsync(model.Employee, connection, transaction);
+
+                    //Complete the rest of the registrations
+
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch(SqlException ex)
+                {
+                    await transaction.RollbackAsync();
+                    throw new Exception($"Sql Error: {ex.Message}");
+                }
+                catch(Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    throw new Exception($"General Error: {ex.Message}");
+                }
             }
         }
     }
