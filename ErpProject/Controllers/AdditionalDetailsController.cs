@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 namespace ErpProject.Controllers;
 
 [Route("additionaldetails")]
-public class AdditionalDetailsController
+public class AdditionalDetailsController // Add ": Controller"
 {
-    
+
 }
