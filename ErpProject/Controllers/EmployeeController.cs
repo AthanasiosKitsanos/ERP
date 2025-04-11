@@ -53,7 +53,7 @@ public class EmployeeController: Controller
             return RedirectToAction("Register");
         }
 
-        return RedirectToAction("Index", "AdditionalDetails", model);
+        return RedirectToAction("Add", "AdditionalDetails", model);
     }
     
     [HttpGet("delete/{id}")]

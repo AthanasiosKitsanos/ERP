@@ -9,18 +9,20 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Data.SqlTypes;
 using ErpProject.Models.DTOModels;
 using System.Transactions;
+using ErpProject.Services.EmployeeServicesFolder;
 
 namespace ErpProject.Services.EmployeeServices;
 
 public class EmployeeService
 {
-    //private readonly ErpDbContext _dbContext;
     private readonly Connection _connection;
+    private readonly AdditionalDetailsService _additionalDetails;
 
-    public EmployeeService(/*ErpDbContext dbContext*/ Connection connection)
+
+    public EmployeeService(Connection connection, AdditionalDetailsService additionalDetails)
     {
-        //_dbContext = dbContext;
         _connection = connection;
+        _additionalDetails = additionalDetails;
     }
 
     /// <summary>
@@ -172,22 +174,30 @@ public class EmployeeService
         }
     }
 
-    public async Task<bool> RegisterNewEmployeeAsync(EmployeeDTO employee, SqlConnection connection, SqlTransaction transaction)
+    /// <summary>
+    /// Registers a new Employee to the Emloyee table
+    /// </summary>
+    /// <param name="employee">The EmployeeDTO class and Properties</param>
+    /// <param name="connection">The connection string</param>
+    /// <param name="transaction">The transaction</param>
+    /// <returns>Returns the Id of the new added Employee</returns>
+    public async Task<int> RegisterNewEmployeeAsync(EmployeeDTO employee, SqlConnection connection, SqlTransaction transaction)
     {
         if(employee is null)
         {
-            return false;
+            return -1;
         }
 
         bool emailExists = await EmailExistsAsync(employee.Email);
 
         if(emailExists)
         {
-            return false;
+            return -1;
         }
         
         string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath)
-                            VALUES (FirstName = @FirstName, LastName = @LastName, Age = @Age, DateOfBirth = @DateOfBirth, Nationality = @Nationality, Gender = @Gender, PhoneNumber = @PhoneNumber, PhotographPath = @PhotographPath)";
+                            VALUES (@FirstName, @LastName, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @PhotographPath);
+                            SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         using(SqlCommand command = new SqlCommand(addEmployee, connection, transaction))
         {
@@ -201,12 +211,18 @@ public class EmployeeService
             command.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@PhotographPath", string.Empty);
 
-            int affectedRows = await command.ExecuteNonQueryAsync();
+            var result = await command.ExecuteScalarAsync();
 
-            return affectedRows > 0;
+            return (result is not null) ? Convert.ToInt32(result) : -1;
         }
     }
 
+    /// <summary>
+    /// It completes the full registration of an employee
+    /// </summary>
+    /// <param name="model">A ViewModelDTO that uses all the Models of the DTO folder as properties</param>
+    /// <returns>True if the transaction is completed, false if an error occures</returns>
+    /// <exception cref="Exception"></exception>
     public async Task<bool> RegistrationCompleteAsync(ViewModelDTO model)
     {
         if(model is null)
@@ -218,27 +234,30 @@ public class EmployeeService
         {
             await connection.OpenAsync();
 
-            using(SqlTransaction transaction = connection.BeginTransaction())
+            SqlTransaction transaction = connection.BeginTransaction();
+
+            try
             {
-                try
-                {
-                    await RegisterNewEmployeeAsync(model.Employee, connection, transaction);
+                int id = await RegisterNewEmployeeAsync(model.Employee, connection, transaction);
 
-                    //Complete the rest of the registrations
+                await _additionalDetails.AddAdditionalDetailsAsync(model.AdditionalDetails, id, connection, transaction);
 
-                    await transaction.CommitAsync();
-                    return true;
-                }
-                catch(SqlException ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw new Exception($"Sql Error: {ex.Message}");
-                }
-                catch(Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw new Exception($"General Error: {ex.Message}");
-                }
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch(SqlException ex)
+            {
+                await transaction.RollbackAsync();
+                throw new Exception($"Sql Error: {ex.Message}");
+            }
+            catch(Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                await transaction.DisposeAsync();
             }
         }
     }

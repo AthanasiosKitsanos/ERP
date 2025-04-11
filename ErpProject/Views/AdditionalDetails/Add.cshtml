@@ -1,0 +1,24 @@
+﻿@using ErpProject.Models.DTOModels
+@model ViewModelDTO
+
+<div>
+    <form asp-action="AddDetails" asp-controller="AdditionalDetails" method="post">
+        <ul>
+            <li>
+                <label>Emergency Number</label>
+                <input type="text" asp-for="@Model.AdditionalDetails.EmergencyNumbers">
+                <span asp-validation-for="@Model.AdditionalDetails.EmergencyNumbers"></span>
+            </li>
+            
+            <li>
+                <label>Education</label>
+                <input type="text" asp-for="@Model.AdditionalDetails.Education">
+                <span asp-validation-for="@Model.AdditionalDetails.Education"></span>
+            </li>
+
+            <li>
+                <button type="submit">Next</button>
+            </li>
+        </ul>
+    </form>
+</div>
