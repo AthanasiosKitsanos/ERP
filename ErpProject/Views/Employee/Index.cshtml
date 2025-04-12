@@ -45,6 +45,7 @@
                         <td>@employee.Nationality</td>
                         <td>@employee.Gender</td>
                         <td>@employee.PhoneNumber</td>
+                        <td><img src="@employee.PhotographPath"></td>
                         <td><a asp-action="Update" asp-route-id="@employee.Id">Edit</a></td>
                         <td><a asp-action="Delete" asp-route-id="@employee.Id">Delete</a></td>
                     </tr>
