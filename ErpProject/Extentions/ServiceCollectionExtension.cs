@@ -5,6 +5,7 @@ using ErpProject.ContextDb;
 using ErpProject.Helpers.Connection;
 using ErpProject.Models.AdditionalDetailsModel;
 using ErpProject.Services.EmployeeServicesFolder;
+using ErpProject.Services;
 
 namespace ErpProject.Extentions;
 
@@ -16,6 +17,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<EmployeeService>();
         services.AddScoped<RoleService>();
         services.AddScoped<AdditionalDetailsService>();
+        services.AddScoped<PhotoUploadService>();
         return services;
     }
 }
