@@ -1,7 +1,11 @@
 ﻿@using ErpProject.Models.DTOModels
 @model ViewModelDTO
-<div>
-    <form asp-action="Register" method="post">
+
+@using(Html.BeginForm("Register", "Employee", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div>
         <ul style="list-style: none;">
             <li>
                 <label>First Name</label>
@@ -46,8 +50,13 @@
             </li>
 
             <li>
+                <label for="ProfileImage">Photograph</label>
+                <input type="file" id="ProfileImage" accept="image/*">
+            </li>
+
+             <li>
                 <button type="submit">Next</button>
             </li>
         </ul>
-    </form>
-</div>
+    </div>
+}

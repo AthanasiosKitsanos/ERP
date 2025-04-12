@@ -46,6 +46,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("register")]
+    [ValidateAntiForgeryToken]
     public IActionResult Register(ViewModelDTO model)
     {
         if(model is null)
@@ -70,6 +71,7 @@ public class EmployeeController: Controller
     }
 
     [HttpPost("delete/{id}")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
         if(!ModelState.IsValid)
