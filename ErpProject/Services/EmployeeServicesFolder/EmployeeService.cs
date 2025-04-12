@@ -18,7 +18,6 @@ public class EmployeeService
     private readonly Connection _connection;
     private readonly AdditionalDetailsService _additionalDetails;
 
-
     public EmployeeService(Connection connection, AdditionalDetailsService additionalDetails)
     {
         _connection = connection;
@@ -209,7 +208,7 @@ public class EmployeeService
             command.Parameters.AddWithValue("@Nationality", employee.Nationality);
             command.Parameters.AddWithValue("@Gender", employee.Gender);
             command.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
-            command.Parameters.AddWithValue("@PhotographPath", string.Empty);
+            command.Parameters.AddWithValue("@PhotographPath", employee.PhotographPath);
 
             var result = await command.ExecuteScalarAsync();
 
@@ -223,7 +222,7 @@ public class EmployeeService
     /// <param name="model">A ViewModelDTO that uses all the Models of the DTO folder as properties</param>
     /// <returns>True if the transaction is completed, false if an error occures</returns>
     /// <exception cref="Exception"></exception>
-    public async Task<bool> RegistrationCompleteAsync(ViewModelDTO model)
+    public async Task<bool> RegistrationCompleteAsync(ViewModelDTO model, IFormFile file)
     {
         if(model is null)
         {
