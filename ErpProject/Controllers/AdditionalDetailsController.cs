@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using ErpProject.Models.DTOModels;
+using ErpProject.Services;
 using ErpProject.Services.EmployeeServicesFolder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -9,9 +11,9 @@ namespace ErpProject.Controllers;
 [Route("additionaldetails")]
 public class AdditionalDetailsController: Controller
 {
-    private readonly AdditionalDetailsService _service;
+    private readonly PhotoUploadService _service;
 
-    public AdditionalDetailsController(AdditionalDetailsService service)
+    public AdditionalDetailsController(PhotoUploadService service)
     {
         _service = service;
     }
