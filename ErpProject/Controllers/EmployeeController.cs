@@ -60,7 +60,7 @@ public class EmployeeController: Controller
 
         model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(file);
 
-        if(string.IsNullOrEmpty(model.Employee.PhotographPath))
+        if(string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
         {
             await _photoUploadService.DeletePhoto(model.Employee.PhotographPath);
             return View("Register");
