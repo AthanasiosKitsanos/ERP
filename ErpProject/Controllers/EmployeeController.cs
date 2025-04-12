@@ -5,6 +5,8 @@ using ErpProject.Services.EmployeeServices;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ErpProject.Models.DTOModels;
+using Microsoft.AspNetCore.Http.Metadata;
+using ErpProject.Services;
 
 
 namespace ErpProject.Controllers;
@@ -13,10 +15,12 @@ namespace ErpProject.Controllers;
 public class EmployeeController: Controller
 {
     private readonly EmployeeService _employeeService;
+    private readonly PhotoUploadService _photoUploadService;
 
-    public EmployeeController(EmployeeService employeeService)
+    public EmployeeController(EmployeeService employeeService, PhotoUploadService photoUploadService)
     {
         _employeeService = employeeService;
+        _photoUploadService = photoUploadService;
     }
 
     [HttpGet("index")]
@@ -47,11 +51,19 @@ public class EmployeeController: Controller
 
     [HttpPost("register")]
     [ValidateAntiForgeryToken]
-    public IActionResult Register(ViewModelDTO model)
+    public async Task<IActionResult> Register(ViewModelDTO model, IFormFile file)
     {
         if(model is null)
         {
             return RedirectToAction("Register");
+        }
+
+        model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(file);
+
+        if(string.IsNullOrEmpty(model.Employee.PhotographPath))
+        {
+            await _photoUploadService.DeletePhoto(model.Employee.PhotographPath);
+            return View("Register");
         }
 
         return RedirectToAction("Add", "AdditionalDetails", model);
