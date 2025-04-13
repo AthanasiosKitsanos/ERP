@@ -1,1 +1,51 @@
-﻿<!--TODO: Create the inputs for Employement Details -->
+﻿@using ErpProject.Models.DTOModels
+@model ViewModelDTO
+
+@using(Html.BeginForm("AddDetails", "EmploymentDetails", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <ul>
+            <li>
+               <label >Position</label>
+               <input type="text" asp-for="@Model.EmploymentDetails.Position">
+               <span asp-validation-for="@Model.EmploymentDetails.Position"></span>
+            </li>
+
+            <li>
+                <label >Department</label>
+               <input type="text" asp-for="@Model.EmploymentDetails.Department">
+               <span asp-validation-for="@Model.EmploymentDetails.Department"></span>
+            </li>
+
+            <li>
+                <label >Employment Status</label>
+               <input type="text" asp-for="@Model.EmploymentDetails.EmploymentStatus">
+               <span asp-validation-for="@Model.EmploymentDetails.EmploymentStatus"></span>
+            </li>
+
+            <li>
+                <label >Hire Date</label>
+               <input type="date" asp-for="@Model.EmploymentDetails.HireDate">
+               <span asp-validation-for="@Model.EmploymentDetails.HireDate"></span>
+            </li>
+
+            <li>
+                <label >Contract Type</label>
+               <input type="text" asp-for="@Model.EmploymentDetails.ContractType">
+               <span asp-validation-for="@Model.EmploymentDetails.ContractType"></span>
+            </li>
+
+            <li>
+                <label >Work Location</label>
+               <input type="text" asp-for="@Model.EmploymentDetails.WorkLocation">
+               <span asp-validation-for="@Model.EmploymentDetails.WorkLocation"></span>
+            </li>
+
+            <li>
+                <button type="submit">Next</button>
+            </li>
+        </ul>
+    </div>
+}

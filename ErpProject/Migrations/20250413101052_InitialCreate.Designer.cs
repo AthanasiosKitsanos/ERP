@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ErpProject.Migrations
 {
     [DbContext(typeof(ErpDbContext))]
-    [Migration("20250322101758_InitalCreate")]
-    partial class InitalCreate
+    [Migration("20250413101052_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace ErpProject.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.AccountStatus", b =>
+            modelBuilder.Entity("ErpProject.Models.AccountStatusModel.AccountStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace ErpProject.Migrations
                     b.ToTable("AccountStatus");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.AdditionalDetails", b =>
+            modelBuilder.Entity("ErpProject.Models.AdditionalDetailsModel.AdditionalDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,10 +50,9 @@ namespace ErpProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<byte[]>("Certifications")
+                    b.Property<string>("CertificationsPath")
                         .IsRequired()
-                        .HasMaxLength(8000)
-                        .HasColumnType("varbinary(8000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Education")
                         .IsRequired()
@@ -66,10 +65,9 @@ namespace ErpProject.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("PersonalDocuments")
+                    b.Property<string>("PersonalDocumentsPath")
                         .IsRequired()
-                        .HasMaxLength(8000)
-                        .HasColumnType("varbinary(8000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -78,7 +76,41 @@ namespace ErpProject.Migrations
                     b.ToTable("AdditionalDetails");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.Employee", b =>
+            modelBuilder.Entity("ErpProject.Models.EmployeeCredentilasModel.EmployeeCredentials", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastLogIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountStatusId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeCredentials");
+                });
+
+            modelBuilder.Entity("ErpProject.Models.EmployeeModel.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,41 +158,7 @@ namespace ErpProject.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.EmployeeCredentials", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastLogIn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountStatusId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeCredentials");
-                });
-
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.EmploymentDetails", b =>
+            modelBuilder.Entity("ErpProject.Models.EmploymentDetailsModel.EmploymentDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -201,7 +199,7 @@ namespace ErpProject.Migrations
                     b.ToTable("EmploymentDetails");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.Identifications", b =>
+            modelBuilder.Entity("ErpProject.Models.IdentificationsModel.Identifications", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,7 +228,7 @@ namespace ErpProject.Migrations
                     b.ToTable("Identifications");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.RoleEpmloyee", b =>
+            modelBuilder.Entity("ErpProject.Models.RolesEmployeeModel.RoleEpmloyee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -250,10 +248,10 @@ namespace ErpProject.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleEpmloyee");
+                    b.ToTable("RoleEmployee");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.Roles", b =>
+            modelBuilder.Entity("ErpProject.Models.RolesModel.Roles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -270,9 +268,9 @@ namespace ErpProject.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.AdditionalDetails", b =>
+            modelBuilder.Entity("ErpProject.Models.AdditionalDetailsModel.AdditionalDetails", b =>
                 {
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Employee", "Employee")
+                    b.HasOne("ErpProject.Models.EmployeeModel.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -281,15 +279,15 @@ namespace ErpProject.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.EmployeeCredentials", b =>
+            modelBuilder.Entity("ErpProject.Models.EmployeeCredentilasModel.EmployeeCredentials", b =>
                 {
-                    b.HasOne("ErpProject.Models.EmployeeProfile.AccountStatus", "AccountStatus")
+                    b.HasOne("ErpProject.Models.AccountStatusModel.AccountStatus", "AccountStatus")
                         .WithMany()
                         .HasForeignKey("AccountStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Employee", "Employee")
+                    b.HasOne("ErpProject.Models.EmployeeModel.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -300,9 +298,9 @@ namespace ErpProject.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.EmploymentDetails", b =>
+            modelBuilder.Entity("ErpProject.Models.EmploymentDetailsModel.EmploymentDetails", b =>
                 {
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Employee", "Employee")
+                    b.HasOne("ErpProject.Models.EmployeeModel.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -311,9 +309,9 @@ namespace ErpProject.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.Identifications", b =>
+            modelBuilder.Entity("ErpProject.Models.IdentificationsModel.Identifications", b =>
                 {
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Employee", "Employee")
+                    b.HasOne("ErpProject.Models.EmployeeModel.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -322,15 +320,15 @@ namespace ErpProject.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("ErpProject.Models.EmployeeProfile.RoleEpmloyee", b =>
+            modelBuilder.Entity("ErpProject.Models.RolesEmployeeModel.RoleEpmloyee", b =>
                 {
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Employee", "Employee")
+                    b.HasOne("ErpProject.Models.EmployeeModel.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ErpProject.Models.EmployeeProfile.Roles", "Role")
+                    b.HasOne("ErpProject.Models.RolesModel.Roles", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -47,14 +47,14 @@ public class EmployeeController: Controller
 
     [HttpPost("register")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(ViewModelDTO model, IFormFile file)
+    public async Task<IActionResult> Register(ViewModelDTO model)
     {
         if(model is null)
         {
             return RedirectToAction("Register");
         }
 
-        model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(file);
+        model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(model.ProfilePhoto);
 
         if(string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
         {

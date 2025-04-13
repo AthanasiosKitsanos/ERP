@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ErpProject.Migrations
 {
     /// <inheritdoc />
-    public partial class InitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,8 +66,8 @@ namespace ErpProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmergencyNumbers = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Education = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Certifications = table.Column<byte[]>(type: "varbinary(8000)", maxLength: 8000, nullable: false),
-                    PersonalDocuments = table.Column<byte[]>(type: "varbinary(8000)", maxLength: 8000, nullable: false),
+                    CertificationsPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonalDocumentsPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -158,7 +158,7 @@ namespace ErpProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleEpmloyee",
+                name: "RoleEmployee",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -168,15 +168,15 @@ namespace ErpProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleEpmloyee", x => x.Id);
+                    table.PrimaryKey("PK_RoleEmployee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleEpmloyee_Employees_EmployeeId",
+                        name: "FK_RoleEmployee_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoleEpmloyee_Roles_RoleId",
+                        name: "FK_RoleEmployee_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -209,13 +209,13 @@ namespace ErpProject.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleEpmloyee_EmployeeId",
-                table: "RoleEpmloyee",
+                name: "IX_RoleEmployee_EmployeeId",
+                table: "RoleEmployee",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleEpmloyee_RoleId",
-                table: "RoleEpmloyee",
+                name: "IX_RoleEmployee_RoleId",
+                table: "RoleEmployee",
                 column: "RoleId");
         }
 
@@ -235,7 +235,7 @@ namespace ErpProject.Migrations
                 name: "Identifications");
 
             migrationBuilder.DropTable(
-                name: "RoleEpmloyee");
+                name: "RoleEmployee");
 
             migrationBuilder.DropTable(
                 name: "AccountStatus");

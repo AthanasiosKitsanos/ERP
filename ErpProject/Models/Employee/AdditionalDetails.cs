@@ -15,11 +15,9 @@ public class AdditionalDetails
 
     public string Education { get; set; } = string.Empty;
 
-    [MaxLength(8000)]
-    public byte[] Certifications { get; set; } = null!;
+    public string CertificationsPath { get; set; } = null!;
 
-    [MaxLength(8000)]
-    public byte[] PersonalDocuments { get; set; } = null!;
+    public string PersonalDocumentsPath { get; set; } = null!;
 
     public int EmployeeId { get; set; }
 

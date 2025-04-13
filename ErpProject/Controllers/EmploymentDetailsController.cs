@@ -7,13 +7,6 @@ namespace ErpProject.Controllers;
 [Route("employmentDetails")]
 public class EmploymentDetailsController: Controller
 {
-    private readonly FileUpload _uploadService;
-
-    public EmploymentDetailsController(FileUpload uploadService)
-    {
-        _uploadService = uploadService;
-    }
-
     [HttpGet("add")]
     public IActionResult Add(ViewModelDTO model)
     {

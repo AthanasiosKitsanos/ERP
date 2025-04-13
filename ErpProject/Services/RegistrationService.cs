@@ -51,7 +51,7 @@ public class RegistrationService
 
                 await _adService.AddAdditionalDetailsAsync(id, model.AdditionalDetails, connection, transaction);
 
-                await _edService.AddEmploymentDetailsAsync(id, model.EmploymentDetail, connection, transaction);
+                await _edService.AddEmploymentDetailsAsync(id, model.EmploymentDetails, connection, transaction);
 
                 await transaction.CommitAsync();
                 return true;
