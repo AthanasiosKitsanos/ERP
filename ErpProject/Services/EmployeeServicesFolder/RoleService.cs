@@ -1,8 +1,4 @@
-using System;
-using Microsoft.EntityFrameworkCore;
-using ErpProject.ContextDb;
 using ErpProject.Models.RolesModel;
-using ErpProject.Models.RolesEmployeeModel;
 using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 

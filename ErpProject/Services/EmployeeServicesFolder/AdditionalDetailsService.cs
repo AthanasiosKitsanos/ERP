@@ -1,6 +1,3 @@
-using System;
-using ErpProject.Helpers.Connection;
-using ErpProject.Models.AdditionalDetailsModel;
 using ErpProject.Models.DTOModels;
 using Microsoft.Data.SqlClient;
 
@@ -8,14 +5,7 @@ namespace ErpProject.Services.EmployeeServicesFolder;
 
 public class AdditionalDetailsService
 {
-    private readonly Connection _connection;
-
-    public AdditionalDetailsService(Connection connection)
-    {
-        _connection = connection;
-    }
-
-    public async Task<bool> AddAdditionalDetailsAsync(AdditionalDetailsDTO details, int id, SqlConnection connection, SqlTransaction transaction)
+    public async Task<bool> AddAdditionalDetailsAsync(int id, AdditionalDetailsDTO details, SqlConnection connection, SqlTransaction transaction)
     {
         if(details is null)
         {

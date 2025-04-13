@@ -1,6 +1,3 @@
-using System;
-using ErpProject.Models.RolesModel;
-
 namespace ErpProject.Models.DTOModels;
 
 public class ViewModelDTO

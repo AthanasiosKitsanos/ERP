@@ -1,8 +1,11 @@
 ﻿@using ErpProject.Models.DTOModels
 @model ViewModelDTO
 
-<div>
-    <form asp-action="AddDetails" asp-controller="AdditionalDetails" method="post">
+@using(Html.BeginForm("AddDetails", "AdditionalDetails", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
         <ul>
             <li>
                 <label>Emergency Number</label>
@@ -20,5 +23,5 @@
                 <button type="submit">Next</button>
             </li>
         </ul>
-    </form>
-</div>
+    </div>
+}

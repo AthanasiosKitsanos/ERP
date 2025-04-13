@@ -1,14 +1,8 @@
-using System;
 using ErpProject.Models.EmployeeModel;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using ErpProject.ContextDb;
 using ErpProject.Helpers;
 using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
-using Microsoft.Data.SqlTypes;
 using ErpProject.Models.DTOModels;
-using System.Transactions;
 using ErpProject.Services.EmployeeServicesFolder;
 
 namespace ErpProject.Services.EmployeeServices;
@@ -213,51 +207,6 @@ public class EmployeeService
             var result = await command.ExecuteScalarAsync();
 
             return (result is not null) ? Convert.ToInt32(result) : -1;
-        }
-    }
-
-    /// <summary>
-    /// It completes the full registration of an employee
-    /// </summary>
-    /// <param name="model">A ViewModelDTO that uses all the Models of the DTO folder as properties</param>
-    /// <returns>True if the transaction is completed, false if an error occures</returns>
-    /// <exception cref="Exception"></exception>
-    public async Task<bool> RegistrationCompleteAsync(ViewModelDTO model, IFormFile file)
-    {
-        if(model is null)
-        {
-            return false;
-        }
-
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
-        {
-            await connection.OpenAsync();
-
-            SqlTransaction transaction = connection.BeginTransaction();
-
-            try
-            {
-                int id = await RegisterNewEmployeeAsync(model.Employee, connection, transaction);
-
-                await _additionalDetails.AddAdditionalDetailsAsync(model.AdditionalDetails, id, connection, transaction);
-
-                await transaction.CommitAsync();
-                return true;
-            }
-            catch(SqlException ex)
-            {
-                await transaction.RollbackAsync();
-                throw new Exception($"Sql Error: {ex.Message}");
-            }
-            catch(Exception)
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
-            finally
-            {
-                await transaction.DisposeAsync();
-            }
         }
     }
 }

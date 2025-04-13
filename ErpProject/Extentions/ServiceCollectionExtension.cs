@@ -18,6 +18,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<RoleService>();
         services.AddScoped<AdditionalDetailsService>();
         services.AddScoped<PhotoUploadService>();
+        services.AddScoped<FileUpload>();
+        services.AddScoped<RegistrationService>();
         return services;
     }
 }

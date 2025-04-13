@@ -1,5 +1,3 @@
-using System;
-
 namespace ErpProject.Helpers.Connection;
 
 public class Connection
