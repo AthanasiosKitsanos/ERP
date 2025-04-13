@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ErpProject.Models.EmployeeModel;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Models.DTOModels;
-using ErpProject.Services;
+using ErpProject.Helpers;
 
 
 namespace ErpProject.Controllers;
@@ -11,12 +11,12 @@ namespace ErpProject.Controllers;
 public class EmployeeController : Controller
 {
     private readonly EmployeeService _employeeService;
-    private readonly PhotoUploadService _photoUploadService;
+    private readonly FileManagement _fileManagement;
 
-    public EmployeeController(EmployeeService employeeService, PhotoUploadService photoUploadService)
+    public EmployeeController(EmployeeService employeeService, FileManagement fileManagement)
     {
         _employeeService = employeeService;
-        _photoUploadService = photoUploadService;
+        _fileManagement = fileManagement;
     }
 
     [HttpGet("index")]
@@ -53,11 +53,11 @@ public class EmployeeController : Controller
         {
             return RedirectToAction("Register");
         }
-            model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(model.ProfilePhoto);
+            model.Employee.PhotographPath = _fileManagement.UploadPhoto(model.ProfilePhoto, out string fullPath);
 
             if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
             {
-                return View("Register");
+                await _fileManagement.DeleteFile(fullPath);
             }
 
         return RedirectToAction("Add", "AdditionalDetails", model);

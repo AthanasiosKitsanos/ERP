@@ -53,6 +53,12 @@ public class RegistrationService
 
                 await _edService.AddEmploymentDetailsAsync(id, model.EmploymentDetails, connection, transaction);
 
+                await _adService.AddCertificationsAsync(id, model.Certifications, connection, transaction);
+
+                await _adService.AddPersonalDocumentsAsync(id, model.PersonalDocuments, connection, transaction);
+
+                // TODO: Create the rest of the services
+
                 await transaction.CommitAsync();
                 return true;
             }

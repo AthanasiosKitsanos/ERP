@@ -12,7 +12,7 @@ public class AdditionalDetails
 
     public string EmergencyNumbers { get; set; } = string.Empty;
 
-    public string PersonalDocumentsPath { get; set; } = null!;
+    public string Education { get; set; } = string.Empty;
 
     public int EmployeeId { get; set; }
 
