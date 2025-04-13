@@ -8,11 +8,9 @@ public class AdditionalDetailsDTO
 
     public string Education { get; set; } = string.Empty;
 
-    [MaxLength(8000)]
-    public byte[] Certifications { get; set; } = new byte[0];
+    public string CertificationsPath { get; set; } = string.Empty;
 
-    [MaxLength(8000)]
-    public byte[] PersonalDocuments { get; set; } = new byte[0];
+    public string PersonalDocumentsPath { get; set; } = string.Empty;
 
     public int EmployeeId { get; set; }
 }

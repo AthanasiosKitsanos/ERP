@@ -8,7 +8,7 @@ using ErpProject.Services;
 namespace ErpProject.Controllers;
 
 [Route("employee")]
-public class EmployeeController: Controller
+public class EmployeeController : Controller
 {
     private readonly EmployeeService _employeeService;
     private readonly PhotoUploadService _photoUploadService;
@@ -24,7 +24,7 @@ public class EmployeeController: Controller
     {
         List<Employee> employees = await _employeeService.GetEmployeesAsync();
 
-        if(employees is null)
+        if (employees is null)
         {
             return View();
         }
@@ -37,7 +37,7 @@ public class EmployeeController: Controller
     {
         ViewModelDTO model = new ViewModelDTO();
 
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(model);
         }
@@ -49,28 +49,26 @@ public class EmployeeController: Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(ViewModelDTO model)
     {
-        if(model is null)
+        if (model is null)
         {
             return RedirectToAction("Register");
         }
+            model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(model.ProfilePhoto);
 
-        model.Employee.PhotographPath = await _photoUploadService.UploadPhotoAsync(model.ProfilePhoto);
-
-        if(string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
-        {
-            await _photoUploadService.DeletePhoto(model.Employee.PhotographPath);
-            return View("Register");
-        }
+            if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
+            {
+                return View("Register");
+            }
 
         return RedirectToAction("Add", "AdditionalDetails", model);
     }
-    
+
     [HttpGet("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         Employee employee = await _employeeService.GetEmployeeByIdAsync(id);
 
-        if(employee is null)
+        if (employee is null)
         {
             return NotFound();
         }
@@ -82,14 +80,14 @@ public class EmployeeController: Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(await _employeeService.DeleteEmployeeAsync(id));
         }
 
         bool result = await _employeeService.DeleteEmployeeAsync(id);
 
-        if(!result)
+        if (!result)
         {
             return View(await _employeeService.DeleteEmployeeAsync(id));
         }

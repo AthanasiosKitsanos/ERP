@@ -9,17 +9,16 @@ public class FileUpload
         _env = env;
     }
 
-    public async Task<byte[]> ConvertToByteArrayAsync(IFormFile file)
-    {
-        if(file is null || file.Length == 0)
-        {
-            return null!;
-        }
+    // public async Task<List<string> UploadFileAsync(List<IFormFile> files)
+    // {
+    //     if(files is null || files.Count == 0)
+    //     {
+    //         return null!;
+    //     }
+        
+    //     foreach(IFormFile file in files)
+    //     {
 
-        using(MemoryStream stream = new MemoryStream())
-        {
-            await file.CopyToAsync(stream);
-            return stream.ToArray();
-        }
-    }
+    //     }
+    // }
 }

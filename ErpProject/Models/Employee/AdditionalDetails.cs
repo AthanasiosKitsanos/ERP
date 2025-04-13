@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ErpProject.Models.EmployeeModel;
@@ -12,10 +11,6 @@ public class AdditionalDetails
     public int Id { get; set; }
 
     public string EmergencyNumbers { get; set; } = string.Empty;
-
-    public string Education { get; set; } = string.Empty;
-
-    public string CertificationsPath { get; set; } = null!;
 
     public string PersonalDocumentsPath { get; set; } = null!;
 

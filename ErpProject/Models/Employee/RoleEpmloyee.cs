@@ -1,8 +1,7 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ErpProject.Models.EmployeeModel;
 using ErpProject.Models.RolesModel;
+using ErpProject.Models.EmployeeModel;
 
 namespace ErpProject.Models.RolesEmployeeModel;
 

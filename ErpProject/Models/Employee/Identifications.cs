@@ -1,7 +1,5 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
 using ErpProject.Models.EmployeeModel;
 
 namespace ErpProject.Models.IdentificationsModel;

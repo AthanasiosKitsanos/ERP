@@ -11,12 +11,12 @@ public class PhotoUploadService
 
     public async Task<string> UploadPhotoAsync(IFormFile file)
     {
-        if(file is null || file.Length == 0)
+        if (file is null || file.Length == 0)
         {
             return string.Empty;
         }
 
-        if(!file.ContentType.StartsWith("image/"))
+        if (!file.ContentType.StartsWith("image/"))
         {
             throw new ArgumentException("You can upload only images.");
         }
@@ -24,29 +24,41 @@ public class PhotoUploadService
         string uniquePath = Guid.NewGuid() + Path.GetExtension(file.FileName);
 
         string uploadFolder = Path.Combine(_env.WebRootPath, "images/ProfilePhotos");
-        
-        if(!Directory.Exists(uploadFolder))
+
+        if (!Directory.Exists(uploadFolder))
         {
             Directory.CreateDirectory(uploadFolder);
         }
-        
+
         string filePath = Path.Combine(uploadFolder, uniquePath);
 
-        using(FileStream stream = new FileStream(filePath, FileMode.Create))
+        try
         {
-            await file.CopyToAsync(stream);
+            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            string fileUrl = "/images/ProfilePhotos/" + uniquePath;
+
+            return fileUrl;
         }
+        catch(Exception)
+        {
+            if(File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
 
-        string fileUrl = "/images/ProfilePhotos/" + uniquePath;
-
-        return fileUrl;
+            throw;
+        }
     }
 
     public async Task<bool> DeletePhoto(string photoPath)
     {
         try
         {
-            if(string.IsNullOrWhiteSpace(photoPath))
+            if (string.IsNullOrWhiteSpace(photoPath))
             {
                 return false;
             }
@@ -55,7 +67,7 @@ public class PhotoUploadService
 
             return await Task.Run(() =>
             {
-                if(File.Exists(fullPath))
+                if (File.Exists(fullPath))
                 {
                     File.Delete(fullPath);
                     return true;
@@ -64,9 +76,9 @@ public class PhotoUploadService
                 return false;
             });
         }
-        catch(Exception)
+        catch (Exception)
         {
-            throw new  Exception("The file could not be deleted.");
+            throw new Exception("The file could not be deleted.");
         }
     }
 }

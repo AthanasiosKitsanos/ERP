@@ -20,6 +20,16 @@
             </li>
 
             <li>
+                <label>Certifications</label>
+                <input asp-for='@Model.CertificationPDF' type="file" accept="application/pdf">
+            </li>
+
+            <li>
+                <label>Personal Documents</label>
+                <input asp-for='@Model.PersonalDocumentsPDF' type="file" accept="application/pdf">
+            </li>
+
+            <li>
                 <button type="submit">Next</button>
             </li>
         </ul>

@@ -7,6 +7,8 @@ using ErpProject.Models.IdentificationsModel;
 using ErpProject.Models.RolesModel;
 using ErpProject.Models.RolesEmployeeModel;
 using ErpProject.Models.EmployeeCredentilasModel;
+using ErpProject.Models.CertificationModel;
+using ErpProject.Models.PersonalDocumentsModels;
 
 namespace ErpProject.ContextDb;
 
@@ -26,6 +28,8 @@ public class ErpDbContext: DbContext
     public DbSet<RoleEpmloyee> RoleEmployee { get; set; }
     public DbSet<EmployeeCredentials> EmployeeCredentials { get; set; }
     public DbSet<AccountStatus> AccountStatus { get; set; }
+    public DbSet<Certifications> Certifications { get; set; }
+    public DbSet<PersonalDocuments> PersonalDocuments { get; set; }
 
     /// <summary>Payments</summary>
     // public DbSet<PayGrades> PayGrades { get; set; }

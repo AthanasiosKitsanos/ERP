@@ -188,8 +188,8 @@ public class EmployeeService
             return -1;
         }
         
-        string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, PhotographPath)
-                            VALUES (@FirstName, @LastName, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @PhotographPath);
+        string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber)
+                            VALUES (@FirstName, @LastName, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber;
                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         using(SqlCommand command = new SqlCommand(addEmployee, connection, transaction))
@@ -202,7 +202,6 @@ public class EmployeeService
             command.Parameters.AddWithValue("@Nationality", employee.Nationality);
             command.Parameters.AddWithValue("@Gender", employee.Gender);
             command.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
-            command.Parameters.AddWithValue("@PhotographPath", employee.PhotographPath);
 
             var result = await command.ExecuteScalarAsync();
 
