@@ -31,26 +31,40 @@ public class AdditionalDetailsController: Controller
     {
         if(model is null)
         {
-            return RedirectToAction("Add");
+            return RedirectToAction("Add", model);
         }
+
+
 
         foreach(IFormFile certification in model.CertificationPDF)
         {
-            model.AdditionalDetails.CertificationsPath = _fileManagement.UploadCertifications(certification, out string fullPath);
+            var result = await _fileManagement.UploadCertificationsAsync(certification);
 
-            if(string.IsNullOrEmpty(model.AdditionalDetails.CertificationsPath) || string.IsNullOrWhiteSpace(model.AdditionalDetails.CertificationsPath))
+            model.Certifications.CertificationPaths.Add(result.CertificateUrl);
+
+            string fullPath = result.FullPath;
+
+            if(model.Certifications.CertificationPaths is null || model.Certifications.CertificationPaths.Count == 0)
             {
                await _fileManagement.DeleteFile(fullPath);
+
+               return View(model);
             }
         }
 
         foreach(IFormFile document in model.PersonalDocumentsPDF)
         {
-            model.AdditionalDetails.PersonalDocumentsPath = _fileManagement.UploadPersonalDocuments(document, out string fullPath);
+            var result = await _fileManagement.UploadPersonalDocumentsAsync(document);
 
-            if(string.IsNullOrEmpty(model.AdditionalDetails.PersonalDocumentsPath) || string.IsNullOrWhiteSpace(model.AdditionalDetails.PersonalDocumentsPath))
+            model.PersonalDocuments.DocumentsPaths.Add(result.DocumentUrl);
+
+            string fullPath = result.FullPath;
+
+            if(model.PersonalDocuments.DocumentsPaths is null ||  model.PersonalDocuments.DocumentsPaths.Count == 0)
             {
                await _fileManagement.DeleteFile(fullPath);
+
+               return View(model);
             }
         }
 
