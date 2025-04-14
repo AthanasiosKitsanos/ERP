@@ -7,6 +7,7 @@ using ErpProject.Models.AdditionalDetailsModel;
 using ErpProject.Services.EmployeeServicesFolder;
 using ErpProject.Services;
 using ErpProject.Helpers;
+using ErpProject.Models.RegistrationModel;
 
 namespace ErpProject.Extentions;
 
@@ -21,6 +22,8 @@ public static class ServiceCollectionExtension
         services.AddScoped<EmploymentDetailsService>();
         services.AddScoped<RegistrationService>();
         services.AddScoped<FileManagement>();
+        services.AddScoped<IdentificationsService>();
+        services.AddScoped<RegistrationModel>();
         return services;
     }
 }
