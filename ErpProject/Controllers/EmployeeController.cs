@@ -53,12 +53,17 @@ public class EmployeeController : Controller
         {
             return RedirectToAction("Register");
         }
-            model.Employee.PhotographPath = _fileManagement.UploadPhoto(model.ProfilePhoto, out string fullPath);
+        
+        var result =  await _fileManagement.UploadPhotoAsync(model.ProfilePhoto);
 
-            if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
-            {
-                await _fileManagement.DeleteFile(fullPath);
-            }
+        model.Employee.PhotographPath = result.ProfilePhotoUrl;
+
+        string fullPath = result.FullPath;
+
+        if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
+        {
+            await _fileManagement.DeleteFile(fullPath);
+        }
 
         return RedirectToAction("Add", "AdditionalDetails", model);
     }
