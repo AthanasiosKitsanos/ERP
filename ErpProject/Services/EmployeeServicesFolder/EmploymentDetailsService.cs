@@ -7,11 +7,11 @@ namespace ErpProject.Services.EmployeeServicesFolder;
 
 public class EmploymentDetailsService
 {
-    public async Task<bool> AddEmploymentDetailsAsync(int id, EmploymentDetailsDTO details, SqlConnection connection, SqlTransaction transaction)
+    public async Task<int> AddEmploymentDetailsAsync(int id, EmploymentDetailsDTO details, SqlConnection connection, SqlTransaction transaction)
     {
         if(details is null)
         {
-            return false;
+            return 0;
         }
 
         string query = @"INSERT INTO EmploymentDetails (Position, Department, EmploymentStatus, HireDate, ContractType, WorkLocation, EmployeeId)
@@ -28,7 +28,8 @@ public class EmploymentDetailsService
             command.Parameters.AddWithValue("@EmployeeId", id);
 
             int affectedRows = await command.ExecuteNonQueryAsync();
-            return affectedRows >0;
+            
+            return affectedRows;
         }
     }
 }
