@@ -3,22 +3,20 @@ using Microsoft.Data.SqlClient;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Models.DTOModels;
 using ErpProject.Services.EmployeeServicesFolder;
+using ErpProject.Models.RegistrationModel;
 
 namespace ErpProject.Services;
 
 public class RegistrationService
 {
     private readonly Connection _connection;
-    private readonly EmployeeService _eServices;
-    private readonly AdditionalDetailsService _adService;
-    private readonly EmploymentDetailsService _edService;
 
-    public RegistrationService(Connection connection, EmployeeService eServices, AdditionalDetailsService adService, EmploymentDetailsService edService)
+    private readonly RegistrationModel _service;
+
+    public RegistrationService(Connection connection, RegistrationModel service)
     {
         _connection = connection;
-        _eServices = eServices;
-        _adService = adService;
-        _edService = edService;
+        _service = service;
     }
 
     /// <summary>
@@ -42,22 +40,32 @@ public class RegistrationService
 
             try
             {
-                int id = await _eServices.RegisterNewEmployeeAsync(model.Employee, connection, transaction);
+                var result = await _service.employeeService.RegisterNewEmployeeAsync(model.Employee, connection, transaction);
 
-                if(id == 0)
+                int id = result.id;
+                int affectedRows = result.affectedRows;
+
+                if(id <= 0)
                 {
                     return false;
                 }
 
-                await _adService.AddAdditionalDetailsAsync(id, model.AdditionalDetails, connection, transaction);
+                affectedRows += await _service.additionalDetailsService.AddAdditionalDetailsAsync(id, model.AdditionalDetails, connection, transaction);
 
-                await _edService.AddEmploymentDetailsAsync(id, model.EmploymentDetails, connection, transaction);
+                affectedRows += await _service.employmentDetailsService.AddEmploymentDetailsAsync(id, model.EmploymentDetails, connection, transaction);
 
-                await _adService.AddCertificationsAsync(id, model.Certifications, connection, transaction);
+                affectedRows += await _service.additionalDetailsService.AddCertificationsAsync(id, model.Certifications, connection, transaction);
 
-                await _adService.AddPersonalDocumentsAsync(id, model.PersonalDocuments, connection, transaction);
+                affectedRows += await _service.additionalDetailsService.AddPersonalDocumentsAsync(id, model.PersonalDocuments, connection, transaction);
+
+                affectedRows += await _service.identifivationService.AddIdentificationsAsync(id, model.Identifications,connection, transaction);
 
                 // TODO: Create the rest of the services
+                if(affectedRows < 6)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
 
                 await transaction.CommitAsync();
                 return true;
