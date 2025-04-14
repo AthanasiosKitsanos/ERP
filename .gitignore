@@ -8,3 +8,4 @@ TestingProject/
 # Ignoring the obj directory as it contains build artifacts
 ErpProject/obj
 .vscode/launch.json
+ErpProject/reminder.md
