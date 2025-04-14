@@ -5,11 +5,11 @@ namespace ErpProject.Services.EmployeeServicesFolder;
 
 public class AdditionalDetailsService
 {
-    public async Task<bool> AddAdditionalDetailsAsync(int id, AdditionalDetailsDTO details, SqlConnection connection, SqlTransaction transaction)
+    public async Task<int> AddAdditionalDetailsAsync(int id, AdditionalDetailsDTO details, SqlConnection connection, SqlTransaction transaction)
     {
         if (details is null)
         {
-            return false;
+            return 0;
         }
 
         string query = @"ISNERT INTO AdditionalDetails (EmergencyNumbers, Education, Certifications, EmployeeId)
@@ -25,18 +25,16 @@ public class AdditionalDetailsService
 
             affectedRows = await command.ExecuteNonQueryAsync();
 
-            return affectedRows > 0;
+            return affectedRows;
         }
     }
 
-    public async Task<bool> AddCertificationsAsync(int id, CertificationDTO certificationList, SqlConnection connection, SqlTransaction transaction)
+    public async Task<int> AddCertificationsAsync(int id, CertificationDTO certificationList, SqlConnection connection, SqlTransaction transaction)
     {
         if (certificationList is null || certificationList.CertificationPaths.Count == 0)
         {
-            return false;
+            return 0;
         }
-        
-        int affectedRows = 0;
 
         string query = @"INSERT INTO Certifications (CertificationPath, EmployeeId)
                         VALUES (@CertificationPath, @EmployeeId)";
@@ -50,21 +48,19 @@ public class AdditionalDetailsService
                 command.Parameters.AddWithValue("@CertificationPath", url);
                 command.Parameters.AddWithValue("@EmployeeId", id);
             
-                affectedRows += await command.ExecuteNonQueryAsync();
+                await command.ExecuteNonQueryAsync();
             }
         }
         
-        return affectedRows > 0;
+        return 1;
     }
 
-    public async Task<bool> AddPersonalDocumentsAsync(int id, PersonalDocumentsDTO personalDocumentsList, SqlConnection connection, SqlTransaction transaction)
+    public async Task<int> AddPersonalDocumentsAsync(int id, PersonalDocumentsDTO personalDocumentsList, SqlConnection connection, SqlTransaction transaction)
     {
         if (personalDocumentsList is null || personalDocumentsList.DocumentsPaths.Count == 0)
         {
-            return false;
+            return 0;
         }
-        
-        int affectedRows = 0;
 
         string query = @"INSERT INTO PersonalDocuments (DocumentsPaths, EmployeeId)
                         VALUES (@DocumentsPaths, @EmployeeId)";
@@ -78,10 +74,10 @@ public class AdditionalDetailsService
                 command.Parameters.AddWithValue("@DocumentsPaths", url);
                 command.Parameters.AddWithValue("@EmployeeId", id);
             
-                affectedRows += await command.ExecuteNonQueryAsync();
+                await command.ExecuteNonQueryAsync();
             }
         }
         
-        return affectedRows > 0;
+        return 1;
     }
 }
