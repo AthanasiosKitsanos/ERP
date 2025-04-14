@@ -10,12 +10,10 @@ namespace ErpProject.Services.EmployeeServices;
 public class EmployeeService
 {
     private readonly Connection _connection;
-    private readonly AdditionalDetailsService _additionalDetails;
 
-    public EmployeeService(Connection connection, AdditionalDetailsService additionalDetails)
+    public EmployeeService(Connection connection)
     {
         _connection = connection;
-        _additionalDetails = additionalDetails;
     }
 
     /// <summary>
@@ -174,18 +172,18 @@ public class EmployeeService
     /// <param name="connection">The connection string</param>
     /// <param name="transaction">The transaction</param>
     /// <returns>Returns the Id of the new added Employee</returns>
-    public async Task<int> RegisterNewEmployeeAsync(EmployeeDTO employee, SqlConnection connection, SqlTransaction transaction)
+    public async Task<(int id , int affectedRows)> RegisterNewEmployeeAsync(EmployeeDTO employee, SqlConnection connection, SqlTransaction transaction)
     {
         if(employee is null)
         {
-            return -1;
+            return (0, 0);
         }
 
         bool emailExists = await EmailExistsAsync(employee.Email);
 
         if(emailExists)
         {
-            return -1;
+            return ( 0, 0);
         }
         
         string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber)
@@ -205,7 +203,7 @@ public class EmployeeService
 
             var result = await command.ExecuteScalarAsync();
 
-            return (result is not null) ? Convert.ToInt32(result) : -1;
+            return (result is not null ? Convert.ToInt32(result) : 0, 1);
         }
     }
 }
