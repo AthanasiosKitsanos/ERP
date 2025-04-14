@@ -11,13 +11,11 @@ public class FileManagement
         _env = env;
     }
 
-    public string UploadPhoto(IFormFile file, out string fullPath)
+    public async Task<(string ProfilePhotoUrl, string FullPath)> UploadPhotoAsync(IFormFile file)
     {
-        fullPath = string.Empty;
-
         if (file is null || file.Length == 0)
         {
-            return string.Empty;
+            return (string.Empty, string.Empty);
         }
 
         if (!file.ContentType.StartsWith("image/"))
@@ -34,18 +32,18 @@ public class FileManagement
             Directory.CreateDirectory(uploadFolder);
         }
 
-        fullPath = Path.Combine(uploadFolder, uniquePath);
+        string fullPath = Path.Combine(uploadFolder, uniquePath);
 
         try
         {
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
-                file.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
             }
 
             string profilePhotoUrl = "/images/ProfilePhotos/" + uniquePath;
 
-            return profilePhotoUrl;
+            return (profilePhotoUrl, fullPath);
         }
         catch (Exception)
         {
@@ -58,10 +56,8 @@ public class FileManagement
         }
     }
 
-    public string UploadCertifications(IFormFile certificationFile, out string fullPath)
+    public async Task<(string CertificateUrl, string FullPath)> UploadCertificationsAsync(IFormFile certificationFile)
     {
-        fullPath = string.Empty;
-
         if (!certificationFile.ContentType.StartsWith("application/pdf"))
         {
             throw new ArgumentException("You can upload only pdf files");
@@ -76,19 +72,18 @@ public class FileManagement
             Directory.CreateDirectory(uploadFolder);
         }
 
-        fullPath = Path.Combine(uploadFolder, uniqueCertificationPath);
+        string fullPath = Path.Combine(uploadFolder, uniqueCertificationPath);
 
         try
         {
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
-                certificationFile.CopyTo(stream);
-
+                await certificationFile.CopyToAsync(stream);
             }
 
             string certificateUrl = "Documents/Certifications/" + uniqueCertificationPath;
 
-            return certificateUrl;
+            return (certificateUrl, fullPath);
         }
         catch (Exception)
         {
@@ -101,10 +96,8 @@ public class FileManagement
         }
     }
 
-    public string UploadPersonalDocuments(IFormFile certificationFile, out string fullPath)
+    public async Task<(string DocumentUrl, string FullPath)> UploadPersonalDocumentsAsync(IFormFile certificationFile)
     {
-        fullPath = string.Empty;
-
         if (!certificationFile.ContentType.StartsWith("application/pdf"))
         {
             throw new ArgumentException("You can upload only pdf files");
@@ -119,19 +112,19 @@ public class FileManagement
             Directory.CreateDirectory(uploadFolder);
         }
 
-        fullPath = Path.Combine(uploadFolder, uniqueCertificationPath);
+        string fullPath = Path.Combine(uploadFolder, uniqueCertificationPath);
 
         try
         {
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
-                certificationFile.CopyTo(stream);
+                await certificationFile.CopyToAsync(stream);
 
             }
 
             string certificateUrl = "Documents/Personal Documents/" + uniqueCertificationPath;
 
-            return certificateUrl;
+            return (certificateUrl, fullPath);
         }
         catch (Exception)
         {
