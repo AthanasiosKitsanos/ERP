@@ -8,9 +8,5 @@ public class AdditionalDetailsDTO
 
     public string Education { get; set; } = string.Empty;
 
-    public string CertificationsPath { get; set; } = string.Empty;
-
-    public string PersonalDocumentsPath { get; set; } = string.Empty;
-
     public int EmployeeId { get; set; }
 }
