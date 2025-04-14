@@ -24,7 +24,7 @@ public class EmploymentDetailsController: Controller
     {
         if(model is null)
         {
-            return RedirectToAction("Add");
+            return RedirectToAction("Add", model);
         }
 
         return RedirectToAction("Add", "Identifications", model);
