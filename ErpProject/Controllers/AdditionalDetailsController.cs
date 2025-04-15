@@ -38,15 +38,13 @@ public class AdditionalDetailsController: Controller
 
         foreach(IFormFile certification in model.CertificationPDF)
         {
-            var result = await _fileManagement.UploadCertificationsAsync(certification);
+            var paths = await _fileManagement.UploadCertificationsAsync(certification);
 
-            model.Certifications.CertificationPaths.Add(result.CertificateUrl);
-
-            string fullPath = result.FullPath;
+            model.Certifications.CertificationPaths.Add(paths.CertificateUrl);
 
             if(model.Certifications.CertificationPaths is null || model.Certifications.CertificationPaths.Count == 0)
             {
-               await _fileManagement.DeleteFile(fullPath);
+               await _fileManagement.DeleteFile(paths.FullPath);
 
                return View(model);
             }
@@ -54,15 +52,13 @@ public class AdditionalDetailsController: Controller
 
         foreach(IFormFile document in model.PersonalDocumentsPDF)
         {
-            var result = await _fileManagement.UploadPersonalDocumentsAsync(document);
+            var paths = await _fileManagement.UploadPersonalDocumentsAsync(document);
 
-            model.PersonalDocuments.DocumentsPaths.Add(result.DocumentUrl);
-
-            string fullPath = result.FullPath;
+            model.PersonalDocuments.DocumentsPaths.Add(paths.DocumentUrl);
 
             if(model.PersonalDocuments.DocumentsPaths is null ||  model.PersonalDocuments.DocumentsPaths.Count == 0)
             {
-               await _fileManagement.DeleteFile(fullPath);
+               await _fileManagement.DeleteFile(paths.FullPath);
 
                return View(model);
             }
