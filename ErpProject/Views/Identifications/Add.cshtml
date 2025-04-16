@@ -1,0 +1,32 @@
+﻿@using ErpProject.Models.DTOModels
+@model ViewModelDTO
+
+@using(Html.BeginForm("AddDetails", "Identifications", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <ul>
+            <li>
+                <label>TIN</label>
+                <input type="text" asp-for="@Model.Identifications.TIN">
+                <span asp-validation-for="@Model.Identifications.TIN"></span>
+            </li>
+
+            <li>
+                <label>Work Authorization</label>
+                <input type="checkbox" asp-for="@Model.Identifications.WorkAuth">
+            </li>
+
+            <li>
+                <label>Tax Information</label>
+                <input type="text" asp-for="@Model.Identifications.TaxInformation">
+                <span asp-validation-for="@Model.Identifications.TaxInformation"></span>
+            </li>
+
+            <li>
+                <button type="submit">Next</button>
+            </li>
+        </ul>
+    </div>
+}
