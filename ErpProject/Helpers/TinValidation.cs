@@ -2,9 +2,10 @@ namespace ErpProject.Helpers;
 
 public static class TinValidation
 {
-    public static bool IsValidTin(string tin)
+    public static async Task<bool> IsValidTin(string tin)
     {
-        var isValid = ValidateNumberIntegrity(tin);
+
+        var isValid = await ValidateNumberIntegrity(tin);
 
         if(!isValid)
         {
@@ -31,24 +32,37 @@ public static class TinValidation
         return true;
     }
 
-    public static bool ValidateNumberIntegrity(string tinNumber)
-    {
-        int count = 0;
-
-        bool isValidString = int.TryParse(tinNumber, out _);
-
-        for(int i = 0; i < tinNumber.Length; i++)
-        {
-            if(tinNumber[i] == '0')
-            {
-                count++;
-            }
-        }
-
-        if(!isValidString || tinNumber.Length != 9 || count == 9)
+    public static async Task<bool> ValidateNumberIntegrity(string tinNumber)
+    {   
+        if(string.IsNullOrEmpty(tinNumber) || string.IsNullOrWhiteSpace(tinNumber))
         {
             return false;
         }
+
+        await Task.Run(() =>
+        {
+            if(!int.TryParse(tinNumber, out _) || tinNumber.Length != 9)
+            {
+                return false;
+            }
+
+            int count = 0;
+
+            for(int i = 0; i < tinNumber.Length; i++)
+            {
+                if(tinNumber[i] == '0')
+                {
+                    count++;
+                }
+            }
+
+            if(count >= 9)
+            {
+                return false;
+            }
+
+            return true;
+        });
 
         return true;
     }
