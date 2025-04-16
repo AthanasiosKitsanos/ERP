@@ -20,6 +20,7 @@ public class IdentificationsController: Controller
     }
 
     [HttpPost("add")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddDetails(ViewModelDTO model)
     {
         if(model is null)
@@ -31,7 +32,6 @@ public class IdentificationsController: Controller
 
         if(!result)
         {
-            ViewBag.Add("The TIN number is invalid");
             return View(model);
         }
 
