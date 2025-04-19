@@ -1,7 +1,7 @@
 using ErpProject.Models.DTOModels;
 using Microsoft.Data.SqlClient;
 
-namespace ErpProject.Services.EmployeeServicesFolder;
+namespace ErpProject.Services.AdditionalDetailsServices;
 
 public class AdditionalDetailsService
 {
