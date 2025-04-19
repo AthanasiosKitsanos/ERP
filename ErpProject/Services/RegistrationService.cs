@@ -2,7 +2,6 @@ using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Models.DTOModels;
-using ErpProject.Services.EmployeeServicesFolder;
 using ErpProject.Models.RegistrationModel;
 
 namespace ErpProject.Services;
@@ -60,8 +59,10 @@ public class RegistrationService
 
                 affectedRows += await _service.identifivationService.AddIdentificationsAsync(id, model.Identifications,connection, transaction);
 
+                affectedRows += await _service.roleService.AddRoleToEmployeeAsync(id, model.Roles, connection, transaction);
+
                 // TODO: Create the rest of the services
-                if(affectedRows < 6)
+                if(affectedRows < 7)
                 {
                     await transaction.RollbackAsync();
                     return false;
