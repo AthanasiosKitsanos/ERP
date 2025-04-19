@@ -25,7 +25,7 @@ public class IdentificationsController: Controller
     {
         if(model is null)
         {
-            return RedirectToAction("Add", model);
+            return RedirectToAction("Add", "Identifications", model);
         }
 
         bool result = await TinValidation.IsValidTin(model.Identifications.TIN);
