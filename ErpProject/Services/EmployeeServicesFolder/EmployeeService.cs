@@ -3,7 +3,6 @@ using ErpProject.Helpers;
 using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 using ErpProject.Models.DTOModels;
-using ErpProject.Services.EmployeeServicesFolder;
 
 namespace ErpProject.Services.EmployeeServices;
 
