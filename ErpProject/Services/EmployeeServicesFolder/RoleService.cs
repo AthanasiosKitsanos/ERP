@@ -1,6 +1,7 @@
 using ErpProject.Models.RolesModel;
 using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
+using ErpProject.Models.DTOModels;
 
 namespace ErpProject.Services.RoleServices;
 
@@ -15,88 +16,61 @@ public class RoleService
 
     public async Task<List<Roles>> GetAllRolesAsync()
     {
-        List<Roles> roleList = new List<Roles>();
+        List<Roles> rolesList = new List<Roles>();
 
-        string query = @"SELECT RoleName 
+        string query = @"SELECT *
                         FROM Roles";
+
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
-            
+
             using(SqlCommand command = new SqlCommand(query, connection))
             {
                 using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    Dictionary<string, int> collumnMap = new Dictionary<string, int>
+                    Dictionary<string, int> param = new Dictionary<string, int>
                     {
-                        {"RoleName", reader.GetOrdinal("RoleName")}
+                        {"Id", reader.GetOrdinal("Id")},
+                        {"RoleName", reader.GetOrdinal("RoleName")},
                     };
 
                     while(await reader.ReadAsync())
                     {
                         Roles role = new Roles
                         {
-                            RoleName = reader.GetString(collumnMap["RoleName"])
-                        };
+                            Id = reader.GetInt32(param["Id"]),
+                            RoleName = reader.GetString(param["RoleName"])
+                        };  
 
-                        roleList.Add(role);
+                        rolesList.Add(role);
                     }
                 }
             }
         }
 
-        return roleList;
+        return rolesList;
     }
 
-     /// <summary>
-    /// Adds a role to the Employee
-    /// </summary>
-    /// <param name="employee">Param for an Employee object</param>
-    /// <param name="roleName">The role's name</param>
-    /// <returns>True of the role is added. else false</returns>
-    public async Task<bool> AddRoleToEmployeeAsync(int id, string roleName)
+    public async Task<int> AddRoleToEmployeeAsync(int id, RolesDTO roles, SqlConnection connection, SqlTransaction transaction)
     {
-        if(id <=0 || string.IsNullOrEmpty(roleName))
+        if(roles.SelectedRole == 0)
         {
-            return false;
+            return 0;
         }
 
-        int roleId = 0;
+        string query = @"INSERT INTO RoleEmployee (RoleId, EmployeeId)
+                        VALUES (@RoleId, @EmployeeId)";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using(SqlCommand command = new SqlCommand(query, connection, transaction))
         {
-            await connection.OpenAsync();
+            command.Parameters.AddWithValue("@RoleId", roles.SelectedRole);
+            command.Parameters.AddWithValue("EmpoyeeId", id);
 
-            string getRoleId = @"SELECT Id 
-                                FROM Roles 
-                                WHERE RoleName = @RoleName";
+            await command.ExecuteNonQueryAsync();
+        }
 
-            using(SqlCommand command = new SqlCommand(getRoleId, connection))
-            {
-                command.Parameters.AddWithValue("@RoleName", roleName);
-
-                using(SqlDataReader reader = await command.ExecuteReaderAsync())
-                {
-                    if(await reader.ReadAsync())
-                    {
-                        roleId = reader.GetInt32(reader.GetOrdinal("Id"));
-                    }
-                }
-            }
-
-            string addRole = @"INSERT INTO RoleEmployee (RoleId, EmployeeId) 
-                            VALUES (@RoleId, @EmployeeId)";
-
-            using(SqlCommand command = new SqlCommand(addRole, connection))
-            {
-                command.Parameters.AddWithValue("@RoleId", roleId);
-                command.Parameters.AddWithValue("@EmployeeId", id);
-
-                await command.ExecuteNonQueryAsync();
-
-                return true;
-            }   
-        } 
+        return 1;
     }
 }
