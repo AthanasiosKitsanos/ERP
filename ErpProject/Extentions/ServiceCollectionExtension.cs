@@ -1,13 +1,12 @@
-using System;
 using ErpProject.Services.EmployeeServices;
 using ErpProject.Services.RoleServices;
-using ErpProject.ContextDb;
 using ErpProject.Helpers.Connection;
-using ErpProject.Models.AdditionalDetailsModel;
-using ErpProject.Services.EmployeeServicesFolder;
 using ErpProject.Services;
 using ErpProject.Helpers;
 using ErpProject.Models.RegistrationModel;
+using ErpProject.Services.AdditionalDetailsServices;
+using ErpProject.Services.EmploymentDetailsServices;
+using ErpProject.Services.IdentificationServices;
 
 namespace ErpProject.Extentions;
 
@@ -17,13 +16,13 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<Connection>();
         services.AddScoped<EmployeeService>();
-        services.AddScoped<RoleService>();
         services.AddScoped<AdditionalDetailsService>();
         services.AddScoped<EmploymentDetailsService>();
         services.AddScoped<RegistrationService>();
         services.AddScoped<FileManagement>();
         services.AddScoped<IdentificationsService>();
         services.AddScoped<RegistrationModel>();
+        services.AddScoped<RoleService>();
         return services;
     }
 }
