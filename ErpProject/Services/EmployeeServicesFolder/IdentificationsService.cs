@@ -4,7 +4,7 @@ using ErpProject.Helpers.Connection;
 using ErpProject.Models.DTOModels;
 using Microsoft.Data.SqlClient;
 
-namespace ErpProject.Services.EmployeeServicesFolder;
+namespace ErpProject.Services.IdentificationServices;
 
 public class IdentificationsService
 {
