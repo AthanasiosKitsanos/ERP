@@ -186,7 +186,7 @@ public class EmployeeService
         }
         
         string addEmployee = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber)
-                            VALUES (@FirstName, @LastName, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber;
+                            VALUES (@FirstName, @LastName, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber);
                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
         using(SqlCommand command = new SqlCommand(addEmployee, connection, transaction))
