@@ -60,7 +60,7 @@ public class EmployeeController : Controller
 
         string fullPath = result.FullPath;
 
-        if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath))
+        if (string.IsNullOrEmpty(model.Employee.PhotographPath) || string.IsNullOrWhiteSpace(model.Employee.PhotographPath) || model.Employee.DateOfBirth < new DateTime(1753, 1, 1) || model.Employee.DateOfBirth < new DateTime(9999, 12, 31))
         {
             await _fileManagement.DeleteFile(fullPath);
         }
