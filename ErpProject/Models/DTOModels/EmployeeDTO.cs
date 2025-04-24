@@ -13,7 +13,7 @@ public class EmployeeDTO
 
     public string Age { get; set; } = string.Empty;
 
-    public DateTime DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; } = new DateTime();
 
     public string Nationality { get; set; } = string.Empty;
 
