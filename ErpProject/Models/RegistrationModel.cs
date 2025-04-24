@@ -5,6 +5,7 @@ using ErpProject.Services.AdditionalDetailsServices;
 using ErpProject.Services.EmploymentDetailsServices;
 using ErpProject.Services.IdentificationServices;
 using ErpProject.Services.RoleServices;
+using ErpProject.Services.EmployeeCredentialsServices;
 
 namespace ErpProject.Models.RegistrationModel;
 
@@ -20,12 +21,15 @@ public class RegistrationModel
 
     public RoleService roleService;
 
-    public RegistrationModel(EmployeeService _employeeService, AdditionalDetailsService _additionalDetailsService, EmploymentDetailsService _employmentDetailsService, IdentificationsService _identifivationService, RoleService _roleService)
+    public EmployeeCredentialsService credentialsService;
+
+    public RegistrationModel(EmployeeService _employeeService, AdditionalDetailsService _additionalDetailsService, EmploymentDetailsService _employmentDetailsService, IdentificationsService _identifivationService, RoleService _roleService, EmployeeCredentialsService _credentialsService)
     {
         employeeService = _employeeService;
         additionalDetailsService = _additionalDetailsService;
         employmentDetailsService = _employmentDetailsService;
         identifivationService = _identifivationService;
         roleService = _roleService;
+        credentialsService = _credentialsService;
     }
 }
