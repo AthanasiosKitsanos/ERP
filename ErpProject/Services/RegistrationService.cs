@@ -61,6 +61,8 @@ public class RegistrationService
 
                 affectedRows += await _service.roleService.AddRoleToEmployeeAsync(id, model.Roles, connection, transaction);
 
+                affectedRows += await _service.credentialsService.AddCredentialsToEmployeeAsync(id, model.EmployeeCredential, model.AccountStatus, connection, transaction);
+
                 // TODO: Create the rest of the services
                 if(affectedRows < 7)
                 {
