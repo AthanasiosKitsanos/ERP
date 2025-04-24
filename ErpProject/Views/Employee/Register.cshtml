@@ -27,7 +27,7 @@
 
             <li>
                 <label>Date of Birth</label>
-                <input type="date" asp-for="@Model.Employee.DateOfBirth">
+                <input type="date" asp-for="@Model.Employee.DateOfBirth" min="1753-01-01" max="9999-12-31">
                 <span asp-validation-for="@Model.Employee.DateOfBirth"></span>
             </li>
 
