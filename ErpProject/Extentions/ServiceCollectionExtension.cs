@@ -7,6 +7,7 @@ using ErpProject.Models.RegistrationModel;
 using ErpProject.Services.AdditionalDetailsServices;
 using ErpProject.Services.EmploymentDetailsServices;
 using ErpProject.Services.IdentificationServices;
+using ErpProject.Services.EmployeeCredentialsServices;
 
 namespace ErpProject.Extentions;
 
@@ -23,6 +24,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<IdentificationsService>();
         services.AddScoped<RegistrationModel>();
         services.AddScoped<RoleService>();
+        services.AddScoped<EmployeeCredentialsService>();
         return services;
     }
 }
