@@ -195,7 +195,7 @@ public class EmployeeService
             command.Parameters.AddWithValue("@LastName", employee.LastName);
             command.Parameters.AddWithValue("@Email", employee.Email);
             command.Parameters.AddWithValue("@Age", AgeCalculator.CalculateAge(employee.DateOfBirth));
-            command.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth);
+            command.Parameters.AddWithValue("@DateOfBirth", employee.DateOfBirth.Date);
             command.Parameters.AddWithValue("@Nationality", employee.Nationality);
             command.Parameters.AddWithValue("@Gender", employee.Gender);
             command.Parameters.AddWithValue("@PhoneNumber", employee.PhoneNumber);
