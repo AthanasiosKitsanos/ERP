@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="wwwroot\Documents\Certifications\" />
+    <Folder Include="wwwroot\Documents\Personal Documents\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\ProfilePhotos\" />
     <Folder Include="wwwroot\js\" />
