@@ -1,5 +1,5 @@
-﻿@using ErpProject.Models.DTOModels
-@model ViewModelDTO
+﻿@using ErpProject.Models
+@model Employee
 
 @using(Html.BeginForm("Register", "Employee", FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
@@ -9,49 +9,49 @@
         <ul style="list-style: none;">
             <li>
                 <label>First Name</label>
-                <input type="text" asp-for="@Model.Employee.FirstName">
-                <span asp-validation-for="@Model.Employee.FirstName"></span>
+                <input type="text" asp-for="@Model.FirstName">
+                <span asp-validation-for="@Model.FirstName"></span>
             </li>
 
             <li>
                 <label>Last Name</label>
-                <input type="text" asp-for="@Model.Employee.LastName">
-                <span asp-validation-for="@Model.Employee.LastName"></span>
+                <input type="text" asp-for="@Model.LastName">
+                <span asp-validation-for="@Model.LastName"></span>
             </li>
 
             <li>
                 <label>Email</label>
-                <input type="email" asp-for="@Model.Employee.Email">
-                <span asp-validation-for="@Model.Employee.Email"></span>
+                <input type="email" asp-for="@Model.Email">
+                <span asp-validation-for="@Model.Email"></span>
             </li>
 
             <li>
                 <label>Date of Birth</label>
-                <input type="date" asp-for="@Model.Employee.DateOfBirth" min="1753-01-01" max="9999-12-31">
-                <span asp-validation-for="@Model.Employee.DateOfBirth"></span>
+                <input type="datetime-local" asp-for="@Model.DateOfBirth" min="1753-01-01T00:00" max="9999-12-31T23:59">
+                <span asp-validation-for="@Model.DateOfBirth"></span>
             </li>
 
             <li>
                 <label>Nationality</label>
-                <input type="text" asp-for="@Model.Employee.Nationality">
-                <span asp-validation-for="@Model.Employee.Nationality"></span>
+                <input type="text" asp-for="@Model.Nationality">
+                <span asp-validation-for="@Model.Nationality"></span>
             </li>
 
             <li>
                 <label>Gender</label>
-                <input type="text" asp-for="@Model.Employee.Gender">
-                <span asp-validation-for="@Model.Employee.Gender"></span>
+                <input type="text" asp-for="@Model.Gender">
+                <span asp-validation-for="@Model.Gender"></span>
             </li>
 
             <li>
                 <label>Phone Number</label>
-                <input type="text" asp-for="@Model.Employee.PhoneNumber">
-                <span asp-validation-for="@Model.Employee.PhoneNumber"></span>
+                <input type="text" asp-for="@Model.PhoneNumber">
+                <span asp-validation-for="@Model.PhoneNumber"></span>
             </li>
 
             <li>
-                <label for="ProfileImage">ProfileImage Photo</label>
-                <input type="file" asp-for="@Model.ProfilePhoto" id="ProfileImage" accept="image/*">
+                <label>ProfileImage Photo</label>
+                <input type="file" asp-for="@Model.PhotoFile" id="ProfileImage" accept="image/*">
             </li>
 
              <li>
