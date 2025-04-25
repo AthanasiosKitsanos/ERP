@@ -22,9 +22,9 @@ public class Employee
 
     public string PhoneNumber { get; set; } = string.Empty;
 
-    public string PhotographPath { get; set; } = string.Empty;
+    public byte[] Photograph { get; set; } = new byte[0];
 
-    public string PhotographFullPath { get; set; } = string.Empty;
+    public string MIME { get; set; } = string.Empty;
 
     [Required]
     public IFormFile? PhotoFile { get; set; }
