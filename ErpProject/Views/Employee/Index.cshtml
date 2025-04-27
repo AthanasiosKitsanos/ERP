@@ -31,6 +31,8 @@
                     <th>Gender</th>
 
                     <th>Phone Number</th>
+
+                    <th>Profile Photo</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +47,18 @@
                         <td>@employee.Nationality</td>
                         <td>@employee.Gender</td>
                         <td>@employee.PhoneNumber</td>
-                        <td><img src="@employee.PhotographPath"></td>>
+                        <td>
+                            @if(employee.Photograph is not null)
+                            {   
+                                var base64 = Convert.ToBase64String(employee.Photograph);
+                                var imageSrc = $"data:{employee.MIME};base64,{base64}";
+                                <img src="@imageSrc" style="width: 100px; height: auto;">
+                            }   
+                            else
+                            {
+                                <span>No Photo</span>
+                            }
+                        </td>>
                         <td><a asp-action="Update" asp-route-id="@employee.Id">Edit</a></td>
                         <td><a asp-action="Delete" asp-route-id="@employee.Id">Delete</a></td>
                     </tr>
