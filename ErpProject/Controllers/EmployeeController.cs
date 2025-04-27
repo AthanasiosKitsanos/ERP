@@ -26,4 +26,12 @@ public class EmployeeController: Controller
 
         return View(employees);
     }
+
+    [HttpGet("register")]
+    public IActionResult Register()
+    {
+        Employee employee = new Employee();
+
+        return View(employee);
+    }
 }
