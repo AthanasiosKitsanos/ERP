@@ -1,6 +1,7 @@
 using ErpProject.Helpers.Connection;
 using ErpProject.Helpers;
 using ErpProject.Services;
+using ErpProject.BackgroundServices;
 
 namespace ErpProject.Extentions;
 
@@ -10,6 +11,8 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<Connection>();
         services.AddScoped<EmployeeServices>();
+        services.AddScoped<CredentialsServices>();
+        services.AddHostedService<RegistrationCleanUpService>();
 
         return services;
     }
