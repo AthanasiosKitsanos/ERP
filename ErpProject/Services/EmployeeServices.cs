@@ -15,11 +15,37 @@ public class EmployeeServices
         _connection = connection;
     }
 
-    public async Task<bool> AddEmployeeAsync(Employee employee)
+    public async Task<bool> EmailExistsAsync(string email)
+    {
+        if(string.IsNullOrEmpty(email))
+        {
+            return false;
+        }
+
+        string query = @"SELECT COUNT(*)
+                        FORM Employees
+                        WHERE Email = @Email";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+
+                int count = Convert.ToInt32(await command.ExecuteScalarAsync());
+
+                return count > 0;
+            }
+        }
+    }
+
+    public async Task<int> AddEmployeeAsync(Employee employee)
     {
         if(employee is null || employee.PhotoFile is null)
         {
-            return false;
+            return 0;
         }
 
         employee.MIME = employee.PhotoFile.ContentType;
@@ -31,8 +57,9 @@ public class EmployeeServices
             employee.Photograph = memoryStream.ToArray();
         }
 
-        string query = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Photograph, MIME)
-                        VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @Photograph, @MIME)";
+        string query = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Photograph, MIME, CreatedAt)
+                        VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @Photograph, @MIME, @CreatedAt);
+                        SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -50,10 +77,11 @@ public class EmployeeServices
                 command.Parameters.Add("@PhoneNumber", SqlDbType.NVarChar).Value = employee.PhoneNumber;
                 command.Parameters.Add("@Photograph", SqlDbType.VarBinary).Value = employee.Photograph;
                 command.Parameters.Add("@MIME", SqlDbType.NVarChar).Value = employee.MIME;
+                command.Parameters.Add("@CreatedAt", SqlDbType.DateTime2).Value = DateTime.Now;
 
-                int affectedRows = await command.ExecuteNonQueryAsync();
-                
-                return affectedRows > 0;
+                int id = Convert.ToInt32(await command.ExecuteScalarAsync());
+
+                return id;
             }
         }
     }
@@ -97,7 +125,7 @@ public class EmployeeServices
                             LastName = reader.GetString(param["LastName"]),
                             Email = reader.GetString(param["Email"]),
                             Age = reader.GetString(param["Age"]),
-                            DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(param["dateOfBirth"])),
+                            DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(param["DateOfBirth"])),
                             Nationality = reader.GetString(param["Nationality"]),
                             Gender = reader.GetString(param["Gender"]),
                             PhoneNumber = reader.GetString(param["PhoneNumber"]),
@@ -112,5 +140,65 @@ public class EmployeeServices
         }
 
         return employeeList;
+    }
+
+    public async Task<bool> DeleteEmployeeByIdAsync(int id)
+    {
+        if(id <= 0)
+        {
+            return false;
+        }
+
+        string query = @"DELETE FROM Employees 
+                        WHERE Id = @Id";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                int affectedRows = await command.ExecuteNonQueryAsync();
+
+                return affectedRows > 0;
+            }
+        }
+    }
+
+    public async Task<Employee> GetEmployeeByIdAsync(int id)
+    {
+        if(id <= 0)
+        {
+            return null!;
+        }
+
+        Employee employee = new Employee();
+        
+        string query = @"SELECT FirstName, LastName 
+                        FROM Employees
+                        WHERE Id = @Id";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlCommand command = new SqlCommand(query,connection))
+            {
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
+                using(SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if(await reader.ReadAsync())
+                    {
+                        employee.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                        employee.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    }
+                }
+            }
+        }
+
+        return employee;
     }
 }
