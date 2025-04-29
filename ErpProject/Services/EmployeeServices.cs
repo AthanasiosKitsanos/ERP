@@ -23,7 +23,7 @@ public class EmployeeServices
         }
 
         string query = @"SELECT COUNT(*)
-                        FORM Employees
+                        FROM Employees
                         WHERE Email = @Email";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
@@ -91,7 +91,8 @@ public class EmployeeServices
         List<Employee> employeeList = new List<Employee>();
 
         string query = @"SELECT *
-                        FROM Employees";
+                        FROM Employees
+                        WHERE IsCompleted = 1";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -173,32 +174,53 @@ public class EmployeeServices
         {
             return null!;
         }
-
-        Employee employee = new Employee();
         
-        string query = @"SELECT FirstName, LastName 
+        Employee employee = new Employee();
+        string query = @"SELECT *
                         FROM Employees
-                        WHERE Id = @Id";
+                        WHERE IsCompleted = 1";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query,connection))
+            using(SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
-
                 using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
+                    Dictionary<string, int> param = new Dictionary<string, int>
+                    {
+                        {"Id", reader.GetOrdinal("Id")},
+                        {"FirstName", reader.GetOrdinal("FirstName")},
+                        {"LastName", reader.GetOrdinal("LastName")},
+                        {"Email", reader.GetOrdinal("Email")},
+                        {"Age", reader.GetOrdinal("Age")},
+                        {"DateOfBirth", reader.GetOrdinal("DateOfBirth")},
+                        {"Nationality", reader.GetOrdinal("Nationality")},
+                        {"Gender", reader.GetOrdinal("Gender")},
+                        {"PhoneNumber", reader.GetOrdinal("PhoneNumber")},
+                        {"Photograph", reader.GetOrdinal("Photograph")},
+                        {"MIME", reader.GetOrdinal("MIME")}
+                    };
+
                     if(await reader.ReadAsync())
                     {
-                        employee.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                        employee.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                        employee.Id = reader.GetInt32(param["Id"]);
+                        employee.FirstName = reader.GetString(param["FirstName"]);
+                        employee.LastName = reader.GetString(param["LastName"]);
+                        employee.Email = reader.GetString(param["Email"]);
+                        employee.Age = reader.GetString(param["Age"]);
+                        employee.DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(param["DateOfBirth"]));
+                        employee.Nationality = reader.GetString(param["Nationality"]);
+                        employee.Gender = reader.GetString(param["Gender"]);
+                        employee.PhoneNumber = reader.GetString(param["PhoneNumber"]);
+                        employee.Photograph = await reader.GetFieldValueAsync<byte[]>(param["Photograph"]);
+                        employee.MIME = reader.GetString(param["MIME"]);
                     }
                 }
             }
-        }
 
-        return employee;
+            return employee;
+        }
     }
 }
