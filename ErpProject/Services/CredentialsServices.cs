@@ -1,6 +1,7 @@
 using System.Data;
 using ErpProject.Helpers.Connection;
 using ErpProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 
 namespace ErpProject.Services;
@@ -21,6 +22,8 @@ public class CredentialsServices
             return false;
         }
 
+        PasswordHasher<Credentials> hasher = new PasswordHasher<Credentials>();
+
         string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatusId, EmployeeId)
                         VALUES (@Username, @Password, @LastLogIn, @AccountStatusId, @EmployeeId);
                         UPDATE Employees SET IsCompleted = 1 WHERE Id = @Id";
@@ -32,7 +35,7 @@ public class CredentialsServices
             using(SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = credentials.Username;
-                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = credentials.Password;
+                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = hasher.HashPassword(credentials, credentials.Password);
                 command.Parameters.Add("@LastLogIn", SqlDbType.DateTime2).Value = DateTime.Now;
                 command.Parameters.Add("@AccountStatusId", SqlDbType.Int).Value = credentials.AccountStatusId;
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
@@ -45,7 +48,7 @@ public class CredentialsServices
         }
     }
 
-    public async Task<List<AccountStatus>> GetStatusNamesAsync()
+    public async Task<List<AccountStatus>> GetAccountStatusListAsync()
     {
         List<AccountStatus> statusNamesList = new List<AccountStatus>();
 
