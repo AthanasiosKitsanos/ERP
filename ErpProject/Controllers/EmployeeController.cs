@@ -1,6 +1,7 @@
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ErpProject.Controllers;
 
@@ -58,7 +59,26 @@ public class EmployeeController: Controller
             return View(employee);
         }
 
-        return RedirectToAction("Index", "Credentials", id);
+        return RedirectToAction("Index", "Credentials", new {id});
+    }
+
+    [HttpGet("details/id")]
+    public async Task<IActionResult> Details(int id)
+    {
+        if(!ModelState.IsValid)
+        {
+            return RedirectToAction("Index");
+        }
+
+        Employee employee = await _service.GetEmployeeByIdAsync(id);
+
+        if(employee is null)
+        {
+            ModelState.AddModelError(string.Empty, "Something went wrong while retrieving the employee data");
+            return RedirectToAction("Index");
+        }
+
+        return View(employee);
     }
 
     [HttpGet("delete/{id}")]
