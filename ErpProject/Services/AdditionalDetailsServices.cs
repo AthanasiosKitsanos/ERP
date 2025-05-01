@@ -1,4 +1,5 @@
 using System.Data;
+using ErpProject.Helpers;
 using ErpProject.Helpers.Connection;
 using ErpProject.Models;
 using Microsoft.Data.SqlClient;
@@ -49,5 +50,53 @@ public class AdditionalDetailsServices
         return details;
     }
 
+    public async Task<bool> SaveAdditionalDetailsAsync(int id, AdditionalDetails details)
+    {
+        if(id <= 0 || details is null || details.CertificationFile is null || details.PersonalDocumentsFile is null)
+        {
+            return false;
+        }
+        
+        FileToByteArray arrayConverter = new FileToByteArray();
 
+        string query = @"INSERT INTO AdditionalDetails (EmergencyNumbers, Education, EmployeeId)
+                        VALUES (@EmergencyNumbers, @Education, @EmployeeId);
+
+                        INSERT INTO Certifications (CertData, MIME, EmployeeId)
+                        VALUES(@CertData, @CertMime, @EmployeeId);
+                        
+                        INSERT INTO PersonalDocuments (DocData, MIME, EmployeeID)
+                        VALUES (@DocData, @DocMime, @EmployeeId)";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlTransaction transaction = connection.BeginTransaction())
+            {
+                using(SqlCommand command =  new SqlCommand(query, connection, transaction))
+                {
+                    command.Parameters.Add("@EmergencyNumbers", SqlDbType.NVarChar).Value = details.EmergencyNumbers;
+                    command.Parameters.Add("@Education", SqlDbType.NVarChar).Value = details.Education;
+                    command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@CertData", SqlDbType.VarBinary).Value = await arrayConverter.AddToArray(details.CertificationFile);
+                    command.Parameters.Add("@CertMime", SqlDbType.NVarChar).Value = details.CertificationFile.ContentType;
+                    command.Parameters.Add("@DocData", SqlDbType.VarBinary).Value = await arrayConverter.AddToArray(details.PersonalDocumentsFile);
+                    command.Parameters.Add("@DocMime", SqlDbType.NVarChar).Value = details.PersonalDocumentsFile.ContentType;
+                    
+                    try
+                    {
+                        int affectedRows = await command.ExecuteNonQueryAsync();
+                        transaction.Commit();
+                        return affectedRows == 3;
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        return false;
+                    }
+                }
+            }
+        }
+    }
 }
