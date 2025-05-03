@@ -178,7 +178,7 @@ public class EmployeeServices
         Employee employee = new Employee();
         string query = @"SELECT *
                         FROM Employees
-                        WHERE IsCompleted = 1";
+                        WHERE Id = @Id AND IsCompleted = 1";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -186,6 +186,8 @@ public class EmployeeServices
 
             using(SqlCommand command = new SqlCommand(query, connection))
             {
+                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+
                 using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     Dictionary<string, int> param = new Dictionary<string, int>
