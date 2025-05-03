@@ -24,7 +24,7 @@ public class AdditionalDetailsServices
             return null!;
         }
 
-        string query = @"SELECT EmergencyNumbers, Education, Identifications, PersonalDocuments, MIME
+        string query = @"SELECT EmergencyNumbers, Education
                         FROM AdditionalDetails
                         WHERE EmployeeId = @EmployeeId";
 
