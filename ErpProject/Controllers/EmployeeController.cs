@@ -62,7 +62,7 @@ public class EmployeeController: Controller
         return RedirectToAction("Index", "Credentials", new {id});
     }
 
-    [HttpGet("details/id")]
+    [HttpGet("details/{id}")]
     public async Task<IActionResult> Details(int id)
     {
         if(!ModelState.IsValid)
