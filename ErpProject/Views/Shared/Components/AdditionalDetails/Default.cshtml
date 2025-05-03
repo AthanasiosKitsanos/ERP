@@ -1,0 +1,60 @@
+﻿@using ErpProject.Models
+@model AdditionalDetails
+
+@{
+    string mode = ViewData["Mode"] as string ?? "view";
+    int id = Convert.ToInt32(ViewData["Id"]);
+}
+
+<h3>Additional Details</h3>
+
+@if(mode == "edit")
+{
+    <form method="post" asp-action="AddAdditionalDetails" asp-controller="AdditionalDetails" asp-route-id="@id" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <ul style="list-style: none;">
+            <li>
+                <label>Emergency Number</label>
+                <input type="text" asp-for="@Model.EmergencyNumbers">
+                <span asp-validation-for="@Model.EmergencyNumbers"></span>
+            </li>
+
+            <li>
+                <label>Education</label>
+                <input type="text" asp-for="@Model.Education">
+                <span asp-validation-for="@Model.Education"></span>
+            </li>
+
+            <li>
+                <label>Certifications</label>
+                <input type="file" asp-for="@Model.CertificationFile" accept="application/pdf">
+            </li>
+
+            <li>
+                <label>Personal Documents</label>
+                <input type="file" asp-for="@Model.PersonalDocumentsFile" accept="application/pdf">
+            </li>
+
+            <li>
+                <button type="submit">Save</button>
+                <a asp-action="Details" asp-controller="Employee" asp-route-id="@id">Cancel</a>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul style="list-style: none;">
+        <li>
+            Emergency Numbers: @Model.EmergencyNumbers
+        </li>
+
+        <li>
+            Education: @Model.Education
+        </li>
+
+        <li>
+            <a asp-action="SwitchtToEditMode" asp-controller="AdditionalDetails" asp-route-id="@id">Edit</a>
+        </li>
+    </ul>
+}
