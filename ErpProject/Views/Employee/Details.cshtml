@@ -5,13 +5,48 @@
     <table>
         <tbody>
             <tr>
-                <td>First Name: </td>
+                <td><b>First Name:</b></td>
                 <td>@Model.FirstName</td>
             </tr>
             <tr>
-                <td>Last Name</td>
+                <td><b>Last Name:</b></td>
                 <td>@Model.LastName</td>
+            </tr>
+
+            <tr>
+                <td><b>Email:</b></td>
+                <td>@Model.Email</td>
+            </tr>
+
+            <tr>
+                <td><b>Age:</b></td>
+                <td>@Model.Age</td>
+            </tr>
+
+            <tr>
+                <td><b>Date of Birth:</b></td>
+                <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+            </tr>
+
+            <tr>
+                <td><b>Natinality:</b></td>
+                <td>@Model.Nationality</td>
+            </tr>
+
+            <tr>
+                <td><b>Gender:</b></td>
+                <td>@Model.Gender</td>
+            </tr>
+
+            <tr>
+                <td><b>Phone Number:</b></td>
+                <td>@Model.PhoneNumber</td>
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<div>
+    @await Component.InvokeAsync("AdditionalDetails", new {id = Model.Id})
 </div>
