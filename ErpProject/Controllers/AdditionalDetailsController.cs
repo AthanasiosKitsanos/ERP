@@ -14,23 +14,10 @@ public class AdditionalDetailsController: Controller
         _service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAdditionalDetails(int id, AdditionalDetails details)
+    [HttpGet]  
+    public IActionResult SwitchToEditMode(int id)
     {
-        if(id == 0)
-        {
-            return ViewComponent("AdditionalDetails");
-        }
-
-        details = await _service.GetAdditionalDetailsAsync(id);
-
-        if(details is null)
-        {
-            ModelState.AddModelError(string.Empty, "No additional details were found");
-            return ViewComponent("AdditionalDetails");
-        }
-
-        return ViewComponent("AdditionalDetails", details);
+        return ViewComponent("AdditionalDetails", new{id, mode = "edit"});
     }
 
     [HttpPost]
@@ -42,13 +29,13 @@ public class AdditionalDetailsController: Controller
             return ViewComponent("AdditionalDetails", new {id});
         }
 
-        //bool result = await _service.
+        bool result = await _service.SaveAdditionalDetailsAsync(id, details);
 
         if(id == 0)
         {
             return NotFound("Employee not Found");
         }
 
-        return RedirectToAction("Details", "Employee");
+        return ViewComponent("AdditionalDetails", new {id});
     }
 }
