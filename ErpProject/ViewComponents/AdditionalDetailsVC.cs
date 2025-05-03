@@ -1,16 +1,29 @@
 using ErpProject.Models;
+using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpProject.ViewComponents;
 
-public class AdditionalDetailsVC: ViewComponent
+public class AdditionalDetailsViewComponent: ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync(AdditionalDetails details)
+    private readonly AdditionalDetailsServices _service;
+
+    public AdditionalDetailsViewComponent(AdditionalDetailsServices service)
     {
+        _service = service;
+    }
+
+    public async Task<IViewComponentResult> InvokeAsync(int id, string mode = "view")
+    {
+        AdditionalDetails details = await _service.GetAdditionalDetailsAsync(id);
+        
         if(details is null)
         {
             return View();
         }
+
+        ViewData["Mode"] = mode;
+        ViewData["Id"] = id;
 
         return View(details);
     }
