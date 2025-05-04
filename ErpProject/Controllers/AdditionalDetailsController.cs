@@ -1,10 +1,10 @@
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ErpProject.Controllers;
 
+[Route("additionaldetails")]
 public class AdditionalDetailsController: Controller
 {
     private readonly AdditionalDetailsServices _service;
@@ -14,28 +14,59 @@ public class AdditionalDetailsController: Controller
         _service = service;
     }
 
-    [HttpGet]  
-    public IActionResult SwitchToEditMode(int id)
+    [HttpGet("add/{id}")]  
+    public IActionResult Add(int id)
     {
-        return ViewComponent("AdditionalDetails", new{id, mode = "edit"});
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddAdditionalDetails(int id, AdditionalDetails details)
-    {
-        if(!ModelState.IsValid)
+        if(id <= 0)
         {
-            return ViewComponent("AdditionalDetails", new {id});
+            ModelState.AddModelError(string.Empty, "The was no employee found");
+            return RedirectToAction("Index", "Employee");
         }
 
-        bool result = await _service.SaveAdditionalDetailsAsync(id, details);
+        ViewData["Id"] = id;
 
+        return View();
+    }
+
+    [HttpPost("add/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Add(int id, AdditionalDetails details)
+    {
         if(id == 0)
         {
             return NotFound("Employee not Found");
         }
 
-        return ViewComponent("AdditionalDetails", new {id});
+        bool result = await _service.AddAdditionalDetailsAsync(id, details);
+
+        if(!result)
+        {
+            ModelState.AddModelError(string.Empty, "There was a problem while adding the new details or files.");
+            return RedirectToAction("Details", "Employee", new {id});
+        }
+
+        return RedirectToAction("Details", "Employee", new {id});
+    }
+
+    [HttpGet("update/{id}")]
+    public IActionResult Update(int id)
+    {
+        ViewData["Id"] = id;
+
+        return View();
+    }
+
+    [HttpPost("update/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(int id, AdditionalDetails details)
+    {
+        bool result = await _service.UpdateAdditionalDetailsAsync(id, details);
+
+        if(!result)
+        {
+            return RedirectToAction("Detials", "Employee", new{id});
+        }
+
+        return RedirectToAction("Details", "Employee", new {id});
     }
 }
