@@ -1,52 +1,76 @@
 ﻿@using ErpProject.Models
 @model Employee
 
-<div>
-    <table>
-        <tbody>
-            <tr>
-                <td><b>First Name:</b></td>
-                <td>@Model.FirstName</td>
-            </tr>
-            <tr>
-                <td><b>Last Name:</b></td>
-                <td>@Model.LastName</td>
-            </tr>
+@section Styles
+{
+    <link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+}
 
-            <tr>
-                <td><b>Email:</b></td>
-                <td>@Model.Email</td>
-            </tr>
+@{
+    string base64 = Convert.ToBase64String(Model.Photograph);
+    string imgSrc = $"data:{Model.MIME};base64,{base64}";
+}
 
-            <tr>
-                <td><b>Age:</b></td>
-                <td>@Model.Age</td>
-            </tr>
+<div style="text-align: left; margin-left: 0; padding-left: 20px; margin-top: -20px;">
+    <div>
+        <h3>Details</h3>
+    </div>
 
-            <tr>
-                <td><b>Date of Birth:</b></td>
-                <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
-            </tr>
+    <div style="margin-top: -30px;">
+        <table>
+            <tbody>
+                <tr>
+                    <td><b>First Name:</b></td>
+                    <td>@Model.FirstName</td>
+                </tr>
 
-            <tr>
-                <td><b>Natinality:</b></td>
-                <td>@Model.Nationality</td>
-            </tr>
+                <tr>
+                    <td><b>Last Name:</b></td>
+                    <td>@Model.LastName</td>
+                </tr>
 
-            <tr>
-                <td><b>Gender:</b></td>
-                <td>@Model.Gender</td>
-            </tr>
+                <tr>
+                    <td><b>Email:</b></td>
+                    <td>@Model.Email</td>
+                </tr>
 
-            <tr>
-                <td><b>Phone Number:</b></td>
-                <td>@Model.PhoneNumber</td>
-            </tr>
-        </tbody>
-    </table>
+                <tr>
+                    <td><b>Age:</b></td>
+                    <td>@Model.Age</td>
+                </tr>
+
+                <tr>
+                    <td><b>Date of Birth:</b></td>
+                    <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                </tr>
+
+                <tr>
+                    <td><b>Natinality:</b></td>
+                    <td>@Model.Nationality</td>
+                </tr>
+
+                <tr>
+                    <td><b>Gender:</b></td>
+                    <td>@Model.Gender</td>
+                </tr>
+
+                <tr>
+                    <td><b>Phone Number:</b></td>
+                    <td>@Model.PhoneNumber</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: -20px;">
+        <div><h3>Additional Details</h3></div>
+
+        <div style="margin-top: -30px;">
+            @await Component.InvokeAsync("AdditionalDetails", new {id = Model.Id})
+        </div>
+    </div>
 </div>
 
-
 <div>
-    @await Component.InvokeAsync("AdditionalDetails", new {id = Model.Id})
+    <img src="@imgSrc" style="max-width: 400px; max-height: 400px; padding-left: 30px;"
 </div>
