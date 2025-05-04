@@ -13,7 +13,7 @@ public class AdditionalDetailsViewComponent: ViewComponent
         _service = service;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync(int id, string mode = "view")
+    public async Task<IViewComponentResult> InvokeAsync(int id)
     {
         AdditionalDetails details = await _service.GetAdditionalDetailsAsync(id);
         
@@ -22,7 +22,6 @@ public class AdditionalDetailsViewComponent: ViewComponent
             return View();
         }
 
-        ViewData["Mode"] = mode;
         ViewData["Id"] = id;
 
         return View(details);
