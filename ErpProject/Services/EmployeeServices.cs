@@ -1,12 +1,13 @@
 using System.Data;
 using ErpProject.Helpers;
 using ErpProject.Helpers.Connection;
+using ErpProject.Interfaces;
 using ErpProject.Models;
 using Microsoft.Data.SqlClient;
 
 namespace ErpProject.Services;
 
-public class EmployeeServices
+public class EmployeeServices: IEmployeeServices
 {
     private readonly Connection _connection;
 
