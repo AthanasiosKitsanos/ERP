@@ -1,13 +1,9 @@
-﻿@using ErpProject.Models
-@model List<Employee>
-
-@section Styles
+﻿@section Styles
 {
     <link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
 }
 
 <div>
-
     <div>
         <a asp-action="Register">Register new Employee</a>
     </div>
@@ -33,24 +29,36 @@
                     <th>Phone Number</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach(Employee employee in Model)
-                {
-                    <tr>
-                        <td>@employee.FirstName</td>
-                        <td>@employee.LastName</td>
-                        <td>@employee.Email</td>
-                        <td>@employee.Age</td>
-                        <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
-                        <td>@employee.Nationality</td>
-                        <td>@employee.Gender</td>
-                        <td>@employee.PhoneNumber</td>
-                        <td><a asp-action="Details" asp-route-id="@employee.Id">Details</a></td>
-                        <td><a asp-action="Update" asp-route-id="@employee.Id">Edit</a></td>
-                        <td><a asp-action="Delete" asp-route-id="@employee.Id">Delete</a></td>
-                    </tr>
-                }
+            <tbody  id="employeeTable">
+                
             </tbody>
         </table>
     </div>
 </div>
+
+
+<script>
+        const tbody = document.getElementById('employeeTable');
+
+        fetch('/Employee/GetAllEmployees')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(e => {
+                const row = `<tr>
+                                <td>${e.firstName}</td>
+                                <td>${e.lastName}</td>
+                                <td>${e.email}</td>
+                                <td>${e.age}</td>
+                                <td>${e.dateOfBirth}</td>
+                                <td>${e.nationality}</td>
+                                <td>${e.gender}</td>
+                                <td>${e.phoneNumber}</td>
+                                <td><a href="/Employee/Details/${e.id}">Details</a></td>
+                                <td><a href="/Employee/Update/${e.id}">Edit</a></td>
+                                <td><a href="/Employee/Delete/${e.id}">Delete</a></td>
+                            </tr>`;
+                tbody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error('Fetch error:', error));
+</script>
