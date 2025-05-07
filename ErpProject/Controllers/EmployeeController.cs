@@ -1,31 +1,41 @@
+using ErpProject.Interfaces;
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ErpProject.Controllers;
 
 [Route("employee")]
 public class EmployeeController: Controller
 {
-    private readonly EmployeeServices _service;
+    private readonly IEmployeeServices _service;
+    private readonly ILogger<EmployeeController> _logger;
 
-    public EmployeeController(EmployeeServices service)
+    public EmployeeController(IEmployeeServices service, ILogger<EmployeeController> logger)
     {
         _service = service;
+        _logger = logger;
     }
 
-    [HttpGet("index")]
-    public async Task<IActionResult> Index()
+    [Route("index")]
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpGet("getallemployees")]
+    public async Task<IActionResult> GetAllEmployees()
     {
         List<Employee> employees = await _service.GetAllEmployeesAsync();
 
-        if(employees is null)
+        _logger.LogInformation("Employees are cached for the next 5 minutes");
+
+        if(employees is null || employees.Count == 0)
         {
-            return NotFound("The list of Employees is null");
+            return Json(new {message = "No employees found."});
         }
 
-        return View(employees);
+        return Json(employees ?? new List<Employee>());
     }
 
     [HttpGet("register")]
@@ -71,6 +81,13 @@ public class EmployeeController: Controller
         }
 
         Employee employee = await _service.GetEmployeeByIdAsync(id);
+
+        Type type = typeof(Employee);
+
+        foreach(var property in type.GetProperties())
+        {
+            _logger.LogInformation($"{property}: {property.GetValue(employee)}");
+        }
 
         if(employee is null)
         {
