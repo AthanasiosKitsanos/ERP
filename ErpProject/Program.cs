@@ -11,7 +11,13 @@ class MainProgram
 
         builder.Services.AddCustomServices();
 
+        builder.Services.AddCustomInterfaces();
+
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddMemoryCache();
+
+        builder.Services.AddAntiforgery();
 
         var app = builder.Build();
 
