@@ -82,12 +82,7 @@ public class EmployeeController: Controller
 
         Employee employee = await _service.GetEmployeeByIdAsync(id);
 
-        Type type = typeof(Employee);
-
-        foreach(var property in type.GetProperties())
-        {
-            _logger.LogInformation($"{property}: {property.GetValue(employee)}");
-        }
+        _logger.LogInformation($"Id: {employee.Id}\n\rFirst Name: {employee.FirstName}");
 
         if(employee is null)
         {
