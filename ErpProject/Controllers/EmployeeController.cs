@@ -2,6 +2,7 @@ using ErpProject.Interfaces;
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ErpProject.Controllers;
 
@@ -9,17 +10,20 @@ namespace ErpProject.Controllers;
 public class EmployeeController: Controller
 {
     private readonly IEmployeeServices _service;
+    private readonly IMemoryCache _cache;
     private readonly ILogger<EmployeeController> _logger;
 
-    public EmployeeController(IEmployeeServices service, ILogger<EmployeeController> logger)
+    public EmployeeController(IEmployeeServices service, ILogger<EmployeeController> logger, IMemoryCache cache)
     {
         _service = service;
         _logger = logger;
+        _cache = cache;
     }
 
     [Route("index")]
     public IActionResult Index()
     {
+        _cache.Remove("employee");
         return View();
     }
 
@@ -41,6 +45,7 @@ public class EmployeeController: Controller
     [HttpGet("register")]
     public IActionResult Register()
     {
+        _cache.Remove("employee");
         return View();
     }
 
