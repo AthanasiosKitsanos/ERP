@@ -85,4 +85,31 @@ public class CredentialsServices
 
         return statusNamesList;
     }
+
+    public async Task<bool> UsernameExistsAsync(string username)
+    {
+        if(string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username))
+        {
+            return false;
+        }
+
+        string query = @"SELECT COUNT(*)
+                        FROM Credentials
+                        WHERE Username = @Username";
+
+        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using(SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = username;
+
+                int count = Convert.ToInt32(await command.ExecuteScalarAsync());
+
+                return count > 0;
+            }
+        }
+    }
+    
 }
