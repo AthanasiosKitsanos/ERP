@@ -15,7 +15,15 @@ public class EmploymentDetailsViewComponent: ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync(int id)
     {
-        EmploymentDetails details = new EmploymentDetails();
+        EmploymentDetails details = await _services.GetEmploymentDetailsAsync(id);
+
+        if(details is null)
+        {
+            return View();
+        }
+
+        ViewData["Id"] = id;
+
         return View(details);
     }
 }
