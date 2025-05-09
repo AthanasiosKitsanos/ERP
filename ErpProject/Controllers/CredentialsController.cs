@@ -1,6 +1,7 @@
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ErpProject.Controllers;
 
@@ -43,6 +44,13 @@ public class CredentialsController: Controller
         if(credentials is null)
         {
             ModelState.AddModelError(string.Empty, "There was something wring while adding the credentials");
+            return View(new Credentials());
+        }
+
+        if(await _service.UsernameExistsAsync(credentials.Username))
+        {
+            ModelState.AddModelError("Username", "Username already exists!");
+            credentials.StatusNameList = await _service.GetAccountStatusListAsync();
             return View(credentials);
         }
 
@@ -52,11 +60,9 @@ public class CredentialsController: Controller
             return View(credentials);
         }
 
-        bool result = await _service.CreateCredentialsAsync(id, credentials);
-
-        if(!result)
+        if(!await _service.CreateCredentialsAsync(id, credentials))
         {
-            ModelState.AddModelError(string.Empty, "There was something wring while adding the credentials");
+            ModelState.AddModelError(string.Empty, "There was something wring while creating the credentials");
             return View(credentials);
         }
 
