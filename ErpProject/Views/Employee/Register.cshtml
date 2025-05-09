@@ -1,62 +1,81 @@
 ﻿@using ErpProject.Models
 @model Employee
 
-@using(Html.BeginForm("Register", "Employee", FormMethod.Post, new {enctype = "multipart/form-data"}))
+@section Styles
 {
+    <link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+}
+
+<div>
+    <form method="post" asp-action="Register" asp-controller="Employee" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
     
-    <div>
-        <ul style="list-style: none;">
-            <li>
-                <label>First Name</label>
-                <input type="text" asp-for="@Model.FirstName">
-                <span asp-validation-for="@Model.FirstName"></span>
-            </li>
+    <table>
+        <tbody>
+            <tr>
+                <td><label>First Name</label></td>
+                <td>
+                    <input type="text" asp-for="@Model.FirstName">
+                    <span asp-validation-for="@Model.FirstName"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Last Name</label>
-                <input type="text" asp-for="@Model.LastName">
-                <span asp-validation-for="@Model.LastName"></span>
-            </li>
+            <tr>
+                <td><label>Last Name</label></td>
+                <td>
+                    <input type="text" asp-for="@Model.LastName">
+                    <span asp-validation-for="@Model.LastName"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Email</label>
-                <input type="email" asp-for="@Model.Email">
-                <span asp-validation-for="@Model.Email"></span>
-            </li>
+            <tr>
+                <td><label>Email</label></td>
+                <td>
+                    <input type="email" asp-for="@Model.Email">
+                    <span asp-validation-for="@Model.Email"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Date of Birth</label>
-                <input type="date" asp-for="@Model.DateOfBirth" value="" min="1960-01-01" max="2100-12-31">
-                <span asp-validation-for="@Model.DateOfBirth"></span>
-            </li>
+            <tr>
+                <td><label>Date of Birth</label></td>
+                <td>
+                    <input type="date" asp-for="@Model.DateOfBirth" value="" min="1960-01-01" max="2100-12-31">
+                    <span asp-validation-for="@Model.DateOfBirth"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Nationality</label>
-                <input type="text" asp-for="@Model.Nationality">
-                <span asp-validation-for="@Model.Nationality"></span>
-            </li>
+            <tr>
+                <td><label>Nationality</label></td>
+                <td>
+                    <input type="text" asp-for="@Model.Nationality">
+                    <span asp-validation-for="@Model.Nationality"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Gender</label>
-                <input type="text" asp-for="@Model.Gender">
-                <span asp-validation-for="@Model.Gender"></span>
-            </li>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <input type="text" asp-for="@Model.Gender">
+                    <span asp-validation-for="@Model.Gender"></span>
+                </td>
+            </tr>
 
-            <li>
-                <label>Phone Number</label>
-                <input type="text" asp-for="@Model.PhoneNumber">
+            <tr>
+                <td><label>Phone Number</label></td>
+                <td><input type="text" asp-for="@Model.PhoneNumber">
                 <span asp-validation-for="@Model.PhoneNumber"></span>
-            </li>
+            </tr>
 
-            <li>
-                <label>Profile Photo</label>
-                <input type="file" asp-for="@Model.PhotoFile" id="ProfileImage" accept="image/*">
-            </li>
+            <tr>
+                <td><label>Profile Photo</label></td>
+                <td><input type="file" asp-for="@Model.PhotoFile" id="ProfileImage" accept="image/*"></td>
+            </tr>
+        </tbody>
+    </table>
 
-             <li>
-                <button type="submit">Next</button>
-            </li>
-        </ul>
+    <div style="display: flex; justify-content: center; padding-top: 30px;">
+        <button type="submit">Next</button>
     </div>
-}
+    
+    </form>
+</div>
