@@ -23,7 +23,6 @@ public class EmployeeController: Controller
     [Route("index")]
     public IActionResult Index()
     {
-        _cache.Remove("employee");
         return View();
     }
 
