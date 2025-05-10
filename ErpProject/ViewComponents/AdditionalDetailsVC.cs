@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ErpProject.ViewComponents;
 
+[Route("additionaldetailsvc")]
 public class AdditionalDetailsViewComponent: ViewComponent
 {
     private readonly AdditionalDetailsServices _service;
@@ -15,15 +16,15 @@ public class AdditionalDetailsViewComponent: ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync(int id)
     {
+        ViewData["Id"] = id;
+
         AdditionalDetails details = await _service.GetAdditionalDetailsAsync(id);
-        
+         
         if(details is null)
         {
             return View();
         }
 
-        ViewData["Id"] = id;
-
         return View(details);
-    }
+    } 
 }
