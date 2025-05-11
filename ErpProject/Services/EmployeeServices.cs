@@ -105,7 +105,7 @@ public class EmployeeServices: IEmployeeServices
                 {
                     Dictionary<string, int> param = new Dictionary<string, int>
                     {
-                        {"Id", reader.GetOrdinal("Id")},
+                        {"EmployeeId", reader.GetOrdinal("EmployeeId")},
                         {"FirstName", reader.GetOrdinal("FirstName")},
                         {"LastName", reader.GetOrdinal("LastName")},
                         {"Email", reader.GetOrdinal("Email")},
@@ -122,7 +122,7 @@ public class EmployeeServices: IEmployeeServices
                     {
                         Employee employee = new Employee
                         {
-                            Id = reader.GetInt32(param["Id"]),
+                            Id = reader.GetInt32(param["EmployeeId"]),
                             FirstName = reader.GetString(param["FirstName"]),
                             LastName = reader.GetString(param["LastName"]),
                             Email = reader.GetString(param["Email"]),
@@ -152,7 +152,7 @@ public class EmployeeServices: IEmployeeServices
         }
 
         string query = @"DELETE FROM Employees 
-                        WHERE Id = @Id";
+                        WHERE EmployeeId = @EmployeeId";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -160,7 +160,7 @@ public class EmployeeServices: IEmployeeServices
 
             using(SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
                 int affectedRows = await command.ExecuteNonQueryAsync();
 
@@ -179,7 +179,7 @@ public class EmployeeServices: IEmployeeServices
         Employee employee = new Employee();
         string query = @"SELECT *
                         FROM Employees
-                        WHERE Id = @Id AND IsCompleted = 1";
+                        WHERE EmployeeId = @EmployeeId AND IsCompleted = 1";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -187,13 +187,13 @@ public class EmployeeServices: IEmployeeServices
 
             using(SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
                 using(SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     Dictionary<string, int> param = new Dictionary<string, int>
                     {
-                        {"Id", reader.GetOrdinal("Id")},
+                        {"EmployeeId", reader.GetOrdinal("EmployeeId")},
                         {"FirstName", reader.GetOrdinal("FirstName")},
                         {"LastName", reader.GetOrdinal("LastName")},
                         {"Email", reader.GetOrdinal("Email")},
@@ -208,7 +208,7 @@ public class EmployeeServices: IEmployeeServices
 
                     if(await reader.ReadAsync())
                     {
-                        employee.Id = reader.GetInt32(param["Id"]);
+                        employee.Id = reader.GetInt32(param["EmployeeId"]);
                         employee.FirstName = reader.GetString(param["FirstName"]);
                         employee.LastName = reader.GetString(param["LastName"]);
                         employee.Email = reader.GetString(param["Email"]);
