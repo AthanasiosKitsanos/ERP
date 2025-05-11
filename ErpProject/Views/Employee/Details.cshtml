@@ -65,16 +65,15 @@
     <div style="margin-top: -20px;">
         <div><h3>Additional Details</h3></div>
 
-        <div style="margin-top: -30px;">
-            @await Component.InvokeAsync("AdditionalDetails", new {id = Model.Id})
+        <div id="additionalDetailsContainer" style="margin-top: -30px;">
         </div>
     </div>
 
    <div style="margin-top: -20px;">
         <div><h3>Employment Details</h3></div>
 
-        <div style="margin-top: -30px">
-            @await Component.InvokeAsync("EmploymentDetails", new { id = Model.Id})
+        <div id="employmentDetailsContainer" style="margin-top: -30px">
+            
         </div>
     </div>
 </div>
@@ -82,3 +81,7 @@
 <div>
     <img src="@imgSrc" style="max-width: 400px; max-height: 400px; padding-left: 30px;"
 </div>
+
+<script>window.Id = @Model.Id</script>
+<script src="~/js/AdditionalDetails.js"></script>
+<script src="~/js/EmploymentDetails.js"></script>
