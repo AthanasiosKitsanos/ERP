@@ -14,8 +14,8 @@ public class EmploymentDetailsController: Controller
         _services = services;
     }
 
-    [HttpGet("getdetails/{id}")]
-    public async Task<IActionResult> GetDetails(int id)
+    [HttpGet("index/{id}")]
+    public async Task<IActionResult> Index(int id)
     {
         if(id <= 0)
         {
@@ -24,6 +24,84 @@ public class EmploymentDetailsController: Controller
 
         EmploymentDetails details = await _services.GetEmploymentDetailsAsync(id);
 
-        return Json(details);
+        return PartialView(details);
+    }
+
+    [HttpGet("register/{id}")]
+    public IActionResult Register(int id)
+    {
+        if(id <= 0)
+        {
+            return NotFound("There was a problem");
+        }
+
+        EmploymentDetails details = new EmploymentDetails()
+        {
+            EmployeeId = id
+        };
+
+        return PartialView(details);
+    }
+
+    [HttpPost("register/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(EmploymentDetails details)
+    {
+        if(!ModelState.IsValid)
+        {
+            return PartialView(details);
+        }
+
+        if(details.EmployeeId <= 0 )
+        {
+            return NotFound();
+        }
+
+        bool result = await _services.AddEmploymentDetailsAsync(details.EmployeeId, details);
+
+        if(!result)
+        {
+            ModelState.AddModelError(string.Empty, "There was a problem with saving your details");
+            return RedirectToAction("Details", "Employee", details.EmployeeId);
+        }
+
+        return RedirectToAction("Details", "Employee", details.EmployeeId);
+    }
+
+    [HttpGet("edit/{id}")]
+    public IActionResult Edit(int id)
+    {
+        if(id <= 0)
+        {
+            ModelState.AddModelError("id", "There was an error while searching for this employee's details");
+            return PartialView("Details", id);
+        }
+
+        EmploymentDetails details = new EmploymentDetails()
+        {
+            EmployeeId = id
+        };
+
+        return PartialView(details);
+    }
+
+    [HttpPost("edit/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(EmploymentDetails details)
+    {
+        if(details.EmployeeId <= 0 || details is null)
+        {
+            return NotFound("Something went wrong while loading the edit page");
+        }
+
+        bool result = await _services.AddEmploymentDetailsAsync(details.EmployeeId, details);
+
+        if(!result)
+        {
+            ModelState.AddModelError(string.Empty, "There was something wrong while saving the employment detials");
+            return RedirectToAction("Details", "Employees", details.EmployeeId);
+        }
+
+        return RedirectToAction("Details", "Employees", details.EmployeeId);
     }
 }
