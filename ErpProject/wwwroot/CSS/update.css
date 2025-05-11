@@ -17,6 +17,7 @@ table {
 th, td {
     padding: 10px 12px;
     text-align: left;
+    width: 250px;
 }
 
 a {
