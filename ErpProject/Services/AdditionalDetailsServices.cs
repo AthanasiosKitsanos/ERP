@@ -24,7 +24,7 @@ public class AdditionalDetailsServices
             return null!;
         }
 
-        string query = @"SELECT EmergencyNumbers, Education
+        string query = @"SELECT EmergencyNumbers, Education, EmployeeId
                         FROM AdditionalDetails
                         WHERE EmployeeId = @EmployeeId";
 
@@ -42,6 +42,7 @@ public class AdditionalDetailsServices
                     {
                         details.EmergencyNumbers = reader.GetString(reader.GetOrdinal("EmergencyNumbers"));
                         details.Education = reader.GetString(reader.GetOrdinal("Education"));
+                        details.EmployeeId = reader.GetInt32(reader.GetOrdinal("EmployeeId"));
                     }
                 }
             }
