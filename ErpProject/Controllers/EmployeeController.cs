@@ -38,7 +38,7 @@ public class EmployeeController: Controller
             return Json(new {message = "No employees found."});
         }
 
-        return Json(employees ?? new List<Employee>());
+        return Json(employees);
     }
 
     [HttpGet("register")]
