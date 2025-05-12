@@ -26,6 +26,14 @@
                 </tr>
 
                 <tr>
+                    <td><b>Employment Status:</b></td>
+                    <td>
+                        <input type="text" asp-for="@Model.EmploymentStatus">
+                        <span asp-validation-for="@Model.EmploymentStatus"></span>
+                    </td>
+                </tr>
+
+                <tr>
                     <td><label><b>Hire Date:</b></label></td>
                     <td>
                         <input type="date" asp-for="@Model.HireDate">
