@@ -28,7 +28,13 @@ class MainProgram
         app.UseAuthorization();
         app.MapControllers();
         
-        app.MapControllerRoute(name: "default", pattern: "{controller=LogIn}/{action=Index}");
+        app.MapGet("/", context =>
+        {
+            context.Response.Redirect("/logIn/index");
+            return Task.CompletedTask;
+        });
+
+        //app.MapControllerRoute(name: "default", pattern: "{controller=LogIn}/{action=Index}");
 
         app.Run();
     }
