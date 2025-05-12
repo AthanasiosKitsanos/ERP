@@ -26,7 +26,7 @@ public class CredentialsServices
 
         string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatusId, EmployeeId)
                         VALUES (@Username, @Password, @LastLogIn, @AccountStatusId, @EmployeeId);
-                        UPDATE Employees SET IsCompleted = 1 WHERE Id = @Id";
+                        UPDATE Employees SET IsCompleted = 1 WHERE EmployeeId = @EmployeeId";
 
         using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
