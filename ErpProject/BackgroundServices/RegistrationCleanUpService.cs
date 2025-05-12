@@ -14,7 +14,8 @@ public class RegistrationCleanUpService: BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        string query = @"DELETE TOP(100) FROM Employees WHERE IsCompleted = 0";
+        string query = @"DELETE TOP(100) FROM Employees 
+                        WHERE IsCompleted = 0 AND CreatedAt < DATEADD(MINUTE, -10, GETDATE())";
 
         while(!stoppingToken.IsCancellationRequested)
         {
