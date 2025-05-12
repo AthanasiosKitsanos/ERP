@@ -24,11 +24,6 @@ public class AdditionalDetailsController: Controller
         }
 
         AdditionalDetails details = await _service.GetAdditionalDetailsAsync(id);
-
-        if(details is null)
-        {
-            ModelState.AddModelError(string.Empty, "The are no details found");
-        }
         
         return PartialView(details);
     }
@@ -52,27 +47,27 @@ public class AdditionalDetailsController: Controller
 
     [HttpPost("register/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(AdditionalDetails details)
+    public async Task<IActionResult> Register(int id, AdditionalDetails details)
     {
         if(!ModelState.IsValid)
         {
             return PartialView(details);
         }
 
-        if(details.EmployeeId <= 0)
+        if(id <= 0)
         {
-            return NotFound("Employee not Found");
+            return NotFound($"Employee not Found {id}");
         }
 
-        bool result = await _service.AddAdditionalDetailsAsync(details.EmployeeId, details);
+        bool result = await _service.AddAdditionalDetailsAsync(id, details);
 
         if(!result)
         {
             ModelState.AddModelError(string.Empty, "There was a problem while adding the new details or files.");
-            return RedirectToAction("Details", "Employee", new {details.EmployeeId});
+            return RedirectToAction("Details", "Employee", new {id});
         }
 
-        return RedirectToAction("Details", "Employee", new {details.EmployeeId});
+        return RedirectToAction("Details", "Employee", new {id});
     }
 
     [HttpGet("edit/{id}")]
@@ -94,15 +89,20 @@ public class AdditionalDetailsController: Controller
 
     [HttpPost("edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(AdditionalDetails details)
+    public async Task<IActionResult> Edit(int id, AdditionalDetails details)
     {
-        bool result = await _service.UpdateAdditionalDetailsAsync(details.EmployeeId, details);
+        if(id <= 0)
+        {
+            return NotFound("No Employee is found to edit the details");
+        }
+
+        bool result = await _service.UpdateAdditionalDetailsAsync(id, details);
 
         if(!result)
         {
-            return RedirectToAction("Detials", "Employee", new{details.EmployeeId});
+            return RedirectToAction("Detials", "Employee", new{id});
         }
 
-        return RedirectToAction("Details", "Employee", new {details.EmployeeId});
+        return RedirectToAction("Details", "Employee", new {id});
     }
 }
