@@ -74,7 +74,7 @@ public class EmploymentDetailsServices
             {
                 command.Parameters.Add("@Position", SqlDbType.NVarChar).Value = details.Position;
                 command.Parameters.Add("@Department", SqlDbType.NVarChar).Value = details.Department;
-                command.Parameters.Add("@EmployeeStatus", SqlDbType.NVarChar).Value = details.EmploymentStatus;
+                command.Parameters.Add("@EmploymentStatus", SqlDbType.NVarChar).Value = details.EmploymentStatus;
                 command.Parameters.Add("@HireDate", SqlDbType.Date).Value = details.HireDate;
                 command.Parameters.Add("@ContractType", SqlDbType.NVarChar).Value = details.ContractType;
                 command.Parameters.Add("@WorkLocation", SqlDbType.NVarChar).Value = details.WorkLocation;
