@@ -4,7 +4,7 @@ namespace ErpProject.Controllers;
 
 public class HomeController: Controller
 {
-    public ActionResult Index()
+    public IActionResult Index()
     {
         return View();
     }
