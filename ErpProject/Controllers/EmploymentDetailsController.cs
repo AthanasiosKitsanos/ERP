@@ -45,27 +45,27 @@ public class EmploymentDetailsController: Controller
 
     [HttpPost("register/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(EmploymentDetails details)
+    public async Task<IActionResult> Register(int id, EmploymentDetails details)
     {
         if(!ModelState.IsValid)
         {
             return PartialView(details);
         }
 
-        if(details.EmployeeId <= 0 )
+        if(id <= 0 )
         {
             return NotFound();
         }
 
-        bool result = await _services.AddEmploymentDetailsAsync(details.EmployeeId, details);
+        bool result = await _services.AddEmploymentDetailsAsync(id, details);
 
         if(!result)
         {
             ModelState.AddModelError(string.Empty, "There was a problem with saving your details");
-            return RedirectToAction("Details", "Employee", details.EmployeeId);
+            return RedirectToAction("Details", "Employee", new{id});
         }
 
-        return RedirectToAction("Details", "Employee", details.EmployeeId);
+        return RedirectToAction("Details", "Employees", new {id});
     }
 
     [HttpGet("edit/{id}")]
@@ -87,21 +87,21 @@ public class EmploymentDetailsController: Controller
 
     [HttpPost("edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(EmploymentDetails details)
+    public async Task<IActionResult> Edit(int id, EmploymentDetails details)
     {
-        if(details.EmployeeId <= 0 || details is null)
+        if(id <= 0 || details is null)
         {
             return NotFound("Something went wrong while loading the edit page");
         }
 
-        bool result = await _services.AddEmploymentDetailsAsync(details.EmployeeId, details);
+        bool result = await _services.AddEmploymentDetailsAsync(id, details);
 
         if(!result)
         {
             ModelState.AddModelError(string.Empty, "There was something wrong while saving the employment detials");
-            return RedirectToAction("Details", "Employees", details.EmployeeId);
+            return RedirectToAction("Details", "Employees", new {id});
         }
 
-        return RedirectToAction("Details", "Employees", details.EmployeeId);
+        return RedirectToAction("Details", "Employees", new {id});
     }
 }
