@@ -24,6 +24,11 @@ public class AdditionalDetailsController: Controller
         }
 
         AdditionalDetails details = await _service.GetAdditionalDetailsAsync(id);
+
+        if(details.EmployeeId <= 0)
+        {
+            details.EmployeeId = id;    
+        }
         
         return PartialView(details);
     }
