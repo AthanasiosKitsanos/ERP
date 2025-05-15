@@ -23,6 +23,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<EmploymentDetailsServices>();
 
+        services.AddScoped<IdentificationsServices>();
+
         return services;
     }
 }
