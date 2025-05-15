@@ -14,7 +14,7 @@ public class IdentificationsController : Controller
         _services = services;
     }
 
-    [HttpGet("index")]
+    [HttpGet("index/{id}")]
     public async Task<IActionResult> Index(int id)
     {
         if(id <= 0)
