@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", async function()
                                 <td>${e.gender}</td>
                                 <td>${e.phoneNumber}</td>
                                 <td><a href="/employee/details/${e.id}">Details</a></td>
-                                <td><a href="/employee/update/${e.id}">Edit</a></td>
                                 <td><a href="/employee/delete/${e.id}">Delete</a></td>
                             </tr>`;
                 tbody.innerHTML += row;
