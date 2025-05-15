@@ -12,30 +12,30 @@
             </tr>
 
             <tr>
-                <td><b>Work Authorized</b></td>
+                <td><b>Work Authorized:</b></td>
                 @if(Model.WorkAuth)
                 {
                     <td>Yes</td>    
                 }
                 else
                 {
-                    <td>No</td>
+                    <td></td>
                 }
             </tr>
 
             <tr>
-                <td><b>Tax Information</b></td>
+                <td><b>Tax Information:</b></td>
                 <td>@Model.TaxInformation</td>
             </tr>
 
             <tr>
                  @if(string.IsNullOrEmpty(Model.TIN) && string.IsNullOrEmpty(Model.TaxInformation))
                 {
-                    <td><a id="AdRegistrationForm" href="#">Add Details</a></td>
+                    <td><a id="IdRegistrationForm" href="#">Add Details</a></td>
                 }
                 else
                 {
-                    <td><a id="AdEditForm" href="#">Edit</a></td>
+                    <td><a id="IdEditForm" href="#">Edit</a></td>
                 }
             </tr>
         </tbody>
