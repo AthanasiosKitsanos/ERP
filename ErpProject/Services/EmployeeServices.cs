@@ -87,10 +87,8 @@ public class EmployeeServices: IEmployeeServices
         }
     }
 
-    public async Task<List<Employee>> GetAllEmployeesAsync()
+    public async IAsyncEnumerable<Employee> GetAllEmployeesAsync()
     {
-        List<Employee> employeeList = new List<Employee>();
-
         string query = @"SELECT *
                         FROM Employees
                         WHERE IsCompleted = 1";
@@ -118,7 +116,7 @@ public class EmployeeServices: IEmployeeServices
                         {"MIME", reader.GetOrdinal("MIME")}
                     };
 
-                    while(await reader.ReadAsync())
+                    while (await reader.ReadAsync())
                     {
                         Employee employee = new Employee
                         {
@@ -135,13 +133,11 @@ public class EmployeeServices: IEmployeeServices
                             MIME = reader.GetString(param["MIME"])
                         };
 
-                        employeeList.Add(employee);
+                        yield return employee;
                     }
                 }
             }
         }
-
-        return employeeList;
     }
 
     public async Task<bool> DeleteEmployeeByIdAsync(int id)
