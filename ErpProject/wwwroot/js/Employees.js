@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", async function()
         .then(response => response.json())
         .then(data => {
             data.forEach(e => {
-                const row = `<tr>
-                                <td>${e.firstName}</td>
+                
+                const tr = document.createElement("tr");
+
+                tr.innerHTML = `<td>${e.firstName}</td>
                                 <td>${e.lastName}</td>
                                 <td>${e.email}</td>
                                 <td>${e.age}</td>
@@ -16,9 +18,9 @@ document.addEventListener("DOMContentLoaded", async function()
                                 <td>${e.gender}</td>
                                 <td>${e.phoneNumber}</td>
                                 <td><a href="/employee/details/${e.id}">Details</a></td>
-                                <td><a href="/employee/delete/${e.id}">Delete</a></td>
-                            </tr>`;
-                tbody.innerHTML += row;
+                                <td><a href="/employee/delete/${e.id}">Delete</a></td>`;
+                
+                tbody.appendChild(tr);
             });
         })
         .catch(error => console.error('Fetch error:', error));
