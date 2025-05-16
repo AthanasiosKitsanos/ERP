@@ -8,7 +8,7 @@ public interface IEmployeeServices
 
     Task<int> AddEmployeeAsync(Employee employee);
 
-    Task<List<Employee>> GetAllEmployeesAsync();
+    IAsyncEnumerable<Employee> GetAllEmployeesAsync();
 
     Task<bool> DeleteEmployeeByIdAsync(int id);
 
