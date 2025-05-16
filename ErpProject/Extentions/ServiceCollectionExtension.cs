@@ -13,8 +13,6 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<Connection>();
 
-        services.AddScoped<EmployeeServices>();
-
         services.AddScoped<CredentialsServices>();
 
         services.AddHostedService<RegistrationCleanUpService>();
