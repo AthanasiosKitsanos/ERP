@@ -29,16 +29,21 @@ public class EmployeeController: Controller
     [HttpGet("getallemployees")]
     public async Task<IActionResult> GetAllEmployees()
     {
-        List<Employee> employees = await _service.GetAllEmployeesAsync();
+        List<Employee> employeesList = new List<Employee>();
+
+        await foreach(Employee employee in _service.GetAllEmployeesAsync())
+        {
+            employeesList.Add(employee);
+        }
 
         _logger.LogInformation("Employees are cached for the next 5 minutes");
 
-        if(employees is null || employees.Count == 0)
+        if(employeesList is null || employeesList.Count == 0)
         {
             return Json(new {message = "No employees found."});
         }
 
-        return Json(employees);
+        return Json(employeesList);
     }
 
     [HttpGet("register")]
