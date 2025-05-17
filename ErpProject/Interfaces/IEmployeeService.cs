@@ -13,4 +13,6 @@ public interface IEmployeeServices
     Task<bool> DeleteEmployeeByIdAsync(int id);
 
     Task<Employee> GetEmployeeByIdAsync(int id);
+
+    Task<bool> EditEmployeeAsync(int id, Employee employee);
 }
