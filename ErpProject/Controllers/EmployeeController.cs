@@ -2,12 +2,13 @@ using ErpProject.Interfaces;
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace ErpProject.Controllers;
 
 [Route("employee")]
-public class EmployeeController: Controller
+public class EmployeeController : Controller
 {
     private readonly IEmployeeServices _service;
     private readonly IMemoryCache _cache;
@@ -31,16 +32,16 @@ public class EmployeeController: Controller
     {
         List<Employee> employeesList = new List<Employee>();
 
-        await foreach(Employee employee in _service.GetAllEmployeesAsync())
+        await foreach (Employee employee in _service.GetAllEmployeesAsync())
         {
             employeesList.Add(employee);
         }
 
         _logger.LogInformation("Employees are cached for the next 5 minutes");
 
-        if(employeesList is null || employeesList.Count == 0)
+        if (employeesList is null || employeesList.Count == 0)
         {
-            return Json(new {message = "No employees found."});
+            return Json(new { message = "No employees found." });
         }
 
         return Json(employeesList);
@@ -57,14 +58,14 @@ public class EmployeeController: Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(Employee employee)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(employee);
         }
 
         bool emailExists = await _service.EmailExistsAsync(employee.Email);
 
-        if(emailExists)
+        if (emailExists)
         {
             ModelState.AddModelError("Email", "Email already exists. Please try another.");
             return View(employee);
@@ -72,40 +73,42 @@ public class EmployeeController: Controller
 
         int id = await _service.AddEmployeeAsync(employee);
 
-        if(id <= 0)
+        if (id <= 0)
         {
             ModelState.AddModelError(string.Empty, "An unexpected error has occurred while saving. Please try again.");
             return View(employee);
         }
 
-        return RedirectToAction("Index", "Credentials", new {id});
+        return RedirectToAction("Index", "Credentials", new { id });
     }
 
     [HttpGet("details/{id}")]
-    public async Task<IActionResult> Details(int id)
+    public IActionResult Details(int id)
     {
-        if(!ModelState.IsValid)
+        Employee employee = new Employee();
+
+        employee.Id = id;
+
+        return View(employee);
+    }
+
+    [HttpGet("maindetails/{id}")]
+    public async Task<IActionResult> MainDetails(int id)
+    {
+        if (id <= 0)
         {
-            return RedirectToAction("Index");
+            return NotFound("No employee was found");
         }
 
         Employee employee = await _service.GetEmployeeByIdAsync(id);
 
-        _logger.LogInformation($"Id: {employee.Id}\n\rFirst Name: {employee.FirstName}");
-
-        if(employee is null)
-        {
-            ModelState.AddModelError(string.Empty, "Something went wrong while retrieving the employee data");
-            return RedirectToAction("Index");
-        }
-
-        return View(employee);
+        return PartialView(employee);
     }
 
     [HttpGet("delete/{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        if(id <= 0)
+        if (id <= 0)
         {
             return NotFound("No Id was found");
         }
@@ -114,10 +117,10 @@ public class EmployeeController: Controller
 
         employee.Id = id;
 
-        if(employee is null)
+        if (employee is null)
         {
             ModelState.AddModelError(string.Empty, "No employee was found.");
-            
+
             return View("Index");
         }
 
@@ -127,13 +130,51 @@ public class EmployeeController: Controller
     [HttpPost("delete/{id}")]
     public async Task<IActionResult> ConfirmDelete(int id)
     {
-        bool result =  await _service.DeleteEmployeeByIdAsync(id);
+        bool result = await _service.DeleteEmployeeByIdAsync(id);
 
-        if(!result)
+        if (!result)
         {
             ModelState.AddModelError(string.Empty, "There was a problem with the deletion of the employee");
         }
 
         return RedirectToAction("Index");
+    }
+
+    [HttpGet("edit/{id}")]
+    public async Task<IActionResult> Edit(int id)
+    {
+        if (id <= 0)
+        {
+            return NotFound("No employee was found");
+        }
+
+        Employee employee = await _service.GetEmployeeByIdAsync(id);
+
+        return PartialView(employee);
+    }
+
+    [HttpPost("edit/{id}")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Employee employee)
+    {
+        if (id <= 0)
+        {
+            return BadRequest("Invalid employee data");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return PartialView("Edit", employee);
+        }
+
+        bool result = await _service.EditEmployeeAsync(id, employee);
+
+        if (!result)
+        {
+            ModelState.AddModelError(string.Empty, "There was aproblem while saving the new changes");
+            return PartialView("Index", employee);
+        }
+
+        return PartialView("Index", employee);
     }
 }
