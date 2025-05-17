@@ -1,0 +1,11 @@
+﻿@using ErpProject.Models
+@model RolesList
+
+<div>
+    <select asp-for="@Model.SelectedRole">
+        @foreach(Roles role in Model.List)
+        {
+            <option value="@role.Id">@role.RoleName</option>
+        }
+    </select>
+</div>
