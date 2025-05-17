@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ErpProject.Services;
 
-public class EmployeeServices: IEmployeeServices
+public class EmployeeServices : IEmployeeServices
 {
     private readonly Connection _connection;
 
@@ -18,7 +18,7 @@ public class EmployeeServices: IEmployeeServices
 
     public async Task<bool> EmailExistsAsync(string email)
     {
-        if(string.IsNullOrEmpty(email))
+        if (string.IsNullOrEmpty(email))
         {
             return false;
         }
@@ -27,11 +27,11 @@ public class EmployeeServices: IEmployeeServices
                         FROM Employees
                         WHERE Email = @Email";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
 
@@ -44,14 +44,14 @@ public class EmployeeServices: IEmployeeServices
 
     public async Task<int> AddEmployeeAsync(Employee employee)
     {
-        if(employee is null || employee.PhotoFile is null)
+        if (employee is null || employee.PhotoFile is null)
         {
             return 0;
         }
 
         employee.MIME = employee.PhotoFile.ContentType;
 
-        using(MemoryStream memoryStream = new MemoryStream())
+        using (MemoryStream memoryStream = new MemoryStream())
         {
             await employee.PhotoFile.CopyToAsync(memoryStream);
 
@@ -62,11 +62,11 @@ public class EmployeeServices: IEmployeeServices
                         VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @Photograph, @MIME, @CreatedAt);
                         SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = employee.FirstName;
                 command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = employee.LastName;
@@ -89,17 +89,17 @@ public class EmployeeServices: IEmployeeServices
 
     public async IAsyncEnumerable<Employee> GetAllEmployeesAsync()
     {
-        string query = @"SELECT *
+        string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber
                         FROM Employees
                         WHERE IsCompleted = 1";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
-                using(SqlDataReader reader = await command.ExecuteReaderAsync())
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     Dictionary<string, int> param = new Dictionary<string, int>
                     {
@@ -111,9 +111,7 @@ public class EmployeeServices: IEmployeeServices
                         {"DateOfBirth", reader.GetOrdinal("DateOfBirth")},
                         {"Nationality", reader.GetOrdinal("Nationality")},
                         {"Gender", reader.GetOrdinal("Gender")},
-                        {"PhoneNumber", reader.GetOrdinal("PhoneNumber")},
-                        {"Photograph", reader.GetOrdinal("Photograph")},
-                        {"MIME", reader.GetOrdinal("MIME")}
+                        {"PhoneNumber", reader.GetOrdinal("PhoneNumber")}
                     };
 
                     while (await reader.ReadAsync())
@@ -128,9 +126,7 @@ public class EmployeeServices: IEmployeeServices
                             DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(param["DateOfBirth"])),
                             Nationality = reader.GetString(param["Nationality"]),
                             Gender = reader.GetString(param["Gender"]),
-                            PhoneNumber = reader.GetString(param["PhoneNumber"]),
-                            Photograph = await reader.GetFieldValueAsync<byte[]>(param["Photograph"]),
-                            MIME = reader.GetString(param["MIME"])
+                            PhoneNumber = reader.GetString(param["PhoneNumber"])
                         };
 
                         yield return employee;
@@ -142,7 +138,7 @@ public class EmployeeServices: IEmployeeServices
 
     public async Task<bool> DeleteEmployeeByIdAsync(int id)
     {
-        if(id <= 0)
+        if (id <= 0)
         {
             return false;
         }
@@ -150,11 +146,11 @@ public class EmployeeServices: IEmployeeServices
         string query = @"DELETE FROM Employees 
                         WHERE EmployeeId = @EmployeeId";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
@@ -167,25 +163,26 @@ public class EmployeeServices: IEmployeeServices
 
     public async Task<Employee> GetEmployeeByIdAsync(int id)
     {
-        if(id <= 0)
+        if (id <= 0)
         {
             return null!;
         }
-        
+
         Employee employee = new Employee();
-        string query = @"SELECT *
+
+        string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber
                         FROM Employees
                         WHERE EmployeeId = @EmployeeId AND IsCompleted = 1";
 
-        using(SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using(SqlCommand command = new SqlCommand(query, connection))
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
-                using(SqlDataReader reader = await command.ExecuteReaderAsync())
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     Dictionary<string, int> param = new Dictionary<string, int>
                     {
@@ -197,12 +194,10 @@ public class EmployeeServices: IEmployeeServices
                         {"DateOfBirth", reader.GetOrdinal("DateOfBirth")},
                         {"Nationality", reader.GetOrdinal("Nationality")},
                         {"Gender", reader.GetOrdinal("Gender")},
-                        {"PhoneNumber", reader.GetOrdinal("PhoneNumber")},
-                        {"Photograph", reader.GetOrdinal("Photograph")},
-                        {"MIME", reader.GetOrdinal("MIME")}
+                        {"PhoneNumber", reader.GetOrdinal("PhoneNumber")}
                     };
 
-                    if(await reader.ReadAsync())
+                    if (await reader.ReadAsync())
                     {
                         employee.Id = reader.GetInt32(param["EmployeeId"]);
                         employee.FirstName = reader.GetString(param["FirstName"]);
@@ -213,13 +208,52 @@ public class EmployeeServices: IEmployeeServices
                         employee.Nationality = reader.GetString(param["Nationality"]);
                         employee.Gender = reader.GetString(param["Gender"]);
                         employee.PhoneNumber = reader.GetString(param["PhoneNumber"]);
-                        employee.Photograph = await reader.GetFieldValueAsync<byte[]>(param["Photograph"]);
-                        employee.MIME = reader.GetString(param["MIME"]);
                     }
                 }
             }
 
             return employee;
+        }
+    }
+
+    public async Task<bool> EditEmployeeAsync(int id, Employee employee)
+    {
+        if (id <= 0)
+        {
+            return false;
+        }
+
+        List<string> additions = new List<string>();
+        List<SqlParameter> parameters = new List<SqlParameter>();
+
+        if (!string.IsNullOrEmpty(employee.Email) || !string.IsNullOrWhiteSpace(employee.Email))
+        {
+            additions.Add("Email = @Email");
+            parameters.Add(new SqlParameter("@Email", SqlDbType.Int) { Value = employee.Email });
+        }
+
+        if (!string.IsNullOrEmpty(employee.PhoneNumber) || !string.IsNullOrWhiteSpace(employee.PhoneNumber))
+        {
+            additions.Add("PhoneNumber = @PhoneNumber");
+            parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.Int) { Value = employee.PhoneNumber });
+        }
+
+        string query = $@"UPDATE Employees
+                        SET {string.Join(", ", additions)}
+                        WHERE EmployeeId = @EmployeeId";
+
+        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddRange(parameters.ToArray());
+
+                int affectedRows = await command.ExecuteNonQueryAsync();
+
+                return affectedRows > 0;
+            }
         }
     }
 }
