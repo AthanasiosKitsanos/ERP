@@ -85,11 +85,9 @@ public class EmployeeController : Controller
     [HttpGet("details/{id}")]
     public IActionResult Details(int id)
     {
-        Employee employee = new Employee();
+        EmployeeId newId = new EmployeeId(id);
 
-        employee.Id = id;
-
-        return View(employee);
+        return View(newId);
     }
 
     [HttpGet("maindetails/{id}")]
