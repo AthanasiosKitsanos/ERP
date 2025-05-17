@@ -1,5 +1,4 @@
 # Ignoring settings.json to prevent sensitive or machine-specific data from being committed
-**/settings.json
 ErpProject/bin/
 // Removed duplicate entry
 
