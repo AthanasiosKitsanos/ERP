@@ -25,6 +25,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<PhotoServices>();
 
+        services.AddScoped<RolesServices>();
+
         return services;
     }
 }
