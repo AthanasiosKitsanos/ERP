@@ -23,6 +23,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<IdentificationsServices>();
 
+        services.AddScoped<PhotoServices>();
+
         return services;
     }
 }
