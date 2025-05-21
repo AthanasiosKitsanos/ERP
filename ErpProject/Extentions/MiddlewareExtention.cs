@@ -17,7 +17,7 @@ public static class CustomMiddlewareExtention
             context.Response.Redirect("/LogIn/Index");
             return Task.CompletedTask;
         });
-
+ 
         return app;
     }
 }
