@@ -1,0 +1,67 @@
+﻿@using ErpProject.Models
+@model EmploymentDetails
+
+<link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+
+<div>
+    <form method="post" asp-action="Register" asp-route-id="@Model.EmployeeId">
+        @Html.AntiForgeryToken()
+
+        <table>
+            <tbody>
+                <tr>
+                    <td><label><b>Positions:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Position">
+                        <span asp-validation-for="@Model.Position"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Department:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Department">
+                        <span asp-validation-for="@Model.Department"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Employment Status:</b></td>
+                    <td>
+                        <input type="text" asp-for="@Model.EmploymentStatus">
+                        <span asp-validation-for="@Model.EmploymentStatus"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Hire Date:</b></label></td>
+                    <td>
+                        <input type="date" asp-for="@Model.HireDate">
+                        <span asp-validation-for="@Model.HireDate"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Contract Type:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.ContractType">
+                        <span asp-validation-for="@Model.ContractType"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Work Location</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.WorkLocation">
+                        <span asp-validation-for="@Model.WorkLocation"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><button type="post">Save</button></td>
+                    <td><a id="CancelEdForm" href="#">Cancel</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

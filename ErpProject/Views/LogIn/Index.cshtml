@@ -1,0 +1,52 @@
+﻿@using ErpProject.Models
+@model LogIn
+
+@{
+    ViewData["Title"] = "Log In Page";
+}
+
+<link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+
+<div>
+    @if(ViewData.ModelState.ContainsKey(string.Empty))
+    {
+        <div>
+            @ViewData.ModelState[string.Empty]!.Errors[0].ErrorMessage
+        </div>
+    }
+    
+    <h1>Log In Page</h1>
+    <form method="post" asp-action="Index" asp-controller="LogIn">
+        <table>
+            <tbody>
+                <tr>
+                    <td><b>Username:</b></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Username">
+                        <span asp-validation-for="@Model.Username"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Password:</b></td>
+                    <td>
+                        <input type="password" asp-for="@Model.Password">
+                        <span asp-validation-for="@Model.Password"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Remember me <input type="checkbox" asp-for="@Model.RememberMe">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button type="submit">Sign In</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

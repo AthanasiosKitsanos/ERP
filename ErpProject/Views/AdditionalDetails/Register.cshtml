@@ -1,0 +1,53 @@
+﻿@using ErpProject.Models
+@model AdditionalDetails
+
+<link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+
+<div>
+    <form asp-action="Register" asp-route-id="@Model.EmployeeId" enctype="multipart/form-data">
+    
+    @Html.AntiForgeryToken()
+    
+        <table>
+            <tbody>
+                <tr>
+                    <td><label><b>Emergency Numbers:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.EmergencyNumbers">
+                        <span asp-validation-for="@Model.EmergencyNumbers"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Education:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Education">
+                        <span asp-validation-for="@Model.Education"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Certifications:</b></label></td>
+                    <td>
+                        <input type="file" asp-for="@Model.CertificationFile" accept="application/pdf">
+                        <span asp-validation-for="@Model.CertificationFile"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Personal Documents:</b></label></td>
+                    <td>
+                        <input type="file" asp-for="@Model.PersonalDocumentsFile" accept="application/pdf">
+                        <span asp-validation-for="@Model.PersonalDocumentsFile"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><button type="submit">Save</button></td>
+                    <td><a id="CancelAdForm" href="#">Cancel</a></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </form>
+</div>

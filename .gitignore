@@ -1,0 +1,10 @@
+# Ignoring settings.json to prevent sensitive or machine-specific data from being committed
+ErpProject/bin/
+// Removed duplicate entry
+
+TestingProject/
+# Ignoring the obj directory as it contains build artifacts
+ErpProject/obj
+.vscode/launch.json
+ErpProject/reminder.md
+ErpProject/demoSecretKey.json

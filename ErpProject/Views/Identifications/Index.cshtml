@@ -1,0 +1,41 @@
+﻿@using ErpProject.Models
+@model Identifications
+
+<link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+
+<table>
+    <tbody>
+        <tr>
+            <td><b>TIN:</b></td>
+            <td>@Model.TIN</td>
+        </tr>
+
+        <tr>
+            <td><b>Work Authorized:</b></td>
+            @if (Model.WorkAuth)
+            {
+                <td>Yes</td>
+            }
+            else
+            {
+                <td></td>
+            }
+        </tr>
+
+        <tr>
+            <td><b>Tax Information:</b></td>
+            <td>@Model.TaxInformation</td>
+        </tr>
+
+        <tr>
+            @if (string.IsNullOrEmpty(Model.TIN) && string.IsNullOrEmpty(Model.TaxInformation))
+            {
+                <td><a id="IdRegistrationForm" href="#">Add Details</a></td>
+            }
+            else
+            {
+                <td><a id="IdEditForm" href="#">Edit</a></td>
+            }
+        </tr>
+    </tbody>
+</table>

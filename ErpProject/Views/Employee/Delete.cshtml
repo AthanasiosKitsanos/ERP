@@ -1,0 +1,24 @@
+﻿@using ErpProject.Models
+@model Employee
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/CSS/ul/css" asp-append-version="true">
+}
+
+<ul class="delete">
+    <li>
+        You are about to delete @Model.FirstName @Model.LastName
+    </li>
+
+    <li>
+        Are you sure?
+    </li>
+    
+    <li>
+        <form method="post" asp-action="Delete" asp-route-id="@Model.Id">
+            <button type="submit">Delete</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
+    </li>
+</ul>

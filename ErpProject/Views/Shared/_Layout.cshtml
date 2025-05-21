@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,charset initial-scale=1.0">
+        <link rel="icon" type="imgae/png" href="~/images/erp.png">
+        <link rel="stylesheet" href="~/CSS/layout.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/CSS/nav.css" asp-append-version="true">
+        @RenderSection("Styles", required: false)
+        <title>@ViewData["Title"] - Enterpise Resource Planning</title>
+    </head>
+    <body>
+        <header>
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Employee" asp-action="Index">Employees </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <main class="container">
+            @RenderBody()
+        </main>
+
+        <footer>
+            All rights reserved
+        </footer>
+        
+    </body>
+</html>
