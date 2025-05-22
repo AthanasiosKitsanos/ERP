@@ -31,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="JsonWebToken\" />
     <Folder Include="wwwroot\Documents\Certifications\" />
     <Folder Include="wwwroot\Documents\Personal Documents\" />
     <Folder Include="wwwroot\images\" />
