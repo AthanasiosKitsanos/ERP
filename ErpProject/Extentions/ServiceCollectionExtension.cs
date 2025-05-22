@@ -1,6 +1,7 @@
 using ErpProject.Helpers.Connection;
 using ErpProject.Services;
 using ErpProject.BackgroundServices;
+using ErpProject.JsonWebToken;
 
 namespace ErpProject.Extentions;
 
@@ -27,6 +28,20 @@ public static class ServiceCollectionExtension
         services.AddScoped<RolesServices>();
 
         services.AddScoped<LogInServices>();
+
+        services.AddSingleton(sp =>
+        {
+            IConfiguration config = sp.GetRequiredService<IConfiguration>();
+            return new JWTHeader(config);
+        });
+
+        services.AddSingleton(sp =>
+        {
+            IConfiguration config = sp.GetRequiredService<IConfiguration>();
+            return new JWTDemoKey(config);
+        });
+
+        services.AddSingleton<JWTServices>();
 
         return services;
     }
