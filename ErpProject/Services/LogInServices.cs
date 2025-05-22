@@ -74,11 +74,11 @@ public class LogInServices
             return null!;
         }
 
-        string query = @"SELECT EmployeeId, FirstName, LastName, RoleName
-                        FROM Employees
-                        JOIN Credentials ON Credentials.EmployeeId = Employees.EmployeeId
-                        JOIN RoleEmployee ON RoleEmployee.EmployeeId = Employees.EmployeeId
-                        JOIN Roles ON Roles.Id = RoleEmployee.RoleId
+        string query = @"SELECT e.EmployeeId, e.FirstName, e.LastName, r.RoleName
+                        FROM Employees e
+                        JOIN Credentials c ON c.EmployeeId = e.EmployeeId
+                        JOIN RoleEmployee re ON re.EmployeeId = e.EmployeeId
+                        JOIN Roles r ON r.Id = re.RoleId
                         WHERE Username = @Username";
 
         LoggedInData data = new LoggedInData();
