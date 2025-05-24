@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -20,55 +21,72 @@ public class JwtAuthenticationHandler : AuthenticationHandler<AuthenticationSche
 
         if (!Request.Headers.ContainsKey("Authorization"))
         {
-            return AuthenticateResult.NoResult();
+            Logger.LogDebug("No Authorization header was found");
+            return await Task.FromResult(AuthenticateResult.NoResult());
         }
 
-        string authorizationHeader = Request.Headers["Authorization"]!;
+        string authHeader = Request.Headers["Authorization"].ToString();
 
-        if (string.IsNullOrEmpty("authorizationHeader") || !authorizationHeader.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
+        if (!authHeader.StartsWith("Bearer", StringComparison.OrdinalIgnoreCase))
         {
-            return AuthenticateResult.Fail("Invalide Authorazation Format");
+            Logger.LogWarning("Authorization header is not Bearer");
+            return await Task.FromResult(AuthenticateResult.NoResult());
         }
 
-        string token = authorizationHeader.Substring("Bearer".Length).Trim();
+        string token = authHeader.Substring("Bearer".Length).Trim();
 
-        if (string.IsNullOrEmpty(token))
+        string[] parts = token.Split('.');
+
+        string encodedHeader = parts[0];
+        string encodedPayload = parts[1];
+        string ecnodedSignature = parts[2];
+
+        byte[] headerBytes;
+        byte[] payloadBytes;
+
+        try
         {
-            return AuthenticateResult.Fail("Token is missing");
+            headerBytes = Base64UrlDecode(encodedHeader);
+            payloadBytes = Base64UrlDecode(encodedPayload);
         }
-
-        string[] tokenParts = token.Split(".");
-
-        if (tokenParts.Length != 3)
+        catch (FormatException)
         {
-            return AuthenticateResult.Fail("The token must consist of a header, payload and a signature");
+            Logger.LogError("Failed to Base64Url-decode header or payload");
+            return await Task.FromResult(AuthenticateResult.Fail("Invalid token encoding"));
         }
 
-        string headerJson = Base64UrlDecode(tokenParts[0]);
-        string payloadJson = Base64UrlDecode(tokenParts[1]);
-        string signature = tokenParts[2];
+        string headerJson = Encoding.UTF8.GetString(headerBytes);
+        string payloadJason = Encoding.UTF8.GetString(payloadBytes);
 
-        var header = JsonSerializer.Deserialize<Dictionary<string, object>>(headerJson);
-        var payload = JsonSerializer.Deserialize<Dictionary<string, object>>(payloadJson);
+        //TODO: The rest of the jwt reading
 
-        return AuthenticateResult.Fail("Not implemented");
+        return await Task.FromResult(AuthenticateResult.Fail("Not implemented"));
     }
 
-    private static string Base64UrlDecode(string input)
+    private static byte[] Sign(string unsignedToken, string secretKey)
     {
-        string base64 = input.Replace('-', '+').Replace('_', '/');
+        byte[] secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
-        switch (base64.Length % 4)
+        using var hmac = new HMACSHA256(secretKeyBytes);
+
+        return hmac.ComputeHash(Encoding.UTF8.GetBytes(unsignedToken));
+    }
+
+    private static byte[] Base64UrlDecode(string input)
+    {
+        string padded = input.Replace('-', '+').Replace('_', '/');
+
+        switch (padded.Length % 4)
         {
-            case 2: base64 += "==";
+            case 2:
+                padded += "==";
                 break;
 
-            case 3: base64 += "=";
+            case 3:
+                padded += "=";
                 break;
         }
 
-        byte[] bytes = Convert.FromBase64String(base64);
-
-        return Encoding.UTF8.GetString(bytes);
+        return Convert.FromBase64String(padded);
     }
 }
