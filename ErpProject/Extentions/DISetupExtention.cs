@@ -1,3 +1,6 @@
+using ErpProject.JsonWebToken;
+using Microsoft.AspNetCore.Authentication;
+
 namespace ErpProject.Extentions;
 
 public static class DISetupExtention
@@ -8,7 +11,7 @@ public static class DISetupExtention
 
         services.AddAntiforgery();
 
-        services.AddAuthentication();
+        services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", null);
 
         services.AddAuthorization();
 
