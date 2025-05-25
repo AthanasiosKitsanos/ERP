@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
 using ErpProject.Models;
@@ -8,18 +9,34 @@ public class JWTServices
 {
     private readonly JWTHeader _header;
     private readonly JWTDemoKey _key;
+    private readonly ILogger<JWTServices> _logger;
+    private readonly IConfiguration _config;
 
-    public JWTServices(JWTHeader header, JWTDemoKey key)
+    public JWTServices(JWTHeader header, JWTDemoKey key, IConfiguration config, ILogger<JWTServices> logger)
     {
-        _header = header;
         _key = key;
+        _config = config;
+        _header = header;
+        _logger = logger;
     }
 
     public string CreateJWToken(LoggedInData data, bool rememberMe)
     {
-        JWTPayload payload = new JWTPayload(data, rememberMe);
+        JWTPayload payload = new JWTPayload
+        {
+            Id = data.Id,
+            FirstName = data.FirstName,
+            LastName = data.LastName,
+            Role = data.RoleName,
+            Expiration = rememberMe ? DateTimeOffset.UtcNow.AddDays(7).ToUnixTimeSeconds() : DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds()
+        };
 
-        string payloadJson = payload.Serialize();
+        if (payload.Id <= 0 || string.IsNullOrEmpty(payload.FirstName) || string.IsNullOrEmpty(payload.FirstName) || string.IsNullOrEmpty(payload.LastName) || string.IsNullOrEmpty(payload.Role))
+        {
+            _logger.LogInformation($"{payload}");
+        }
+
+         string payloadJson = payload.Serialize();
 
         string headerJson = _header.Serialize();
 
