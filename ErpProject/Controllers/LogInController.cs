@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ErpProject.Controllers;
 
 [Route("login")]
-public class LogInController: Controller
+public class LogInController : Controller
 {
     private readonly LogInServices _services;
     private readonly JWTServices _jwtServices;
@@ -16,7 +16,7 @@ public class LogInController: Controller
         _services = services;
         _jwtServices = jwtServices;
     }
-    
+
     [HttpGet("index")]
     public IActionResult Index()
     {
@@ -53,5 +53,14 @@ public class LogInController: Controller
         });
 
         return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult LogOut()
+    {
+        Response.Cookies.Delete("jwt");
+
+        return RedirectToAction("Index", "LogIn");
     }
 }
