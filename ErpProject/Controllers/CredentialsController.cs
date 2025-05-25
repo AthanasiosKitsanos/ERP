@@ -66,6 +66,6 @@ public class CredentialsController: Controller
             return View(credentials);
         }
 
-        return RedirectToAction("Index", "Employee");
+        return RedirectToAction("Index", "LogIn");
     }
 }
