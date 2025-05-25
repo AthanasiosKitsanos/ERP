@@ -29,11 +29,7 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<LogInServices>();
 
-        services.AddSingleton(sp =>
-        {
-            IConfiguration config = sp.GetRequiredService<IConfiguration>();
-            return new JWTHeader(config);
-        });
+        services.AddSingleton<JWTHeader>();
 
         services.AddSingleton(sp =>
         {
