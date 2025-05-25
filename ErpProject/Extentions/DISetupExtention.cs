@@ -11,7 +11,7 @@ public static class DISetupExtention
 
         services.AddAntiforgery();
 
-        services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", null);
+        services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", options => {});
 
         services.AddAuthorization();
 
