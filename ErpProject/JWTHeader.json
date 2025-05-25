@@ -1,6 +1,0 @@
-{
-    "HeaderSetting":{
-        "algorithm": "HS256",
-        "type": "JWT"
-    }
-}
