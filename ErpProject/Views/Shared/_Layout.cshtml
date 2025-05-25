@@ -6,6 +6,7 @@
         <link rel="icon" type="imgae/png" href="~/images/erp.png">
         <link rel="stylesheet" href="~/CSS/layout.css" asp-append-version="true">
         <link rel="stylesheet" href="~/CSS/nav.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/CSS/btn-as-link.css" asp-append-version="true">
         @RenderSection("Styles", required: false)
         <title>@ViewData["Title"] - Enterpise Resource Planning</title>
     </head>
@@ -19,6 +20,13 @@
 
                     <li>
                         <a asp-controller="Employee" asp-action="Index">Employees </a>
+                    </li>
+
+                    <li>
+                        <form method="post" asp-action="LogOut" asp-controller="LogIn">
+                            @Html.AntiForgeryToken()
+                            <button class="btn-as-link" type="submit">Log out</button>
+                        </form>
                     </li>
                 </ul>
             </div>
