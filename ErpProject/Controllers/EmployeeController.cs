@@ -1,11 +1,13 @@
 using ErpProject.Models;
 using ErpProject.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace ErpProject.Controllers;
 
+[Authorize(AuthenticationSchemes = "ErpJwt")]
 [Route("employee")]
 public class EmployeeController : Controller
 {
@@ -20,6 +22,7 @@ public class EmployeeController : Controller
     }
 
     [Route("index")]
+    [Authorize(Roles = "Owner, Admin")]
     public IActionResult Index()
     {
         return View();
