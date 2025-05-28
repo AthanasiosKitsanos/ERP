@@ -1,9 +1,8 @@
+using System.Security.Claims;
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace ErpProject.Controllers;
 
@@ -81,10 +80,19 @@ public class EmployeeController : Controller
     }
 
     [HttpGet("details/{id}")]
+    [Authorize]
     public IActionResult Details(int id)
     {
         EmployeeId newId = new EmployeeId(id);
 
+        if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee")
+        {
+            if (newId.Id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
+            {
+                return Forbid();
+            }
+        }
+            
         return View(newId);
     }
 
