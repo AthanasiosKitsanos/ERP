@@ -69,22 +69,6 @@ public class JwtAuthenticationHandler : AuthenticationHandler<AuthenticationSche
             Logger.LogWarning("Unsupported or missing JWT algorithm");
             return await Task.FromResult(AuthenticateResult.Fail("Unsupported JWT algorithm"));
         }
-        // JWTHeader header;
-        // try
-        // {
-        //     header = JsonSerializer.Deserialize<JWTHeader>(headerJson)!;
-        // }
-        // catch
-        // {
-        //     Logger.LogError("Failed to deserialize Jwt Header");
-        //     return await Task.FromResult(AuthenticateResult.Fail("Invalid header Json"));
-        // }
-
-        // if (header is null || !string.Equals(header.algorithm, "HS256", StringComparison.OrdinalIgnoreCase))
-        // {
-        //     Logger.LogWarning("Unsupported or missing JWT algorithm");
-        //     return await Task.FromResult(AuthenticateResult.Fail("Unsupported JWT algorithm"));
-        // }
 
         string encodedSignature = parts[2];
 
@@ -213,7 +197,7 @@ public class JwtAuthenticationHandler : AuthenticationHandler<AuthenticationSche
         {
             new Claim(JwtRegisteredClaimNames.Iss, payload.Issuer),
             new Claim(JwtRegisteredClaimNames.Aud, payload.Audience),
-            new Claim(ClaimTypes.NameIdentifier, payload.Id.ToString()),
+            new Claim("UserId", payload.Id.ToString()),
             new Claim(ClaimTypes.GivenName, payload.FirstName),
             new Claim(ClaimTypes.Surname, payload.LastName),
             new Claim(ClaimTypes.Role, payload.Role),
