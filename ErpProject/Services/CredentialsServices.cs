@@ -22,8 +22,8 @@ public class CredentialsServices
             return false;
         }
 
-        string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatusId, EmployeeId)
-                        VALUES (@Username, @Password, @LastLogIn, @AccountStatusId, @EmployeeId);
+        string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatus, EmployeeId)
+                        VALUES (@Username, @Password, @LastLogIn, @AccountStatus, @EmployeeId);
                         UPDATE Employees SET IsCompleted = 1 WHERE EmployeeId = @EmployeeId";
 
         PasswordHasher<Credentials> hasher = new PasswordHasher<Credentials>();
@@ -37,7 +37,7 @@ public class CredentialsServices
                 command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = credentials.Username;
                 command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = hasher.HashPassword(credentials, credentials.Password);
                 command.Parameters.Add("@LastLogIn", SqlDbType.DateTime2).Value = DateTime.Now;
-                command.Parameters.Add("@AccountStatusId", SqlDbType.Int).Value = credentials.AccountStatusId;
+                command.Parameters.Add("@AccountStatus", SqlDbType.NVarChar).Value = credentials.AccountStatus;
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
                 command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
@@ -46,44 +46,6 @@ public class CredentialsServices
                 return affectedRows > 0;
             }
         }
-    }
-
-    public async Task<List<AccountStatus>> GetAccountStatusListAsync()
-    {
-        List<AccountStatus> statusNamesList = new List<AccountStatus>();
-
-        string query = @"SELECT *
-                        FROM AccountStatus";
-
-        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
-        {
-            await connection.OpenAsync();
-
-            await using (SqlCommand command = new SqlCommand(query, connection))
-            {
-                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                {
-                    Dictionary<string, int> param = new Dictionary<string, int>
-                    {
-                        {"Id", reader.GetOrdinal("Id")},
-                        {"StatusName", reader.GetOrdinal("StatusName")}
-                    };
-
-                    while (await reader.ReadAsync())
-                    {
-                        AccountStatus status = new AccountStatus
-                        {
-                            Id = reader.GetInt32(param["Id"]),
-                            StatusName = reader.GetString(param["StatusName"])
-                        };
-
-                        statusNamesList.Add(status);
-                    }
-                }
-            }
-        }
-
-        return statusNamesList;
     }
 
     public async Task<bool> UsernameExistsAsync(string username)
