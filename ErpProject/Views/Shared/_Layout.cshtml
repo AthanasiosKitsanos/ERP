@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -12,22 +14,41 @@
     </head>
     <body>
         <header>
-            <div class="navbar">
+             <div class="navbar">
+                <div class="navbar">
                 <ul>
                     <li>
                         <a asp-controller="Home" asp-action="Index">Home</a>
                     </li>
 
-                    <li>
-                        <a asp-controller="Employee" asp-action="Index">Employees </a>
-                    </li>
+                    @if(User.Identity?.IsAuthenticated == true && ((ClaimsIdentity)User.Identity).Claims.Any())
+                    {
+                        <li>
+                            <b>
+                                <a asp-action="Details" asp-controller="Employee" asp-route-id="@User.FindFirst("UserId")?.Value">
+                                    @User.FindFirst(ClaimTypes.GivenName)?.Value @User.FindFirst(ClaimTypes.Surname)?.Value
+                                </a>
+                            </b>
+                        </li>
 
-                    <li>
-                        <form method="post" asp-action="LogOut" asp-controller="LogIn">
-                            @Html.AntiForgeryToken()
-                            <button class="btn-as-link" type="submit">Log out</button>
-                        </form>
-                    </li>
+                        if(User.FindFirst(ClaimTypes.Role)?.Value != "Employee")
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Employee">Employees</a>
+                            </li>
+                        }
+
+                        <li>
+                            <form method="post" asp-action="LogOut" asp-controller="LogIn">
+                                @Html.AntiForgeryToken()
+                                <button class="btn-as-link" type="submit">Log out</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" asp-controller="LogIn">Log In</a>
+                    }
                 </ul>
             </div>
         </header>
