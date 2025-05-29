@@ -1,4 +1,5 @@
-﻿@using ErpProject.Models
+﻿@using System.Security.Claims
+@using ErpProject.Models
 @model Roles
 
 <link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
@@ -16,15 +17,18 @@
             }
         </tr>
 
-        <tr>
-            @if(string.IsNullOrEmpty(Model.RoleName))
-            {
-                <td><a id="registerRole" href="#">Add Role</a></td>
-            }
-            else
-            {
-                <td><a id="editRole" href="#">Edit</a></td>
-            }
-        </tr>
+        @if(User.Identity!.IsAuthenticated && (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager"))
+        {
+            <tr>
+                @if(string.IsNullOrEmpty(Model.RoleName))
+                {
+                    <td><a id="registerRole" href="#">Add Role</a></td>
+                }
+                else
+                {
+                    <td><a id="editRole" href="#">Edit</a></td>
+                }
+            </tr>
+        }
     </tbody>
 </table>
