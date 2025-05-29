@@ -16,8 +16,7 @@ public class Credentials
     [Compare("Password", ErrorMessage = "Passwords do not match")]
     public string ConfirmPassword { get; set; } = string.Empty;
 
-    public List<AccountStatus> StatusNameList { get; set; } = new List<AccountStatus>();
-    public int AccountStatusId { get; set; }
+    public string AccountStatus { get; set; } = string.Empty;
 
     public int EmployeeId { get; set; }
 }
