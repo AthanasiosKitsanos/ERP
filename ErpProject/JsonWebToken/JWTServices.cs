@@ -20,7 +20,7 @@ public class JWTServices
         _logger = logger;
     }
 
-    public string CreateJWToken(LoggedInData data, bool rememberMe)
+    public string CreateJWToken(LoggedInData data)
     {
         JWTPayload payload = new JWTPayload
         {
@@ -28,7 +28,7 @@ public class JWTServices
             FirstName = data.FirstName,
             LastName = data.LastName,
             Role = data.RoleName,
-            Expiration = rememberMe ? DateTimeOffset.UtcNow.AddDays(7).ToUnixTimeSeconds() : DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds()
+            Expiration = DateTimeOffset.UtcNow.AddMinutes(5).ToUnixTimeSeconds()
         };
 
         if (payload.Id <= 0 || string.IsNullOrEmpty(payload.FirstName) || string.IsNullOrEmpty(payload.FirstName) || string.IsNullOrEmpty(payload.LastName) || string.IsNullOrEmpty(payload.Role))
