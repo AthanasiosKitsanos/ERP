@@ -17,7 +17,7 @@ public class CredentialsController: Controller
     }
 
     [HttpGet("index/{id}")]
-    public async Task<IActionResult> Index(int id)
+    public IActionResult Index(int id)
     {
         if (id <= 0)
         {
@@ -25,17 +25,7 @@ public class CredentialsController: Controller
             return View();
         }
 
-        Credentials credentials = new Credentials();
-
-        credentials.StatusNameList = await _service.GetAccountStatusListAsync();
-
-        if (credentials.StatusNameList is null || credentials.StatusNameList.Count == 0)
-        {
-            ModelState.AddModelError("Status List", "Something went wrong while loading the status list");
-            return View();
-        }
-
-        return View(credentials);
+        return View();
     }
 
     [HttpPost("index/{id}")]
@@ -51,13 +41,11 @@ public class CredentialsController: Controller
         if (await _service.UsernameExistsAsync(credentials.Username))
         {
             ModelState.AddModelError("Username", "Username already exists!");
-            credentials.StatusNameList = await _service.GetAccountStatusListAsync();
             return View(credentials);
         }
 
         if (!ModelState.IsValid)
         {
-            credentials.StatusNameList = await _service.GetAccountStatusListAsync();
             return View(credentials);
         }
 
