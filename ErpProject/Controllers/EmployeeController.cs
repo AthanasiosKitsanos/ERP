@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ErpProject.Controllers;
 
-[Authorize(AuthenticationSchemes = "ErpJwt")]
+[Authorize]
 [Route("employee")]
 public class EmployeeController : Controller
 {
@@ -21,13 +21,14 @@ public class EmployeeController : Controller
     }
 
     [Route("index")]
-    [Authorize(Roles = "Owner, Admin")]
+    [Authorize(Roles = "Owner, Admin, Manager")]
     public IActionResult Index()
     {
         return View();
     }
 
     [HttpGet("getallemployees")]
+    [Authorize(Roles = "Owner, Admin, Manager")]
     public async Task<IActionResult> GetAllEmployees()
     {
         List<Employee> employeesList = new List<Employee>();
@@ -46,6 +47,7 @@ public class EmployeeController : Controller
     }
 
     [HttpGet("register")]
+    [Authorize(Roles = "Admin, Manager")]
     public IActionResult Register()
     {
         return View();
@@ -53,6 +55,7 @@ public class EmployeeController : Controller
 
     [HttpPost("register")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Register(Employee employee)
     {
         if (!ModelState.IsValid)
@@ -80,19 +83,17 @@ public class EmployeeController : Controller
     }
 
     [HttpGet("details/{id}")]
-    [Authorize]
     public IActionResult Details(int id)
     {
+        if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee" && id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
+        {
+            EmployeeId realId = new EmployeeId(Convert.ToInt32(User.FindFirst("UserId")?.Value));
+
+            return View(realId);
+        }
+        
         EmployeeId newId = new EmployeeId(id);
 
-        if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee")
-        {
-            if (newId.Id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
-            {
-                return Forbid();
-            }
-        }
-            
         return View(newId);
     }
 
@@ -104,12 +105,18 @@ public class EmployeeController : Controller
             return NotFound("No employee was found");
         }
 
-        Employee employee = await _service.GetEmployeeByIdAsync(id);
+        if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee" && id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
+        {
+            Employee realEmployee = await _service.GetEmployeeByIdAsync(Convert.ToInt32(User.FindFirst("UserId")?.Value));    
+            return PartialView(realEmployee);   
+        }
 
+        Employee employee = await _service.GetEmployeeByIdAsync(id);
         return PartialView(employee);
     }
 
     [HttpGet("delete/{id}")]
+    [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Delete(int id)
     {
         if (id <= 0)
@@ -131,7 +138,9 @@ public class EmployeeController : Controller
         return View(employee);
     }
 
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPost("delete/{id}")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {
         bool result = await _service.DeleteEmployeeByIdAsync(id);
@@ -144,6 +153,7 @@ public class EmployeeController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize(Roles = "Admin, Manager")]
     [HttpGet("edit/{id}")]
     public async Task<IActionResult> Edit(int id)
     {
@@ -161,6 +171,7 @@ public class EmployeeController : Controller
         return PartialView(employee);
     }
 
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPost("edit/{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Employee employee)
