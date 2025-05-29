@@ -26,11 +26,11 @@ public class LogInController : Controller
     [HttpPost("index")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(LogIn login)
-    {
+    {   
         if (!ModelState.IsValid)
-        {
-            return View();
-        }
+            {
+                return View();
+            }
 
         bool logInSuccess = await _services.LogInAsync(login);
 
@@ -42,7 +42,7 @@ public class LogInController : Controller
 
         LoggedInData data = await _services.GetLoggedInDataAsync(login.Username);
 
-        string token = _jwtServices.CreateJWToken(data, login.RememberMe);
+        string token = _jwtServices.CreateJWToken(data);
 
         HttpContext.Response.Cookies.Append("jwt", token, new CookieOptions
         {
