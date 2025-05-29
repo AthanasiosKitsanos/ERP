@@ -1,9 +1,12 @@
+using System.Security.Claims;
 using ErpProject.Models;
 using ErpProject.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpProject.Controllers;
 
+[Authorize]
 [Route("roles")]
 public class RolesController : Controller
 {
@@ -22,12 +25,19 @@ public class RolesController : Controller
             return NotFound("There was no employee found");
         }
 
+        if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee" && id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
+        {
+            Roles realRole = await _services.GetEmployeeRoleAsync(Convert.ToInt32(User.FindFirst("UserId")?.Value));
+            return PartialView(realRole);
+        }
+
         Roles role = await _services.GetEmployeeRoleAsync(id);
 
         return PartialView(role);
     }
 
     [HttpGet("edit/{id}")]
+    [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Edit(int id)
     {
         if (id <= 0)
@@ -48,6 +58,7 @@ public class RolesController : Controller
     }
 
     [HttpPost("edit/{id}")]
+    [Authorize(Roles = "Admin, Manager")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, RolesList role)
     {
@@ -72,6 +83,7 @@ public class RolesController : Controller
     }
 
     [HttpGet("register/{id}")]
+    [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Register(int id)
     {
         if (id <= 0)
@@ -91,6 +103,7 @@ public class RolesController : Controller
         return PartialView(roles);
     }
 
+    [Authorize(Roles = "Admin, Manager")]
     [HttpPost("register/{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(int id, RolesList role)
