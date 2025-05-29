@@ -14,7 +14,7 @@ public static class CustomMiddlewareExtention
 
         app.MapGet("/", context =>
         {
-            context.Response.Redirect("/LogIn/Index"); 
+            context.Response.Redirect("/Home/Index"); 
             return Task.CompletedTask;
         });
  
