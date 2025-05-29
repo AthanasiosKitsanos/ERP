@@ -1,0 +1,49 @@
+﻿@using ErpProject.Models
+@model Identifications
+
+<link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
+
+<div>
+    <form asp-action="Edit" asp-controller="Identifications" asp-route-id="@Model.EmployeeId">
+        @Html.AntiForgeryToken()
+
+        <table>
+            <tbody>
+                <tr>
+                    <td><b>TIN:</b></td>
+                    <td>
+                        <input type="text" asp-for="@Model.TIN">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Work Authorized:</b></td>
+                    <td>
+                        <select asp-for="@Model.WorkAuth">
+                            <option value="" disabled>--Select--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Tax Information:</b></td>
+                    <td>
+                        <input type="text" asp-for="@Model.TaxInformation">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button type="submit">Save</button>
+                    </td>
+
+                    <td>
+                        <a id="CancelIdForm" href="#">Cancel</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
