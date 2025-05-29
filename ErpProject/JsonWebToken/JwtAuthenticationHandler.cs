@@ -60,8 +60,6 @@ public class JwtAuthenticationHandler : AuthenticationHandler<AuthenticationSche
         string headerJson = Encoding.UTF8.GetString(headerBytes);
         string payloadJson = Encoding.UTF8.GetString(payloadBytes);
 
-        //TODO: The rest of the jwt reading
-
         JWTHeader header = HeaderDeserializer(headerJson);
 
         if (header is null)
