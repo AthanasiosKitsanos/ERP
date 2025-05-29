@@ -1,4 +1,5 @@
-﻿@using ErpProject.Models
+﻿@using System.Security.Claims
+@using ErpProject.Models
 @model AdditionalDetails
 
 <link rel="stylesheet" href="~/CSS/update.css" asp-append-version="true">
@@ -19,16 +20,19 @@
             <td><b>Documents:</b></td>
             <td><a asp-action="Index" asp-controller="GeneralDocuments">Go to Page</a></td>
         </tr>
-
-        <tr>
-            @if (string.IsNullOrEmpty(Model.Education) && string.IsNullOrEmpty(Model.EmergencyNumbers))
-            {
-                <td><a id="AdRegistrationForm" href="#">Add Details</a></td>
-            }
-            else
-            {
-                <td><a id="AdEditForm" href="#">Edit</a></td>
-            }
-        </tr>
+        
+        @if(User.Identity!.IsAuthenticated && (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager"))
+        {
+            <tr>
+                @if (string.IsNullOrEmpty(Model.Education) && string.IsNullOrEmpty(Model.EmergencyNumbers))
+                {
+                    <td><a id="AdRegistrationForm" href="#">Add Details</a></td>
+                }
+                else
+                {
+                    <td><a id="AdEditForm" href="#">Edit</a></td>
+                }
+            </tr>
+        }
     </tbody>
 </table>
