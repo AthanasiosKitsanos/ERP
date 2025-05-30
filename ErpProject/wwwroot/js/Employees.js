@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function()
 {
     const tbody = document.getElementById('employeeTable');
 
-        fetch('/Employee/GetAllEmployees')
+        fetch('/employees/getallemployees')
         .then(response => response.json())
         .then(data => {
             data.forEach(e => {
@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", async function()
                                 <td>${e.nationality}</td>
                                 <td>${e.gender}</td>
                                 <td>${e.phoneNumber}</td>
-                                <td><a href="/employee/details/${e.id}">Details</a></td>
-                                <td><a href="/employee/delete/${e.id}">Delete</a></td>`;
+                                <td><a href="/employees/${e.id}/details">Details</a></td>
+                                <td><a href="/employees/${e.id}/delete">Delete</a></td>`;
                 
                 tbody.appendChild(tr);
             });
