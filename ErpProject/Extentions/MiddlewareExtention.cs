@@ -6,12 +6,14 @@ public static class CustomMiddlewareExtention
     {
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+        app.UseHttpMethodOverride(new HttpMethodOverrideOptions
+        {
+            FormFieldName = "_method"
+        });
         app.UseRouting();
-        app.UseAntiforgery();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-
         app.MapGet("/", context =>
         {
             context.Response.Redirect("/Home/Index");
