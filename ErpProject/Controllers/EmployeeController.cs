@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace ErpProject.Controllers;
 
 [Authorize]
-[Route("employee")]
-public class EmployeeController : Controller
+[Route("employees")]
+public class EmployeesController : Controller
 {
     private readonly EmployeeServices _service;
 
-    private readonly ILogger<EmployeeController> _logger;
+    private readonly ILogger<EmployeesController> _logger;
 
-    public EmployeeController(EmployeeServices service, ILogger<EmployeeController> logger)
+    public EmployeesController(EmployeeServices service, ILogger<EmployeesController> logger)
     {
         _service = service;
         _logger = logger;
@@ -82,7 +82,7 @@ public class EmployeeController : Controller
         return RedirectToAction("Index", "Credentials", new { id });
     }
 
-    [HttpGet("details/{id}")]
+    [HttpGet("{id}/details")]
     public IActionResult Details(int id)
     {
         if (User.FindFirst(ClaimTypes.Role)?.Value == "Employee" && id != Convert.ToInt32(User.FindFirst("UserId")?.Value))
@@ -97,7 +97,7 @@ public class EmployeeController : Controller
         return View(newId);
     }
 
-    [HttpGet("maindetails/{id}")]
+    [HttpGet("{id}/maindetails")]
     public async Task<IActionResult> MainDetails(int id)
     {
         if (id <= 0)
@@ -115,7 +115,7 @@ public class EmployeeController : Controller
         return PartialView(employee);
     }
 
-    [HttpGet("delete/{id}")]
+    [HttpGet("{id}/delete")]
     [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -139,7 +139,7 @@ public class EmployeeController : Controller
     }
 
     [Authorize(Roles = "Admin, Manager")]
-    [HttpPost("delete/{id}")]
+    [HttpDelete("{id}/delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {
@@ -154,7 +154,7 @@ public class EmployeeController : Controller
     }
 
     [Authorize(Roles = "Admin, Manager")]
-    [HttpGet("edit/{id}")]
+    [HttpGet("{id}/edit")]
     public async Task<IActionResult> Edit(int id)
     {
         if (id <= 0)
@@ -172,7 +172,7 @@ public class EmployeeController : Controller
     }
 
     [Authorize(Roles = "Admin, Manager")]
-    [HttpPost("edit/{id}")]
+    [HttpPut("{id}/edit")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Employee employee)
     {
