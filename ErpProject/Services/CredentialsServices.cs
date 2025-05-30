@@ -24,6 +24,7 @@ public class CredentialsServices
 
         string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatus, EmployeeId)
                         VALUES (@Username, @Password, @LastLogIn, @AccountStatus, @EmployeeId);
+
                         UPDATE Employees SET IsCompleted = 1 WHERE EmployeeId = @EmployeeId";
 
         PasswordHasher<Credentials> hasher = new PasswordHasher<Credentials>();
@@ -32,18 +33,29 @@ public class CredentialsServices
         {
             await connection.OpenAsync();
 
-            await using (SqlCommand command = new SqlCommand(query, connection))
+            await using (SqlTransaction transaction = connection.BeginTransaction())
             {
-                command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = credentials.Username;
-                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = hasher.HashPassword(credentials, credentials.Password);
-                command.Parameters.Add("@LastLogIn", SqlDbType.DateTime2).Value = DateTime.Now;
-                command.Parameters.Add("@AccountStatus", SqlDbType.NVarChar).Value = credentials.AccountStatus;
-                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
-                command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                await using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                {
+                    command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = credentials.Username;
+                    command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = hasher.HashPassword(credentials, credentials.Password);
+                    command.Parameters.Add("@LastLogIn", SqlDbType.DateTime2).Value = DateTime.Now;
+                    command.Parameters.Add("@AccountStatus", SqlDbType.NVarChar).Value = credentials.AccountStatus;
+                    command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
 
-                int affectedRows = await command.ExecuteNonQueryAsync();
-
-                return affectedRows > 0;
+                    try
+                    {
+                        int affectedRows = await command.ExecuteNonQueryAsync();
+                        await transaction.CommitAsync();
+                        return affectedRows > 0;
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        return false;
+                    }
+                }
             }
         }
     }
