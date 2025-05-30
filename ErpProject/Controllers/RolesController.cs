@@ -69,17 +69,17 @@ public class RolesController : Controller
 
         if (!ModelState.IsValid)
         {
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
         bool result = await _services.EditRoleAsync(id, role.SelectedRoleId);
 
         if (!result)
         {
-            return PartialView("Edit", id);
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 
     [HttpGet("register/{id}")]
@@ -115,16 +115,16 @@ public class RolesController : Controller
 
         if (!ModelState.IsValid)
         {
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
         bool result = await _services.AddRoleToEmployeeAsync(id, role.SelectedRoleId);
 
         if (!result)
         {
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 }
