@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function()
 
     let container = document.getElementById("employeeDetailsContainer");
 
-    let response = await fetch(`/Employee/MainDetails/${Id}`);
+    let response = await fetch(`/Employees/${Id}/MainDetails`);
 
     let html = await response.text();
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async function()
             {
                 event.preventDefault();
 
-                response = await fetch(`/Employee/Edit/${Id}`);
+                response = await fetch(`/Employees/${Id}/Edit`);
 
                 html = await response.text();
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function()
             {
                 e.preventDefault();
 
-                response = await fetch(`/Employee/MainDetails/${Id}`);
+                response = await fetch(`/Employees/${Id}/MainDetails`);
 
                 html = await response.text();
 
