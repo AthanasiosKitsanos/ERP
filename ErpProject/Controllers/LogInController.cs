@@ -42,6 +42,11 @@ public class LogInController : Controller
 
         LoggedInData data = await _services.GetLoggedInDataAsync(login.Username);
 
+        if (data is null)
+        {
+            return NotFound("No data recieved");
+        }
+
         string token = _jwtServices.CreateJWToken(data);
 
         HttpContext.Response.Cookies.Append("jwt", token, new CookieOptions
