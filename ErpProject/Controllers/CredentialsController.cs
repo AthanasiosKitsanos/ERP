@@ -16,7 +16,7 @@ public class CredentialsController: Controller
         _service = service;
     }
 
-    [HttpGet("index/{id}")]
+    [HttpGet("{id}")]
     public IActionResult Index(int id)
     {
         if (id <= 0)
@@ -25,10 +25,15 @@ public class CredentialsController: Controller
             return View();
         }
 
-        return View();
+        Credentials credentials = new Credentials
+        {
+            EmployeeId = id
+        };
+
+        return View(credentials);
     }
 
-    [HttpPost("index/{id}")]
+    [HttpPost("{id}")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Index(int id, Credentials credentials)
     {
@@ -55,6 +60,6 @@ public class CredentialsController: Controller
             return View(credentials);
         }
 
-        return RedirectToAction("Index", "LogIn");
+        return RedirectToAction("Index", "Employees");
     }
 }
