@@ -59,6 +59,7 @@ public class EmployeeServices
 
         string query = @"INSERT INTO Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Photograph, MIME, CreatedAt)
                         VALUES (@FirstName, @LastName, @Email, @Age, @DateOfBirth, @Nationality, @Gender, @PhoneNumber, @Photograph, @MIME, @CreatedAt);
+                        
                         SELECT CAST(SCOPE_IDENTITY() AS INT)";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
