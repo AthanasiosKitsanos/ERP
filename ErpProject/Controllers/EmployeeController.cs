@@ -181,11 +181,6 @@ public class EmployeesController : Controller
             return BadRequest("Invalid employee data");
         }
 
-        if (!ModelState.IsValid)
-        {
-            return PartialView("Edit", employee);
-        }
-
         bool result = await _service.EditEmployeeAsync(id, employee);
 
         if (!result)
@@ -194,6 +189,6 @@ public class EmployeesController : Controller
             return PartialView("Index", employee);
         }
 
-        return PartialView("Details", employee);
+        return RedirectToAction("Details", new { id });
     }
 }
