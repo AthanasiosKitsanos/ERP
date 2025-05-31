@@ -17,7 +17,7 @@ public class AdditionalDetailsController: Controller
         _service = service;
     }
 
-    [HttpGet("index/{id}")]
+    [HttpGet("{id}/index")]
     public async Task<IActionResult> Index(int id)
     {
         if (id <= 0)
@@ -48,14 +48,14 @@ public class AdditionalDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpGet("register/{id}")]
+    [HttpGet("{id}/register")]
     [Authorize(Roles = "Admin, Manager")]
     public IActionResult Register(int id)
     {
         if (id <= 0)
         {
             ModelState.AddModelError(string.Empty, "The was no employee found");
-            return RedirectToAction("Details", "Employee");
+            return RedirectToAction("Details", "Employees");
         }
 
         AdditionalDetails details = new AdditionalDetails()
@@ -66,7 +66,7 @@ public class AdditionalDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpPost("register/{id}")]
+    [HttpPost("{id}/register")]
     [ValidateAntiForgeryToken]
     [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Register(int id, AdditionalDetails details)
@@ -86,20 +86,20 @@ public class AdditionalDetailsController: Controller
         if (!result)
         {
             ModelState.AddModelError(string.Empty, "There was a problem while adding the new details or files.");
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 
-    [HttpGet("edit/{id}")]
+    [HttpGet("{id}/edit")]
     [Authorize(Roles = "Admin, Manager")]
     public IActionResult Edit(int id)
     {
         if (id <= 0)
         {
             ModelState.AddModelError(string.Empty, "The was no employee found");
-            return RedirectToAction("Details", "Employee");
+            return RedirectToAction("Index", "Home");
         }
 
         AdditionalDetails details = new AdditionalDetails()
@@ -110,7 +110,7 @@ public class AdditionalDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpPost("edit/{id}")]
+    [HttpPut("{id}/edit")]
     [ValidateAntiForgeryToken]
     [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Edit(int id, AdditionalDetails details)
@@ -124,9 +124,9 @@ public class AdditionalDetailsController: Controller
 
         if (!result)
         {
-            return RedirectToAction("Detials", "Employee", new { id });
+            return RedirectToAction("Detials", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 }
