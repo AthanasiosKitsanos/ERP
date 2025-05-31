@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using System.Threading.Tasks;
+using ErpProject.Helpers;
 using ErpProject.Models;
 using ErpProject.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +18,7 @@ public class IdentificationsController : Controller
         _services = services;
     }
 
-    [HttpGet("index/{id}")]
+    [HttpGet("{id}/index")]
     public async Task<IActionResult> Index(int id)
     {
         if (id <= 0)
@@ -39,8 +39,8 @@ public class IdentificationsController : Controller
     }
 
     [Authorize(Roles = "Admin, Manager")]
-    [HttpGet("register/{id}")]
-    public async Task<IActionResult> Register(int id)
+    [HttpGet("{id}/register")]
+    public IActionResult Register(int id)
     {
         if (id <= 0)
         {
@@ -55,12 +55,12 @@ public class IdentificationsController : Controller
     }
 
     [Authorize(Roles = "Admin, Manager")]
-    [HttpPost("register/{id}")]
+    [HttpPost("{id}/register")]
     public async Task<IActionResult> Register(int id, Identifications identifications)
     {
         if (!ModelState.IsValid)
         {
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
         if (id <= 0)
@@ -68,17 +68,33 @@ public class IdentificationsController : Controller
             return NotFound();
         }
 
+        bool IsValidTin = await TinValidation.IsValidTin(identifications.TIN);
+
+        if (!IsValidTin)
+        {
+            ModelState.AddModelError("TIN", "The TIN number is not valid");
+            return RedirectToAction("Details", "Employees", new { id });
+        }
+
+        bool tinExists = await _services.TinExistsAsync(identifications.TIN);
+
+        if (tinExists)
+        {
+            ModelState.AddModelError("TIN", "The TIN number is not valid");
+            return RedirectToAction("Details", "Employees", new { id });
+        }
+
         bool result = await _services.AddIdentificationsAsync(id, identifications);
 
         if (!result)
         {
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 
-    [HttpGet("edit/{id}")]
+    [HttpGet("{id}/edit")]
     [Authorize(Roles = "Admin, Manager")]
     public IActionResult Edit(int id)
     {
@@ -94,7 +110,7 @@ public class IdentificationsController : Controller
         return PartialView(identifications);
     }
 
-    [HttpPost("edit/{id}")]
+    [HttpPut("{id}/edit")]
     [Authorize(Roles = "Admin, Manager")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Identifications identifications)
@@ -104,14 +120,29 @@ public class IdentificationsController : Controller
             return NotFound();
         }
 
+        bool IsValidTin = await TinValidation.IsValidTin(identifications.TIN);
+
+        if (!IsValidTin)
+        {
+            ModelState.AddModelError("TIN", "The TIN number is not valid");
+            return RedirectToAction("Details", "Employees", new { id });
+        }
+
+        bool tinExists = await _services.TinExistsAsync(identifications.TIN);
+
+        if (tinExists)
+        {
+            ModelState.AddModelError("TIN", "The TIN number is not valid");
+            return RedirectToAction("Details", "Employees", new { id });
+        }
+
         bool result = await _services.EditIdentificationsAsync(id, identifications);
 
         if (!result)
         {
-            //return RedirectToAction("Details", "Employee", new { id });
-            return NotFound();
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 }
