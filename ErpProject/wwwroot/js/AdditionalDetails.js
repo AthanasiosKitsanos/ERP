@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function()
 {
     const Id = window.Id;
 
-    let response = await fetch(`/additionalDetails/index/${Id}`);
+    let response = await fetch(`/additionalDetails/${Id}/index`);
 
     let html = await response.text();
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function()
             {
                 event.preventDefault();
 
-                response = await fetch(`/additionalDetails/register/${Id}`);
+                response = await fetch(`/additionalDetails/${Id}/register`);
 
                 html = await response.text();
 
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async function()
             {
                 event.preventDefault();
             
-                response = await fetch(`/additionalDetails/edit/${Id}`);
+                response = await fetch(`/additionalDetails/${Id}/edit`);
 
                 html = await response.text();
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function()
             {
                 event.preventDefault();
 
-                response = await fetch(`/AdditionalDetails/Index/${Id}`);
+                response = await fetch(`/AdditionalDetails/${Id}/Index`);
 
                 html = await response.text();
 
