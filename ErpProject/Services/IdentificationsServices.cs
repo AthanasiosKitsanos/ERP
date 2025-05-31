@@ -60,11 +60,11 @@ public class IdentificationsServices
         string query = @"INSERT INTO Identifications (TIN, WorkAuth, TaxInformation, EmployeeId)
                         VALUES (@TIN, @WorkAuth, @TaxInformation, @EmployeeId)";
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@TIN", SqlDbType.NVarChar).Value = identifications.TIN;
                 command.Parameters.Add("@WorkAuth", SqlDbType.NVarChar).Value = identifications.WorkAuth;
@@ -93,13 +93,13 @@ public class IdentificationsServices
             additions.Add("TIN = @TIN");
             parameters.Add(new SqlParameter("@TIN", SqlDbType.NVarChar) { Value = identifications.TIN });
         }
-        
+
         if (!string.IsNullOrEmpty(identifications.WorkAuth) || !string.IsNullOrWhiteSpace(identifications.WorkAuth))
         {
             additions.Add("WorkAuth = @WorkAuth");
             parameters.Add(new SqlParameter("@WorkAuth", SqlDbType.NVarChar) { Value = identifications.WorkAuth });
         }
-        
+
         if (!string.IsNullOrEmpty(identifications.TaxInformation) || !string.IsNullOrWhiteSpace(identifications.TaxInformation))
         {
             additions.Add("TaxInformation = @TaxInformation");
@@ -110,11 +110,11 @@ public class IdentificationsServices
                         SET {string.Join(", ", additions)}
                         WHERE EmployeeId = @EmployeeId";
 
-        using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
             await connection.OpenAsync();
 
-            using (SqlCommand command = new SqlCommand(query, connection))
+            await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
                 command.Parameters.AddRange(parameters.ToArray());
@@ -122,6 +122,32 @@ public class IdentificationsServices
                 int affectedRows = await command.ExecuteNonQueryAsync();
 
                 return affectedRows > 0;
+            }
+        }
+    }
+
+    public async Task<bool> TinExistsAsync(string tin)
+    {
+        if (string.IsNullOrEmpty(tin))
+        {
+            return false;
+        }
+
+        string query = @"SELECT COUNT(*)
+                        FROM Identifications
+                        WHERE TIN = @TIN";
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@TIN", SqlDbType.NVarChar).Value = tin;
+
+                int count = Convert.ToInt32(await command.ExecuteScalarAsync());
+
+                return count > 0;
             }
         }
     }
