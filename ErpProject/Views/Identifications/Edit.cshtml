@@ -6,7 +6,8 @@
 <div>
     <form asp-action="Edit" asp-controller="Identifications" asp-route-id="@Model.EmployeeId">
         @Html.AntiForgeryToken()
-
+        
+        <input type="hidden" name="_method" value="PUT">
         <table>
             <tbody>
                 <tr>
