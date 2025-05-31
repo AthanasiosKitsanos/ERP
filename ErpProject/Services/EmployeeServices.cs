@@ -229,13 +229,13 @@ public class EmployeeServices
         if (!string.IsNullOrEmpty(employee.Email) || !string.IsNullOrWhiteSpace(employee.Email))
         {
             additions.Add("Email = @Email");
-            parameters.Add(new SqlParameter("@Email", SqlDbType.Int) { Value = employee.Email });
+            parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar) { Value = employee.Email });
         }
 
         if (!string.IsNullOrEmpty(employee.PhoneNumber) || !string.IsNullOrWhiteSpace(employee.PhoneNumber))
         {
             additions.Add("PhoneNumber = @PhoneNumber");
-            parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.Int) { Value = employee.PhoneNumber });
+            parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.NVarChar) { Value = employee.PhoneNumber });
         }
 
         string query = $@"UPDATE Employees
@@ -248,6 +248,7 @@ public class EmployeeServices
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
                 command.Parameters.AddRange(parameters.ToArray());
 
                 int affectedRows = await command.ExecuteNonQueryAsync();
