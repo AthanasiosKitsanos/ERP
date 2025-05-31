@@ -68,17 +68,7 @@ public class IdentificationsController : Controller
             return NotFound();
         }
 
-        bool IsValidTin = await TinValidation.IsValidTin(identifications.TIN);
-
-        if (!IsValidTin)
-        {
-            ModelState.AddModelError("TIN", "The TIN number is not valid");
-            return RedirectToAction("Details", "Employees", new { id });
-        }
-
-        bool tinExists = await _services.TinExistsAsync(identifications.TIN);
-
-        if (tinExists)
+        if (!await TinValidation.IsValidTin(identifications.TIN) || await _services.TinExistsAsync(identifications.TIN))
         {
             ModelState.AddModelError("TIN", "The TIN number is not valid");
             return RedirectToAction("Details", "Employees", new { id });
@@ -120,17 +110,7 @@ public class IdentificationsController : Controller
             return NotFound();
         }
 
-        bool IsValidTin = await TinValidation.IsValidTin(identifications.TIN);
-
-        if (!IsValidTin)
-        {
-            ModelState.AddModelError("TIN", "The TIN number is not valid");
-            return RedirectToAction("Details", "Employees", new { id });
-        }
-
-        bool tinExists = await _services.TinExistsAsync(identifications.TIN);
-
-        if (tinExists)
+        if (!await TinValidation.IsValidTin(identifications.TIN) || await _services.TinExistsAsync(identifications.TIN))
         {
             ModelState.AddModelError("TIN", "The TIN number is not valid");
             return RedirectToAction("Details", "Employees", new { id });
