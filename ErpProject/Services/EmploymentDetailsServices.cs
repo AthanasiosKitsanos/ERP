@@ -125,7 +125,7 @@ public class EmploymentDetailsServices
 
         if(!string.IsNullOrEmpty(details.WorkLocation) && !string.IsNullOrWhiteSpace(details.WorkLocation))
         {
-            additions.Add("WorkLocation = @WorkLocations");
+            additions.Add("WorkLocation = @WorkLocation");
             parameters.Add(new SqlParameter("@WorkLocation", SqlDbType.NVarChar){Value = details.WorkLocation});
         }
 
