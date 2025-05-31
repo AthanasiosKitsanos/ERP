@@ -17,7 +17,7 @@ public class EmploymentDetailsController: Controller
         _services = services;
     }
 
-    [HttpGet("index/{id}")]
+    [HttpGet("{id}/index")]
     public async Task<IActionResult> Index(int id)
     {
         if (id <= 0)
@@ -38,7 +38,7 @@ public class EmploymentDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpGet("register/{id}")]
+    [HttpGet("{id}/register")]
     [Authorize(Roles = "Admin, Manager")]
     public IActionResult Register(int id)
     {
@@ -55,7 +55,7 @@ public class EmploymentDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpPost("register/{id}")]
+    [HttpPost("{id}/register")]
     [ValidateAntiForgeryToken]
     [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Register(int id, EmploymentDetails details)
@@ -75,20 +75,20 @@ public class EmploymentDetailsController: Controller
         if (!result)
         {
             ModelState.AddModelError(string.Empty, "There was a problem with saving your details");
-            return RedirectToAction("Details", "Employee", new { id });
+            return RedirectToAction("Details", "Employees", new { id });
         }
 
-        return RedirectToAction("Details", "Employee", new { id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 
-    [HttpGet("edit/{id}")]
+    [HttpGet("{id}/edit")]
     [Authorize(Roles = "Admin, Manager")]
     public IActionResult Edit(int id)
     {
         if (id <= 0)
         {
             ModelState.AddModelError("id", "There was an error while searching for this employee's details");
-            return PartialView("Details", id);
+            return PartialView("Index", "Home");
         }
 
         EmploymentDetails details = new EmploymentDetails()
@@ -99,7 +99,7 @@ public class EmploymentDetailsController: Controller
         return PartialView(details);
     }
 
-    [HttpPost("edit/{id}")]
+    [HttpPut("{id}/edit")]
     [ValidateAntiForgeryToken]
     [Authorize(Roles = "Admin, Manager")]
     public async Task<IActionResult> Edit(int id, EmploymentDetails details)
