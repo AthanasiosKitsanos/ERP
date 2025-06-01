@@ -44,7 +44,7 @@ public class LogInController : Controller
             return View();
         }
 
-        LoggedInData data = await _services.GetLoggedInDataAsync(login.Username);
+        LoggedInData data = await _services.GetLoggedInDataByUsernameAsync(login.Username);
 
         if (data is null)
         {
