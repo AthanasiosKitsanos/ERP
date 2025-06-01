@@ -1,6 +1,6 @@
 using System.Data;
-using System.Security.Cryptography;
 using ErpProject.Helpers.Connection;
+using ErpProject.RefreshTokens.Models;
 using Microsoft.Data.SqlClient;
 
 namespace ErpProject.RefreshTokens;
@@ -14,11 +14,15 @@ public class RefreshTokenServices
         _connection = connection;
     }
 
-    public async Task CreateRefreshToken(int employeeId, string ipAddress)
+    public async Task<bool> GenerateRefreshTokenAsync(int id, string ipAddress, bool rememberMe)
     {
+        if (id <= 0 || string.IsNullOrEmpty(ipAddress))
+        {
+            return false;
+        }
 
-        string query = @"INSERT INTO RefreshToken (Id, Token, ExpiresAt, CreatedAt, CreatedByIp, EmployeeId)
-                        VALUES (@Id, @Token, @ExpiresAt, @CreatedAt, @CreatedByIp, @EmployeeId)";
+        string query = @"INSERT INTO RefreshToken (Id, Token, CreatedAt, ExpiresAt, CreatedByIp, EmployeeId)
+                        VALUES (@Id, @Token, @CreatedAt, @ExpiresAt, @CreatedByIp, @EmployeeId)";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -27,39 +31,29 @@ public class RefreshTokenServices
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = Guid.NewGuid();
-                command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = GenerateSecureToken();
-                command.Parameters.Add("@ExpiresAt", SqlDbType.DateTime2).Value = DateTime.UtcNow.AddDays(7);
-                command.Parameters.Add("@CreatedAt", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = Guid.NewGuid().ToString("N");
+                command.Parameters.Add(@"CreatedAt", SqlDbType.DateTime2).Value = DateTime.UtcNow;
+                command.Parameters.Add(@"ExpiresAt", SqlDbType.DateTime2).Value = rememberMe ? DateTime.UtcNow.AddDays(7) : DateTime.UtcNow.AddMinutes(15);
                 command.Parameters.Add("@CreatedByIp", SqlDbType.NVarChar).Value = ipAddress;
-                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = employeeId;
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
-                await command.ExecuteNonQueryAsync();
+                return await command.ExecuteNonQueryAsync() > 0;
             }
         }
     }
 
-    private static string GenerateSecureToken()
+    public async Task<string> GetRefreshTokenAsync(int id)
     {
-        byte[] randomBytes = new byte[64];
-
-        using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+        if (id <= 0)
         {
-            rng.GetBytes(randomBytes);
+            return string.Empty;
         }
+        
+        string token = string.Empty;
 
-        return Convert.ToBase64String(randomBytes);
-    }
-
-    public async Task<RefreshToken> GetValidatedToekAsync(string token)
-    {
-        if (string.IsNullOrEmpty(token))
-        {
-            return null!;
-        }
-
-        string query = @"SELECT Id, Token, ExpiresAt, RevokedAt, EmployeeId
+        string query = @"SELECT Token
                         FROM RefreshToken
-                        WHERE Token = @Token";
+                        WHERE EmployeeId = @EmployeeId";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -67,33 +61,18 @@ public class RefreshTokenServices
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = token;
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
 
                 await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     if (await reader.ReadAsync())
                     {
-
-                        DateTime expiresAt = reader.GetDateTime(reader.GetOrdinal("ExpiresAt"));
-                        int revokedAt = reader.GetOrdinal("RevokedAt");
-
-                        if (expiresAt < DateTime.UtcNow || !reader.IsDBNull(revokedAt))
-                        {
-                            return null!;
-                        }
-
-                        return new RefreshToken
-                        {
-                            Id = reader.GetGuid(reader.GetOrdinal("Id")),
-                            Token = reader.GetString(reader.GetOrdinal("Token")),
-                            ExpiresAt = expiresAt,
-                            RevokedAt = reader.IsDBNull(revokedAt) ? null : reader.GetDateTime(revokedAt)
-                        };
+                        token = reader.GetString(reader.GetOrdinal("Token"));
                     }
                 }
             }
-
-            return null!;
         }
+        
+        return token;
     }
 }
