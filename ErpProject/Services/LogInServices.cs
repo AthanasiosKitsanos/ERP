@@ -67,7 +67,7 @@ public class LogInServices
         return isValid;
     }
 
-    public async Task<LoggedInData> GetLoggedInDataAsync(string username)
+    public async Task<LoggedInData> GetLoggedInDataByUsernameAsync(string username)
     {
         if (string.IsNullOrEmpty(username))
         {
@@ -110,7 +110,7 @@ public class LogInServices
                     if (data.Id == 0)
                     {
                         await transaction.RollbackAsync();
-                        return null!;    
+                        return null!;
                     }
 
                     query = @"UPDATE Credentials
@@ -131,6 +131,45 @@ public class LogInServices
                 {
                     await transaction.RollbackAsync();
                     throw;
+                }
+            }
+        }
+
+        return data;
+    }
+
+    public async Task<LoggedInData> GetLoggedInDataByIdAsync(int id)
+    {
+        if (id <= 0)
+        {
+            return null!;
+        }
+
+        string query = @"SELECT e.EmployeeId, e.FirstName, r.RoleName
+                        FROM Employees e
+                        JOIN RoleEmployee re ON re.EmployeeId = e.EmployeeId
+                        JOIN Role r ON r.Id = re.RoleId
+                        WHERE EmployeeId = @EmployeeId";
+
+        LoggedInData data = new LoggedInData();
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
+
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        data.Id = reader.GetInt32(reader.GetOrdinal("EmployeeId"));
+                        data.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                        data.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                        data.RoleName = reader.GetString(reader.GetOrdinal("RoleName"));
+                    }
                 }
             }
         }
