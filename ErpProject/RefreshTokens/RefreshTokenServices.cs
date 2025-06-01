@@ -48,12 +48,15 @@ public class RefreshTokenServices
         {
             return string.Empty;
         }
-        
+
         string token = string.Empty;
 
-        string query = @"SELECT Token
+        string query = @"SELECT TOP 1 Token
                         FROM RefreshToken
-                        WHERE EmployeeId = @EmployeeId";
+                        WHERE EmployeeId = @EmployeeId
+                        AND RevokedAt IS NULL
+                        AND ExpiresAt > GETUTCDATE()
+                        ORDER BY CreatedAt DESC";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -72,7 +75,43 @@ public class RefreshTokenServices
                 }
             }
         }
-        
+
         return token;
+    }
+
+    public async Task<int> ValidateRefreshTokenAsync(string token)
+    {
+        if (string.IsNullOrEmpty(token))
+        {
+            return 0;
+        }
+
+        int id = 0;
+
+        string query = @"SELECT EmployeeId
+                        FROM RefreshToken
+                        WHERE Token = @Token
+                        AND RevokedAt IS NULL
+                        AND ExpiresAt > GETUTCDATE()";
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync();
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = token;
+
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        id = reader.GetInt32(reader.GetOrdinal("EmployeeId"));
+                    }
+                }
+            }
+        }
+
+        return id;
     }
 }
