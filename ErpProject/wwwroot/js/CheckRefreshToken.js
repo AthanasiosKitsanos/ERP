@@ -1,46 +1,55 @@
 document.addEventListener("DOMContentLoaded", async function()
 {
-    try
+    window.refreshCheckCompleted = new Promise(async (resolve, reject)=>
     {
-        const response = await fetch(`/api/refreshtoken`,
-        {
-            method: 'GET',
-            credentials: 'include'
-        });
+        await checkRefreshToken();
+        resolve();
+    });
 
-        if(response.ok)
+    async function checkRefreshToken()
+    {
+        try
         {
-            console.log("Access token is valid");
-            return true;
-        }
-
-        if(response.status === 401)
-        {
-            const requestNewToken = await fetch(`/refresh-token`,
+            const response = await fetch(`/api/refreshtoken`,
             {
-                method: 'POST',
+                method: 'GET',
                 credentials: 'include'
             });
 
-            if(requestNewToken.ok)
+            if(response.ok)
             {
-                console.log("Token Refreshed");
+                console.log("Access token is valid");
                 return true;
             }
-            else
-            {
-                console.warn("Refresh Token is invalid");
-                window.location.href = '/LogIn/Index';
-                return false;
-            }
-        }
 
-        throw new Error("Uknown Error");
-    }
-    catch (error)
-    {
-        console.error("Token check failed", err);
-        window.location.href = '/LogIn/Index';
-        return false;
+            if(response.status === 401)
+            {
+                const requestNewToken = await fetch(`/refresh-token`,
+                {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+
+                if(requestNewToken.ok)
+                {
+                    console.log("Token Refreshed");
+                    return true;
+                }
+                else
+                {
+                    console.warn("Refresh Token is invalid");
+                    window.location.href = '/LogIn/Index';
+                    return false;
+                }
+            }
+
+            throw new Error("Uknown Error");
+        }
+        catch (error)
+        {
+            console.error("Token check failed", err);
+            window.location.href = '/LogIn/Index';
+            return false;
+        }
     }
 });

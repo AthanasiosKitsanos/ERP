@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", function ()
+document.addEventListener("DOMContentLoaded", async function ()
 {
+    await window.refreshCheckCompleted;
+
     let work = document.getElementById("work");
 
     const text = ['.', '..', '...'];
