@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", async function()
 
     async function checkRefreshToken()
     {
+        if(window.location.pathname === "/LogIn/Index")
+        {
+            return;
+        }
+        
         try
         {
             const response = await fetch(`/api/refreshtoken`,
