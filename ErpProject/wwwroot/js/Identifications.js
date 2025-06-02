@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", async function()
 
         if(cancelButton)
         {
-            cancelButton.addEventListener("click", async function()
+            cancelButton.addEventListener("click", async function(event)
             {
+                event.preventDefault();
+                
                 response = await fetch(`/Identifications/${Id}/Index`);
 
                 html = await response.text();
-
-                container =  document.getElementById("identificationsDetailsContainer");
 
                 container.innerHTML = html;
     
