@@ -2,6 +2,7 @@ using ErpProject.Helpers.Connection;
 using ErpProject.Services;
 using ErpProject.BackgroundServices;
 using ErpProject.JsonWebToken;
+using ErpProject.RefreshTokens;
 
 namespace ErpProject.Extentions;
 
@@ -38,6 +39,8 @@ public static class ServiceCollectionExtension
         });
 
         services.AddSingleton<JWTServices>();
+
+        services.AddScoped<RefreshTokenServices>();
 
         return services;
     }
