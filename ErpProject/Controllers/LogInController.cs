@@ -97,6 +97,7 @@ public class LogInController : Controller
     public IActionResult LogOut()
     {
         Response.Cookies.Delete("jwt");
+        Response.Cookies.Delete("refreshtoken");
 
         return RedirectToAction("Index", "LogIn");
     }
