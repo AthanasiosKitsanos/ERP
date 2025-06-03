@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using ErpProject.JsonWebToken;
 using ErpProject.Models;
 using ErpProject.RefreshTokens;
@@ -65,7 +66,7 @@ public class LogInController : Controller
             return View();
         }
 
-        request.RefreshToken = await _refreshServices.GetRefreshTokenAsync(data.Id);
+        request.RefreshToken = await _refreshServices.GetRefreshTokenAsync(data.Id, ipAddress);
 
         if (string.IsNullOrEmpty(request.RefreshToken))
         {
@@ -94,8 +95,28 @@ public class LogInController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult LogOut()
+    public async Task<IActionResult> LogOut(int id)
     {
+        string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unkonwn";
+
+        Request.Cookies.TryGetValue("refreshtoken", out string? token);
+
+        if (string.IsNullOrEmpty(token) || string.IsNullOrWhiteSpace(token))
+        {
+            Response.Cookies.Delete("jwt");
+            Response.Cookies.Delete("refreshtoken");
+
+            return RedirectToAction("Index", "LogIn");
+        }
+
+        if (!await _refreshServices.RevokeRefreshTokenAsync(token, ipAddress))
+        {
+            Response.Cookies.Delete("jwt");
+            Response.Cookies.Delete("refreshtoken");    
+            
+            return RedirectToAction("Index", "LogIn");
+        }
+
         Response.Cookies.Delete("jwt");
         Response.Cookies.Delete("refreshtoken");
 
