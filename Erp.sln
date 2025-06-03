@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpProject", "ErpProject\ErpProject.csproj", "{BF164F17-0EF2-48C2-85C2-DB64F1D8E330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingProject", "TestingProject\TestingProject.csproj", "{7D886D5F-5153-4C57-95D2-ACCF48506E3E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,18 +27,6 @@ Global
 		{BF164F17-0EF2-48C2-85C2-DB64F1D8E330}.Release|x64.Build.0 = Release|Any CPU
 		{BF164F17-0EF2-48C2-85C2-DB64F1D8E330}.Release|x86.ActiveCfg = Release|Any CPU
 		{BF164F17-0EF2-48C2-85C2-DB64F1D8E330}.Release|x86.Build.0 = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|x64.Build.0 = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Debug|x86.Build.0 = Debug|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|x64.ActiveCfg = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|x64.Build.0 = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|x86.ActiveCfg = Release|Any CPU
-		{7D886D5F-5153-4C57-95D2-ACCF48506E3E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
