@@ -81,7 +81,7 @@ public class RefreshTokenServices
         return token;
     }
 
-    public async Task<int> ValidateRefreshTokenAsync(string token)
+    public async Task<int> ValidateRefreshTokenAsync(string token, string currentIpAddress)
     {
         if (string.IsNullOrEmpty(token))
         {
@@ -94,7 +94,8 @@ public class RefreshTokenServices
                         FROM RefreshToken
                         WHERE Token = @Token
                         AND RevokedAt IS NULL
-                        AND ExpiresAt > GETUTCDATE()";
+                        AND ExpiresAt > GETUTCDATE()
+                        AND CreatedByIp = @CreatedByIp";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -103,6 +104,7 @@ public class RefreshTokenServices
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = token;
+                command.Parameters.Add("@CreatedByIp", SqlDbType.NVarChar).Value = currentIpAddress;
 
                 await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
