@@ -42,7 +42,7 @@ public class RefreshTokenServices
         }
     }
 
-    public async Task<string> GetRefreshTokenAsync(int id)
+    public async Task<string> GetRefreshTokenAsync(int id, string ipAddress)
     {
         if (id <= 0)
         {
@@ -54,6 +54,7 @@ public class RefreshTokenServices
         string query = @"SELECT TOP 1 Token
                         FROM RefreshToken
                         WHERE EmployeeId = @EmployeeId
+                        AND CreatedByIp = @CreatedByIp
                         AND RevokedAt IS NULL
                         AND ExpiresAt > GETUTCDATE()
                         ORDER BY CreatedAt DESC";
@@ -65,6 +66,7 @@ public class RefreshTokenServices
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
+                command.Parameters.Add("@CreatedByIp", SqlDbType.NVarChar).Value = ipAddress;
 
                 await using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
