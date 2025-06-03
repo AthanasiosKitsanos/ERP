@@ -39,8 +39,9 @@
                         }
 
                         <li>
-                            <form method="post" asp-action="LogOut" asp-controller="LogIn">
+                            <form method="post" asp-action="LogOut" asp-controller="LogIn" asp-route-id="@User.FindFirst("UserId")?.Value">
                                 @Html.AntiForgeryToken()
+                                
                                 <button class="btn-as-link" type="submit">Log out</button>
                             </form>
                         </li>
@@ -60,7 +61,5 @@
         <footer>
             All rights reserved
         </footer>
-        
-        <script src="~/js/CheckRefreshToken.js"></script>
     </body>
 </html>
