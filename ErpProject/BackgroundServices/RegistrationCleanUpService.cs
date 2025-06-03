@@ -1,4 +1,3 @@
-using ErpProject.Helpers.Connection;
 using Microsoft.Data.SqlClient;
 
 namespace ErpProject.BackgroundServices;
@@ -19,11 +18,11 @@ public class RegistrationCleanUpService: BackgroundService
 
         while(!stoppingToken.IsCancellationRequested)
         {
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            await using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync(stoppingToken);
 
-                using(SqlCommand command = new SqlCommand(query, connection))
+                await using(SqlCommand command = new SqlCommand(query, connection))
                 {
                     await command.ExecuteNonQueryAsync(stoppingToken);
                 }
