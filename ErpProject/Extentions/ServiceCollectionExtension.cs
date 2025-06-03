@@ -18,6 +18,8 @@ public static class ServiceCollectionExtension
 
         services.AddHostedService<RegistrationCleanUpService>();
 
+        services.AddHostedService<RefreshTokenCleanUpService>();
+
         services.AddScoped<AdditionalDetailsServices>();
 
         services.AddScoped<EmploymentDetailsServices>();
@@ -43,5 +45,13 @@ public static class ServiceCollectionExtension
         services.AddScoped<RefreshTokenServices>();
 
         return services;
+    }
+}
+
+public static class RefreshTokenMiddlewareExtemsion
+{
+    public static IApplicationBuilder UseRefreshToken(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<RefreshTokenMiddleware>();
     }
 }
