@@ -11,6 +11,7 @@ public static class CustomMiddlewareExtention
             FormFieldName = "_method"
         });
         app.UseRouting();
+        app.UseRefreshToken();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
