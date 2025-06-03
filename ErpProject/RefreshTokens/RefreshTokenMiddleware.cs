@@ -43,7 +43,9 @@ public class RefreshTokenMiddleware
             return;
         }
 
-        int employeeId = await _tokenServices.ValidateRefreshTokenAsync(token);
+        string currentIpAddress = context.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
+
+        int employeeId = await _tokenServices.ValidateRefreshTokenAsync(token, currentIpAddress);
 
         if (employeeId == 0)
         {
@@ -56,8 +58,6 @@ public class RefreshTokenMiddleware
         }
 
         context.Response.Cookies.Delete("jwt");
-
-        string ipAddress = context.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
 
         LoggedInData data = await _logInServices.GetLoggedInDataByIdAsync(employeeId);
 
