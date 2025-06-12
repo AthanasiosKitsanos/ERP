@@ -1,7 +1,7 @@
 --Database creation
-IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpNewDatabase')
+IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpDatabase')
     BEGIN
-        CREATE DATABASE [ErpNewDatabase]
+        CREATE DATABASE [ErpDatabase]
         PRINT 'ErpDatabase Created';
     END
 
@@ -13,7 +13,7 @@ IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpNewDatabase')
 GO
 
 --Using the created Database
-USE [ErpNewDatabase]
+USE [ErpDatabase]
 GO
 
 --Creation of Employees Table
