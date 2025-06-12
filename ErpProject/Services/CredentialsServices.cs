@@ -89,7 +89,7 @@ public class CredentialsServices
 
     public async Task UpdatePasswordHashAsync(string username, string password)
     {
-        string query = @"UPDATE Credentilas
+        string query = @"UPDATE Credentials
                         SET Password = @Password
                         WHERE Username = @Username";
 
