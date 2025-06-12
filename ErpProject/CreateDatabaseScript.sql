@@ -33,7 +33,7 @@ BEGIN
         Mime NVARCHAR(max) NULL,
         Photograph VARBINARY(max) NULL,
         IsCompleted BIT NOT NULL,
-        CreatedAt DATETIME2 NOT NULL
+        CreatedAt DATE NOT NULL
     );
 
     PRINT 'Employees Table is created';
@@ -134,6 +134,8 @@ BEGIN
     PRINT 'Values already exists in Credentials Table';
 END
 
+GO
+
 --Creating AdditionalDetails Table
 IF OBJECT_ID('dbo.AdditionalDetails', 'U') IS NULL
 BEGIN
@@ -184,12 +186,14 @@ BEGIN
     PRINT 'AdditionalDetails table already has values';
 END
 
+GO
+
 --Creating EmploymentDetails Table
 IF OBJECT_ID('dbo.EmploymentDetails', 'U') IS NULL
 BEGIN
     CREATE TABLE dbo.EmploymentDetails
     (
-        Id INT PRIMARY KEY IDENTITY(1,1),
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
         Position NVARCHAR(50) NOT NULL,
         Department NVARCHAR(50) NOT NULL,
         EmploymentStatus NVARCHAR(10) NOT NULL,
@@ -208,6 +212,8 @@ BEGIN
     PRINT 'EmploymentDetails Table already exists';
 END
 
+GO
+
 --Adding Contraint to EmploymentDetails that references the Employees Table
 IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_EmploymentDetails_Employees' AND parent_object_id = OBJECT_ID('dbo.EmploymentDetails'))
 BEGIN
@@ -223,6 +229,8 @@ ELSE
 BEGIN
     PRINT 'FK_EmploymentDetails_Employees already exists';
 END
+
+GO
 
 --Adding values to EmploymentDetails Table
 IF NOT EXISTS(SELECT 1 FROM dbo.EmploymentDetails)
@@ -241,3 +249,297 @@ ELSE
 BEGIN
     PRINT 'EmploymentDetails Table already has values';
 END
+
+GO
+
+--Adding Identifications Table
+IF OBJECT_ID('dbo.Identifications', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Identifications
+    (
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+        TIN NVARCHAR(11) NOT NULL,
+        WorkAuth NVARCHAR(3) NOT NULL,
+        TaxInformation NVARCHAR(50) NOT NULL,
+        EmployeeId INT NOT NULL
+    )
+
+    PRINT 'Identifications Table created';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'Identifications already exists';
+END
+
+GO
+
+--Adding Contraints to Identifications referensing Employees Table
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_Identifications_Employees' AND parent_object_id = OBJECT_ID('dbo.Identifications'))
+BEGIN
+    ALTER TABLE Identifications
+    ADD CONSTRAINT FK_Identifications_Employees FOREIGN KEY (EmployeeId)
+    REFERENCES dbo.Employees(EmployeeId);
+
+    PRINT 'Contraint FK_Identifications_Employees created';
+END
+
+ELSE
+
+BEGIN 
+    PRINT 'FK_Identifications_Employees already exists';
+END
+
+GO
+
+--Adding values to Identifications Table
+IF NOT EXISTS(SELECT 1 FROM dbo.Identifications)
+BEGIN
+    INSERT INTO Identifications (TIN, WorkAuth, TaxInformation, EmployeeId)
+    VALUES ('TIN1', 'Yes', 'TaxInfo1', 1),
+           ('TIN2', 'Yes', 'TaxInfo2', 2),
+           ('TIN3', 'Yes', 'TaxInfo3', 3),
+           ('TIN4', 'Yes', 'TaxInfo4', 4);
+
+    PRINT 'Values added to Identifications Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'Identifications already has values';
+END
+
+GO
+
+--Adding Roles Table
+IF OBJECT_ID('dbo.Roles', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Roles
+    (
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+        RoleName NVARCHAR(10)
+    );
+
+    PRINT 'Roles Table created';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'Roles Table already exists';
+END
+
+GO
+
+--Adding values to Roles Table
+IF NOT EXISTS(SELECT 1 FROM dbo.Roles)
+BEGIN
+    INSERT INTO dbo.Roles (RoleName)
+    VALUES('Owner'),
+          ('Admin'),
+          ('Manager'),
+          ('Employee');
+
+    PRINT 'Values added to Roles Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'Roles Table already has values';
+END
+
+GO
+
+--Adding RoleEmployee Table
+IF OBJECT_ID('dbo.RoleEmployee', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.RoleEmployee
+    (
+        RoleId INT,
+        EmployeeId INT
+    );
+
+    PRINT 'RoleEmployee Table created';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'RoleEmployeeTable already exists';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM dbo.RoleEmployee)
+BEGIN
+    INSERT INTO dbo.RoleEmployee (RoleId, EmployeeId)
+    VALUES (1, 1),
+           (2, 2),
+           (3, 3),
+           (4, 4);
+
+    PRINT 'Values were added to RoleEmployee Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'RoleEmployee Table already has values';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_RoleEmployee_Role' AND parent_object_id = OBJECT_ID('dbo.RoleEmployee'))
+BEGIN
+    ALTER TABLE dbo.RoleEmployee
+    ADD CONSTRAINT FK_RoleEmployee_Role FOREIGN KEY (RoleId)
+    REFERENCES dbo.Roles(Id);
+
+    PRINT 'FK_RoleEmployee_Role contraint added to RoleEmployee';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'FK_RoleEmployee_Role already exists';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_RoleEmployee_Employee' AND parent_object_id = OBJECT_ID('dbo.RoleEmployee'))
+BEGIN
+    ALTER TABLE dbo.RoleEmployee
+    ADD CONSTRAINT FK_RoleEmployee_Employee FOREIGN KEY (EmployeeId)
+    REFERENCES Employees(EmployeeId);
+
+    PRINT 'FK_RoleEmployee_Employee constrain added to RoleEmployee table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'FK_RoleEmployee_Employee already exists';
+END
+
+GO
+
+IF OBJECT_ID('dbo.Certifications', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.Certifications
+    (
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+        CertData VARBINARY(max) NULL,
+        MIME NVARCHAR(max) NULL,
+        EmployeeId INT NULL
+    );
+
+    PRINT 'Certifications Table created'
+END
+
+ELSE
+
+BEGIN
+    PRINT 'Certifications Table already exists';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_Certifications_Employee' AND parent_object_id = OBJECT_ID('dbo.Certifications'))
+BEGIN
+    ALTER TABLE dbo.Certifications
+    ADD CONSTRAINT FK_Certifications_Employee FOREIGN KEY (EmployeeId)
+    REFERENCES Employees(EmployeeId);
+
+    PRINT 'FK_Certifications_Employee contraint added to Certifications Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'FK_Certifications_Employee already exists';
+END
+
+GO
+
+If OBJECT_ID('dbo.PersonalDocuments', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.PersonalDocuments
+    (
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+        DocData VARBINARY(max) NULL,
+        MIME NVARCHAR(max) NULL,
+        EmployeeId INT NULL
+    );
+
+    PRINT 'PersnonalDocuments Table created';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'PersonalDocuments Table already exists';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_PersonalDocuments_Employee' AND parent_object_id = OBJECT_ID('dbo.PersonalDocuments'))
+BEGIN
+    ALTER TABLE dbo.PersonalDocuments
+    ADD CONSTRAINT FK_PersonalDocuments_Employee FOREIGN KEY (EmployeeId)
+    REFERENCES Employees(EmployeeId);
+
+    PRINT 'FK_PersonalDocuments_Employee contraint added to PersonalDocuments Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'FK_PersonalDocuments_Employee already exists';
+END
+
+GO
+
+IF OBJECT_ID('dbo.RefreshToken', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.RefreshToken
+    (
+        Id UNIQUEIDENTIFIER PRIMARY KEY NOT NULL,
+        Token NVARCHAR(max) NOT NULL,
+        CreatedAt DATETIME2(7) NOT NULL,
+        ExpiresAt DATETIME2(7) NOT NULL,
+        CreatedByIp NVARCHAR(45) NOT NULL,
+        RevokedAt DATETIME2(7) NULL,
+        RevokedByIp NVARCHAR(45) NULL,
+        EmployeeId INT NOT NULL
+    );
+
+    PRINT 'RefreshToken Table created';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'RefreshToken Table already exists';
+END
+
+GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_RefreshToken_Employees' AND parent_object_id = OBJECT_ID('dbo.RefreshToken'))
+BEGIN
+    ALTER TABLE RefreshToken
+    ADD CONSTRAINT FK_RefreshToken_Employees FOREIGN KEY (EmployeeId)
+    REFERENCES Employees(EmployeeId);
+
+    PRINT 'FK_RefreshToken_Employees constrain added to RefreshToken Table';
+END
+
+ELSE
+
+BEGIN
+    PRINT 'FK_RefreshToken_Employees already exists';
+END
+
+GO
