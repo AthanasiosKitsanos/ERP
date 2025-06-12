@@ -75,7 +75,7 @@ BEGIN
         Id INT PRIMARY KEY IDENTITY(1,1),
         Username NVARCHAR(50) NOT NULL,
         Password NVARCHAR(255) NOT NULL,
-        LastLogIn DATETIME2 NOT NULL,
+        LastLogIn DATETIME2 NULL,
         EmployeeId INT NOT NULL,
         AccountStatus NVARCHAR(20) NOT NULL
     );
@@ -142,8 +142,8 @@ BEGIN
     CREATE TABLE dbo.AdditionalDetails
     (
         Id INT PRIMARY KEY IDENTITY(1,1),
-        EmergencyNumbers NVARCHAR(max) NOT NULL,
-        Education NVARCHAR(100) NOT NULL,
+        EmergencyNumbers NVARCHAR(max) NULL,
+        Education NVARCHAR(100) NULL,
         EmployeeId INT NOT NULL
     );
 END
@@ -194,12 +194,12 @@ BEGIN
     CREATE TABLE dbo.EmploymentDetails
     (
         Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-        Position NVARCHAR(50) NOT NULL,
-        Department NVARCHAR(50) NOT NULL,
-        EmploymentStatus NVARCHAR(10) NOT NULL,
-        HireDate DATE NOT NULL,
-        ContractType NVARCHAR(10) NOT NULL,
-        WorkLocation NVARCHAR(20) NOT NULL,
+        Position NVARCHAR(50) NULL,
+        Department NVARCHAR(50) NULL,
+        EmploymentStatus NVARCHAR(10) NULL,
+        HireDate DATE NULL,
+        ContractType NVARCHAR(10) NULL,
+        WorkLocation NVARCHAR(20) NULL,
         EmployeeId INT NOT NULL
     );
 
@@ -257,10 +257,10 @@ IF OBJECT_ID('dbo.Identifications', 'U') IS NULL
 BEGIN
     CREATE TABLE dbo.Identifications
     (
-        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-        TIN NVARCHAR(11) NOT NULL,
-        WorkAuth NVARCHAR(3) NOT NULL,
-        TaxInformation NVARCHAR(50) NOT NULL,
+        Id INT PRIMARY KEY IDENTITY(1,1) NULL,
+        TIN NVARCHAR(11) NULL,
+        WorkAuth NVARCHAR(3) NULL,
+        TaxInformation NVARCHAR(50) NULL,
         EmployeeId INT NOT NULL
     )
 
