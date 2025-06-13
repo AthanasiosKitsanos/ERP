@@ -1,7 +1,7 @@
 --Database creation
-IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpDatabase')
+IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpDb')
     BEGIN
-        CREATE DATABASE [ErpDatabase]
+        CREATE DATABASE [ErpDb]
         PRINT 'ErpDatabase Created';
     END
 
@@ -13,7 +13,7 @@ IF NOT EXISTS( SELECT name FROM sys.databases WHERE name = N'ErpDatabase')
 GO
 
 --Using the created Database
-USE [ErpDatabase]
+USE [ErpDb]
 GO
 
 --Creation of Employees Table
@@ -50,7 +50,7 @@ GO
 --Adding values in Employees Table
 IF NOT EXISTS(SELECT 1 FROM dbo.Employees)
 BEGIN
-    INSERT INTO dbo.Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, IsCompleted, CreateAt)
+    INSERT INTO dbo.Employees (FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, IsCompleted, CreatedAt)
     VALUES ('James', 'Anderson', 'JamesAnderson@example.com', '42', '1983-06-07', 'British', 'Male', '1234567891', 1, GETUTCDATE()),
            ('Emily', 'Johnson', 'EmilyJohnson@example.com', '35', '1990-03-29', 'American', 'Female', '1987654321', 1, GETUTCDATE()),
            ('Michael', 'Smith', 'MichaelSmith@example.com', '29', '1996-05-04', 'Scottish', 'Male', '4567891238', 1, GETUTCDATE()),
@@ -257,7 +257,7 @@ IF OBJECT_ID('dbo.Identifications', 'U') IS NULL
 BEGIN
     CREATE TABLE dbo.Identifications
     (
-        Id INT PRIMARY KEY IDENTITY(1,1) NULL,
+        Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
         TIN NVARCHAR(11) NULL,
         WorkAuth NVARCHAR(3) NULL,
         TaxInformation NVARCHAR(50) NULL,
