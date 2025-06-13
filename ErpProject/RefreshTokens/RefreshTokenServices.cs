@@ -119,7 +119,7 @@ public class RefreshTokenServices
         return id;
     }
 
-    public async Task<bool> RevokeRefreshTokenAsync(string token, string ipAddress)
+    public async Task<bool> RevokeRefreshTokenAsync(string token, string ipAddress, int id)
     {
         if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(ipAddress))
         {
@@ -129,7 +129,8 @@ public class RefreshTokenServices
         string query = @"UPDATE RefreshToken 
                         SET RevokedAt = @RevokedAt,
                         RevokedByIp = @RevokedByIp
-                        WHERE Token = @Token";
+                        WHERE Token = @Token
+                        AND EmployeeId = @EmployeeId";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -137,6 +138,7 @@ public class RefreshTokenServices
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
                 command.Parameters.Add("@RevokedAt", SqlDbType.DateTime2).Value = DateTime.UtcNow;
                 command.Parameters.Add("@Token", SqlDbType.NVarChar).Value = token;
                 command.Parameters.Add("@RevokedByIp", SqlDbType.NVarChar).Value = ipAddress;
