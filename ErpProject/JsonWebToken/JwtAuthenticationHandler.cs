@@ -13,7 +13,7 @@ public class JwtAuthenticationHandler : AuthenticationHandler<AuthenticationSche
 {
     private readonly TimeProvider _timeProvider;
     private readonly JWTDemoKey _key;
-    public JwtAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, TimeProvider timeProvider, JWTDemoKey key) : base(options, logger, encoder, new SystemClock())
+    public JwtAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, TimeProvider timeProvider, JWTDemoKey key) : base(options, logger, encoder)
     {
         _timeProvider = timeProvider;
         _key = key;
