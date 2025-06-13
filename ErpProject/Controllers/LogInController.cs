@@ -95,7 +95,7 @@ public class LogInController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> LogOut()
+    public async Task<IActionResult> LogOut(int id)
     {
         string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unkonwn";
 
@@ -109,13 +109,13 @@ public class LogInController : Controller
             return RedirectToAction("Index", "LogIn");
         }
 
-        if (!await _refreshServices.RevokeRefreshTokenAsync(token, ipAddress))
-        {
-            Response.Cookies.Delete("jwt");
-            Response.Cookies.Delete("refreshtoken");    
-            
-            return RedirectToAction("Index", "LogIn");
-        }
+        if (!await _refreshServices.RevokeRefreshTokenAsync(token, ipAddress, id))
+            {
+                Response.Cookies.Delete("jwt");
+                Response.Cookies.Delete("refreshtoken");
+
+                return RedirectToAction("Index", "LogIn");
+            }
 
         Response.Cookies.Delete("jwt");
         Response.Cookies.Delete("refreshtoken");
