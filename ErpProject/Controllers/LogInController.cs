@@ -95,7 +95,7 @@ public class LogInController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> LogOut(int id)
+    public async Task<IActionResult> LogOut()
     {
         string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unkonwn";
 
