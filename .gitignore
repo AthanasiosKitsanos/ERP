@@ -17,11 +17,12 @@ Employees/Employees.Domain/obj/
 Employees/Employees.Infrastructure/bin/
 Employees/Employees.Infrastructure/obj/
 
-Employees/Employees.BackgroundService/bin/
-Employees/Employees.BackgroundService/obj/
+Employees/Employees.BackgroundServices/bin/
+Employees/Employees.BackgroundServices/obj/
 
 Employees/Employees.Core/bin/
 Employees/Employees.Core/obj/
 
 Employees/Employees.Shared/bin/
 Employees/Employees.Shared/obj/
+Employees/Employees.BackgroundServices/bin/Debug/net9.0/Employees.BackgroundServices.deps.json

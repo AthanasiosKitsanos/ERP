@@ -11,6 +11,8 @@
     <Folder Include="Validations\" />
   </ItemGroup>
 
-  
+  <ItemGroup>
+    <ProjectReference Include="..\Employees\Employees.Infrastructure\Employees.Infrastructure.csproj"/>
+  </ItemGroup>
 
 </Project>

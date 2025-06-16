@@ -1,3 +1,5 @@
+using Employees.Api.Extentions;
+
 namespace MainProgram;
 
 class MainProgram
@@ -6,7 +8,11 @@ class MainProgram
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.AddJsonFiles();
+
         var app = builder.Build();
+
+        app.AddMiddleware();
 
         app.Run();
     }

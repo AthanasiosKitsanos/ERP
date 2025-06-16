@@ -17,7 +17,7 @@ class MainProgram
         var app = builder.Build();
 
         app.AddMiddleware();
-
+   
         app.Run();
     }
 }

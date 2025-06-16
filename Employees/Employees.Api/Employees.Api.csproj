@@ -17,4 +17,8 @@
     <Folder Include="Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
