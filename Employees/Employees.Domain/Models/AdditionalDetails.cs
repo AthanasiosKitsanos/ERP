@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Employees.Domain.Models.AdditionalDetails;
+namespace Employees.Domain.Models;
 
 public class AdditionalDetails
 {
