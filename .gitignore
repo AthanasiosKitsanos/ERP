@@ -8,20 +8,20 @@ ErpProject/obj
 .vscode/launch.json
 ErpProject/reminder.md
 
-Employees/Employees.Api/bin
-Employees/Employees.Api/obj
+Employees/Employees.Api/bin/
+Employees/Employees.Api/obj/
 
-Employees/Employees.Domain/bin
-Employees/Employees.Domain/obj
+Employees/Employees.Domain/bin/
+Employees/Employees.Domain/obj/
 
-Employees/Employees.Infrastructure/bin
-Employees/Employees.Infrastructure/obj
+Employees/Employees.Infrastructure/bin/
+Employees/Employees.Infrastructure/obj/
 
-Employees/Employees.BackgroundService/bin
-Employees/Employees.BackgroundService/obj
+Employees/Employees.BackgroundService/bin/
+Employees/Employees.BackgroundService/obj/
 
-Employees/Employees.Core/bin
-Employees/Employees.Core/obj
+Employees/Employees.Core/bin/
+Employees/Employees.Core/obj/
 
-Employees/Employees.Shared/bin
-Employees/Employees.Shared/obj
+Employees/Employees.Shared/bin/
+Employees/Employees.Shared/obj/
