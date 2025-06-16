@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-Solution",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build", "Erp.sln"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\bin\Debug\net9.0\Employees.Domain.deps.json
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\bin\Debug\net9.0\Employees.Domain.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\bin\Debug\net9.0\Employees.Domain.pdb
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.AssemblyInfoInputs.cache
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.AssemblyInfo.cs
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.csproj.CoreCompileInputs.cache
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.sourcelink.json
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\refint\Employees.Domain.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.pdb
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\ref\Employees.Domain.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Domain\obj\Debug\net9.0\Employees.Domain.csproj.AssemblyReference.cache

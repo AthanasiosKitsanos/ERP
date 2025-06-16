@@ -1,0 +1,61 @@
+﻿@using ErpProject.Models
+@model EmploymentDetails
+
+<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+
+<div>
+    <form method="post" asp-action="Edit" asp-route-id="@Model.EmployeeId">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="_method" value="PUT">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label><b>Positions:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Position">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Department:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.Department">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Employment Status:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.EmploymentStatus">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Hire Date:</b></label></td>
+                    <td>
+                        <input type="date" asp-for="@Model.HireDate">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Contract Type:</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.ContractType">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label><b>Work Location</b></label></td>
+                    <td>
+                        <input type="text" asp-for="@Model.WorkLocation">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><button type="submit">Save</button></td>
+                    <td><a id="CancelEdForm" href="#">Cancel</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+﻿@using ErpProject.Models
+@model Photo
+
+@{
+    string base64 = Convert.ToBase64String(Model.Photograph);
+    string imgSrc = $"data:{Model.MIME};base64,{base64}";
+}
+
+<img src="@imgSrc" style="max-width: 400px; max-height: 400px; padding-left: 30px;">

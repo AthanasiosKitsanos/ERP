@@ -1,0 +1,34 @@
+﻿@using System.Security.Claims
+@using ErpProject.Models
+@model Roles
+
+<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+
+<table>
+    <tbody>
+        <tr>
+            @if(string.IsNullOrEmpty(Model.RoleName))
+            {
+                <td>No role assigned yet</td>
+            }
+            else
+            {
+                <td>@Model.RoleName</td>
+            }
+        </tr>
+
+        @if(User.Identity!.IsAuthenticated && (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager"))
+        {
+            <tr>
+                @if(string.IsNullOrEmpty(Model.RoleName))
+                {
+                    <td><a id="registerRole" href="#">Add Role</a></td>
+                }
+                else
+                {
+                    <td><a id="editRole" href="#">Edit</a></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
