@@ -1,12 +1,4545 @@
 {
   "Version": 1,
-  "Hash": "6HKIqJDp73ka41AIQ3OSW7oVE9ntu4Hc2iNwrrCRLso=",
+  "Hash": "svS9/lgeBMsomBBJVyQjgsxKfSoRyuzfPF0PIsFFjsA=",
   "Source": "Employees.Api",
   "BasePath": "_content/Employees.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Employees.Api\\wwwroot",
+      "Source": "Employees.Api",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\13md2podgh-eph43lk6qj.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/MainDetails#[.{fingerprint=eph43lk6qj}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\MainDetails.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "xxqrya3j2w",
+      "Integrity": "JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\MainDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\140w0a1c0w-xdydexg4n6.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Identifications#[.{fingerprint=xdydexg4n6}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Identifications.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "e1zx2x7cmp",
+      "Integrity": "ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Identifications.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\cryeygi55f-d9ia8car1z.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Photo#[.{fingerprint=d9ia8car1z}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Photo.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "h2j7xie4qy",
+      "Integrity": "SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Photo.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\f54fnnr2uw-4poua8kcij.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Roles#[.{fingerprint=4poua8kcij}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Roles.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "h1qwzxdcs0",
+      "Integrity": "1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Roles.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\it5gcuvc3g-absij0b56b.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/update#[.{fingerprint=absij0b56b}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\update.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "r0jwxqmr60",
+      "Integrity": "tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\update.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\j6f8ocpq55-fp2f1vhr27.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/nav#[.{fingerprint=fp2f1vhr27}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\nav.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "1p2jwsv2c1",
+      "Integrity": "m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\nav.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\m7ho86whbl-3ia7u1ovm2.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/AdditionalDetails#[.{fingerprint=3ia7u1ovm2}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\AdditionalDetails.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "4351zu32af",
+      "Integrity": "AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\AdditionalDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\oillsuf866-95e124ro29.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/EmploymentDetails#[.{fingerprint=95e124ro29}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\EmploymentDetails.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "g2ko1gchd5",
+      "Integrity": "mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\EmploymentDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\rfukd6vh07-23dfp3x1f4.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Employees#[.{fingerprint=23dfp3x1f4}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Employees.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "621ag74no0",
+      "Integrity": "IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Employees.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\t5njbiukpi-sxg9vkhppa.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Home#[.{fingerprint=sxg9vkhppa}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Home.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "nnsj5mloid",
+      "Integrity": "LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Home.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\urtcl211ee-zl5yxqqrly.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/layout#[.{fingerprint=zl5yxqqrly}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\layout.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "38hvgfch13",
+      "Integrity": "8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\layout.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xi88944pbp-qsnoyfhn00.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/btn-as-link#[.{fingerprint=qsnoyfhn00}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\btn-as-link.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "4lv9zyo8vp",
+      "Integrity": "2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\btn-as-link.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xrg0lqrbp0-s1avk6g2id.gz",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/ul#[.{fingerprint=s1avk6g2id}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\ul.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "vwxz66pwme",
+      "Integrity": "kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\ul.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\btn-as-link.css",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/btn-as-link#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qsnoyfhn00",
+      "Integrity": "hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\btn-as-link.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\layout.css",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/layout#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zl5yxqqrly",
+      "Integrity": "5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\layout.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\nav.css",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/nav#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fp2f1vhr27",
+      "Integrity": "jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\nav.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\ul.css",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/ul#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "s1avk6g2id",
+      "Integrity": "oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ul.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\update.css",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "css/update#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "absij0b56b",
+      "Integrity": "Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\update.css"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\images\\erp.png",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "images/erp#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "synl97fsfz",
+      "Integrity": "bH6zb8X5IDax6y89sovNVToJixnERDKTc5NVV+DO+6E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\erp.png"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\AdditionalDetails.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/AdditionalDetails#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3ia7u1ovm2",
+      "Integrity": "FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\AdditionalDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Employees.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Employees#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "23dfp3x1f4",
+      "Integrity": "Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Employees.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\EmploymentDetails.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/EmploymentDetails#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "95e124ro29",
+      "Integrity": "I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\EmploymentDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Home.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Home#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "sxg9vkhppa",
+      "Integrity": "AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Home.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Identifications.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Identifications#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xdydexg4n6",
+      "Integrity": "VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Identifications.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\MainDetails.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/MainDetails#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eph43lk6qj",
+      "Integrity": "okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\MainDetails.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Photo.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Photo#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "d9ia8car1z",
+      "Integrity": "D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Photo.js"
+    },
+    {
+      "Identity": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Roles.js",
+      "SourceId": "Employees.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\",
+      "BasePath": "_content/Employees.Api",
+      "RelativePath": "js/Roles#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4poua8kcij",
+      "Integrity": "eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Roles.js"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/btn-as-link.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xi88944pbp-qsnoyfhn00.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006451612903"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "154"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8="
+        }
+      ]
+    },
+    {
+      "Route": "css/btn-as-link.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\btn-as-link.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8="
+        }
+      ]
+    },
+    {
+      "Route": "css/btn-as-link.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xi88944pbp-qsnoyfhn00.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "154"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g="
+        }
+      ]
+    },
+    {
+      "Route": "css/btn-as-link.qsnoyfhn00.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xi88944pbp-qsnoyfhn00.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.006451612903"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "154"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qsnoyfhn00"
+        },
+        {
+          "Name": "label",
+          "Value": "css/btn-as-link.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8="
+        }
+      ]
+    },
+    {
+      "Route": "css/btn-as-link.qsnoyfhn00.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\btn-as-link.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qsnoyfhn00"
+        },
+        {
+          "Name": "label",
+          "Value": "css/btn-as-link.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hqNPE4r6+L7suIGxui2NDjEdowc64VImME98R3PlkS8="
+        }
+      ]
+    },
+    {
+      "Route": "css/btn-as-link.qsnoyfhn00.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xi88944pbp-qsnoyfhn00.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "154"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 25 May 2025 11:30:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qsnoyfhn00"
+        },
+        {
+          "Name": "label",
+          "Value": "css/btn-as-link.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2KzvQfhu9CnYjXVBcKDnYhuK4QzCOMz3yBtgWiOLJ8g="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\urtcl211ee-zl5yxqqrly.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005405405405"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "184"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\layout.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "281"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\urtcl211ee-zl5yxqqrly.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "184"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.zl5yxqqrly.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\urtcl211ee-zl5yxqqrly.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005405405405"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "184"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zl5yxqqrly"
+        },
+        {
+          "Name": "label",
+          "Value": "css/layout.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.zl5yxqqrly.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\layout.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "281"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zl5yxqqrly"
+        },
+        {
+          "Name": "label",
+          "Value": "css/layout.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5xnQUPyB6OlkX4xZKRK5B7BPI9gKdO1dDnMTsliFEpo="
+        }
+      ]
+    },
+    {
+      "Route": "css/layout.zl5yxqqrly.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\urtcl211ee-zl5yxqqrly.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "184"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 04 May 2025 06:53:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zl5yxqqrly"
+        },
+        {
+          "Name": "label",
+          "Value": "css/layout.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8xTk6cGKAS53hhh82u+P6ag0wFev49UpLn9uA17d0aQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\j6f8ocpq55-fp2f1vhr27.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005102040816"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\nav.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "306"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\j6f8ocpq55-fp2f1vhr27.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.fp2f1vhr27.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\j6f8ocpq55-fp2f1vhr27.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.005102040816"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fp2f1vhr27"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nav.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.fp2f1vhr27.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\nav.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "306"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fp2f1vhr27"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nav.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jfcSZTX2tW7UJZ7qUZgNdF6a3gbxt4zS+XnDupwxims="
+        }
+      ]
+    },
+    {
+      "Route": "css/nav.fp2f1vhr27.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\j6f8ocpq55-fp2f1vhr27.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:24:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fp2f1vhr27"
+        },
+        {
+          "Name": "label",
+          "Value": "css/nav.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-m+tEzHwR1BL4cUY3IFaJbhPoEwDq9HHsk1WhyPMd4iE="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xrg0lqrbp0-s1avk6g2id.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007407407407"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\ul.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "159"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xrg0lqrbp0-s1avk6g2id.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.s1avk6g2id.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xrg0lqrbp0-s1avk6g2id.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007407407407"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "s1avk6g2id"
+        },
+        {
+          "Name": "label",
+          "Value": "css/ul.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.s1avk6g2id.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\ul.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "159"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "s1avk6g2id"
+        },
+        {
+          "Name": "label",
+          "Value": "css/ul.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oDB6ybEW+7xKJRJ45+mQN7DKkbbieitT6lyM35IoglE="
+        }
+      ]
+    },
+    {
+      "Route": "css/ul.s1avk6g2id.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\xrg0lqrbp0-s1avk6g2id.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 05 Apr 2025 17:20:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "s1avk6g2id"
+        },
+        {
+          "Name": "label",
+          "Value": "css/ul.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kTterz2cMivD1lsj+0BSuI/Ha9li4jUNdEp9lfw910M="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.absij0b56b.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\it5gcuvc3g-absij0b56b.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003389830508"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "absij0b56b"
+        },
+        {
+          "Name": "label",
+          "Value": "css/update.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.absij0b56b.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\update.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "519"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "absij0b56b"
+        },
+        {
+          "Name": "label",
+          "Value": "css/update.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.absij0b56b.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\it5gcuvc3g-absij0b56b.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "absij0b56b"
+        },
+        {
+          "Name": "label",
+          "Value": "css/update.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\it5gcuvc3g-absij0b56b.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003389830508"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.css",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\css\\update.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "519"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Kr08s3P0Tfa0IHSgHBwSY83jCVyYQCse2FEitr/KV5k="
+        }
+      ]
+    },
+    {
+      "Route": "css/update.css.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\it5gcuvc3g-absij0b56b.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "294"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 18 May 2025 12:17:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tU40/D82y+iPY491JgDi63RSmpI3zjHPE2xA56+z85o="
+        }
+      ]
+    },
+    {
+      "Route": "images/erp.png",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\images\\erp.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9228"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bH6zb8X5IDax6y89sovNVToJixnERDKTc5NVV+DO+6E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 16:42:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bH6zb8X5IDax6y89sovNVToJixnERDKTc5NVV+DO+6E="
+        }
+      ]
+    },
+    {
+      "Route": "images/erp.synl97fsfz.png",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\images\\erp.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9228"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bH6zb8X5IDax6y89sovNVToJixnERDKTc5NVV+DO+6E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 16:42:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "synl97fsfz"
+        },
+        {
+          "Name": "label",
+          "Value": "images/erp.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bH6zb8X5IDax6y89sovNVToJixnERDKTc5NVV+DO+6E="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.3ia7u1ovm2.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\m7ho86whbl-3ia7u1ovm2.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002188183807"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "456"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3ia7u1ovm2"
+        },
+        {
+          "Name": "label",
+          "Value": "js/AdditionalDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.3ia7u1ovm2.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\AdditionalDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2052"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3ia7u1ovm2"
+        },
+        {
+          "Name": "label",
+          "Value": "js/AdditionalDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.3ia7u1ovm2.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\m7ho86whbl-3ia7u1ovm2.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3ia7u1ovm2"
+        },
+        {
+          "Name": "label",
+          "Value": "js/AdditionalDetails.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\m7ho86whbl-3ia7u1ovm2.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002188183807"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "456"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\AdditionalDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2052"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FQ0eJgfe8j+gJxY9wDLwZ+Co+Aj0g/DhPH7oCddQY8I="
+        }
+      ]
+    },
+    {
+      "Route": "js/AdditionalDetails.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\m7ho86whbl-3ia7u1ovm2.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AEWPqV07YFyhGF/y7a70iwu0cHdIzRcev0aDvJGXGyo="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.23dfp3x1f4.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\rfukd6vh07-23dfp3x1f4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002320185615"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "430"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "23dfp3x1f4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Employees.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.23dfp3x1f4.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Employees.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1186"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "23dfp3x1f4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Employees.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.23dfp3x1f4.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\rfukd6vh07-23dfp3x1f4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "23dfp3x1f4"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Employees.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\rfukd6vh07-23dfp3x1f4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002320185615"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "430"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Employees.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1186"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ahu2/8o+jkfEMEgpDcRNJxKNsctuvhgeXaQwA570khQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/Employees.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\rfukd6vh07-23dfp3x1f4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "430"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IlBITJCiL83AH2ExGLhcBLXf7L2hfNGdgIMJpBxhWLs="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.95e124ro29.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\oillsuf866-95e124ro29.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002207505519"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "452"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "95e124ro29"
+        },
+        {
+          "Name": "label",
+          "Value": "js/EmploymentDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.95e124ro29.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\EmploymentDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2047"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "95e124ro29"
+        },
+        {
+          "Name": "label",
+          "Value": "js/EmploymentDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.95e124ro29.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\oillsuf866-95e124ro29.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "452"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "95e124ro29"
+        },
+        {
+          "Name": "label",
+          "Value": "js/EmploymentDetails.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\oillsuf866-95e124ro29.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002207505519"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "452"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\EmploymentDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2047"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-I4A+lhzCuznPLGmIvS96iHrPVTej7WTOTEV7xKHQK/g="
+        }
+      ]
+    },
+    {
+      "Route": "js/EmploymentDetails.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\oillsuf866-95e124ro29.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "452"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mFxNj4k0UOE/NrZ24IlTng8f34Kz/2iBL7SizU2GjU0="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\t5njbiukpi-sxg9vkhppa.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003322259136"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Home.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "493"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\t5njbiukpi-sxg9vkhppa.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.sxg9vkhppa.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\t5njbiukpi-sxg9vkhppa.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003322259136"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg9vkhppa"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Home.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.sxg9vkhppa.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Home.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "493"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg9vkhppa"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Home.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AF2Lce6epZMBXCYOyXFJJJf3sqboEbW1JdBK3XLLMPg="
+        }
+      ]
+    },
+    {
+      "Route": "js/Home.sxg9vkhppa.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\t5njbiukpi-sxg9vkhppa.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sxg9vkhppa"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Home.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LVsvfs4UwAersDbNymg3S7igrHMNPZaK0R6qey+ON04="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\140w0a1c0w-xdydexg4n6.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002159827214"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "462"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Identifications.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2068"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\140w0a1c0w-xdydexg4n6.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "462"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.xdydexg4n6.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\140w0a1c0w-xdydexg4n6.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002159827214"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "462"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xdydexg4n6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Identifications.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.xdydexg4n6.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Identifications.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2068"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xdydexg4n6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Identifications.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VeHouXk1FfswpOyKlNEsG/3T4T0RwC+ZmQtQRL2YYk0="
+        }
+      ]
+    },
+    {
+      "Route": "js/Identifications.xdydexg4n6.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\140w0a1c0w-xdydexg4n6.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "462"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:26:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xdydexg4n6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Identifications.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ogW5HwbpEopt2OY99dDt8NnC/JLBOPu6JHpoYVYUDec="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.eph43lk6qj.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\13md2podgh-eph43lk6qj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002427184466"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eph43lk6qj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/MainDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.eph43lk6qj.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\MainDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1389"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eph43lk6qj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/MainDetails.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.eph43lk6qj.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\13md2podgh-eph43lk6qj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eph43lk6qj"
+        },
+        {
+          "Name": "label",
+          "Value": "js/MainDetails.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\13md2podgh-eph43lk6qj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002427184466"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\MainDetails.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1389"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-okno4EwptK4Bekc3QghOsSpFnCib3CPmgLytyLpuG5s="
+        }
+      ]
+    },
+    {
+      "Route": "js/MainDetails.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\13md2podgh-eph43lk6qj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "411"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JXuTrdzLT34gqVBsibBGFN4ZdN6hXI5+HvpWsSbBMN8="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.d9ia8car1z.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\cryeygi55f-d9ia8car1z.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.004464285714"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d9ia8car1z"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Photo.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.d9ia8car1z.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Photo.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "304"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d9ia8car1z"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Photo.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.d9ia8car1z.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\cryeygi55f-d9ia8car1z.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d9ia8car1z"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Photo.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\cryeygi55f-d9ia8car1z.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.004464285714"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Photo.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "304"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D22nomt9BWiUiNgqyhBPNCymvr/WEm/LyoZ9yWViO9Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Photo.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\cryeygi55f-d9ia8car1z.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "223"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SYVgdZNOH4Ah4lBAyeG3v02aDn9d34kzFNxXVolNDOc="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.4poua8kcij.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\f54fnnr2uw-4poua8kcij.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002247191011"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4poua8kcij"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Roles.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.4poua8kcij.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Roles.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1932"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4poua8kcij"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Roles.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.4poua8kcij.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\f54fnnr2uw-4poua8kcij.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4poua8kcij"
+        },
+        {
+          "Name": "label",
+          "Value": "js/Roles.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\f54fnnr2uw-4poua8kcij.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002247191011"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.js",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\wwwroot\\js\\Roles.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1932"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eH1eHLV5CVW8yynPRI5F0LqI0lCUlT01WkLAfWzWJ1Q="
+        }
+      ]
+    },
+    {
+      "Route": "js/Roles.js.gz",
+      "AssetFile": "c:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.Api\\obj\\Debug\\net9.0\\compressed\\f54fnnr2uw-4poua8kcij.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "444"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 02 Jun 2025 20:07:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1UJCZxD2tPR0MwgO+1PICbR02pT4UZda+korYsabPgY="
+        }
+      ]
+    }
+  ]
 }

@@ -10,4 +10,3 @@ C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Core\obj\Debu
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Core\obj\Debug\net9.0\refint\Employees.Core.dll
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Core\obj\Debug\net9.0\Employees.Core.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Core\obj\Debug\net9.0\ref\Employees.Core.dll
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Core\obj\Debug\net9.0\Employees.Core.csproj.AssemblyReference.cache

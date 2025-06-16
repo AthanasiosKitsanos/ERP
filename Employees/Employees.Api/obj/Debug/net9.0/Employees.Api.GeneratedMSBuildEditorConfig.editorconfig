@@ -9,113 +9,13 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Employees.Api
 build_property.RootNamespace = Employees.Api
-build_property.ProjectDir = C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Api\
+build_property.ProjectDir = c:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Api\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Api
+build_property.MSBuildProjectDirectory = c:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.Api
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/AdditionalDetails/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkaXRpb25hbERldGFpbHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/AdditionalDetails/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkaXRpb25hbERldGFpbHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/AdditionalDetails/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkaXRpb25hbERldGFpbHNcUmVnaXN0ZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Credentials/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGVudGlhbHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/MainDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXE1haW5EZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Employees/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXFJlZ2lzdGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/EmploymentDetails/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95bWVudERldGFpbHNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/EmploymentDetails/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95bWVudERldGFpbHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/EmploymentDetails/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95bWVudERldGFpbHNcUmVnaXN0ZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Identifications/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpZmljYXRpb25zXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Identifications/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpZmljYXRpb25zXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Identifications/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpZmljYXRpb25zXFJlZ2lzdGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/LogIn/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nSW5cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Photo/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvdG9cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Roles/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Roles/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Roles/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcUmVnaXN0ZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/thano/OneDrive/Desktop/Portofolio/ERP/Employees/Employees.Api/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 

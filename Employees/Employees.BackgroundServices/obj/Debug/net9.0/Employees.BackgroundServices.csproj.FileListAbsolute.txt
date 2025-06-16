@@ -1,0 +1,12 @@
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\bin\Debug\net9.0\Employees.BackgroundServices.deps.json
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\bin\Debug\net9.0\Employees.BackgroundServices.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\bin\Debug\net9.0\Employees.BackgroundServices.pdb
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.AssemblyInfoInputs.cache
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.AssemblyInfo.cs
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.csproj.CoreCompileInputs.cache
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.sourcelink.json
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\refint\Employees.BackgroundServices.dll
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\Employees.BackgroundServices.pdb
+C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.BackgroundServices\obj\Debug\net9.0\ref\Employees.BackgroundServices.dll

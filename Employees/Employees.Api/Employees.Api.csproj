@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
-    <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>

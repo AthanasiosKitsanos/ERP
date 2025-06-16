@@ -11,15 +11,6 @@
     <Folder Include="Validations\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
-    <ProjectReference Include="..\Employees.Infrastructure\Employees.Infrastructure.csproj" />
-    <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-  </ItemGroup>
+  
 
 </Project>
