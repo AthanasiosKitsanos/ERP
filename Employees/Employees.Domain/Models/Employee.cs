@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace Employees.Domain.Models.Employee;
+namespace Employees.Domain.Models;
 
 public class Employee
 {

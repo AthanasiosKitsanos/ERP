@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ErpProject.Models;
+namespace Employees.Domain.Models;
 
 public class Credentials
 {

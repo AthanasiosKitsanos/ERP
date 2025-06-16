@@ -1,5 +1,4 @@
-using System;
-namespace ErpProject.Models;
+namespace Employees.Domain.Models;
 
 public class Identifications
 {
