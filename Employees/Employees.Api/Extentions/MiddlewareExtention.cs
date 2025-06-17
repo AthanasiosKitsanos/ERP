@@ -20,7 +20,7 @@ public static class MiddlewareExtention
 
         app.MapGet("/", context =>
         {
-            context.Response.Redirect("/home/index");
+            context.Response.Redirect("/login");
             return Task.CompletedTask;
         });
 

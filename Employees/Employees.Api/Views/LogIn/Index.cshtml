@@ -1,4 +1,4 @@
-﻿@using ErpProject.Models
+@using Employees.Domain.Models
 @model LogIn
 
 @{
@@ -18,8 +18,7 @@
     <h1>Log In Page</h1>
     <form method="post" asp-action="Index" asp-controller="LogIn">
         <table>
-            <tbody>
-                <tr>
+            <tr>
                     <td><b>Username:</b></td>
                     <td>
                         <input type="text" asp-for="@Model.Username">

@@ -1,3 +1,4 @@
+using Employees.Domain;
 using Employees.Infrastructure.IRepository;
 using Employees.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,8 @@ public static class ServiceCollectionExtention
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
+        services.AddScoped<Connection>();
+        
         services.AddScoped<IEmployeesRepository, EmployeesRepository>();
 
         return services;
