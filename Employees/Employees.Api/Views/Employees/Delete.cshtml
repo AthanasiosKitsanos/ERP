@@ -1,0 +1,26 @@
+@using Employees.Contracts.Employee
+@model ResponseEmployee.Delete
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/ul/css" asp-append-version="true">
+}
+
+<ul class="delete">
+    <li>
+        You are about to delete @Model.FirstName @Model.LastName
+    </li>
+
+    <li>
+        Are you sure?
+    </li>
+    
+    <li>
+        <form method="post" asp-action="Delete" asp-controller="Employees" asp-route-id="@Model.Id">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+            <a asp-action="Index">Cancel</a>
+        </form>
+    </li>
+</ul>
