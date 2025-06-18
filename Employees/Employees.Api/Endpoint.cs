@@ -8,4 +8,13 @@ public static class Endpoint
     {
         public const string LogInPage = "/login";
     }
+
+    public static class Employees
+    {
+        private const string Base = "/employees";
+
+        public const string Index = Base;
+        public const string GetAllEmployees = $"{Base}/getallemployees";
+        
+    }
 }
