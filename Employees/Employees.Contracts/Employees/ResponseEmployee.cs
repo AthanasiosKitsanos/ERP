@@ -24,4 +24,11 @@ public class ResponseEmployee
 
         public string MIME { get; set; } = string.Empty;
     }
+
+    public class Delete
+    {
+        public required int Id { get; init; }
+        public required string FirstName { get; init; }
+        public required string LastName { get; init; }
+    }
 }
