@@ -1,4 +1,5 @@
 using System.Data;
+using System.Runtime.CompilerServices;
 using Employees.Domain;
 using Employees.Domain.Models;
 using Employees.Infrastructure.IRepository;
@@ -83,21 +84,23 @@ public class EmployeesRepository : IEmployeesRepository
         }
     }
 
-    public async IAsyncEnumerable<Employee> GetAllAsync()
+    public async IAsyncEnumerable<Employee> GetAllAsync([EnumeratorCancellation] CancellationToken token)
     {
         string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber
                         FROM dbo.Employees";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
-            await connection.OpenAsync();
+            await connection.OpenAsync(token);
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
-                await using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync(token))
                 {
-                    while (await reader.ReadAsync())
+                    while (await reader.ReadAsync(token))
                     {
+                        token.ThrowIfCancellationRequested();
+                        
                         yield return new Employee
                         {
                             Id = reader.GetInt32(0),
