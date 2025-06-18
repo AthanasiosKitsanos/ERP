@@ -139,7 +139,7 @@ public class EmployeesRepository : IEmployeesRepository
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        string query = @"SELECT FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Mime, Photograph
+        string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Mime, Photograph
                         FROM dbo.Employees
                         WHERE EmployeeId = @EmployeeId";
 
@@ -159,16 +159,17 @@ public class EmployeesRepository : IEmployeesRepository
                         
                         return new Employee
                         {
-                            FirstName = reader.GetString(0),
-                            LastName = reader.GetString(1),
-                            Email = reader.GetString(2),
-                            Age = reader.GetString(3),
-                            DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(4)),
-                            Nationality = reader.GetString(5),
-                            Gender = reader.GetString(6),
-                            PhoneNumber = reader.GetString(7),
-                            MIME = reader.GetString(8),
-                            Photograph = await reader.GetFieldValueAsync<byte[]>(9)
+                            Id = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            Email = reader.GetString(3),
+                            Age = reader.GetString(4),
+                            DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(5)),
+                            Nationality = reader.GetString(6),
+                            Gender = reader.GetString(7),
+                            PhoneNumber = reader.GetString(8),
+                            MIME = reader.GetString(9),
+                            Photograph = await reader.GetFieldValueAsync<byte[]>(10)
                         };
                     }
                 }
