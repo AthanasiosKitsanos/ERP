@@ -1,6 +1,7 @@
 using Employees.Api.Extentions;
 using Employees.Core;
 using Employees.Infrastructure;
+using Employees.BackgroundServices;
 
 namespace MainProgram;
 
@@ -13,6 +14,7 @@ class MainProgram
         builder.AddJsonFiles();
         
         builder.Services.AddServices();
+        builder.Services.AddBackgroundServices();
         builder.Services.AddCore();
         builder.Services.AddInfrastructure();
         
