@@ -14,37 +14,48 @@ public class EmployeesServices: IEmployeesServices
         _repository = repository;
     }
 
-    public async Task<int> CreateAsync(Employee employee)
+    public async Task<int> CreateAsync(Employee employee, CancellationToken cancellationToken = default)
     {
-        await _repository.CreateAsync(employee);
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return await _repository.CreateAsync(employee, cancellationToken);  
     }
 
-    public Task<bool> DeleteByIdAsync(int id)
+    public async Task<bool> DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return await _repository.DeleteByIdAsync(id, cancellationToken);
     }
 
-    public Task<bool> EmailExistsAsync(string email)
+    public Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return _repository.EmailExistsAsync(email, cancellationToken);
     }
-    public async IAsyncEnumerable<Employee> GetAllAsync([EnumeratorCancellation] CancellationToken cancellationToken)
+
+    public async IAsyncEnumerable<Employee> GetAllAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         await foreach (Employee employee in _repository.GetAllAsync(cancellationToken))
         {
             yield return employee;
         }
     }
-    
 
-    public Task<Employee> GetByIdAsync(int id)
+    public async Task<Employee> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+
+        return await _repository.GetByIdAsync(id, cancellationToken);
     }
 
-    public Task<bool> UpdateAsync(int id, Employee employee)
+    public async Task<bool> UpdateAsync(int id, Employee employee, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        cancellationToken.ThrowIfCancellationRequested();
+        
+        return await _repository.UpdateAsync(id, employee, cancellationToken); 
     }
 }

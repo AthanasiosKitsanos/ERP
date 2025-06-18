@@ -4,11 +4,11 @@ namespace Employees.Shared;
 
 public static class ByteArray
 {
-    public static async Task<byte[]> GetArrayOfBytes(this byte[] photograph, IFormFile file)
+    public static async Task<byte[]> GetArrayOfBytes(this IFormFile file)
     {
         long arrayLength = file.Length;
 
-        photograph = new byte[arrayLength];
+        byte[] photograph = new byte[arrayLength];
 
         await using (MemoryStream stream = new MemoryStream())
         {

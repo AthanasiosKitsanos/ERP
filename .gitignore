@@ -26,3 +26,8 @@ Employees/Employees.Core/obj/
 Employees/Employees.Shared/bin/
 Employees/Employees.Shared/obj/
 Employees/Employees.BackgroundServices/bin/Debug/net9.0/Employees.BackgroundServices.deps.json
+
+
+Employees/Employees.Contracts/bin/
+Employees/Employees.Contracts/obj/
+

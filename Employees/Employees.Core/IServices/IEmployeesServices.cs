@@ -5,15 +5,15 @@ namespace Employees.Core.IServices;
 
 public interface IEmployeesServices
 {
-    Task<bool> EmailExistsAsync(string email);
+    Task<bool> EmailExistsAsync(string email, CancellationToken token = default);
     
-    Task<int> CreateAsync(Employee employee);
+    Task<int> CreateAsync(Employee employee, CancellationToken token = default);
 
-    IAsyncEnumerable<Employee> GetAllAsync(CancellationToken token);
+    IAsyncEnumerable<Employee> GetAllAsync(CancellationToken token = default);
 
-    Task<Employee> GetByIdAsync(int id);
+    Task<Employee> GetByIdAsync(int id, CancellationToken token = default);
 
-    Task<bool> UpdateAsync(int id, Employee employee);
+    Task<bool> UpdateAsync(int id, Employee employee, CancellationToken token = default);
 
-    Task<bool> DeleteByIdAsync(int id);
+    Task<bool> DeleteByIdAsync(int id, CancellationToken token = default);
 }
