@@ -1,6 +1,7 @@
 using Employees.Domain.Models;
 using Employees.Core.IServices;
 using Employees.Infrastructure.IRepository;
+using System.Runtime.CompilerServices;
 
 namespace Employees.Core.Services;
 
@@ -28,11 +29,14 @@ public class EmployeesServices: IEmployeesServices
     {
         throw new NotImplementedException();
     }
-
-    public IAsyncEnumerable<Employee> GetAllAsync()
+    public async IAsyncEnumerable<Employee> GetAllAsync([EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await foreach (Employee employee in _repository.GetAllAsync(cancellationToken))
+        {
+            yield return employee;
+        }
     }
+    
 
     public Task<Employee> GetByIdAsync(int id)
     {
