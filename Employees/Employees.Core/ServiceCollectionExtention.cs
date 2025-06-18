@@ -10,8 +10,10 @@ public static class ServiceCollectionExtention
     {
         services.AddScoped<IEmployeesServices, EmployeesServices>();
 
+        services.AddScoped<ICredentialsServices, CredentialsServices>();
+
         //services.AddScoped<IEmployeesValidators, EmployeesValidators>();
-        
+
         return services;
     }
 }

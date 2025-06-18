@@ -1,4 +1,4 @@
-using Employees.Contracts;
+using Employees.Contracts.Employee;
 using Employees.Domain.Models;
 using Employees.Shared;
 
@@ -6,9 +6,9 @@ namespace Employees.Api.Mapping.Employees;
 
 public static class EmployeeMapping
 {
-    public static ResponseEmployee MapToResponse(this Employee employee)
+    public static ResponseEmployee.Get MapToGetResponse(this Employee employee)
     {
-        return new ResponseEmployee
+        return new ResponseEmployee.Get
         {
             Id = employee.Id,
             FirstName = employee.FirstName,
@@ -24,14 +24,14 @@ public static class EmployeeMapping
         };
     }
 
-    public static async Task<Employee> MapToCreateRequest(this RequestEmployee request)
+    public static async Task<Employee> MapToCreateRequest(this RequestEmployee.Create request)
     {
         return new Employee
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
             Email = request.Email,
-            Age = request.Age,
+            Age = request.DateOfBirth.CalculateAge(),
             DateOfBirth = request.DateOfBirth,
             Nationality = request.Nationality,
             Gender = request.Gender,
@@ -40,4 +40,6 @@ public static class EmployeeMapping
             MIME = request.PhotoFile.ContentType
         };
     }
+
+
 }

@@ -13,6 +13,8 @@ public static class ServiceCollectionExtention
         
         services.AddScoped<IEmployeesRepository, EmployeesRepository>();
 
+        services.AddScoped<ICredentialsRepository, CredentialsRepository>();
+
         return services;
     }
 }
