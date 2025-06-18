@@ -8,7 +8,7 @@ public interface IEmployeesRepository
     
     Task<int> CreateAsync(Employee employee);
 
-    IAsyncEnumerable<Employee> GetAllAsync();
+    IAsyncEnumerable<Employee> GetAllAsync(CancellationToken token);
 
     Task<Employee> GetByIdAsync(int id);
 
