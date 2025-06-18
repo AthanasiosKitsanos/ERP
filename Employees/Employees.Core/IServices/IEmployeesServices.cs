@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Employees.Domain.Models;
 
 namespace Employees.Core.IServices;
@@ -8,7 +9,7 @@ public interface IEmployeesServices
     
     Task<int> CreateAsync(Employee employee);
 
-    IAsyncEnumerable<Employee> GetAllAsync();
+    IAsyncEnumerable<Employee> GetAllAsync(CancellationToken token);
 
     Task<Employee> GetByIdAsync(int id);
 
