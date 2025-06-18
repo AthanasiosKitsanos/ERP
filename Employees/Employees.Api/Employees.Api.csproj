@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Employees\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
     <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
     <ProjectReference Include="..\Employees.Infrastructure\Employees.Infrastructure.csproj" />
