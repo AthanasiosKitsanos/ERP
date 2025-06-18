@@ -12,4 +12,23 @@ public class EmployeesController : Controller
     {
         _services = services;
     }
+
+    [HttpGet(Endpoint.Employees.Index)]
+    public IActionResult Index(CancellationToken cancellationToken)
+    {
+        return View();
+    }
+
+    [HttpGet(Endpoint.Employees.GetAllEmployees)]
+    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    {
+        List<Employee> employees = new List<Employee>();
+
+        await foreach (Employee employee in _services.GetAllAsync(cancellationToken))
+        {
+            employees.Add(employee);
+        }
+
+        return Json(employees);
+    }
 }
