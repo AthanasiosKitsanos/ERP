@@ -19,6 +19,9 @@ public static class Endpoint
         public const string Index = Base;
         public const string GetAllEmployees = $"{Base}/getallemployees";
         public const string Create = $"{Base}/create";
+
+        public const string Get = $"{Base}/{{id}}";
+        public const string Delete = $"{Get}/delete";
     }
 
     public static class Credentials
