@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function()
-{
-    await window.refreshCheckCompleted;
-    
+{   
     const tbody = document.getElementById('employeeTable');
 
         fetch('/employees/getallemployees')
