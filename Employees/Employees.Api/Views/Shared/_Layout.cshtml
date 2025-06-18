@@ -21,6 +21,10 @@
                         <a asp-controller="Home" asp-action="Index">Home</a>
                     </li>
 
+                    <li>
+                        <a asp-action="Index" asp-controller="Employees">Employees</a>
+                    </li>
+
                     @if(User.Identity?.IsAuthenticated == true && ((ClaimsIdentity)User.Identity).Claims.Any())
                     {
                         <li>
