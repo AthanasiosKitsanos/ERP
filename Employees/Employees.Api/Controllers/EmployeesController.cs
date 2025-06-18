@@ -80,4 +80,32 @@ public class EmployeesController : Controller
 
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
+
+    [HttpGet(Endpoint.Employees.Delete)]
+    public async Task<IActionResult> Delete(int id)
+    {
+        _logger.LogInformation($"url Id {id}");
+        Employee employee = await _services.GetByIdAsync(id);
+
+        ResponseEmployee.Delete response = employee.MapToDeleteResponse();
+
+        _logger.LogInformation($"Employee Id {response.Id}");
+        return View(response);
+    }
+
+    [HttpDelete(Endpoint.Employees.Delete)]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ConfirmDelete(int id)
+    {
+        _logger.LogInformation($"Delete Id: {id}");
+        bool IsDeleted = await _services.DeleteByIdAsync(id);
+
+        if (!IsDeleted)
+        {
+            _logger.LogWarning("The Employe was not deleted");
+            return RedirectToAction("Index", "Employees");    
+        }
+
+        return RedirectToAction("Index", "Employees");
+    }
 }
