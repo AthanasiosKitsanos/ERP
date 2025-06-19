@@ -116,7 +116,7 @@ public class EmployeesRepository : IEmployeesRepository
                     while (await reader.ReadAsync(cancellationToken))
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        
+
                         yield return new Employee
                         {
                             Id = reader.GetInt32(0),
@@ -156,7 +156,7 @@ public class EmployeesRepository : IEmployeesRepository
                     if (await reader.ReadAsync(cancellationToken))
                     {
                         cancellationToken.ThrowIfCancellationRequested();
-                        
+
                         return new Employee
                         {
                             Id = reader.GetInt32(0),
@@ -234,5 +234,37 @@ public class EmployeesRepository : IEmployeesRepository
                 return await command.ExecuteNonQueryAsync(cancellationToken) > 0;
             }
         }
+    }
+
+    public async Task<Employee> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
+    {
+        string query = @"SELECT EmployeeId, FirstName, LastName
+                        FROM Employees
+                        WHERE EmployeeId = @EmployeeId";
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync(token);
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
+
+                await using (SqlDataReader reader = await command.ExecuteReaderAsync(token))
+                {
+                    if (await reader.ReadAsync(token))
+                    {
+                        return new Employee
+                        {
+                            Id = reader.GetInt32(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2)
+                        };
+                    }
+                }
+            }
+        }
+
+        return null!;
     }
 }
