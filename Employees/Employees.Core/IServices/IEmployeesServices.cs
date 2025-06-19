@@ -6,7 +6,7 @@ namespace Employees.Core.IServices;
 public interface IEmployeesServices
 {
     Task<bool> EmailExistsAsync(string email, CancellationToken token = default);
-    
+
     Task<int> CreateAsync(Employee employee, CancellationToken token = default);
 
     IAsyncEnumerable<Employee> GetAllAsync(CancellationToken token = default);
@@ -16,4 +16,6 @@ public interface IEmployeesServices
     Task<bool> UpdateAsync(int id, Employee employee, CancellationToken token = default);
 
     Task<bool> DeleteByIdAsync(int id, CancellationToken token = default);
+
+    Task<Employee> GetInfoForDeleteAysnc(int id, CancellationToken token = default);
 }
