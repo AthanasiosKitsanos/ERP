@@ -29,7 +29,8 @@
 
 - `ERP.sln`  
   Main solution file that aggregates all sub-projects.
-1) `Employees/`
+1) <details>
+    <summary>`Employees/`</summary>
     - `Employees.Api`
         - Exposes RESTful API endpoints for managing employee-related operations.
         - ASP.NET Core MVC web front-end (Controllers, Razor views, layout structure)
@@ -52,7 +53,7 @@
 
     - `Employees.Shared`
         - Responsible for data type manipulation
-
+    </details>
 2) `Coming Soon...`
 
 ### 📝 License
