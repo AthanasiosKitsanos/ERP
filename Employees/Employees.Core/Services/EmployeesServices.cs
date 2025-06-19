@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Employees.Core.Services;
 
-public class EmployeesServices: IEmployeesServices
+public class EmployeesServices : IEmployeesServices
 {
     private readonly IEmployeesRepository _repository;
 
@@ -18,7 +18,7 @@ public class EmployeesServices: IEmployeesServices
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _repository.CreateAsync(employee, cancellationToken);  
+        return await _repository.CreateAsync(employee, cancellationToken);
     }
 
     public async Task<bool> DeleteByIdAsync(int id, CancellationToken cancellationToken = default)
@@ -55,7 +55,12 @@ public class EmployeesServices: IEmployeesServices
     public async Task<bool> UpdateAsync(int id, Employee employee, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        
-        return await _repository.UpdateAsync(id, employee, cancellationToken); 
+
+        return await _repository.UpdateAsync(id, employee, cancellationToken);
+    }
+
+    public async Task<Employee> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
+    {   
+        return await _repository.GetInfoForDeleteAysnc(id, token);
     }
 }
