@@ -20,7 +20,9 @@ public class CredentialsRepository : ICredentialsRepository
         string query = @"INSERT INTO Credentials (Username, Password, LastLogIn, AccountStatus, EmployeeId)
                         VALUES (@Username, @Password, @LastLogIn, @AccountStatus, @EmployeeId);
 
-                        UPDATE Employees SET IsCompleted = 1 WHERE EmployeeId = @EmployeeId";
+                        UPDATE Employees 
+                        SET IsCompleted = 1
+                        WHERE EmployeeId = @EmployeeId";
 
         PasswordHasher<Credentials> hasher = new PasswordHasher<Credentials>();
 
