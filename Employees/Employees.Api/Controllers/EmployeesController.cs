@@ -85,7 +85,8 @@ public class EmployeesController : Controller
     public async Task<IActionResult> Delete(int id)
     {
         _logger.LogInformation($"url Id {id}");
-        Employee employee = await _services.GetByIdAsync(id);
+
+        Employee employee = await _services.GetInfoForDeleteAysnc(id);
 
         ResponseEmployee.Delete response = employee.MapToDeleteResponse();
 
