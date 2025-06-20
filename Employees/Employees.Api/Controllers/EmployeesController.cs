@@ -1,8 +1,12 @@
+using System.Threading.Tasks;
+using Azure;
 using Employees.Api.Mapping.Employees;
 using Employees.Contracts.Employee;
 using Employees.Core.IServices;
+using Employees.Domain;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Employees.Api.Controllers;
 
@@ -40,7 +44,43 @@ public class EmployeesController : Controller
             responseList.Add(response);
         }
 
+        _logger.LogInformation("List of Employees created and was sent as Json.");
         return Json(responseList);
+    }
+
+    [HttpGet(Endpoint.Employees.GetAllDetails)]
+    public IActionResult Details(int id)
+    {
+        if (id <= 0)
+        {
+            Response.StatusCode = 404;
+            _logger.LogWarning("Status code 404, id was not found");
+            return PartialView("Error", new ErrorViewModel
+            {
+                StatusCode = 404,
+                Message = "Id was not found"
+            });
+        }
+
+        EmployeeId newId = new EmployeeId(id);
+
+        return View(newId);
+    }
+
+    [HttpGet(Endpoint.Employees.GetMainDetails)]
+    public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
+    {
+        Employee employee = await _services.GetByIdAsync(id, token);
+
+        ResponseEmployee.Get response = employee.MapToGetResponse();
+
+        if (response is null)
+        {
+            Response.StatusCode = 404;
+            return PartialView("Error", Response.StatusCode);
+        }
+
+        return PartialView(response);
     }
 
     [HttpGet(Endpoint.Employees.Create)]
@@ -55,6 +95,7 @@ public class EmployeesController : Controller
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model State not valid, returning to Create Page again.");
             return View(request);
         }
 
@@ -62,11 +103,12 @@ public class EmployeesController : Controller
 
         if (emailExists)
         {
+            _logger.LogInformation($"{request.Email} already exists, returning to the Create View");
             ModelState.AddModelError(nameof(request.Email), "Email already exists");
             return View(request);
         }
 
-        Employee employee = await request.MapToCreateRequest();
+        Employee employee = await request.MapToCreateEmployee();
 
         int employeeId = await _services.CreateAsync(employee, cancellationToken);
 
@@ -79,6 +121,43 @@ public class EmployeesController : Controller
         _logger.LogInformation($"Employee with Id: {employeeId} is created");
 
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
+    }
+
+    [HttpGet(Endpoint.Employees.Update)]
+    public async Task<IActionResult> Update(int id, CancellationToken token)
+    {
+        Employee employee = await _services.GetByIdAsync(id, token);
+
+        RequestEmployee.Update request = employee.MapToUpdateRequest();
+
+        if (request is null)
+        {
+            Response.StatusCode = 404;
+            return PartialView("Error", new ErrorViewModel
+            {
+                StatusCode = 404,
+                Message = "Page was not found"
+            });
+        }
+
+        return PartialView(request);
+    }
+
+    [HttpPut(Endpoint.Employees.Update)]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
+    {
+        Employee employee = request.MapToUpdateEmployee();
+
+        bool IsUpdated = await _services.UpdateAsync(id, employee, token);
+
+        if (!IsUpdated)
+        {
+            _logger.LogWarning($"Employee with Id: {id}, was not updated");
+            return RedirectToAction("Details", new { id });
+        }
+
+        return RedirectToAction("Details", new { id });
     }
 
     [HttpGet(Endpoint.Employees.Delete)]
