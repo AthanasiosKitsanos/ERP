@@ -1,11 +1,8 @@
 using System.Data;
 using System.Runtime.CompilerServices;
-using System.Security.Principal;
 using Employees.Domain;
 using Employees.Domain.Models;
 using Employees.Infrastructure.IRepository;
-using Employees.Shared;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 
 namespace Employees.Infrastructure.Repository;
@@ -139,7 +136,7 @@ public class EmployeesRepository : IEmployeesRepository
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber, Mime, Photograph
+        string query = @"SELECT EmployeeId, FirstName, LastName, Email, Age, DateOfBirth, Nationality, Gender, PhoneNumber
                         FROM dbo.Employees
                         WHERE EmployeeId = @EmployeeId";
 
@@ -167,9 +164,7 @@ public class EmployeesRepository : IEmployeesRepository
                             DateOfBirth = DateOnly.FromDateTime(reader.GetDateTime(5)),
                             Nationality = reader.GetString(6),
                             Gender = reader.GetString(7),
-                            PhoneNumber = reader.GetString(8),
-                            MIME = reader.GetString(9),
-                            Photograph = await reader.GetFieldValueAsync<byte[]>(10)
+                            PhoneNumber = reader.GetString(8)
                         };
                     }
                 }
@@ -179,46 +174,9 @@ public class EmployeesRepository : IEmployeesRepository
         return null!;
     }
 
-    public async Task<bool> UpdateAsync(int id, Employee employee, CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateAsync(string query, List<SqlParameter> parameters, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-
-        List<string> variables = new List<string>();
-        List<SqlParameter> parameters = new List<SqlParameter>();
-
-        if (!string.IsNullOrEmpty(employee.Email))
-        {
-            variables.Add("Email = @Email");
-            parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar) { Value = employee.Email });
-        }
-
-        if (!string.IsNullOrEmpty(employee.PhoneNumber))
-        {
-            variables.Add("PhoneNumber = @PhoneNumber");
-            parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.NVarChar) { Value = employee.PhoneNumber });
-        }
-
-        if (!string.IsNullOrEmpty(employee.Nationality))
-        {
-            variables.Add("Nationality = @Nationality");
-            parameters.Add(new SqlParameter("@Nationality", SqlDbType.NVarChar) { Value = employee.Nationality });
-        }
-
-        if (employee.PhotoFile is not null)
-        {
-            variables.Add("Photograph = @Photograph, Mime = @Mime");
-            parameters.Add(new SqlParameter("@Mime", SqlDbType.NVarChar) { Value = employee.PhotoFile.ContentType });
-            parameters.Add(new SqlParameter(@"Photograph", SqlDbType.VarBinary) { Value = employee.Photograph });
-        }
-
-        if (variables.Count == 0)
-        {
-            return false;
-        }
-
-        string query = @$"UPDATE dbo.Employees
-                        SET {string.Join(", ", variables)}
-                        WHERE EmployeeId = @EmployeeId";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -226,7 +184,6 @@ public class EmployeesRepository : IEmployeesRepository
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = id;
                 command.Parameters.AddRange(parameters.ToArray());
 
                 cancellationToken.ThrowIfCancellationRequested();
