@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="QueryBuilders\" />
+  </ItemGroup>
+
 </Project>
