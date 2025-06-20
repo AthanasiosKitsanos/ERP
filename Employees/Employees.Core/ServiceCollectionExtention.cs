@@ -12,8 +12,6 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<ICredentialsServices, CredentialsServices>();
 
-        //services.AddScoped<IEmployeesValidators, EmployeesValidators>();
-
         return services;
     }
 }
