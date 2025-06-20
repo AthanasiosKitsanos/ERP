@@ -15,13 +15,13 @@ public static class Endpoint
     public static class Employees
     {
         private const string Base = "/employees";
-
         public const string Index = Base;
         public const string GetAllEmployees = $"{Base}/getallemployees";
         public const string Create = $"{Base}/create";
-
-        public const string Get = $"{Base}/{{id}}";
-        public const string Delete = $"{Get}/delete";
+        public const string GetAllDetails = $"{Base}/{{id}}/details";
+        public const string GetMainDetails = $"{Base}/{{id}}/getmaindetails";
+        public const string Delete = $"{Base}/{{id}}/delete";
+        public const string Update = $"{Base}/{{id}}/update";
     }
 
     public static class Credentials
