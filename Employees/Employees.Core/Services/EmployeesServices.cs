@@ -2,6 +2,9 @@ using Employees.Domain.Models;
 using Employees.Core.IServices;
 using Employees.Infrastructure.IRepository;
 using System.Runtime.CompilerServices;
+using Employees.Shared.QueryBuilders;
+using Microsoft.Data.SqlClient;
+using Employees.Shared.Validators;
 
 namespace Employees.Core.Services;
 
@@ -54,9 +57,16 @@ public class EmployeesServices : IEmployeesServices
 
     public async Task<bool> UpdateAsync(int id, Employee employee, CancellationToken cancellationToken = default)
     {
+        (string query, List<SqlParameter> sqlParameters) objects = employee.UpdateDetailsQueryBuilder();
+
+        if (objects.IsEmptyOrNull())
+        {
+            return false;
+        }
+
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _repository.UpdateAsync(id, employee, cancellationToken);
+        return await _repository.UpdateAsync(objects.query, objects.sqlParameters, cancellationToken);
     }
 
     public async Task<Employee> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
