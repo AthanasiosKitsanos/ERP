@@ -6,7 +6,7 @@ namespace Employees.Api.Mapping.Employees;
 
 public static class RequestMapping
 {
-    public static async Task<Employee> MapToCreateRequest(this RequestEmployee.Create request)
+    public static async Task<Employee> MapToCreateEmployee(this RequestEmployee.Create request)
     {
         return new Employee
         {
@@ -20,6 +20,30 @@ public static class RequestMapping
             PhoneNumber = request.PhoneNumber,
             Photograph = await request.PhotoFile.GetArrayOfBytes(),
             MIME = request.PhotoFile.ContentType
+        };
+    }
+
+    public static RequestEmployee.Update MapToUpdateRequest(this Employee employee)
+    {
+        return new RequestEmployee.Update
+        {
+            Id = employee.Id,
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+            Age = employee.Age,
+            DateOfBirth = employee.DateOfBirth,
+            Gender = employee.Gender
+        };
+    }
+
+    public static Employee MapToUpdateEmployee(this RequestEmployee.Update request)
+    {
+        return new Employee
+        {
+            Id = request.Id,
+            Email = request.Email,
+            Nationality = request.Nationality,
+            PhoneNumber = request.PhoneNumber
         };
     }
 }
