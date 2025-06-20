@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Validations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Employees.Infrastructure\Employees.Infrastructure.csproj" />
   </ItemGroup>
 
