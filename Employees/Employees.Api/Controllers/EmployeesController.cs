@@ -1,12 +1,8 @@
-using System.Threading.Tasks;
-using Azure;
-using Employees.Api.Mapping.Employees;
-using Employees.Contracts.Employee;
+using Employees.Contracts.EmployeeContracts;
 using Employees.Core.IServices;
 using Employees.Domain;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace Employees.Api.Controllers;
 
@@ -38,10 +34,18 @@ public class EmployeesController : Controller
 
         List<ResponseEmployee.Get> responseList = new List<ResponseEmployee.Get>();
 
-        await foreach (Employee employee in _services.GetAllAsync(cancellationToken))
+        await foreach (ResponseEmployee.Get response in _services.GetAllAsync(cancellationToken))
         {
-            ResponseEmployee.Get response = employee.MapToGetResponse();
             responseList.Add(response);
+        }
+
+        if (responseList.Count == 0)
+        {
+            return View("Error", new ErrorViewModel
+            {
+                StatusCode = 404,
+                Message = "List not found"
+            });
         }
 
         _logger.LogInformation("List of Employees created and was sent as Json.");
@@ -53,8 +57,8 @@ public class EmployeesController : Controller
     {
         if (id <= 0)
         {
-            Response.StatusCode = 404;
             _logger.LogWarning("Status code 404, id was not found");
+
             return PartialView("Error", new ErrorViewModel
             {
                 StatusCode = 404,
@@ -70,14 +74,16 @@ public class EmployeesController : Controller
     [HttpGet(Endpoint.Employees.GetMainDetails)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
     {
-        Employee employee = await _services.GetByIdAsync(id, token);
-
-        ResponseEmployee.Get response = employee.MapToGetResponse();
+        ResponseEmployee.Get response = await _services.GetByIdAsync(id, token);
 
         if (response is null)
         {
-            Response.StatusCode = 404;
-            return PartialView("Error", Response.StatusCode);
+
+            return PartialView("Error", new ErrorViewModel
+            {
+                StatusCode = 404,
+                Message = "Employee details not found"
+            });
         }
 
         return PartialView(response);
@@ -108,9 +114,7 @@ public class EmployeesController : Controller
             return View(request);
         }
 
-        Employee employee = await request.MapToCreateEmployee();
-
-        int employeeId = await _services.CreateAsync(employee, cancellationToken);
+        int employeeId = await _services.CreateAsync(request, cancellationToken);
 
         if (employeeId <= 0)
         {
@@ -126,9 +130,7 @@ public class EmployeesController : Controller
     [HttpGet(Endpoint.Employees.Update)]
     public async Task<IActionResult> Update(int id, CancellationToken token)
     {
-        Employee employee = await _services.GetByIdAsync(id, token);
-
-        RequestEmployee.Update request = employee.MapToUpdateRequest();
+        ResponseEmployee.Get request = await _services.GetByIdAsync(id, token);
 
         if (request is null)
         {
@@ -145,11 +147,9 @@ public class EmployeesController : Controller
 
     [HttpPut(Endpoint.Employees.Update)]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
+    public async Task<IActionResult> Update(int id, ResponseEmployee.Update request, CancellationToken token)
     {
-        Employee employee = request.MapToUpdateEmployee();
-
-        bool IsUpdated = await _services.UpdateAsync(id, employee, token);
+        bool IsUpdated = await _services.UpdateAsync(id, request, token);
 
         if (!IsUpdated)
         {
@@ -165,9 +165,7 @@ public class EmployeesController : Controller
     {
         _logger.LogInformation($"url Id {id}");
 
-        Employee employee = await _services.GetInfoForDeleteAysnc(id);
-
-        ResponseEmployee.Delete response = employee.MapToDeleteResponse();
+        ResponseEmployee.Delete response = await _services.GetInfoForDeleteAysnc(id);
 
         _logger.LogInformation($"Employee Id {response.Id}");
         return View(response);

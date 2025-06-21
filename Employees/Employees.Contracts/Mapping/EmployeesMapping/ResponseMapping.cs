@@ -1,5 +1,4 @@
-using System;
-using Employees.Contracts.Employee;
+using Employees.Contracts.EmployeeContracts;
 using Employees.Domain.Models;
 
 namespace Employees.Api.Mapping.Employees;

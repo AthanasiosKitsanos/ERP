@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Employees.Domain.Models;
 
 public class Credentials

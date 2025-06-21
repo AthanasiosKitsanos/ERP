@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Employees.Contracts.Credentials;
+namespace Employees.Contracts.CredentialsContract;
 
 public class RequestCredentials
 {

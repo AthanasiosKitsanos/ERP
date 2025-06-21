@@ -1,7 +1,7 @@
-using Employees.Contracts.Credentials;
 using Employees.Domain.Models;
+using Employees.Contracts.CredentialsContract;
 
-namespace Employees.Api.Mapping;
+namespace Employees.Contracts.CredentialsMapping;
 
 public static class CredentialsMapping
 {

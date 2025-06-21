@@ -2,9 +2,12 @@ using Employees.Domain.Models;
 using Employees.Core.IServices;
 using Employees.Infrastructure.IRepository;
 using System.Runtime.CompilerServices;
-using Employees.Shared.QueryBuilders;
+using Employees.Core.QueryBuilders;
 using Microsoft.Data.SqlClient;
 using Employees.Shared.Validators;
+using Employees.Contracts.EmployeeContracts;
+using Employees.Contracts.EmployeesMapping;
+using Employees.Api.Mapping.Employees;
 
 namespace Employees.Core.Services;
 
@@ -17,9 +20,11 @@ public class EmployeesServices : IEmployeesServices
         _repository = repository;
     }
 
-    public async Task<int> CreateAsync(Employee employee, CancellationToken cancellationToken = default)
+    public async Task<int> CreateAsync(RequestEmployee.Create request, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
+
+        Employee employee = await request.MapToCreateEmployee();
 
         return await _repository.CreateAsync(employee, cancellationToken);
     }
@@ -38,26 +43,30 @@ public class EmployeesServices : IEmployeesServices
         return _repository.EmailExistsAsync(email, cancellationToken);
     }
 
-    public async IAsyncEnumerable<Employee> GetAllAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<ResponseEmployee.Get> GetAllAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
         await foreach (Employee employee in _repository.GetAllAsync(cancellationToken))
         {
-            yield return employee;
+            yield return employee.MapToGetResponse();;
         }
     }
 
-    public async Task<Employee> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<ResponseEmployee.Get> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _repository.GetByIdAsync(id, cancellationToken);
+        Employee employee = await _repository.GetByIdAsync(id);
+
+        return employee.MapToGetResponse();
     }
 
-    public async Task<bool> UpdateAsync(int id, Employee employee, CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateAsync(int id, ResponseEmployee.Update updateResponse, CancellationToken cancellationToken = default)
     {
-        (string query, List<SqlParameter> sqlParameters) objects = employee.UpdateDetailsQueryBuilder();
+        RequestEmployee.Update updateRequest = updateResponse.MapResponseToRequestUpdate();
+
+        (string query, List<SqlParameter> sqlParameters) objects = updateRequest.UpdateDetailsQueryBuilder(id);
 
         if (objects.IsEmptyOrNull())
         {
@@ -69,8 +78,10 @@ public class EmployeesServices : IEmployeesServices
         return await _repository.UpdateAsync(objects.query, objects.sqlParameters, cancellationToken);
     }
 
-    public async Task<Employee> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
-    {   
-        return await _repository.GetInfoForDeleteAysnc(id, token);
+    public async Task<ResponseEmployee.Delete> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
+    {
+        Employee employee = await _repository.GetInfoForDeleteAysnc(id, token);
+
+        return employee.MapToDeleteResponse();
     }
 }

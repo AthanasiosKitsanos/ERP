@@ -1,8 +1,8 @@
-using Employees.Contracts.Employee;
+using Employees.Contracts.EmployeeContracts;
 using Employees.Domain.Models;
 using Employees.Shared;
 
-namespace Employees.Api.Mapping.Employees;
+namespace Employees.Contracts.EmployeesMapping;
 
 public static class RequestMapping
 {
@@ -23,27 +23,13 @@ public static class RequestMapping
         };
     }
 
-    public static RequestEmployee.Update MapToUpdateRequest(this Employee employee)
+    public static RequestEmployee.Update MapResponseToRequestUpdate(this ResponseEmployee.Update updateResponse)
     {
         return new RequestEmployee.Update
         {
-            Id = employee.Id,
-            FirstName = employee.FirstName,
-            LastName = employee.LastName,
-            Age = employee.Age,
-            DateOfBirth = employee.DateOfBirth,
-            Gender = employee.Gender
-        };
-    }
-
-    public static Employee MapToUpdateEmployee(this RequestEmployee.Update request)
-    {
-        return new Employee
-        {
-            Id = request.Id,
-            Email = request.Email,
-            Nationality = request.Nationality,
-            PhoneNumber = request.PhoneNumber
+            Email = updateResponse.Email,
+            Nationality = updateResponse.Nationality,
+            PhoneNumber = updateResponse.PhoneNumber
         };
     }
 }

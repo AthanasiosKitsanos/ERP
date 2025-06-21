@@ -13,12 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj" />
-    <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
-    <ProjectReference Include="..\Employees.Infrastructure\Employees.Infrastructure.csproj" />
-    <ProjectReference Include="..\Employees.BackgroundServices\Employees.BackgroundServices.csproj" />
     <ProjectReference Include="..\Employees.Contracts\Employees.Contracts.csproj" />
-    <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
+    <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
+    <ProjectReference Include="..\Employees.BackgroundServices\Employees.BackgroundServices.csproj" />
   </ItemGroup>
 
 </Project>
