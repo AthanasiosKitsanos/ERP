@@ -1,6 +1,4 @@
-using Employees.Domain.Models;
 using Employees.Contracts.EmployeeContracts;
-using Azure;
 
 namespace Employees.Core.IServices;
 
@@ -14,7 +12,7 @@ public interface IEmployeesServices
 
     Task<ResponseEmployee.Get> GetByIdAsync(int id, CancellationToken token = default);
 
-    Task<bool> UpdateAsync(int id, ResponseEmployee.Update request, CancellationToken token = default);
+    Task<bool> UpdateAsync(int id, RequestEmployee.Update request, CancellationToken token = default);
 
     Task<bool> DeleteByIdAsync(int id, CancellationToken token = default);
 
