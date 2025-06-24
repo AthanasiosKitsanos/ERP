@@ -13,7 +13,7 @@ public interface IEmployeesRepository
 
     Task<Employee> GetByIdAsync(int id, CancellationToken token = default);
 
-    Task<bool> UpdateAsync(string query, List<SqlParameter> sqlParameters, CancellationToken token = default);
+    Task<bool> UpdateAsync(Employee employee, CancellationToken token = default);
 
     Task<bool> DeleteByIdAsync(int id, CancellationToken token = default);
 
