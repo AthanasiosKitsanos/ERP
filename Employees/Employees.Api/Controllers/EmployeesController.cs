@@ -35,19 +35,19 @@ public class EmployeesController : Controller
 
         List<ResponseEmployee.Get> responseList = new List<ResponseEmployee.Get>();
 
-        await foreach (ResponseEmployee.Get response in _services.GetAllAsync(cancellationToken))
-        {
-            responseList.Add(response);
-        }
+        // await foreach (ResponseEmployee.Get response in _services.GetAllAsync())
+        // {
+        //     responseList.Add(response);
+        // }
 
-        if (responseList.Count == 0)
-        {
-            return View("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "List not found"
-            });
-        }
+        // if (responseList.Count == 0)
+        // {
+        //     return View("Error", new ErrorViewModel
+        //     {
+        //         StatusCode = 404,
+        //         Message = "List not found"
+        //     });
+        // }
 
         _logger.LogInformation("List of Employees created and was sent as Json.");
         return Json(responseList);
