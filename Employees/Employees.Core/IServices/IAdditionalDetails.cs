@@ -1,4 +1,4 @@
-using Employees.Contracts.
+using Employees.Contracts.AdditionalDetails;
 
 namespace Employees.Core.IServices;
 
