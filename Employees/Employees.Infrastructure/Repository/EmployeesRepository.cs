@@ -174,9 +174,39 @@ public class EmployeesRepository : IEmployeesRepository
         return null!;
     }
 
-    public async Task<bool> UpdateAsync(string query, List<SqlParameter> parameters, CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateAsync(Employee employee, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
+
+        List<string> variables = new List<string>();
+        List<SqlParameter> sqlParameters = new List<SqlParameter>();
+
+        if (!string.IsNullOrEmpty(employee.Email))
+        {
+            variables.Add("Email = @Email");
+            sqlParameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar) { Value = employee.Email });
+        }
+
+        if (!string.IsNullOrEmpty(employee.Nationality))
+        {
+            variables.Add("Nationality = @Nationality");
+            sqlParameters.Add(new SqlParameter("@Nationality", SqlDbType.NVarChar) { Value = employee.Nationality });
+        }
+
+        if (!string.IsNullOrEmpty(employee.PhoneNumber))
+        {
+            variables.Add("PhoneNumber = @PhoneNumber");
+            sqlParameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.NVarChar) { Value = employee.PhoneNumber });
+        }
+
+        if (variables.Count == 0)
+        {
+            return false;
+        }
+
+        string query = @$"UPDATE Employees
+                        SET {string.Join(", ", variables)}
+                        WHERE EmployeeId = @EmployeeId";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
         {
@@ -184,7 +214,8 @@ public class EmployeesRepository : IEmployeesRepository
 
             await using (SqlCommand command = new SqlCommand(query, connection))
             {
-                command.Parameters.AddRange(parameters.ToArray());
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = employee.Id;
+                command.Parameters.AddRange(sqlParameters.ToArray());
 
                 cancellationToken.ThrowIfCancellationRequested();
 
