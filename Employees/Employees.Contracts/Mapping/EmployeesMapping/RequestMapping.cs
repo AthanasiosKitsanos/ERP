@@ -23,13 +23,24 @@ public static class RequestMapping
         };
     }
 
-    public static RequestEmployee.Update MapResponseToRequestUpdate(this ResponseEmployee.Update updateResponse)
+    public static Employee MapResponseToUpdateEmployee(this RequestEmployee.Update updateResponse, int id)
     {
-        return new RequestEmployee.Update
+        return new Employee
         {
+            Id = id,
             Email = updateResponse.Email,
             Nationality = updateResponse.Nationality,
             PhoneNumber = updateResponse.PhoneNumber
+        };
+    }
+
+    public static RequestEmployee.Update MapToUpdateRequest(this ResponseEmployee.Update response)
+    {
+        return new RequestEmployee.Update
+        {
+            Email = response.Email,
+            Nationality = response.Nationality,
+            PhoneNumber = response.PhoneNumber
         };
     }
 }
