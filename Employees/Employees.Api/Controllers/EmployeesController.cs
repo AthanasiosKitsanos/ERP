@@ -1,4 +1,5 @@
 using Employees.Contracts.EmployeeContracts;
+using Employees.Contracts.EmployeesMapping;
 using Employees.Core.IServices;
 using Employees.Domain;
 using Employees.Domain.Models;
@@ -149,7 +150,9 @@ public class EmployeesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, ResponseEmployee.Update request, CancellationToken token)
     {
-        bool IsUpdated = await _services.UpdateAsync(id, request, token);
+        RequestEmployee.Update update = request.MapToUpdateRequest();
+
+        bool IsUpdated = await _services.UpdateAsync(id, update, token);
 
         if (!IsUpdated)
         {
