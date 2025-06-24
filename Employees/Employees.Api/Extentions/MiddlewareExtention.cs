@@ -1,3 +1,5 @@
+using Employees.Shared.CustomMiddlewares;
+
 namespace Employees.Api.Extentions;
 
 public static class MiddlewareExtention
@@ -16,6 +18,7 @@ public static class MiddlewareExtention
         //app.UseMiddleware<RefreshTokenMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseMiddleware<CancellationTokenMiddlewareHandler>();
         app.MapControllers();
 
         app.MapGet("/", context =>
