@@ -20,7 +20,7 @@ public class CredentialsServices : ICredentialsServices
 
     public async Task UpdatePasswordHashAsync(int id, string username, string password, CancellationToken token)
     {
-        throw new NotImplementedException();
+        await _repository.UpdatePasswordHashAsync(id, username, password, token);
     }
 
     public async Task<bool> UsernameExistsAsync(string username, CancellationToken token)
