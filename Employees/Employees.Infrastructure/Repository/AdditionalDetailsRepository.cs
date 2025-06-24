@@ -18,12 +18,12 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
         throw new NotImplementedException();
     }
 
-    public Task<AdditionalDetails> GetAsync(int id, CancellationToken token = default)
+    public Task<Credentials> GetAsync(int id, CancellationToken token = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(int id, CancellationToken token = default)
+    public Task<bool> UpdateAsync(AdditionalDetails details, CancellationToken token = default)
     {
         throw new NotImplementedException();
     }
