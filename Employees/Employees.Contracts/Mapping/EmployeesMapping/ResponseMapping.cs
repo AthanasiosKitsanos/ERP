@@ -1,7 +1,7 @@
 using Employees.Contracts.EmployeeContracts;
 using Employees.Domain.Models;
 
-namespace Employees.Api.Mapping.Employees;
+namespace Employees.Contracts.EmployeesMapping;
 
 public static class ResponseMapping
 {
