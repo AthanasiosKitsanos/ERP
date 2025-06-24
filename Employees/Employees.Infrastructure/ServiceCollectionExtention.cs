@@ -15,6 +15,8 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<ICredentialsRepository, CredentialsRepository>();
 
+        services.AddScoped<IAdditionalDetailsRepository, AdditionalDetailsRepository>();
+
         return services;
     }
 }
