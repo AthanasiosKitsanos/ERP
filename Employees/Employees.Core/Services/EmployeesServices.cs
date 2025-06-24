@@ -2,12 +2,8 @@ using Employees.Domain.Models;
 using Employees.Core.IServices;
 using Employees.Infrastructure.IRepository;
 using System.Runtime.CompilerServices;
-using Employees.Core.QueryBuilders;
-using Microsoft.Data.SqlClient;
-using Employees.Shared.Validators;
 using Employees.Contracts.EmployeeContracts;
 using Employees.Contracts.EmployeesMapping;
-using Employees.Api.Mapping.Employees;
 
 namespace Employees.Core.Services;
 
@@ -62,20 +58,18 @@ public class EmployeesServices : IEmployeesServices
         return employee.MapToGetResponse();
     }
 
-    public async Task<bool> UpdateAsync(int id, ResponseEmployee.Update updateResponse, CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateAsync(int id, RequestEmployee.Update updateRequest, CancellationToken cancellationToken = default)
     {
-        RequestEmployee.Update updateRequest = updateResponse.MapResponseToRequestUpdate();
-
-        (string query, List<SqlParameter> sqlParameters) objects = updateRequest.UpdateDetailsQueryBuilder(id);
-
-        if (objects.IsEmptyOrNull())
+        if (id <= 0 || updateRequest is null)
         {
             return false;
         }
 
+        Employee employee = updateRequest.MapResponseToUpdateEmployee(id);
+
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await _repository.UpdateAsync(objects.query, objects.sqlParameters, cancellationToken);
+        return await _repository.UpdateAsync(employee, cancellationToken);
     }
 
     public async Task<ResponseEmployee.Delete> GetInfoForDeleteAysnc(int id, CancellationToken token = default)
