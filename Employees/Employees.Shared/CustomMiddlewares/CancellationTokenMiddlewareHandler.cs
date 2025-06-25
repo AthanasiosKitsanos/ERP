@@ -14,9 +14,9 @@ public class CancellationTokenMiddlewareHandler
         _logger = logger;
     }
 
-    public async Task InvoleAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context)
     {
-        CancellationToken token = context.RequestAborted;
+        CancellationToken token = context.RequestAborted; 
 
         try
         {
