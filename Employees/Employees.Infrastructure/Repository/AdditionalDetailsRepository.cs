@@ -18,7 +18,7 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
         throw new NotImplementedException();
     }
 
-    public Task<Credentials> GetAsync(int id, CancellationToken token = default)
+    public Task<AdditionalDetails> GetAsync(int id, CancellationToken token = default)
     {
         throw new NotImplementedException();
     }
