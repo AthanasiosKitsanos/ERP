@@ -14,6 +14,8 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<IAdditionalDetailsServices, AdditionalDetailsServices>();
 
+        services.AddScoped<IFileServices, FileServices>();
+
         return services;
     }
 }

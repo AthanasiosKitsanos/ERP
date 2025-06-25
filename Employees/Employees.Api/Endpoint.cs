@@ -24,6 +24,13 @@ public static class Endpoint
         public const string Update = $"{Base}/{{id}}/update";
     }
 
+    public static class Files
+    {
+        private const string Base = $"/employees/{{id}}/files";
+
+        public const string GetPhoto = $"{Base}/photograph";
+    }
+
     public static class Credentials
     {
         private const string Base = $"{Employees.Index}/{{id}}/credentials/create";

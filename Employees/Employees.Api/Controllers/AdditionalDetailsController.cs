@@ -38,7 +38,7 @@ public class AdditionalDetailsController : Controller
             });
         }
 
-        _logger.LogInformation($"{nameof(details)} are sent to employees/{id}/details\nFrom Url employees/{id}/additionaldetails");
+        _logger.LogInformation($"{nameof(details)} are sent to employees/{id}/details from Url employees/{id}/additionaldetails");
 
         return PartialView(details);
     }
