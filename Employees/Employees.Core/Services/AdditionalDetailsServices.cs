@@ -1,17 +1,21 @@
-using Employees.Contracts.AdditionalDetails;
+using Employees.Contracts.AdditionalDetailsContract;
+using Employees.Contracts.AdditionalDetailsMapping;
 using Employees.Core.IServices;
 using Employees.Domain.Models;
 using Employees.Infrastructure.IRepository;
+using Microsoft.Extensions.Logging;
 
 namespace Employees.Core.Services;
 
 public class AdditionalDetailsServices : IAdditionalDetailsServices
 {
     private readonly IAdditionalDetailsRepository _repository;
+    private readonly ILogger<AdditionalDetailsServices> _logger;
 
-    public AdditionalDetailsServices(IAdditionalDetailsRepository repository)
+    public AdditionalDetailsServices(IAdditionalDetailsRepository repository, ILogger<AdditionalDetailsServices> logger)
     {
         _repository = repository;
+        _logger = logger;
     }
 
     public async Task<bool> CreateAsync(RequestAdditionalDetails.Create createDetails, CancellationToken token = default)
@@ -24,11 +28,10 @@ public class AdditionalDetailsServices : IAdditionalDetailsServices
 
     public async Task<ResponseAdditionalDetails.Get> GetAsync(int id, CancellationToken token = default)
     {
-        //Need to update this
         AdditionalDetails additionalDetails = await _repository.GetAsync(id, token);
 
-        ResponseAdditionalDetails.Get details = new ResponseAdditionalDetails.Get();
-
+        ResponseAdditionalDetails.Get details = additionalDetails.MapToGetResponse();
+        
         return details;
     }
 
