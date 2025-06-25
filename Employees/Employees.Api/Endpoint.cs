@@ -26,8 +26,16 @@ public static class Endpoint
 
     public static class Credentials
     {
-        private const string Base = $"{Employees.Index}/{{id}}/createCredentials";
+        private const string Base = $"{Employees.Index}/{{id}}/credentials/create";
         public const string Create = Base;
+    }
+
+    public static class AdditionalDetails
+    {
+        private const string Base = $"{Employees.Index}/{{id}}/additionaldetails";
+        public const string Get = Base;
+        public const string Create = $"{Base}/create";
+        public const string Update = $"{Base}/update";
     }
 
 }
