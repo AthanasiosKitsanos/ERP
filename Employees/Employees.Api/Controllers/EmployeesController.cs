@@ -79,13 +79,15 @@ public class EmployeesController : Controller
 
         if (response is null)
         {
-
+            _logger.LogInformation($"There was an error while getting the main details");
             return PartialView("Error", new ErrorViewModel
             {
                 StatusCode = 404,
                 Message = "Employee details not found"
             });
         }
+
+        _logger.LogInformation($"Main details are sent to /employees/{id}/details");
 
         return PartialView(response);
     }
