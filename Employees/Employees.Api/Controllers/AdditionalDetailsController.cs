@@ -1,4 +1,5 @@
 using Employees.Contracts.AdditionalDetailsContract;
+using Employees.Contracts.AdditionalDetailsMapping;
 using Employees.Core.IServices;
 using Employees.Domain;
 using Employees.Domain.Models;
@@ -66,6 +67,38 @@ public class AdditionalDetailsController : Controller
     public async Task<IActionResult> Create(RequestAdditionalDetails.Create details, CancellationToken token)
     {
         bool IsCreated = await _services.CreateAsync(details, token);
+
+        return RedirectToAction("Details", "Employees", new { details.Id });
+    }
+
+    [HttpGet(Endpoint.AdditionalDetails.Update)]
+    public async Task<IActionResult> Update(int id, CancellationToken token)
+    {
+        ResponseAdditionalDetails.Get details = await _services.GetAsync(id, token);
+
+        RequestAdditionalDetails.Update update = details.MapToUpdateRequest();
+
+        update.Id = id;
+
+        return PartialView(update);
+    }
+
+    [HttpPut(Endpoint.AdditionalDetails.Update)]
+    public async Task<IActionResult> Update(RequestAdditionalDetails.Update details, CancellationToken token)
+    {
+        bool IsUpdated = await _services.UpdateAsync(details, token);
+
+        if (!IsUpdated)
+        {
+            _logger.LogWarning("There was an error while updating the additional details");
+            return PartialView("Error", new ErrorViewModel
+            {
+                StatusCode = 400,
+                Message = "There was an error while updating the additional details"
+            });
+        }
+
+        _logger.LogInformation("Additional details updated");
 
         return RedirectToAction("Details", "Employees", new { details.Id });
     }
