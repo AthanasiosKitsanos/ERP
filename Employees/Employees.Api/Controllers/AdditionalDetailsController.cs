@@ -1,6 +1,7 @@
 using Employees.Contracts.AdditionalDetailsContract;
 using Employees.Core.IServices;
 using Employees.Domain;
+using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employees.Api.Controllers;
@@ -43,5 +44,29 @@ public class AdditionalDetailsController : Controller
         return PartialView(details);
     }
 
-    
+    [HttpGet(Endpoint.AdditionalDetails.Create)]
+    public IActionResult Create(int id)
+    {
+        if (id <= 0)
+        {
+            _logger.LogWarning("There was no Id found");
+            return PartialView("Error", new ErrorViewModel
+            {
+                StatusCode = 404,
+                Message = "No Id was found"
+            });
+        }
+
+        _logger.LogInformation("Additional Details Create page loaded");
+
+        return PartialView(new RequestAdditionalDetails.Create { Id = id });
+    }
+
+    [HttpPost(Endpoint.AdditionalDetails.Create)]
+    public async Task<IActionResult> Create(RequestAdditionalDetails.Create details, CancellationToken token)
+    {
+        bool IsCreated = await _services.CreateAsync(details, token);
+
+        return RedirectToAction("Details", "Employees", new { details.Id });
+    }
 }
