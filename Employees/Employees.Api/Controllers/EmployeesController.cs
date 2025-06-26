@@ -63,7 +63,7 @@ public class EmployeesController : Controller
             return PartialView("Error", new ErrorViewModel
             {
                 StatusCode = 404,
-                Message = "Id was not found"
+                Message = "EmployeesController Details: Id was not found"
             });
         }
 

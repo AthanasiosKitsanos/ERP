@@ -3,21 +3,63 @@ using Employees.Domain;
 using Employees.Domain.Models;
 using Employees.Infrastructure.IRepository;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace Employees.Infrastructure.Repository;
 
 public class AdditionalDetailsRepository : IAdditionalDetailsRepository
 {
     private readonly Connection _connection;
+    private readonly ILogger<AdditionalDetailsRepository> _logger;
 
-    public AdditionalDetailsRepository(Connection connection)
+    public AdditionalDetailsRepository(Connection connection, ILogger<AdditionalDetailsRepository> logger)
     {
         _connection = connection;
+        _logger = logger;
     }
 
-    public Task<bool> CreateAsync(AdditionalDetails details, CancellationToken token = default)
+    public async Task<bool> CreateAsync(AdditionalDetails details, CancellationToken token = default)
     {
-        throw new NotImplementedException();
+        string query = @"INSERT INTO dbo.AdditionalDetails (EmergencyNumbers, Education, EmployeeId)
+                        VALUES (@EmergencyNumbers, @Education, @EmployeeId);
+                        
+                        INSERT INTO dbo.Certifications (CertData, EmployeeId, MIME)
+                        VALUES (@CertData, @EmployeeId, @CertMIME);
+                        
+                        INSERT INTO dbo.PersonalDocuments (DocData, EmployeeId, MIME)
+                        VALUES (@DocData, @EmployeeId, @DocMIME)";
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync(token);
+
+            await using (SqlTransaction transaction = connection.BeginTransaction())
+            {
+                await using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                {
+                    command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = details.EmployeeId;
+                    command.Parameters.Add("@EmergencyNumbers", SqlDbType.NVarChar).Value = details.EmergencyNumbers;
+                    command.Parameters.Add("@Education", SqlDbType.NVarChar).Value = details.Education;
+                    command.Parameters.Add("@CertData", SqlDbType.VarBinary).Value = details.Certifications;
+                    command.Parameters.Add("@CertMIME", SqlDbType.NVarChar).Value = details.CertMime;
+                    command.Parameters.Add("@DocData", SqlDbType.VarBinary).Value = details.PersonalDocuments;
+                    command.Parameters.Add("@DocMIME", SqlDbType.NVarChar).Value = details.DocMime;
+
+                    try
+                    {
+                        await command.ExecuteNonQueryAsync();
+                        await transaction.CommitAsync();
+                        return true;
+                    }
+                    catch
+                    {
+                        _logger.LogWarning("There was a problem while adding the additional");
+                        await transaction.RollbackAsync();
+                        return false;
+                    }
+                }
+            }
+        }
     }
 
     public async Task<AdditionalDetails> GetAsync(int id, CancellationToken token = default)
@@ -42,15 +84,15 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
 
                         return new AdditionalDetails
                         {
-                            EmergencyNumbers = reader.GetString(0),
-                            Education = reader.GetString(1)
+                            EmergencyNumbers = reader.GetString(1),
+                            Education = reader.GetString(0)
                         };
                     }
                 }
             }
         }
 
-        return null!;
+        return new AdditionalDetails();
     }
 
     public Task<bool> UpdateAsync(AdditionalDetails details, CancellationToken token = default)

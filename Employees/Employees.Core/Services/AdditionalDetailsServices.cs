@@ -18,10 +18,14 @@ public class AdditionalDetailsServices : IAdditionalDetailsServices
         _logger = logger;
     }
 
-    public async Task<bool> CreateAsync(RequestAdditionalDetails.Create createDetails, CancellationToken token = default)
+    public async Task<bool> CreateAsync(int id, RequestAdditionalDetails.Create createDetails, CancellationToken token = default)
     {
         //Need to update this
-        AdditionalDetails details = new AdditionalDetails();
+        AdditionalDetails details = await createDetails.MapToCreate(id);
+
+        details.EmployeeId = id;
+
+        _logger.LogInformation($"EmployeeId = {details.EmployeeId}");
 
         return await _repository.CreateAsync(details, token);
     }

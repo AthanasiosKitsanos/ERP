@@ -60,15 +60,29 @@ public class AdditionalDetailsController : Controller
 
         _logger.LogInformation("Additional Details Create page loaded");
 
-        return PartialView(new RequestAdditionalDetails.Create { Id = id });
+        return PartialView(new RequestAdditionalDetails.Create { EmployeeId = id });
     }
 
     [HttpPost(Endpoint.AdditionalDetails.Create)]
-    public async Task<IActionResult> Create(RequestAdditionalDetails.Create details, CancellationToken token)
+    public async Task<IActionResult> Create(int id, RequestAdditionalDetails.Create details, CancellationToken token)
     {
-        bool IsCreated = await _services.CreateAsync(details, token);
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("Details", "Employees", new { id });
+        }
+        
+        _logger.LogWarning($"{nameof(details.EmployeeId)} = {details.EmployeeId}");        
 
-        return RedirectToAction("Details", "Employees", new { details.Id });
+        bool IsCreated = await _services.CreateAsync(id, details, token);
+
+        if (!IsCreated)
+        {
+            _logger.LogInformation($"{details.EmployeeId}");
+            _logger.LogWarning("The details were not added");
+            return RedirectToAction("Details", "Employees", new { id = details.EmployeeId });
+        }
+
+        return RedirectToAction("Details", "Employees", new { id });
     }
 
     [HttpGet(Endpoint.AdditionalDetails.Update)]

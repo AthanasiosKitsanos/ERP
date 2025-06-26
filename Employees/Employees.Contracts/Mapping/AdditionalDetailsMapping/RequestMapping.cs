@@ -1,5 +1,8 @@
+using System.Threading.Tasks;
 using Azure;
 using Employees.Contracts.AdditionalDetailsContract;
+using Employees.Domain.Models;
+using Employees.Shared;
 
 namespace Employees.Contracts.AdditionalDetailsMapping;
 
@@ -11,6 +14,20 @@ public static class RequestMapping
         {
             EmergencyNumbers = details.EmergencyNumbers,
             Education = details.Education
+        };
+    }
+
+    public static async Task<AdditionalDetails> MapToCreate(this RequestAdditionalDetails.Create create, int id)
+    {
+        return new AdditionalDetails
+        {
+            EmergencyNumbers = create.EmergencyNumbers,
+            Education = create.Education,
+            Certifications = await create.CertificationFile!.GetArrayOfBytes(),
+            PersonalDocuments = await create.PersonalDocumentsFile!.GetArrayOfBytes(),
+            CertMime = create.CertificationFile!.ContentType,
+            DocMime = create.PersonalDocumentsFile!.ContentType,
+            EmployeeId = id
         };
     }
 }
