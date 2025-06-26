@@ -17,7 +17,7 @@ public static class RequestMapping
         };
     }
 
-    public static async Task<AdditionalDetails> MapToCreate(this RequestAdditionalDetails.Create create)
+    public static async Task<AdditionalDetails> MapToCreate(this RequestAdditionalDetails.Create create, int id)
     {
         return new AdditionalDetails
         {
@@ -26,7 +26,8 @@ public static class RequestMapping
             Certifications = await create.CertificationFile!.GetArrayOfBytes(),
             PersonalDocuments = await create.PersonalDocumentsFile!.GetArrayOfBytes(),
             CertMime = create.CertificationFile!.ContentType,
-            DocMime = create.PersonalDocumentsFile!.ContentType
+            DocMime = create.PersonalDocumentsFile!.ContentType,
+            EmployeeId = id
         };
     }
 }

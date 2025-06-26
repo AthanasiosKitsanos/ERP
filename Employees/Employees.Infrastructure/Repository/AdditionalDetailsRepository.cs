@@ -3,16 +3,19 @@ using Employees.Domain;
 using Employees.Domain.Models;
 using Employees.Infrastructure.IRepository;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace Employees.Infrastructure.Repository;
 
 public class AdditionalDetailsRepository : IAdditionalDetailsRepository
 {
     private readonly Connection _connection;
+    private readonly ILogger<AdditionalDetailsRepository> _logger;
 
-    public AdditionalDetailsRepository(Connection connection)
+    public AdditionalDetailsRepository(Connection connection, ILogger<AdditionalDetailsRepository> logger)
     {
         _connection = connection;
+        _logger = logger;
     }
 
     public async Task<bool> CreateAsync(AdditionalDetails details, CancellationToken token = default)
@@ -50,6 +53,7 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
                     }
                     catch
                     {
+                        _logger.LogWarning("There was a problem while adding the additional");
                         await transaction.RollbackAsync();
                         return false;
                     }
@@ -80,15 +84,15 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
 
                         return new AdditionalDetails
                         {
-                            EmergencyNumbers = reader.GetString(0),
-                            Education = reader.GetString(1)
+                            EmergencyNumbers = reader.GetString(1),
+                            Education = reader.GetString(0)
                         };
                     }
                 }
             }
         }
 
-        return null!;
+        return new AdditionalDetails();
     }
 
     public Task<bool> UpdateAsync(AdditionalDetails details, CancellationToken token = default)
