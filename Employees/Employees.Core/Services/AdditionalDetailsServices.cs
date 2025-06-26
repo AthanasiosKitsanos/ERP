@@ -21,7 +21,7 @@ public class AdditionalDetailsServices : IAdditionalDetailsServices
     public async Task<bool> CreateAsync(RequestAdditionalDetails.Create createDetails, CancellationToken token = default)
     {
         //Need to update this
-        AdditionalDetails details = new AdditionalDetails();
+        AdditionalDetails details = await createDetails.MapToCreate();
 
         return await _repository.CreateAsync(details, token);
     }

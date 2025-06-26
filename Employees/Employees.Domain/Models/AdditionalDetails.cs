@@ -8,9 +8,13 @@ public class AdditionalDetails
 
     public string Education { get; set; } = string.Empty;
 
-    public IFormFile? CertificationFile { get; set; }
+    public byte[] Certifications{ get; set; } = null!;
 
-    public IFormFile? PersonalDocumentsFile { get; set; }
+    public byte[] PersonalDocuments { get; set; } = null!;
+
+    public string CertMime { get; set; } = string.Empty;
+
+    public string DocMime { get; set; } = string.Empty;
 
     public int EmployeeId { get; set; }
 }
