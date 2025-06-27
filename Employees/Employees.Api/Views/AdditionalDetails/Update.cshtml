@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
 <div>
-    <form asp-action="Update" asp-route-id="@Model.Id" enctype="multipart/form-data">
+    <form asp-action="Update" asp-route-id="@Model.EmployeeId" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
 
     <input type="hidden" name="_method" value="PUT">
