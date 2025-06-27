@@ -90,17 +90,16 @@ public class AdditionalDetailsController : Controller
     {
         ResponseAdditionalDetails.Get details = await _services.GetAsync(id, token);
 
-        RequestAdditionalDetails.Update update = details.MapToUpdateRequest();
-
-        update.Id = id;
+        RequestAdditionalDetails.Update update = details.MapToUpdateRequest(id);
 
         return PartialView(update);
     }
 
     [HttpPut(Endpoint.AdditionalDetails.Update)]
-    public async Task<IActionResult> Update(RequestAdditionalDetails.Update details, CancellationToken token)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(int id, RequestAdditionalDetails.Update details, CancellationToken token)
     {
-        bool IsUpdated = await _services.UpdateAsync(details, token);
+        bool IsUpdated = await _services.UpdateAsync(id, details, token);
 
         if (!IsUpdated)
         {
@@ -114,6 +113,6 @@ public class AdditionalDetailsController : Controller
 
         _logger.LogInformation("Additional details updated");
 
-        return RedirectToAction("Details", "Employees", new { details.Id });
+        return RedirectToAction("Details", "Employees", new { id });
     }
 }

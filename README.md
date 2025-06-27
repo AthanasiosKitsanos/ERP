@@ -1,4 +1,4 @@
-### This is my first ERP (Enterprise Resource Planning) web application, built entirely from scratch. It serves as a self-guided training project to prepare myself for a future professional role in software development.
+### This is my first ERP (Enterprise Resource Planning) web application, built entirely from scratch. It serves as a self-guided training project to prepare myself for a future professional role in software development. All changes and new branches are created using git commands
 
 
 ### ⚙️ Technologies & Concepts I'm Exploring
