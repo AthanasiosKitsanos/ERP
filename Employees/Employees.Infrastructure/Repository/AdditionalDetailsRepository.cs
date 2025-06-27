@@ -84,8 +84,8 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
 
                         return new AdditionalDetails
                         {
-                            EmergencyNumbers = reader.GetString(1),
-                            Education = reader.GetString(0)
+                            EmergencyNumbers = reader.GetString(0),
+                            Education = reader.GetString(1)
                         };
                     }
                 }
@@ -95,8 +95,44 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
         return new AdditionalDetails();
     }
 
-    public Task<bool> UpdateAsync(AdditionalDetails details, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(AdditionalDetails details, CancellationToken token = default)
     {
-        throw new NotImplementedException();
+        List<string> variables = new List<string>();
+        List<SqlParameter> parameters = new List<SqlParameter>();
+
+        if (!string.IsNullOrEmpty(details.EmergencyNumbers))
+        {
+            variables.Add("EmergencyNumbers = @EmergencyNumbers");
+            parameters.Add(new SqlParameter("@EmergencyNumbers", SqlDbType.NVarChar) { Value = details.EmergencyNumbers });
+        }
+
+        if (!string.IsNullOrEmpty(details.Education))
+        {
+            variables.Add("Education = @Education");
+            parameters.Add(new SqlParameter("@Education", SqlDbType.NVarChar) { Value = details.Education });
+        }
+
+        if (variables.Count == 0)
+        {
+            return false;
+        }
+
+        string query = $@"UPDATE dbo.AdditionalDetails
+                        SET {string.Join(", ", variables)}
+                        WHERE EmployeeId = @EmployeeId";
+
+
+        await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
+        {
+            await connection.OpenAsync(token);
+
+            await using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.Add("@EmployeeId", SqlDbType.Int).Value = details.EmployeeId;
+                command.Parameters.AddRange(parameters.ToArray());
+
+                return await command.ExecuteNonQueryAsync(token) > 0;
+            }
+        }
     }
 }
