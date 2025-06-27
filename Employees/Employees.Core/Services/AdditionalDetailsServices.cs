@@ -39,9 +39,10 @@ public class AdditionalDetailsServices : IAdditionalDetailsServices
         return details;
     }
 
-    public Task<bool> UpdateAsync(RequestAdditionalDetails.Update updateRequest, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(int id, RequestAdditionalDetails.Update updateRequest, CancellationToken token = default)
     {
-        //Need to update this
-        throw new NotImplementedException();
+        AdditionalDetails details = updateRequest.MapToUpdate(id);
+
+        return await _repository.UpdateAsync(details, token);
     }
 }
