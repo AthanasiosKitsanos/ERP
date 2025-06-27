@@ -1,4 +1,5 @@
 using Employees.Shared.CustomMiddlewares;
+using Employees.RazorComponents;
 
 namespace Employees.Api.Extentions;
 
@@ -7,6 +8,7 @@ public static class MiddlewareExtention
     public static WebApplication AddMiddleware(this WebApplication app)
     {
         app.UseHttpsRedirection();
+
         app.UseStaticFiles();
 
         app.UseHttpMethodOverride(new HttpMethodOverrideOptions
@@ -15,11 +17,18 @@ public static class MiddlewareExtention
         });
 
         app.UseRouting();
+
         //app.UseMiddleware<RefreshTokenMiddleware>();
+
         app.UseAuthentication();
+
         app.UseAuthorization();
+
         app.UseMiddleware<CancellationTokenMiddlewareHandler>();
+
         app.MapControllers();
+
+        app.MapBlazorHub();
 
         app.MapGet("/", context =>
         {

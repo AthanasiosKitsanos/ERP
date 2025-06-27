@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\thano\\OneDrive\\Desktop\\Portofolio\\ERP\\Employees\\Employees.RazorComponents\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\Employees.RazorComponents.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Employees.RazorComponents.2phxhwuekx.bundle.scp.css"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Employees.RazorComponents.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Employees.RazorComponents.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.Employees.RazorComponents.props",
+      "PackagePath": "build\\Employees.RazorComponents.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.Employees.RazorComponents.props",
+      "PackagePath": "buildMultiTargeting\\Employees.RazorComponents.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.Employees.RazorComponents.props",
+      "PackagePath": "buildTransitive\\Employees.RazorComponents.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

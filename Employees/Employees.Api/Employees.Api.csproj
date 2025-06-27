@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
     <ProjectReference Include="..\Employees.BackgroundServices\Employees.BackgroundServices.csproj" />
     <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
+    <ProjectReference Include="..\Employees.RazorComponents\Employees.RazorComponents.csproj" />
   </ItemGroup>
 
 </Project>

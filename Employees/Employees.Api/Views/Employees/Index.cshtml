@@ -1,3 +1,5 @@
+@using Employees.RazorComponents
+
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
 <div>
@@ -6,31 +8,8 @@
     </div>
 
     <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-
-                    <th>Last Name</th>
-
-                    <th>Email</th>
-
-                    <th>Age</th>
-
-                    <th>Date of Birth</th>
-
-                    <th>Nationality</th>
-
-                    <th>Gender</th>
-
-                    <th>Phone Number</th>
-                </tr>
-            </thead>
-            <tbody  id="employeeTable">
-                
-            </tbody>
-        </table>
+        <component type="typeof(GetAllEmployees)" render-mode="ServerPrerendered"/>
     </div>
 </div>
 
-<script src="~/js/Employees.js"></script>
+<!-- <script src="~/js/Employees.js"></script> -->

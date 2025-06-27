@@ -1,11 +1,14 @@
+@using Employees.RazorComponents
 @using System.Security.Claims
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,charset initial-scale=1.0">
-        <link rel="icon" type="imgae/png" href="~/images/erp.png">
+        <base href="~/"/>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="imgage/png" href="~/images/erp.png">
         <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/btn-as-link.css" asp-append-version="true">
@@ -15,7 +18,6 @@
     <body>
         <header>
              <div class="navbar">
-                <div class="navbar">
                 <ul>
                     <li>
                         <a asp-controller="Home" asp-action="HomePage">Home</a>
@@ -50,6 +52,10 @@
                             </form>
                         </li>
                     }
+
+                    <li>
+                        
+                    </li>
                 </ul>
             </div>
         </header>
@@ -61,5 +67,7 @@
         <footer>
             All rights reserved
         </footer>
+        <script src="_framework/blazor.server.js"></script>
     </body>
 </html>
+<component 
