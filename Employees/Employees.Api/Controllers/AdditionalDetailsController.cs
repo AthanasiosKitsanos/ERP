@@ -2,7 +2,7 @@ using Employees.Contracts.AdditionalDetailsContract;
 using Employees.Contracts.AdditionalDetailsMapping;
 using Employees.Core.IServices;
 using Employees.Domain;
-using Employees.Domain.Models;
+using Employees.Shared.CustomEndpoints;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employees.Api.Controllers;
@@ -18,7 +18,7 @@ public class AdditionalDetailsController : Controller
         _logger = logger;
     }
 
-    [HttpGet(Endpoint.AdditionalDetails.Get)]
+    [HttpGet(Endpoints.AdditionalDetails.Get)]
     public async Task<IActionResult> Get(int id, CancellationToken token)
     {
         if (token.IsCancellationRequested)
@@ -45,7 +45,7 @@ public class AdditionalDetailsController : Controller
         return PartialView(details);
     }
 
-    [HttpGet(Endpoint.AdditionalDetails.Create)]
+    [HttpGet(Endpoints.AdditionalDetails.Create)]
     public IActionResult Create(int id)
     {
         if (id <= 0)
@@ -63,7 +63,7 @@ public class AdditionalDetailsController : Controller
         return PartialView(new RequestAdditionalDetails.Create { EmployeeId = id });
     }
 
-    [HttpPost(Endpoint.AdditionalDetails.Create)]
+    [HttpPost(Endpoints.AdditionalDetails.Create)]
     public async Task<IActionResult> Create(int id, RequestAdditionalDetails.Create details, CancellationToken token)
     {
         if (!ModelState.IsValid)
@@ -85,7 +85,7 @@ public class AdditionalDetailsController : Controller
         return RedirectToAction("Details", "Employees", new { id });
     }
 
-    [HttpGet(Endpoint.AdditionalDetails.Update)]
+    [HttpGet(Endpoints.AdditionalDetails.Update)]
     public async Task<IActionResult> Update(int id, CancellationToken token)
     {
         ResponseAdditionalDetails.Get details = await _services.GetAsync(id, token);
@@ -95,7 +95,7 @@ public class AdditionalDetailsController : Controller
         return PartialView(update);
     }
 
-    [HttpPut(Endpoint.AdditionalDetails.Update)]
+    [HttpPut(Endpoints.AdditionalDetails.Update)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, RequestAdditionalDetails.Update details, CancellationToken token)
     {

@@ -1,5 +1,6 @@
 using Employees.Core.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Employees.Shared.CustomEndpoints;
 
 namespace Employees.Api.Controllers;
 

@@ -15,8 +15,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.6" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <ProjectReference Include="..\Employees.Core\Employees.Core.csproj" />
+    <Folder Include="Widgets\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Employees.Contracts\Employees.Contracts.csproj" />
+    <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
   </ItemGroup>
 
 </Project>

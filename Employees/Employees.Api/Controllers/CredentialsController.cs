@@ -3,6 +3,7 @@ using Employees.Contracts.CredentialsMapping;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Employees.Core.IServices;
+using Employees.Shared.CustomEndpoints;
 
 namespace Employees.Api.Controllers;
 
@@ -17,7 +18,7 @@ public class CredentialsController : Controller
         _logger = logger;
     }
 
-    [HttpGet(Endpoint.Credentials.Create)]
+    [HttpGet(Endpoints.Credentials.Create)]
     public IActionResult Create(int id)
     {
 
@@ -26,7 +27,7 @@ public class CredentialsController : Controller
         return View(request);
     }
 
-    [HttpPost(Endpoint.Credentials.Create)]
+    [HttpPost(Endpoints.Credentials.Create)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(int id, RequestCredentials.Create request, CancellationToken cancellationToken)
     {

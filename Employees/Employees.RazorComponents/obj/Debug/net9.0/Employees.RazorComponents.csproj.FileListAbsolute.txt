@@ -1,4 +1,3 @@
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.RazorComponents.staticwebassets.runtime.json
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.RazorComponents.staticwebassets.endpoints.json
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.RazorComponents.deps.json
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.RazorComponents.dll
@@ -29,13 +28,9 @@ C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponen
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\obj\Debug\net9.0\Employees.RazorComponents.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\obj\Debug\net9.0\ref\Employees.RazorComponents.dll
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Contracts.dll
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Core.dll
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Domain.dll
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Infrastructure.dll
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Shared.dll
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Core.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Contracts.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Domain.pdb
-C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Infrastructure.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\bin\Debug\net9.0\Employees.Shared.pdb
 C:\Users\thano\OneDrive\Desktop\Portofolio\ERP\Employees\Employees.RazorComponents\obj\Debug\net9.0\Employee.4EB55595.Up2Date

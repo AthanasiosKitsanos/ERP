@@ -1,6 +1,7 @@
 using Employees.Domain;
 using Employees.Contracts.File;
 using Employees.Core.IServices;
+using Employees.Shared.CustomEndpoints;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ public class FileController : Controller
 
 
 
-    [HttpGet(Endpoint.Files.GetPhoto)]
+    [HttpGet(Endpoints.Files.GetPhoto)]
     public async Task<IActionResult> GetPhoto(int id, CancellationToken token)
     {
         ResponseFile.GetPhoto photo = await _services.GetPhotoAsync(id, token);

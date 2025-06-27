@@ -1,6 +1,6 @@
-namespace Employees.Api;
+namespace Employees.Shared.CustomEndpoints;
 
-public static class Endpoint
+public static class Endpoints
 {
     public static class LogIn
     {

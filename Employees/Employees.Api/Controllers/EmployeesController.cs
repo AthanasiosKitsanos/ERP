@@ -4,6 +4,7 @@ using Employees.Core.IServices;
 using Employees.Domain;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Employees.Shared.CustomEndpoints;
 
 namespace Employees.Api.Controllers;
 
@@ -18,13 +19,13 @@ public class EmployeesController : Controller
         _logger = logger;
     }
 
-    [HttpGet(Endpoint.Employees.Index)]
+    [HttpGet(Endpoints.Employees.Index)]
     public IActionResult Index()
     {
         return View();
     }
 
-    [HttpGet(Endpoint.Employees.GetAllEmployees)]
+    [HttpGet(Endpoints.Employees.GetAllEmployees)]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
@@ -53,7 +54,7 @@ public class EmployeesController : Controller
         return Json(responseList);
     }
 
-    [HttpGet(Endpoint.Employees.GetAllDetails)]
+    [HttpGet(Endpoints.Employees.GetAllDetails)]
     public IActionResult Details(int id)
     {
         if (id <= 0)
@@ -72,7 +73,7 @@ public class EmployeesController : Controller
         return View(newId);
     }
 
-    [HttpGet(Endpoint.Employees.GetMainDetails)]
+    [HttpGet(Endpoints.Employees.GetMainDetails)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
     {
         ResponseEmployee.Get response = await _services.GetByIdAsync(id, token);
@@ -92,13 +93,13 @@ public class EmployeesController : Controller
         return PartialView(response);
     }
 
-    [HttpGet(Endpoint.Employees.Create)]
+    [HttpGet(Endpoints.Employees.Create)]
     public IActionResult Create()
     {
         return View();
     }
 
-    [HttpPost(Endpoint.Employees.Create)]
+    [HttpPost(Endpoints.Employees.Create)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(RequestEmployee.Create request, CancellationToken cancellationToken)
     {
@@ -130,7 +131,7 @@ public class EmployeesController : Controller
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
 
-    [HttpGet(Endpoint.Employees.Update)]
+    [HttpGet(Endpoints.Employees.Update)]
     public async Task<IActionResult> Update(int id, CancellationToken token)
     {
         ResponseEmployee.Get request = await _services.GetByIdAsync(id, token);
@@ -148,7 +149,7 @@ public class EmployeesController : Controller
         return PartialView(request);
     }
 
-    [HttpPut(Endpoint.Employees.Update)]
+    [HttpPut(Endpoints.Employees.Update)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, ResponseEmployee.Update request, CancellationToken token)
     {
@@ -165,7 +166,7 @@ public class EmployeesController : Controller
         return RedirectToAction("Details", new { id });
     }
 
-    [HttpGet(Endpoint.Employees.Delete)]
+    [HttpGet(Endpoints.Employees.Delete)]
     public async Task<IActionResult> Delete(int id)
     {
         _logger.LogInformation($"url Id {id}");
@@ -176,7 +177,7 @@ public class EmployeesController : Controller
         return View(response);
     }
 
-    [HttpDelete(Endpoint.Employees.Delete)]
+    [HttpDelete(Endpoints.Employees.Delete)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {

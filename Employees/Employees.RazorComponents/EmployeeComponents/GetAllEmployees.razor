@@ -1,0 +1,70 @@
+﻿@using Employees.Contracts.EmployeeContracts
+@using System.Net.Http.Json
+@using Employees.Shared.CustomEndpoints
+
+@inject NavigationManager nav
+@inject HttpClient httpClient
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+
+                <th>Last Name</th>
+
+                <th>Email</th>
+
+                <th>Age</th>
+
+                <th>Date of Birth</th>
+
+                <th>Nationality</th>
+
+                <th>Gender</th>
+
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(list is not null)
+            {
+                @foreach (ResponseEmployee.Get employee in list)
+                {
+                    <tr>
+                        <td>@employee.FirstName</td>
+                        <td>@employee.LastName</td>
+                        <td>@employee.Email</td>
+                        <td>@employee.Age</td>
+                        <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                        <td>@employee.Gender</td>
+                        <td>@employee.Nationality</td>
+                        <td>@employee.PhoneNumber</td>
+                        <td><a href="employees/@employee.Id/details">Details</a></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <p>@errorMessage</p>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code
+{
+    private string errorMessage = string.Empty;
+
+    List<ResponseEmployee.Get> list = new List<ResponseEmployee.Get>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        list = await httpClient.GetFromJsonAsync<List<ResponseEmployee.Get>>($"{nav.BaseUri.Trim('/')}{Endpoints.Employees.GetAllEmployees}") ?? null!;
+
+        if (list is null)
+        {
+            errorMessage = "The list is empty";
+        }
+    }
+}

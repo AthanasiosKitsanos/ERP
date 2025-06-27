@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using Employees.Shared.CustomEndpoints;
 
 namespace Employees.Api.Controllers;
 
 public class HomeController : Controller
 {
-    [HttpGet(Endpoint.Home.Index)]
+    [HttpGet(Endpoints.Home.Index)]
     public IActionResult HomePage()
     {
         return View();
