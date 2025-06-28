@@ -1,4 +1,4 @@
-@using Employees.RazorComponents
+@using Employees.RazorComponents.Widgets
 @using System.Security.Claims
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
                     }
 
                     <li>
-                        
+                        <component type="typeof(Clock)" render-mode="ServerPrerendered"/>
                     </li>
                 </ul>
             </div>

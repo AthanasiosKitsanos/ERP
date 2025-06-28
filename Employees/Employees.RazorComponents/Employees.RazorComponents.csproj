@@ -17,11 +17,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Widgets\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <ProjectReference Include="..\Employees.Contracts\Employees.Contracts.csproj" />
     <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
   </ItemGroup>

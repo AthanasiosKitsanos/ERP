@@ -1,0 +1,52 @@
+﻿@using System.Timers
+
+<div class="clock-container">
+    <p class="clock-text">Time: @currentTime.ToString("HH:mm:ss - dd\\/MM\\clear/yyyy")</p>
+</div>
+
+@code 
+{
+    private DateTime currentTime = DateTime.Now;
+    private Timer? timer;
+    private bool shouldRender = false;
+
+    #pragma warning disable CS1998
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            timer = new Timer(1000);
+
+            timer.Elapsed += async (e, sender) =>
+            {
+                DateTime newTime = DateTime.Now;
+
+                if(newTime.Second != currentTime.Second)
+                {
+                    currentTime = newTime;
+                    shouldRender = true;
+                    await InvokeAsync(StateHasChanged);
+                }
+            };
+
+            timer.Start();
+        }
+    }
+
+    protected override bool ShouldRender()
+    {
+        if(shouldRender)
+        {
+            shouldRender = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Dispose()
+    {
+        timer?.Stop();
+        timer?.Dispose();
+    }
+}
