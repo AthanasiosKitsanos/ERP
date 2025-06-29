@@ -1,10 +1,10 @@
 using Employees.Contracts.EmployeeContracts;
-using Employees.Contracts.EmployeesMapping;
 using Employees.Core.IServices;
 using Employees.Domain;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Employees.Shared.CustomEndpoints;
+using Azure.Core;
 
 namespace Employees.Api.Controllers;
 
@@ -81,7 +81,7 @@ public class EmployeesController : Controller
         if (response is null)
         {
             _logger.LogInformation($"There was an error while getting the main details");
-            return PartialView("Error", new ErrorViewModel
+            return Json("Error", new ErrorViewModel
             {
                 StatusCode = 404,
                 Message = "Employee details not found"
@@ -90,7 +90,7 @@ public class EmployeesController : Controller
 
         _logger.LogInformation($"Main details are sent to /employees/{id}/details");
 
-        return PartialView(response);
+        return Json(response);
     }
 
     [HttpGet(Endpoints.Employees.Create)]
@@ -131,31 +131,11 @@ public class EmployeesController : Controller
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
 
-    [HttpGet(Endpoints.Employees.Update)]
-    public async Task<IActionResult> Update(int id, CancellationToken token)
-    {
-        ResponseEmployee.Get request = await _services.GetByIdAsync(id, token);
-
-        if (request is null)
-        {
-            Response.StatusCode = 404;
-            return PartialView("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "Page was not found"
-            });
-        }
-
-        return PartialView(request);
-    }
-
-    [HttpPut(Endpoints.Employees.Update)]
+    [HttpPost(Endpoints.Employees.Update)]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id, ResponseEmployee.Update request, CancellationToken token)
+    public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
     {
-        RequestEmployee.Update update = request.MapToUpdateRequest();
-
-        bool IsUpdated = await _services.UpdateAsync(id, update, token);
+        bool IsUpdated = await _services.UpdateAsync(id, request, token);
 
         if (!IsUpdated)
         {
@@ -177,7 +157,7 @@ public class EmployeesController : Controller
         return View(response);
     }
 
-    [HttpDelete(Endpoints.Employees.Delete)]
+    [HttpPost(Endpoints.Employees.Delete)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {
@@ -187,7 +167,7 @@ public class EmployeesController : Controller
         if (!IsDeleted)
         {
             _logger.LogWarning("The Employe was not deleted");
-            return RedirectToAction("Index", "Employees");    
+            return RedirectToAction("Index", "Employees");
         }
 
         return RedirectToAction("Index", "Employees");

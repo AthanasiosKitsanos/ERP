@@ -11,11 +11,6 @@ public static class MiddlewareExtention
 
         app.UseStaticFiles();
 
-        app.UseHttpMethodOverride(new HttpMethodOverrideOptions
-        {
-            FormFieldName = "_method"
-        });
-
         app.UseRouting();
 
         //app.UseMiddleware<RefreshTokenMiddleware>();

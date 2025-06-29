@@ -13,12 +13,11 @@ public static class ServiceCollectionExtention
         services.AddControllersWithViews();
 
         services.AddRazorComponents().AddInteractiveServerComponents();
-
         
         //services.AddServerSideBlazor();
 
         services.AddHttpClient();
-
+        
         services.AddAntiforgery();
 
         //services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", options => {});

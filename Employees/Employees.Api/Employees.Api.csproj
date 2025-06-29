@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Employees.RazorComponents\Employees.RazorComponents.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\AdditionalDetails\" />
+  </ItemGroup>
+
 </Project>

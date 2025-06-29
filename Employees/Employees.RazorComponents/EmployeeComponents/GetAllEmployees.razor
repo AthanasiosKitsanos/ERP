@@ -40,13 +40,16 @@
                         <td>@employee.Gender</td>
                         <td>@employee.Nationality</td>
                         <td>@employee.PhoneNumber</td>
-                        <td><a href="employees/@employee.Id/details">Details</a></td>
+                        <td><a href="@Endpoints.Employees.GetAllDetails.Replace("{id}", employee.Id.ToString())">Details</a></td>
+                        <td><a href="@Endpoints.Employees.Delete.Replace("{id}", employee.Id.ToString())">Delete</a></td>
                     </tr>
                 }
             }
             else
             {
-                <p>@errorMessage</p>
+                <tr>
+                    <td colspan="10">Loading...</td>
+                </tr>
             }
         </tbody>
     </table>
@@ -54,17 +57,10 @@
 
 @code
 {
-    private string errorMessage = string.Empty;
-
     List<ResponseEmployee.Get> list = new List<ResponseEmployee.Get>();
 
     protected override async Task OnInitializedAsync()
     {
         list = await httpClient.GetFromJsonAsync<List<ResponseEmployee.Get>>($"{nav.BaseUri.Trim('/')}{Endpoints.Employees.GetAllEmployees}") ?? null!;
-
-        if (list is null)
-        {
-            errorMessage = "The list is empty";
-        }
     }
 }

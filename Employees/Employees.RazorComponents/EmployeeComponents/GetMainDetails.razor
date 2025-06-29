@@ -1,0 +1,164 @@
+﻿@using Employees.Contracts.EmployeeContracts
+@using Employees.Shared.CustomEndpoints
+@using System.Net.Http.Json;
+
+@inject NavigationManager nav
+@inject HttpClient http
+
+<table>
+    <tbody>
+        @if(employee is not null)
+        {
+            switch(mode)
+            {
+                case Mode.View:
+                    
+                    <tr>
+                        <td><b>First Name:</b></td>
+                        <td>@employee.FirstName</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Last Name:</b></td>
+                        <td>@employee.LastName</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Email:</b></td>
+                        <td>@employee.Email</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Age:</b></td>
+                        <td>@employee.Age</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Date of Birth:</b></td>
+                        <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                    </tr>
+
+                        <tr>
+                        <td><b>Nationality:</b></td>
+                        <td>@employee.Nationality</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Gender:</b></td>
+                        <td>@employee.Gender</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Phone Number:</b></td>
+                        <td>@employee.PhoneNumber</td>
+                    </tr>
+
+                    
+                    <tr>
+                        <td><a @onclick=EditForm >Edit</a></td>
+                    </tr>
+                break;
+
+                case Mode.Edit:
+                    <tr>
+                        <td><b>First Name:</b></td>
+                        <td>@employee!.FirstName</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Last Name:</b></td>
+                        <td>@employee.LastName</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Email:</b></td>
+                        <td>
+                            <input name="Email" @bind="update.Email">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Age:</b></td>
+                        <td>@employee.Age</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Date of Birth:</b></td>
+                        <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                    </tr>
+
+                        <tr>
+                        <td><b>Nationality:</b></td>
+                        <td>
+                            <input type="text" name="Nationality" @bind="update.Nationality">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Gender:</b></td>
+                        <td>@employee.Gender</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Phone Number:</b></td>
+                        <td>
+                            <input type="text" name="PhoneNumber" @bind="update.PhoneNumber">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><button type="submit">Save</button></td>
+                        <td><a @onclick=CancelForm>Cancel</a></td>
+                    </tr>
+                break;
+
+                default:
+                    <tr>
+                        <td>Not data found</td>
+                    </tr>
+                break;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">Loading...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    
+
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    private enum Mode
+    {
+        View,
+        Edit
+    }
+
+    private Mode mode = Mode.View;
+
+    private ResponseEmployee.Get? employee;
+
+    private RequestEmployee.Update update = new RequestEmployee.Update();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employee = await http.GetFromJsonAsync<ResponseEmployee.Get>($"{nav.BaseUri.TrimEnd('/')}{Endpoints.Employees.GetMainDetails.Replace("{id}", Id.ToString())}") ?? null!;
+    }
+
+    private void EditForm()
+    {
+        mode = Mode.Edit;
+    }
+
+    private void CancelForm()
+    {
+        mode = Mode.View;
+    }
+}

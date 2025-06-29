@@ -27,7 +27,7 @@ public class ResponseEmployee
 
     public class Get
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
@@ -43,9 +43,9 @@ public class ResponseEmployee
 
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public byte[] Photograph { get; set; } = new byte[0];
+        public byte[]? Photograph { get; set; }
 
-        public string MIME { get; set; } = string.Empty;
+        public string? MIME { get; set; }
     }
 
     public class Delete

@@ -95,7 +95,7 @@ public class AdditionalDetailsController : Controller
         return PartialView(update);
     }
 
-    [HttpPut(Endpoints.AdditionalDetails.Update)]
+    [HttpPost(Endpoints.AdditionalDetails.Update)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, RequestAdditionalDetails.Update details, CancellationToken token)
     {

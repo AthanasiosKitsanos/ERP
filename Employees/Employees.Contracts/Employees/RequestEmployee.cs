@@ -24,9 +24,9 @@ public class RequestEmployee
 
     public class Update
     {
-        public string Email { get; init; } = string.Empty;      
-        public string Nationality { get; init; } = string.Empty;
-        public string PhoneNumber { get; init; } = string.Empty;
+        public string Email { get; set; } = string.Empty;      
+        public string Nationality { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 
     public class Photo
