@@ -1,22 +1,23 @@
 using Employees.Contracts.EmployeeContracts;
 using Employees.Core.IServices;
 using Employees.Domain;
-using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Employees.Shared.CustomEndpoints;
-using Azure.Core;
+using Microsoft.AspNetCore.Antiforgery;
 
 namespace Employees.Api.Controllers;
 
 public class EmployeesController : Controller
 {
+    private readonly IAntiforgery _antiforgery;
     private readonly IEmployeesServices _services;
     private readonly ILogger<EmployeesController> _logger;
 
-    public EmployeesController(IEmployeesServices services, ILogger<EmployeesController> logger)
+    public EmployeesController(IEmployeesServices services, ILogger<EmployeesController> logger, IAntiforgery antiforgery)
     {
         _services = services;
         _logger = logger;
+        _antiforgery = antiforgery;
     }
 
     [HttpGet(Endpoints.Employees.Index)]
@@ -68,9 +69,13 @@ public class EmployeesController : Controller
             });
         }
 
-        EmployeeId newId = new EmployeeId(id);
+        AntiforgeryTokenSet token = _antiforgery.GetAndStoreTokens(HttpContext);
 
-        return View(newId);
+        return View(new DetailsModel
+        {
+            Id = id,
+            Aft = token.RequestToken!
+        });
     }
 
     [HttpGet(Endpoints.Employees.GetMainDetails)]

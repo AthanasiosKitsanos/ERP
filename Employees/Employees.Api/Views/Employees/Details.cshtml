@@ -1,7 +1,8 @@
-@using Employees.Domain.Models
 @using Employees.RazorComponents.EmployeeComponents
 @using Employees.Shared.CustomEndpoints
-@model EmployeeId
+@using Employees.Domain
+
+@model DetailsModel 
 
 @section Styles
 {
@@ -12,10 +13,11 @@
 
     <h3>Details</h3>
     <div id="employeeDetailsContainer" style="margin-top: -30px;">
-        <form method="post" asp-action="Update" asp-controller="Employees" asp-route-id="@Model.Id">
+        @* <form method="post" asp-action="Update" asp-controller="Employees" asp-route-id="@Model.Id">
             @Html.AntiForgeryToken()
-            <component type="typeof(GetMainDetails)" render-mode="ServerPrerendered" param-Id="@Model.Id"/>
-        </form>
+            
+        </form> *@
+        <component type="typeof(GetMainDetails)" render-mode="ServerPrerendered" param-Id="@Model.Id" param-AntiForgery="@Model.Aft" param-Mode="@Model.Mode"/>
     </div>
 
     <h3>Role</h3>

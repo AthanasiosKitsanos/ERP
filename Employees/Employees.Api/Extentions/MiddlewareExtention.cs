@@ -1,5 +1,4 @@
 using Employees.Shared.CustomMiddlewares;
-using Employees.RazorComponents;
 
 namespace Employees.Api.Extentions;
 
