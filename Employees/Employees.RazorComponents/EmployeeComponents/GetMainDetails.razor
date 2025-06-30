@@ -1,17 +1,10 @@
-﻿@using Employees.Contracts.EmployeeContracts
-@using Employees.Shared.CustomEndpoints
-@using Employees.Domain
-@using System.Net.Http.Json
-
-@inject NavigationManager nav
-@inject HttpClient http
-
+﻿@inherits MainDetailsComponent
 
 @if(employee is not null)
 {
     switch(Mode)
     {
-        case FormMode.View:
+        case ViewMode.View:
         <table>
             <tbody>
                 <tr>
@@ -35,11 +28,12 @@
                 </tr>
 
                 <tr>
-                    <td><b>Date Of Birth:</b></td>
+                    <td><b>Date of Birth:</b></td>
                     <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
                 </tr>
 
                 <tr>
+                    <td><b>Nationality:</b></td>
                     <td>@employee.Nationality</td>
                 </tr>
 
@@ -55,16 +49,16 @@
 
             
                 <tr>
-                    <td><a @onclick=EditForm>Edit</a></td>
+                    <td><a @onclick="UpdateForm">Edit</a></td>
                 </tr>
             </tbody>
         </table>
         break;
 
-        case FormMode.Update:
+        case ViewMode.Update:
             
         <form method="post" action="@Endpoints.Employees.Update.Replace("{id}", Id.ToString())">
-            <input type="hidden" name="__RequestVerificationToken" value="@AntiForgery">
+            @* <input type="hidden" name="__RequestVerificationToken" value="@AntiForgery"> *@
 
             <table>
                 <tbody>
@@ -91,7 +85,7 @@
                     </tr>
 
                     <tr>
-                        <td><b>Date Of Birth:</b></td>
+                        <td><b>Date of Birth:</b></td>
                         <td>@employee.DateOfBirth.ToString("dd-MM-yyyy")</td>
                     </tr>
 
@@ -116,7 +110,7 @@
 
                     <tr>
                         <td><button type="submit">Save</button></td>
-                        <td><a @onclick=CancelForm>Cancel</a></td>
+                        <td><a @onclick="CancelForm">Cancel</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -135,33 +129,4 @@ else
     <tr>
         <td colspan="2">Loading...</td>
     </tr>
-}
-
-@code
-{
-    [Parameter]
-    public int Id { get; set; }
-    [Parameter]
-    public string AntiForgery { get; set; } = string.Empty; 
-    [Parameter]
-    public FormMode Mode { get; set; }
-
-    private ResponseEmployee.Get? employee;
-
-    private RequestEmployee.Update update = new RequestEmployee.Update();
-
-    protected override async Task OnInitializedAsync()
-    {
-        employee = await http.GetFromJsonAsync<ResponseEmployee.Get>($"{nav.BaseUri.TrimEnd('/')}{Endpoints.Employees.GetMainDetails.Replace("{id}", Id.ToString())}") ?? null!;
-    }
-
-    private void EditForm()
-    {
-        Mode = FormMode.Update;
-    }
-
-    private void CancelForm()
-    {
-        Mode = FormMode.View;
-    }
 }

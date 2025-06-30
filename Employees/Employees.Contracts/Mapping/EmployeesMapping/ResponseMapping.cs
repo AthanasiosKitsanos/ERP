@@ -7,6 +7,11 @@ public static class ResponseMapping
 {
     public static ResponseEmployee.Get MapToGetResponse(this Employee employee)
     {
+        if (employee is null)
+        {
+            return new ResponseEmployee.Get();
+        }
+        
         return new ResponseEmployee.Get
         {
             Id = employee.Id,

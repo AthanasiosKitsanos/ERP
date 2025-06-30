@@ -17,7 +17,7 @@
             @Html.AntiForgeryToken()
             
         </form> *@
-        <component type="typeof(GetMainDetails)" render-mode="ServerPrerendered" param-Id="@Model.Id" param-AntiForgery="@Model.Aft" param-Mode="@Model.Mode"/>
+        <component type="typeof(GetMainDetails)" render-mode="ServerPrerendered" param-Id="@Model.Id"/>
     </div>
 
     <h3>Role</h3>

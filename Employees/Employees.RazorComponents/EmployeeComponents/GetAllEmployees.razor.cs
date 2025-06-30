@@ -4,7 +4,7 @@ using Employees.Contracts.EmployeeContracts;
 
 namespace Employees.RazorComponents.EmployeeComponents;
 
-public partial class GetAllEmployees : BaseComponent
+public class GetAllEmployeesComponent: BaseComponent
 {
     protected List<ResponseEmployee.Get> employeeList { get; set; } = new List<ResponseEmployee.Get>();
 

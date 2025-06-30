@@ -73,8 +73,7 @@ public class EmployeesController : Controller
 
         return View(new DetailsModel
         {
-            Id = id,
-            Aft = token.RequestToken!
+            Id = id
         });
     }
 

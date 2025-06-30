@@ -43,9 +43,9 @@ public class ResponseEmployee
 
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public byte[]? Photograph { get; set; }
+        public byte[] Photograph { get; set; } = new byte[0];
 
-        public string? MIME { get; set; }
+        public string MIME { get; set; } = string.Empty;
     }
 
     public class Delete

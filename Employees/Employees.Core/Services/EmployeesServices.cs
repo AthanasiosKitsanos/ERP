@@ -55,7 +55,9 @@ public class EmployeesServices : IEmployeesServices
 
         Employee employee = await _repository.GetByIdAsync(id);
 
-        return employee.MapToGetResponse();
+        ResponseEmployee.Get response = employee.MapToGetResponse();
+
+        return response;
     }
 
     public async Task<bool> UpdateAsync(int id, RequestEmployee.Update updateRequest, CancellationToken cancellationToken = default)

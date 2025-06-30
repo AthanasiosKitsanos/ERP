@@ -21,7 +21,7 @@ public class BaseComponent : ComponentBase
     protected AntiForgeryServices AntiforgeryService { get; set; } = default!;
 
     protected MarkupString AntiForgeryMarkup;
-    protected ViewMode mode = ViewMode.View;
+    protected ViewMode Mode = ViewMode.View;
 
     protected override async Task OnInitializedAsync()
     {
