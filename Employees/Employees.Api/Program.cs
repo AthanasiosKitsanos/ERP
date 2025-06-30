@@ -2,6 +2,7 @@ using Employees.Api.Extentions;
 using Employees.Core;
 using Employees.Infrastructure;
 using Employees.BackgroundServices;
+using Employees.RazorComponents;
 
 namespace MainProgram;
 
@@ -19,6 +20,7 @@ class MainProgram
             options.SingleLine = true;
             options.TimestampFormat = "[HH:mm:ss]";
         });
+        builder.Services.AddComponentServices();
         builder.Services.AddServices();
         builder.Services.AddBackgroundServices();
         builder.Services.AddCore();

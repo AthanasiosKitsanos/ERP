@@ -14,6 +14,8 @@ public static class ServiceCollectionExtention
         
         services.AddAntiforgery();
 
+        services.AddHttpContextAccessor();
+
         //services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", options => {});
 
         services.AddAuthorization();
