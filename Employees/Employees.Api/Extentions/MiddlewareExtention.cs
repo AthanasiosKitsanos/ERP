@@ -10,7 +10,7 @@ public static class MiddlewareExtention
 
         app.UseStaticFiles();
 
-        app.UseRouting();
+        app.UseRouting(); 
 
         //app.UseMiddleware<RefreshTokenMiddleware>();
 

@@ -1,11 +1,4 @@
-﻿@using Employees.Contracts.EmployeeContracts
-@using System.Net.Http.Json
-@using Employees.Shared.CustomEndpoints
-
-@inject NavigationManager nav
-@inject HttpClient httpClient
-
-<div>
+﻿<div>
     <table>
         <thead>
             <tr>
@@ -17,8 +10,6 @@
 
                 <th>Age</th>
 
-                <th>Date of Birth</th>
-
                 <th>Nationality</th>
 
                 <th>Gender</th>
@@ -27,9 +18,9 @@
             </tr>
         </thead>
         <tbody>
-            @if(list is not null)
+            @if(employeeList is not null)
             {
-                @foreach (ResponseEmployee.Get employee in list)
+                @foreach (ResponseEmployee.Get employee in employeeList)
                 {
                     <tr>
                         <td>@employee.FirstName</td>
@@ -54,13 +45,3 @@
         </tbody>
     </table>
 </div>
-
-@code
-{
-    List<ResponseEmployee.Get> list = new List<ResponseEmployee.Get>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        list = await httpClient.GetFromJsonAsync<List<ResponseEmployee.Get>>($"{nav.BaseUri.Trim('/')}{Endpoints.Employees.GetAllEmployees}") ?? null!;
-    }
-}
