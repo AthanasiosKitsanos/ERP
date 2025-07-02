@@ -13,10 +13,6 @@
 
     <h3>Details</h3>
     <div id="employeeDetailsContainer" style="margin-top: -30px;">
-        @* <form method="post" asp-action="Update" asp-controller="Employees" asp-route-id="@Model.Id">
-            @Html.AntiForgeryToken()
-            
-        </form> *@
         <component type="typeof(GetMainDetails)" render-mode="ServerPrerendered" param-Id="@Model.Id"/>
     </div>
 

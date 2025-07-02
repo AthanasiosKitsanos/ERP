@@ -54,12 +54,10 @@
             </tbody>
         </table>
         break;
-
+        
         case ViewMode.Update:
             
-        <form method="post" action="@Endpoints.Employees.Update.Replace("{id}", Id.ToString())">
-            @* <input type="hidden" name="__RequestVerificationToken" value="@AntiForgery"> *@
-
+        <FormField method="post" action="Update" controller="Employees" routeId="@Id">
             <table>
                 <tbody>
                     <tr>
@@ -114,7 +112,7 @@
                     </tr>
                 </tbody>
             </table>
-        </form>
+        </FormField>
         break;
 
         default:
