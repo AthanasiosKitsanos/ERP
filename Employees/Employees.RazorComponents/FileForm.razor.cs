@@ -7,30 +7,32 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Employees.RazorComponents;
 
-public class FileFormComponent: BaseComponent
+public class FileFormComponent: ComponentBase
 {
     [Inject] private IHttpContextAccessor Accessor { get; set; } = default!;
     [Inject] private IUrlHelperFactory UrlHelper { get; set; } = default!;
+    [Inject] private AntiForgeryServices AntiforgeryService { get; set; } = default!;
+
     [Parameter] public string? action { get; set; }
     [Parameter] public string? controller { get; set; }
-    [Parameter] public int routeId { get; set; }
+    [Parameter] public int? routeId { get; set; }
     [Parameter] public string? method { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    protected Dictionary<string, object>? RouteValue { get; set; }
     protected string? ActionUrl { get; set; }
+    protected MarkupString AntiForgeryMarkup { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         AntiForgeryMarkup = await AntiforgeryService.GenerateHiddenMarkupInput();
 
-        string id = routeId.ToString();
+        Dictionary<string, string>? RouteValue = null;
 
-        if (!string.IsNullOrEmpty(id))
+        if (routeId.HasValue)
         {
-            RouteValue = new Dictionary<string, object>
+            RouteValue = new Dictionary<string, string>
             {
-                ["id"] = id
+                ["id"] = routeId.Value.ToString()
             };
         }
 
