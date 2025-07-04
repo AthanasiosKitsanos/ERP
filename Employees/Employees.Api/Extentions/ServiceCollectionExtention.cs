@@ -1,3 +1,5 @@
+using MvcStyle.ServiceCollection;
+
 namespace Employees.Api.Extentions;
 
 public static class ServiceCollectionExtention
@@ -6,12 +8,14 @@ public static class ServiceCollectionExtention
     {
         services.AddControllersWithViews();
 
+        services.AddMvcStyle();
+
         services.AddRazorComponents().AddInteractiveServerComponents();
-        
+
         //services.AddServerSideBlazor();
 
         services.AddHttpClient();
-        
+
         services.AddAntiforgery();
 
         services.AddHttpContextAccessor();
@@ -19,8 +23,8 @@ public static class ServiceCollectionExtention
         //services.AddAuthentication("ErpJwt").AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>("ErpJwt", options => {});
 
         services.AddAuthorization();
-        
-        
+
+
         return services;
     }
 }
