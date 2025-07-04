@@ -13,6 +13,5 @@ public class BaseComponent : ComponentBase
 {
     [Inject] protected NavigationManager Navigate { get; set; } = default!;
     [Inject] protected HttpClient HttpClient { get; set; } = default!;
-    [Inject] protected AntiForgeryServices AntiforgeryService { get; set; } = default!;
     protected ViewMode Mode = ViewMode.View;
 }

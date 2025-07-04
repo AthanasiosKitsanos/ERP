@@ -20,7 +20,6 @@ class MainProgram
             options.SingleLine = true;
             options.TimestampFormat = "[HH:mm:ss]";
         });
-        builder.Services.AddComponentServices();
         builder.Services.AddServices();
         builder.Services.AddBackgroundServices();
         builder.Services.AddCore();
