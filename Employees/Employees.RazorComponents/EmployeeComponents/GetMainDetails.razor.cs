@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using System.Threading.Tasks;
+using Azure;
 using Employees.Contracts.EmployeeContracts;
 using Employees.Shared.CustomEndpoints;
 using Microsoft.AspNetCore.Components;
@@ -12,13 +12,10 @@ public class MainDetailsComponent : BaseComponent
     public int Id { get; set; }
 
     protected ResponseEmployee.Get? employee;
-
-    protected RequestEmployee.Update update = new RequestEmployee.Update();
+    protected ResponseEmployee.Update update = new ResponseEmployee.Update();
 
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
-
         employee = await HttpClient.GetFromJsonAsync<ResponseEmployee.Get>($"{Navigate.BaseUri.TrimEnd('/')}{Endpoints.Employees.GetMainDetails.Replace("{id}", Id.ToString())}") ?? null!;
     }
 
@@ -32,6 +29,3 @@ public class MainDetailsComponent : BaseComponent
         Mode = ViewMode.View;
     }
 }
-
-// Μην ξεχάσεις στο OnInitializedAsync
-//πρώτα να καλεσεις το base.OnInitializedAsync για να βαλει το AntiForgeryToken
