@@ -24,4 +24,8 @@
     <Folder Include="Views\AdditionalDetails\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MvcStyle" Version="2.0.1" />
+  </ItemGroup>
+
 </Project>
