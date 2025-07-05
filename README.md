@@ -9,6 +9,7 @@
 - **Database**: Microsoft SQL Server (MSSQL)
 
 - **Frontend**: Razor Views, HTML/CSS, JS
+    - There us a branch named newFeature/blazor that I try to recreate the dynamic UI with blazor mized with MVC
 
 - **Architecture**: Micro-Services (in progress)
 
