@@ -1,13 +1,13 @@
-using System.Net.Http.Json;
-using Azure;
 using Employees.Contracts.EmployeeContracts;
-using Employees.Shared.CustomEndpoints;
 using Microsoft.AspNetCore.Components;
+using MvcStyle.Services;
 
 namespace Employees.RazorComponents.EmployeeComponents;
 
-public class MainDetailsComponent : BaseComponent
+public partial class GetMainDetails
 {
+    [Inject] private IControllerServices Controller { get; set; } = default!;
+
     [Parameter]
     public int Id { get; set; }
 
@@ -16,7 +16,7 @@ public class MainDetailsComponent : BaseComponent
 
     protected override async Task OnInitializedAsync()
     {
-        employee = await HttpClient.GetFromJsonAsync<ResponseEmployee.Get>($"{Navigate.BaseUri.TrimEnd('/')}{Endpoints.Employees.GetMainDetails.Replace("{id}", Id.ToString())}") ?? null!;
+        employee = await Controller.HttpGetJsonAsync<ResponseEmployee.Get>("GetMainDetails", "Employees", Id);
     }
 
     protected void UpdateForm()
@@ -26,6 +26,13 @@ public class MainDetailsComponent : BaseComponent
 
     protected void CancelForm()
     {
+        Mode = ViewMode.View;
+    }
+
+    protected async Task OnSubmit()
+    {
+        employee = await Controller.HttpGetJsonAsync<ResponseEmployee.Get>("GetMainDetails", "Employees", Id);
+
         Mode = ViewMode.View;
     }
 }
