@@ -1,6 +1,6 @@
 using Employees.Domain.Models;
 
-namespace Employees.Infrastructure.IRepository;
+namespace Employees.Infrastructure.Repository;
 
 public interface ICredentialsRepository
 {

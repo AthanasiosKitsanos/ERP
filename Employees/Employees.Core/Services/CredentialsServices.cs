@@ -1,5 +1,5 @@
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 
 namespace Employees.Core.Services;
 

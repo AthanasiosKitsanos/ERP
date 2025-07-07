@@ -1,5 +1,4 @@
 using Employees.Domain;
-using Employees.Infrastructure.IRepository;
 using Employees.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 

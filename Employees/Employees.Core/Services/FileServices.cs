@@ -1,7 +1,7 @@
 using Employees.Contracts.File;
 using Employees.Contracts.Mapping.File;
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 
 namespace Employees.Core.Services;
 
