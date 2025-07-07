@@ -21,12 +21,14 @@ document.addEventListener("DOMContentLoaded", async function()
             edit.addEventListener("click", async function(event)
             {
                 event.preventDefault();
-
+                
                 response = await fetch(`/employees/${Id}/update`);
 
                 html = await response.text();
 
                 container.innerHTML = html;
+                
+                ConfirmUpdate(Id);
 
                 CancelMDForm(Id);
             });
@@ -50,6 +52,39 @@ document.addEventListener("DOMContentLoaded", async function()
                 container.innerHTML = html;
 
                 EditEmployeeButton(Id);
+            });
+        }
+    }
+
+    function ConfirmUpdate(Id)
+    {
+        const updateForm = document.getElementById("employee-update");
+
+        if(updateForm)
+        {
+            updateForm.addEventListener("submit", async e =>
+            {
+                e.preventDefault();
+
+                const form = e.target;
+                const data = new FormData(form);
+
+                const response  = await fetch(`/employees/${Id}/update`, { method: 'POST', body: data});
+
+                const result = await response.json();
+
+                if(result.success)
+                {
+                    const partial = await fetch(`/employees/${Id}/getmaindetails`);
+                    html = await partial.text();
+                    container.innerHTML = html;
+
+                    EditEmployeeButton(Id);
+                }
+                else
+                {
+                    alert("Not updated");
+                }
             });
         }
     }

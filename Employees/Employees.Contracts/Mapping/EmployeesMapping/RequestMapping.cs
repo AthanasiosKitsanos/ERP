@@ -27,6 +27,7 @@ public static class RequestMapping
     {
         return new Employee
         {
+            Id = id,
             Email = updateResponse.Email,
             Nationality = updateResponse.Nationality,
             PhoneNumber = updateResponse.PhoneNumber

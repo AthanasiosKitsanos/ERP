@@ -1,8 +1,6 @@
 using Employees.Contracts.EmployeeContracts;
-using Employees.Contracts.EmployeesMapping;
 using Employees.Core.IServices;
 using Employees.Domain;
-using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employees.Api.Controllers;
@@ -67,7 +65,7 @@ public class EmployeesController : Controller
             });
         }
 
-        return View(new EmployeeId(id));
+        return View(new EmplooyeeId(id));
     }
 
     [HttpGet(Endpoint.Employees.GetMainDetails)]
@@ -146,7 +144,7 @@ public class EmployeesController : Controller
         return PartialView(request);
     }
 
-    [HttpPut(Endpoint.Employees.Update)]
+    [HttpPost(Endpoint.Employees.Update)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
     {
@@ -158,7 +156,9 @@ public class EmployeesController : Controller
             return RedirectToAction("Details", new { id });
         }
 
-        return RedirectToAction("Details", new { id });
+        // return RedirectToAction("Details", new { id });
+
+        return new JsonResult(new { success = true });
     }
 
     [HttpGet(Endpoint.Employees.Delete)]

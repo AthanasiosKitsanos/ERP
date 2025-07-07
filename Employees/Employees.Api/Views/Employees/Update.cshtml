@@ -4,10 +4,8 @@
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
 
-<form method="post" asp-action="Update" asp-controller="Employees" asp-route-id="@Model.Id">
+<form id="employee-update">
     @Html.AntiForgeryToken()
-    <input type="hidden" name="_method" value="PUT">
-
     <table>
         <tbody>
             <tr>
@@ -23,7 +21,7 @@
             <tr>
                 <td><b>Email:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.Email">
+                    <input type="text" name="Email"">
                 </td>
             </tr>
 
@@ -40,7 +38,7 @@
             <tr>
                 <td><b>Nationality:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.Nationality">
+                    <input type="text" name="Nationality"">
                 </td>
             </tr>
 
@@ -52,7 +50,7 @@
             <tr>
                 <td><b>Phone Number:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.PhoneNumber">
+                    <input type="text" name="PhoneNumber">
                 </td>
             </tr>
 
