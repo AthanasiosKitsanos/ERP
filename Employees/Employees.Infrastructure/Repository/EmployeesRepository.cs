@@ -2,7 +2,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using Employees.Domain;
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 using Microsoft.Data.SqlClient;
 
 namespace Employees.Infrastructure.Repository;

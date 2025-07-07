@@ -1,7 +1,7 @@
 using System.Data;
 using Employees.Domain;
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 
