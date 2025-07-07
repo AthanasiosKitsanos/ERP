@@ -19,7 +19,7 @@
 - [x] Employee management (CRUD operations)
 - [ ] Department management
 - [ ] Project assignment logic
-- [ ] Logging system with custom middleware
+- [x] Logging system with custom middleware
 - [ ] Audit trails for data changes
 - [x] RESTful API endpoints
 - [x] Client-side enhancements with JavaScript
@@ -33,8 +33,8 @@
     <summary>Employees/</summary>
 
     - `Employees.Api`
-        - Exposes RESTful API endpoints for managing employee-related operations.
-        - ASP.NET Core MVC web front-end (Controllers, Razor views, layout structure)
+        - Exposes API endpoints for managing employee-related operations.
+        - ASP.NET Core MVC web front-end (Controllers, Razor views, layout structure, JavaScript)
         - Mapping, wwwroot
 
     - `Employees.BackgroundServices`  
