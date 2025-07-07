@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace Employees.Domain.Models;
 
 public class AdditionalDetails
