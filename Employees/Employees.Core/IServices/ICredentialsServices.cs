@@ -1,6 +1,6 @@
 using Employees.Domain.Models;
 
-namespace Employees.Core.IServices;
+namespace Employees.Core.Services;
 
 public interface ICredentialsServices
 {

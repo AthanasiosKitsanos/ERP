@@ -1,5 +1,4 @@
 using Employees.Domain.Models;
-using Employees.Core.IServices;
 using Employees.Infrastructure.IRepository;
 using System.Runtime.CompilerServices;
 using Employees.Contracts.EmployeeContracts;

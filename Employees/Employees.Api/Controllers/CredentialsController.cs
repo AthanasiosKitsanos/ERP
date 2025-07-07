@@ -2,7 +2,7 @@ using Employees.Contracts.CredentialsContract;
 using Employees.Contracts.CredentialsMapping;
 using Employees.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Employees.Core.IServices;
+using Employees.Core.Services;
 
 namespace Employees.Api.Controllers;
 
