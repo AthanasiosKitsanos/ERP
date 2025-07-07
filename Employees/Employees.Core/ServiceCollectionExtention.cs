@@ -11,7 +11,7 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<ICredentialsServices, CredentialsServices>();
 
-        //services.AddScoped<IAdditionalDetailsServices, AdditionalDetailsServices>();
+        services.AddScoped<IAdditionalDetailsServices, AdditionalDetailsServices>();
 
         services.AddScoped<IFileServices, FileServices>();
 

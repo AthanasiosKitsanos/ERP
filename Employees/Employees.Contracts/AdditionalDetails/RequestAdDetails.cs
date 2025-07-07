@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Employees.Contracts.AdditionalDetails;
+namespace Employees.Contracts.AdDetails;
 
 public class RequestAdDetails
 {

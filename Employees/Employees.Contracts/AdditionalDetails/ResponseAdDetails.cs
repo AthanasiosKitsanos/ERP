@@ -1,4 +1,4 @@
-namespace Employees.Contracts.AdditionalDetails;
+namespace Employees.Contracts.AdDetails;
 
 public class ResponseAdDetails
 {
@@ -6,6 +6,5 @@ public class ResponseAdDetails
     {
         public string EmergencyNumbers { get; set; } = string.Empty;
         public string Education { get; set; } = string.Empty;
-        public int EmployeeId { get; set; }
     }
 }
