@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Employees.Shared\Employees.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\AdditionalDetails\" />
+  </ItemGroup>
+
 </Project>

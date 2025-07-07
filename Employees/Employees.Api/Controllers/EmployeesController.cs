@@ -67,9 +67,7 @@ public class EmployeesController : Controller
             });
         }
 
-        EmployeeId newId = new EmployeeId(id);
-
-        return View(newId);
+        return View(new EmployeeId(id));
     }
 
     [HttpGet(Endpoint.Employees.GetMainDetails)]
@@ -150,11 +148,9 @@ public class EmployeesController : Controller
 
     [HttpPut(Endpoint.Employees.Update)]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id, ResponseEmployee.Update request, CancellationToken token)
+    public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
     {
-        RequestEmployee.Update update = request.MapToUpdateRequest();
-
-        bool IsUpdated = await _services.UpdateAsync(id, update, token);
+        bool IsUpdated = await _services.UpdateAsync(id, request, token);
 
         if (!IsUpdated)
         {
