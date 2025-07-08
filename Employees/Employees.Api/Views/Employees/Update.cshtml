@@ -1,5 +1,5 @@
-@using Employees.Contracts.EmployeeContracts
-@model ResponseEmployee.Get
+@* @using Employees.Contracts.EmployeeContracts
+@model ResponseEmployee.Get *@
 
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
@@ -10,12 +10,12 @@
         <tbody>
             <tr>
                 <td><b>First Name:</b></td>
-                <td>@Model.FirstName</td>
+                <td id="FirstName"></td>
             </tr>
 
             <tr>
                 <td><b>Last Name:</b></td>
-                <td>@Model.LastName</td>
+                <td id="LastName"></td>
             </tr>
 
             <tr>
@@ -27,12 +27,12 @@
 
             <tr>
                 <td><b>Age:</b></td>
-                <td>@Model.Age</td>
+                <td id="Age"></td>
             </tr>
 
             <tr>
                 <td><b>Date of Birth:</b></td>
-                <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                <td id="DateOfBirth"></td>
             </tr>
 
             <tr>
@@ -44,7 +44,7 @@
 
             <tr>
                 <td><b>Gender:</b></td>
-                <td>@Model.Gender</td>
+                <td id="Gender"></td>
             </tr>
 
             <tr>

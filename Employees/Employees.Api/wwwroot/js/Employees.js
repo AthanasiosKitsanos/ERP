@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function()
 {   
     const tbody = document.getElementById('employeeTable');
 
-        await fetch('/employees/getallemployees')
+        await fetch('/getallemployees')
         .then(response => response.json())
         .then(data => {
             data.forEach(e => {

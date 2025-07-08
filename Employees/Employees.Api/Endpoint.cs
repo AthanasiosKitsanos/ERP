@@ -14,35 +14,47 @@ public static class Endpoint
 
     public static class Employees
     {
-        private const string Base = "/employees";
-        public const string Index = Base;
-        public const string GetAllEmployees = $"{Base}/getallemployees";
-        public const string Create = $"{Base}/create";
-        public const string GetAllDetails = $"{Base}/{{id}}/details";
-        public const string GetMainDetails = $"{Base}/{{id}}/getmaindetails";
-        public const string Delete = $"{Base}/{{id}}/delete";
-        public const string Update = $"{Base}/{{id}}/update";
+        private const string Id = $"/{{id}}";
+        public const string GetAllEmployees = $"/getallemployees";
+        public const string Get = $"{Id}/getmaindetails";
+        public const string Update = $"{Get}/update";
     }
 
     public static class Files
     {
-        private const string Base = $"/employees/{{id}}/files";
+        private const string Base = $"/files/{{id}}";
 
         public const string GetPhoto = $"{Base}/photograph";
     }
 
     public static class Credentials
     {
-        private const string Base = $"{Employees.Index}/{{id}}/credentials/create";
-        public const string Create = Base;
+    
     }
 
     public static class AdditionalDetails
     {
-        private const string Base = $"{Employees.Index}/{{id}}/additionaldetails";
-        public const string Get = Base;
-        public const string Create = $"{Base}/create";
-        public const string Update = $"{Base}/update";
+        
     }
 
+    public static class Views
+    {
+        public class EmployeeViews
+        {
+            private const string Base = "/employees";
+            private const string BaseId = $"{Base}/{{id}}";
+            public const string Index = Base;
+            public const string Create = $"{Base}/create";
+            public const string Details = $"{BaseId}/details";
+            public const string GetMainDetails = $"{BaseId}/getmaindetails";
+            public const string Update = $"{BaseId}/update";
+            public const string Delete = $"{BaseId}/delete";
+        }
+
+        public class CredentialsViews
+        {
+            private const string Base = $"/credentials/{{id}}/create";
+            public const string Create = $"{Base}";
+        }
+    }
 }

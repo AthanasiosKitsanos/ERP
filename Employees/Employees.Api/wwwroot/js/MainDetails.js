@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", async function()
 
     container.innerHTML = html;
 
+    await fetch()
+
     EditEmployeeButton(Id);
 
     function EditEmployeeButton(Id)

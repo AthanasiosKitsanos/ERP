@@ -8,40 +8,40 @@
         <tbody>
             <tr>
                 <td><b>First Name:</b></td>
-                <td>@Model.FirstName</td>
+                <td id="FirstName"></td>
             </tr>
 
             <tr>
                 <td><b>Last Name:</b></td>
-                <td>@Model.LastName</td>
+                <td id="LastName"></td>
             </tr>
 
             <tr>
                 <td><b>Email:</b></td>
-                <td>@Model.Email</td>
+                <td id="Email"></td>
             </tr>
 
             <tr>
                 <td><b>Age:</b></td>
-                <td>@Model.Age</td>
+                <td id="Age"></td>
             <tr>
                 <td><b>Date of Birth:</b></td>
-                <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                <td id="DateOfBirth"></td>
             </tr>
 
             <tr>
                 <td><b>Nationality:</b></td>
-                <td>@Model.Nationality</td>
+                <td id="Nationality"></td>
             </tr>
 
             <tr>
                 <td><b>Gender:</b></td>
-                <td>@Model.Gender</td>
+                <td id="Gender"></td>
             </tr>
 
             <tr>
                 <td><b>Phone Number:</b></td>
-                <td>@Model.PhoneNumber</td>
+                <td id="PhoneNumber"></td>
             </tr>
             @if(User.Identity!.IsAuthenticated && (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager"))
             {

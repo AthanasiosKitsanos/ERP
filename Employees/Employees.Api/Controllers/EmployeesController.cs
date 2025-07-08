@@ -16,14 +16,14 @@ public class EmployeesController : Controller
         _logger = logger;
     }
 
-    [HttpGet(Endpoint.Employees.Index)]
+    [HttpGet(Endpoint.Views.EmployeeViews.Index)]
     public IActionResult Index()
     {
         return View();
     }
 
     [HttpGet(Endpoint.Employees.GetAllEmployees)]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllEmployees(CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
         {
@@ -51,7 +51,7 @@ public class EmployeesController : Controller
         return Json(responseList);
     }
 
-    [HttpGet(Endpoint.Employees.GetAllDetails)]
+    [HttpGet(Endpoint.Views.EmployeeViews.Details)]
     public IActionResult Details(int id)
     {
         if (id <= 0)
@@ -68,7 +68,7 @@ public class EmployeesController : Controller
         return View(new EmplooyeeId(id));
     }
 
-    [HttpGet(Endpoint.Employees.GetMainDetails)]
+    [HttpGet(Endpoint.Employees.Get)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
     {
         ResponseEmployee.Get response = await _services.GetByIdAsync(id, token);
@@ -85,16 +85,16 @@ public class EmployeesController : Controller
 
         _logger.LogInformation($"Main details are sent to /employees/{id}/details");
 
-        return PartialView(response);
+        return Json(response);
     }
 
-    [HttpGet(Endpoint.Employees.Create)]
+    [HttpGet(Endpoint.Views.EmployeeViews.Create)]
     public IActionResult Create()
     {
         return View();
     }
 
-    [HttpPost(Endpoint.Employees.Create)]
+    [HttpPost(Endpoint.Views.EmployeeViews.Create)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(RequestEmployee.Create request, CancellationToken cancellationToken)
     {
@@ -126,23 +126,13 @@ public class EmployeesController : Controller
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
 
-    [HttpGet(Endpoint.Employees.Update)]
-    public async Task<IActionResult> Update(int id, CancellationToken token)
+    [HttpGet(Endpoint.Views.EmployeeViews.Update)]
+    public IActionResult Update()
     {
-        ResponseEmployee.Get request = await _services.GetByIdAsync(id, token);
-
-        if (request is null)
-        {
-            Response.StatusCode = 404;
-            return PartialView("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "Page was not found"
-            });
-        }
-
-        return PartialView(request);
+        return PartialView();
     }
+
+
 
     [HttpPost(Endpoint.Employees.Update)]
     [ValidateAntiForgeryToken]
@@ -161,7 +151,7 @@ public class EmployeesController : Controller
         return new JsonResult(new { success = true });
     }
 
-    [HttpGet(Endpoint.Employees.Delete)]
+    [HttpGet(Endpoint.Views.EmployeeViews.Delete)]
     public async Task<IActionResult> Delete(int id)
     {
         _logger.LogInformation($"url Id {id}");
@@ -172,7 +162,7 @@ public class EmployeesController : Controller
         return View(response);
     }
 
-    [HttpDelete(Endpoint.Employees.Delete)]
+    [HttpPost(Endpoint.Views.EmployeeViews.Delete)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {

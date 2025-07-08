@@ -17,7 +17,7 @@ public class CredentialsController : Controller
         _logger = logger;
     }
 
-    [HttpGet(Endpoint.Credentials.Create)]
+    //[HttpGet(Endpoint.Credentials.Create)]
     public IActionResult Create(int id)
     {
 
@@ -26,7 +26,7 @@ public class CredentialsController : Controller
         return View(request);
     }
 
-    [HttpPost(Endpoint.Credentials.Create)]
+    [HttpPost(Endpoint.Views.CredentialsViews.Create)]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(int id, RequestCredentials.Create request, CancellationToken cancellationToken)
     {
