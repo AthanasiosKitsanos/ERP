@@ -17,9 +17,7 @@ public static class ResponseMapping
             DateOfBirth = employee.DateOfBirth,
             Nationality = employee.Nationality,
             Gender = employee.Gender,
-            PhoneNumber = employee.PhoneNumber,
-            Photograph = employee.Photograph,
-            MIME = employee.MIME
+            PhoneNumber = employee.PhoneNumber
         };
     }
 
