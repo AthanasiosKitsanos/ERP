@@ -8,7 +8,7 @@
 
 - **Database**: Microsoft SQL Server (MSSQL)
 
-- **Frontend**: Razor Views, HTML/CSS, JS
+- **Frontend**: Razor Views, HTML/CSS, TypeScript-Js
 
 - **Architecture**: Micro-Services (in progress)
 
@@ -21,7 +21,6 @@
 - [ ] Project assignment logic
 - [x] Logging system with custom middleware
 - [ ] Audit trails for data changes
-- [x] RESTful API endpoints
 - [x] Client-side enhancements with JavaScript
 
 
