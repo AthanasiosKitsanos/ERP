@@ -34,10 +34,10 @@ public static class Endpoint
 
     public static class AdditionalDetails
     {
-        private const string Base = $"{{id}}/additionaldetails/";
+        private const string Base = $"/{{id}}/additionaldetails";
         public const string Get = $"{Base}/get";
         public const string Update = $"{Base}/update";
-        public const string Create = $"{Base}/create";
+        public const string Create = $"{Base}/create";                                               
     }
 
     public static class Views

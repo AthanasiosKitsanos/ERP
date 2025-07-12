@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+
+<form id="editAdditionalDetails">
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Emergency Numbers:</b></td>
+                <td>
+                    <input type="text" name="EmergencyNumbers"
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Education:</b></td>
+                <td>
+                    <input type="text" name="Education">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
+
+                <td>
+                    <a id="cancelAdditionalDetails" href="#">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

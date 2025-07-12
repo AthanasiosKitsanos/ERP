@@ -25,11 +25,6 @@ public class AdditionalDetailsController : Controller
     {
         ResponseAdditionalDetails.Get details = await _services.GetAsyncById(id, token);
 
-        if (details is null)
-        {
-            return Json(new { success = false });
-        }
-
         return Json(details);
     }
 
