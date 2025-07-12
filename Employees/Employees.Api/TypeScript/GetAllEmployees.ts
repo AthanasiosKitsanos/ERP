@@ -1,5 +1,14 @@
 import { Employee } from "./Models/Employee";
 
+function formatDate(date: Date): string
+{
+    const day = String(date.getDate()).padStart(2, "0"); 
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+}
+
 async function GetAllEmployees(): Promise<void>
 {
     const tbody = document.getElementById('employeeTable');
@@ -22,6 +31,13 @@ async function GetAllEmployees(): Promise<void>
             if(key === "id")
             {
                 return;
+            }
+
+            if(key === "dateOfBirth")
+            {
+                const valueTd = document.createElement('td');
+                valueTd.innerHTML = formatDate(new Date(value));
+                tr.appendChild(valueTd);
             }
 
             const valueTd = document.createElement('td');
