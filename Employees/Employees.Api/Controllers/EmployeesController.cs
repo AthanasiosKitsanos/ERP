@@ -68,6 +68,8 @@ public class EmployeesController : Controller
         return View(new EmplooyeeId(id));
     }
 
+
+
     [HttpGet(Endpoint.Employees.Get)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
     {
@@ -76,10 +78,10 @@ public class EmployeesController : Controller
         if (response is null)
         {
             _logger.LogInformation($"There was an error while getting the main details");
-            return PartialView("Error", new ErrorViewModel
+            return Json(new
             {
-                StatusCode = 404,
-                Message = "Employee details not found"
+                success = false,
+                error = "Employee details not found"
             });
         }
 
@@ -126,13 +128,17 @@ public class EmployeesController : Controller
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
 
+    [HttpGet(Endpoint.Views.EmployeeViews.GetMainDetails)]
+    public IActionResult GetMainDetails(int id)
+    {
+        return PartialView();
+    }
+
     [HttpGet(Endpoint.Views.EmployeeViews.Update)]
     public IActionResult Update()
     {
         return PartialView();
     }
-
-
 
     [HttpPost(Endpoint.Employees.Update)]
     [ValidateAntiForgeryToken]
