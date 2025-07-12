@@ -16,7 +16,7 @@ public static class Endpoint
     {
         private const string Id = $"/{{id}}";
         public const string GetAllEmployees = $"/getallemployees";
-        public const string Get = $"{Id}/getmaindetails";
+        public const string Get = $"{Id}/getmaindetails"; 
         public const string Update = $"{Get}/update";
     }
 
