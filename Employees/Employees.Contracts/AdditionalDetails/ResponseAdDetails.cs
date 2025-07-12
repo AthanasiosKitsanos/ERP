@@ -1,6 +1,6 @@
 namespace Employees.Contracts.AdDetails;
 
-public class ResponseAdDetails
+public class ResponseAdditionalDetails
 {
     public class Get
     {

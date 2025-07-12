@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Employees.Contracts.AdDetails;
 
-public class RequestAdDetails
+public class RequestAdditionDetails
 {
     public class Create
     {

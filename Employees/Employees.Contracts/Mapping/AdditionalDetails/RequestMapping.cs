@@ -7,7 +7,7 @@ namespace Employees.Contracts.Mapping.AdDetails;
 
 public static class RequestMapping
 {
-    public static async Task<AdditionalDetails> MapToCreateRequest(this RequestAdDetails.Create create, int id)
+    public static async Task<AdditionalDetails> MapToCreateRequest(this RequestAdditionDetails.Create create, int id)
     {
         return new AdditionalDetails
         {
@@ -21,7 +21,7 @@ public static class RequestMapping
         };
     }
 
-    public static AdditionalDetails MapToUpdateRequest(this RequestAdDetails.Update update, int id)
+    public static AdditionalDetails MapToUpdateRequest(this RequestAdditionDetails.Update update, int id)
     {
         return new AdditionalDetails
         {

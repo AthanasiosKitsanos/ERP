@@ -14,21 +14,21 @@ public class AdditionalDetailsServices : IAdditionalDetailsServices
         _repository = repository;
     }
 
-    public async Task<bool> CreateAsync(int id, RequestAdDetails.Create create, CancellationToken token = default)
+    public async Task<bool> CreateAsync(int id, RequestAdditionDetails.Create create, CancellationToken token = default)
     {
         AdditionalDetails details = await create.MapToCreateRequest(id);
 
         return await _repository.CreateAsync(details, token);
     }
 
-    public async Task<ResponseAdDetails.Get> GetAsync(int id, CancellationToken token = default)
+    public async Task<ResponseAdditionalDetails.Get> GetAsyncById(int id, CancellationToken token = default)
     {
-        AdditionalDetails details = await _repository.GetAsync(id, token);
+        AdditionalDetails details = await _repository.GetAsyncById(id, token);
 
         return details.MapToGetResponse();
     }
 
-    public async Task<bool> UpdateAsync(int id, RequestAdDetails.Update update, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(int id, RequestAdditionDetails.Update update, CancellationToken token = default)
     {
         AdditionalDetails details = update.MapToUpdateRequest(id);
 

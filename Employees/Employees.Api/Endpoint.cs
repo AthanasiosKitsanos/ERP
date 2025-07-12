@@ -34,7 +34,10 @@ public static class Endpoint
 
     public static class AdditionalDetails
     {
-        
+        private const string Base = $"{{id}}/additionaldetails/";
+        public const string Get = $"{Base}/get";
+        public const string Update = $"{Base}/update";
+        public const string Create = $"{Base}/create";
     }
 
     public static class Views
@@ -55,6 +58,14 @@ public static class Endpoint
         {
             private const string Base = $"/credentials/{{id}}/create";
             public const string Create = $"{Base}";
+        }
+
+        public class AdditionalDetailsViews
+        {
+            private const string Base = "/additionaldetails";
+            public const string Get = $"{Base}/{{id}}/get";
+            public const string Update = $"{Base}/{{id}}/update";
+            public const string Create = $"{Base}/{{id}}/create";
         }
     }
 }
