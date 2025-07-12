@@ -46,12 +46,12 @@
             @if(User.Identity!.IsAuthenticated && (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager"))
             {
                 <tr>
-                    <td><a id="MDEditForm" href="#">Edit</a></td>
+                    <td><a id="updateDetailsForm" href="#">Edit</a></td>
                 </tr>
             }
 
             <tr>
-                <td><a id="MDEditForm" href="#">Edit</a></td>
+                <td><a id="updateDetailsForm" href="#">Edit</a></td>
             </tr>
         </tbody>
     </table>
