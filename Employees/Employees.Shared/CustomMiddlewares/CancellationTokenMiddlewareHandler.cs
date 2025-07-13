@@ -16,7 +16,7 @@ public class CancellationTokenMiddlewareHandler
 
     public async Task InvokeAsync(HttpContext context)
     {
-        CancellationToken token = context.RequestAborted; 
+        CancellationToken token = context.RequestAborted;
 
         try
         {
@@ -25,13 +25,17 @@ public class CancellationTokenMiddlewareHandler
         catch (OperationCanceledException)
         {
             _logger.LogWarning("Operation cancelled by the user!");
-            
+
             context.Response.StatusCode = 499;
         }
         catch (Exception)
         {
             _logger.LogWarning("There was an error during the middleware runtime!");
             throw;
+        }
+        finally
+        {
+            await _next(context);
         }
     }
 }

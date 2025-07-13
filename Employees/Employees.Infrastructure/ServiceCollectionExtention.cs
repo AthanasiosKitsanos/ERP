@@ -1,5 +1,4 @@
 using Employees.Domain;
-using Employees.Infrastructure.IRepository;
 using Employees.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +17,8 @@ public static class ServiceCollectionExtention
         services.AddScoped<IAdditionalDetailsRepository, AdditionalDetailsRepository>();
 
         services.AddScoped<IFileRepository, FileRepository>();
+
+        services.AddScoped<IEmploymentDetailsRepository, EmploymentDetailsRepository>();
 
         return services;
     }

@@ -1,24 +1,21 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Employees.Contracts.AdditionalDetailsContract;
+namespace Employees.Contracts.AdDetails;
 
-public class RequestAdditionalDetails
+public class RequestAdditionDetails
 {
     public class Create
     {
-        public int EmployeeId { get; set; }
         public string EmergencyNumbers { get; set; } = string.Empty;
-
         public string Education { get; set; } = string.Empty;
 
-        public IFormFile? CertificationFile { get; set; }
+        public IFormFile Certifications { get; set; } = null!;
 
-        public IFormFile? PersonalDocumentsFile { get; set; }
+        public IFormFile PersonalDocuments { get; set; } = null!;
     }
 
     public class Update
     {
-        public int EmployeeId { get; set; }
         public string EmergencyNumbers { get; set; } = string.Empty;
         public string Education { get; set; } = string.Empty;
     }

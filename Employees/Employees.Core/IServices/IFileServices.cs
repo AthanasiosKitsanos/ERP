@@ -1,7 +1,6 @@
 using Employees.Contracts.File;
-using Employees.Domain.Models;
 
-namespace Employees.Core.IServices;
+namespace Employees.Core.Services;
 
 public interface IFileServices
 {

@@ -1,4 +1,3 @@
-using ErpProject.BackgroundServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Employees.BackgroundServices;

@@ -1,6 +1,6 @@
 using Employees.Contracts.EmployeeContracts;
 
-namespace Employees.Core.IServices;
+namespace Employees.Core.Services;
 
 public interface IEmployeesServices
 {

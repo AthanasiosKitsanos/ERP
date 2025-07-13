@@ -1,4 +1,3 @@
-using Employees.Core.IServices;
 using Employees.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +14,8 @@ public static class ServiceCollectionExtention
         services.AddScoped<IAdditionalDetailsServices, AdditionalDetailsServices>();
 
         services.AddScoped<IFileServices, FileServices>();
+
+        services.AddScoped<IEmploymentDetailsServices, EmploymentDetailsServices>();
 
         return services;
     }

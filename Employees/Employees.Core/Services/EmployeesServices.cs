@@ -1,6 +1,5 @@
 using Employees.Domain.Models;
-using Employees.Core.IServices;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 using System.Runtime.CompilerServices;
 using Employees.Contracts.EmployeeContracts;
 using Employees.Contracts.EmployeesMapping;

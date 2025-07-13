@@ -1,47 +1,36 @@
-using Employees.Contracts.AdditionalDetailsContract;
-using Employees.Contracts.AdditionalDetailsMapping;
-using Employees.Core.IServices;
+using Employees.Contracts.AdDetails;
+using Employees.Contracts.Mapping.AdDetails;
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
-using Microsoft.Extensions.Logging;
+using Employees.Infrastructure.Repository;
 
 namespace Employees.Core.Services;
 
 public class AdditionalDetailsServices : IAdditionalDetailsServices
 {
     private readonly IAdditionalDetailsRepository _repository;
-    private readonly ILogger<AdditionalDetailsServices> _logger;
 
-    public AdditionalDetailsServices(IAdditionalDetailsRepository repository, ILogger<AdditionalDetailsServices> logger)
+    public AdditionalDetailsServices(IAdditionalDetailsRepository repository)
     {
         _repository = repository;
-        _logger = logger;
     }
 
-    public async Task<bool> CreateAsync(int id, RequestAdditionalDetails.Create createDetails, CancellationToken token = default)
+    public async Task<bool> CreateAsync(int id, RequestAdditionDetails.Create create, CancellationToken token = default)
     {
-        //Need to update this
-        AdditionalDetails details = await createDetails.MapToCreate(id);
-
-        details.EmployeeId = id;
-
-        _logger.LogInformation($"EmployeeId = {details.EmployeeId}");
+        AdditionalDetails details = await create.MapToCreateRequest(id);
 
         return await _repository.CreateAsync(details, token);
     }
 
-    public async Task<ResponseAdditionalDetails.Get> GetAsync(int id, CancellationToken token = default)
+    public async Task<ResponseAdditionalDetails.Get> GetAsyncById(int id, CancellationToken token = default)
     {
-        AdditionalDetails additionalDetails = await _repository.GetAsync(id, token);
+        AdditionalDetails details = await _repository.GetAsyncById(id, token);
 
-        ResponseAdditionalDetails.Get details = additionalDetails.MapToGetResponse();
-        
-        return details;
+        return details.MapToGetResponse();
     }
 
-    public async Task<bool> UpdateAsync(int id, RequestAdditionalDetails.Update updateRequest, CancellationToken token = default)
+    public async Task<bool> UpdateAsync(int id, RequestAdditionDetails.Update update, CancellationToken token = default)
     {
-        AdditionalDetails details = updateRequest.MapToUpdate(id);
+        AdditionalDetails details = update.MapToUpdateRequest(id);
 
         return await _repository.UpdateAsync(details, token);
     }

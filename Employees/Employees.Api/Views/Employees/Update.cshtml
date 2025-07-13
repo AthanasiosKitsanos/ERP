@@ -1,64 +1,62 @@
-@using Employees.Contracts.EmployeeContracts
-@model ResponseEmployee.Get
+@* @using Employees.Contracts.EmployeeContracts
+@model ResponseEmployee.Get *@
 
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
 
-<form method="post" asp-action="Update" asp-controller="Employees" asp-route-id="@Model.Id">
+<form id="employee-update">
     @Html.AntiForgeryToken()
-    <input type="hidden" name="_method" value="PUT">
-
     <table>
         <tbody>
             <tr>
                 <td><b>First Name:</b></td>
-                <td>@Model.FirstName</td>
+                <td id="FirstName"></td>
             </tr>
 
             <tr>
                 <td><b>Last Name:</b></td>
-                <td>@Model.LastName</td>
+                <td id="LastName"></td>
             </tr>
 
             <tr>
                 <td><b>Email:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.Email">
+                    <input type="text" name="Email"">
                 </td>
             </tr>
 
             <tr>
                 <td><b>Age:</b></td>
-                <td>@Model.Age</td>
+                <td id="Age"></td>
             </tr>
 
             <tr>
                 <td><b>Date of Birth:</b></td>
-                <td>@Model.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                <td id="DateOfBirth"></td>
             </tr>
 
             <tr>
                 <td><b>Nationality:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.Nationality">
+                    <input type="text" name="Nationality"">
                 </td>
             </tr>
 
             <tr>
                 <td><b>Gender:</b></td>
-                <td>@Model.Gender</td>
+                <td id="Gender"></td>
             </tr>
 
             <tr>
                 <td><b>Phone Number:</b></td>
                 <td>
-                    <input type="text" asp-for="@Model.PhoneNumber">
+                    <input type="text" name="PhoneNumber">
                 </td>
             </tr>
 
             <tr>
                 <td><button type="submit">Save</button></td>
-                <td><a id="CancelMDForm" href="#">Cancel</a></td>
+                <td><a id="cancelDetailsForm" href="#">Cancel</a></td>
             </tr>
         </tbody>
     </table>

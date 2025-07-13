@@ -1,53 +1,45 @@
-@using Employees.Contracts.AdditionalDetailsContract
-@model RequestAdditionalDetails.Create
+﻿<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
-<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+<form id="createAdditionalDetails" enctype="multipart/form-data">
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Emergency Numbers:</b></td>
+                <td>
+                    <input type="text" name="EmergencyNumbers"
+                </td>
+            </tr>
 
-<div>
-    <form asp-action="Create" asp-route-id="@Model.EmployeeId" enctype="multipart/form-data">
-    
-    @Html.AntiForgeryToken()
-    
-        <table>
-            <tbody>
-                <tr>
-                    <td><label><b>Emergency Numbers:</b></label></td>
-                    <td>
-                        <input type="text" asp-for="@Model.EmergencyNumbers">
-                        <span asp-validation-for="@Model.EmergencyNumbers"></span>
-                    </td>
-                </tr>
+            <tr>
+                <td><b>Education:</b></td>
+                <td>
+                    <input type="text" name="Education">
+                </td>
+            </tr>
 
-                <tr>
-                    <td><label><b>Education:</b></label></td>
-                    <td>
-                        <input type="text" asp-for="@Model.Education">
-                        <span asp-validation-for="@Model.Education"></span>
-                    </td>
-                </tr>
+            <tr>
+                <td><b>Certifications:</b></td>
+                <td>
+                    <input type="file" name="Certifications" accept="application/pdf">
+                </td>
+            </tr>
 
-                <tr>
-                    <td><label><b>Certifications:</b></label></td>
-                    <td>
-                        <input type="file" asp-for="@Model.CertificationFile" accept="application/pdf">
-                        <span asp-validation-for="@Model.CertificationFile"></span>
-                    </td>
-                </tr>
+            <tr>
+                <td><b>Personal Documents:</b></td>
+                <td>
+                    <input type="file" name="PersonalDocuments" accept="application/pdf">
+                </td>
+            </tr>
 
-                <tr>
-                    <td><label><b>Personal Documents:</b></label></td>
-                    <td>
-                        <input type="file" asp-for="@Model.PersonalDocumentsFile" accept="application/pdf">
-                        <span asp-validation-for="@Model.PersonalDocumentsFile"></span>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
 
-                <tr>
-                    <td><button type="submit">Save</button></td>
-                    <td><a id="CancelAdForm" href="#">Cancel</a></td>
-                </tr>
-                
-            </tbody>
-        </table>
-    </form>
-</div>
+                <td>
+                    <a id="cancelAdditionalDetails" href="#">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

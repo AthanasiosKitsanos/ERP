@@ -1,7 +1,7 @@
 using Employees.Domain.Models;
 using Microsoft.Data.SqlClient;
 
-namespace Employees.Infrastructure.IRepository;
+namespace Employees.Infrastructure.Repository;
 
 public interface IEmployeesRepository
 {

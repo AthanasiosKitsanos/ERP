@@ -1,7 +1,7 @@
 using System.Data;
 using Employees.Domain;
 using Employees.Domain.Models;
-using Employees.Infrastructure.IRepository;
+using Employees.Infrastructure.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 
@@ -62,7 +62,7 @@ public class AdditionalDetailsRepository : IAdditionalDetailsRepository
         }
     }
 
-    public async Task<AdditionalDetails> GetAsync(int id, CancellationToken token = default)
+    public async Task<AdditionalDetails> GetAsyncById(int id, CancellationToken token = default)
     {
         string query = @"SELECT EmergencyNumbers, Education
                         FROM dbo.AdditionalDetails

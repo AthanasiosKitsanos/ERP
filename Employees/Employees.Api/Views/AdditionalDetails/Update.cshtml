@@ -1,35 +1,31 @@
-@using Employees.Contracts.AdditionalDetailsContract
-@model RequestAdditionalDetails.Update
+﻿<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
-<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+<form id="editAdditionalDetails">
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Emergency Numbers:</b></td>
+                <td>
+                    <input type="text" name="EmergencyNumbers"
+                </td>
+            </tr>
 
-<div>
-    <form asp-action="Update" asp-route-id="@Model.EmployeeId" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
+            <tr>
+                <td><b>Education:</b></td>
+                <td>
+                    <input type="text" name="Education">
+                </td>
+            </tr>
 
-    <input type="hidden" name="_method" value="PUT">
-    
-        <table>
-            <tbody>
-                <tr>
-                    <td><label><b>Emergency Numbers:</b></label></td>
-                    <td>
-                        <input type="text" asp-for="@Model.EmergencyNumbers">
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
 
-                <tr>
-                    <td><label><b>Education:</b></label></td>
-                    <td>
-                        <input type="text" asp-for="@Model.Education">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><button type="submit">Save</button></td>
-                    <td><a id="CancelAdForm" href="#">Cancel</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+                <td>
+                    <a id="cancelAdditionalDetails" href="#">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

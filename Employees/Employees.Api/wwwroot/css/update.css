@@ -27,4 +27,5 @@ a {
     border-radius: 5px;
     font-size: 14px;
     width: fit-content;
+    cursor: pointer;
 }

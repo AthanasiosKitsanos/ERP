@@ -1,35 +1,28 @@
-@using Employees.Contracts.AdditionalDetailsContract
-@model ResponseAdditionalDetails.Get
+﻿@using System.Security.Claims
+@using Employees.Domain
+@model EmplooyeeId
 
 <link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
 <table>
     <tbody>
         <tr>
-            <td><b>Emergency Numbers:</b></td>
-            <td>@Model.EmergencyNumbers</td>
+            <td><b>Emergency Number:</b></td>
+            <td id="EmergencyNumber"></td>
         </tr>
 
         <tr>
             <td><b>Education:</b></td>
-            <td>@Model.Education</td>
+            <td id="Education"></td>
         </tr>
 
         <tr>
             <td><b>Documents:</b></td>
-            <td><a asp-action="Index" asp-controller="GeneralDocuments">Go to Page</a></td>
+            <td><a asp-action="Get" asp-controller="File" asp-route-id="@Model.Id">Click here</a></td>
         </tr>
-        
+
         <tr>
-            @if(string.IsNullOrEmpty(Model.EmergencyNumbers) && string.IsNullOrEmpty(Model.Education))
-            {
-                <td><a id="AdRegistrationForm" href="#">Add Details</a></td>
-            }
-            else
-            {
-                <td><a id="AdEditForm" href="#">Edit</a></td>    
-            }
+            <td id="create-or-udpate"></td>
         </tr>
-        
     </tbody>
 </table>
