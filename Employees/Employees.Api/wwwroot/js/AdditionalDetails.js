@@ -11,13 +11,12 @@ async function getView(id, container, details) {
     document.getElementById("Education").innerText = details.education ?? "";
     const anchorTd = document.getElementById("create-or-udpate");
     const anchorPath = document.createElement("a");
-    const isEmplty = !details.emergencyNumbers && !details.education;
-    anchorPath.id = isEmplty ? "createAdditionalDetailsForm" : "editAdditionalDetailsForm";
+    const isEmpty = !details.emergencyNumbers && !details.education;
     anchorPath.href = "#";
-    anchorPath.innerText = isEmplty ? "Add" : "Edit";
+    anchorPath.innerText = isEmpty ? "Add" : "Edit";
     anchorPath.addEventListener("click", async (e) => {
         e.preventDefault();
-        if (isEmplty) {
+        if (isEmpty) {
             await createAdditionalDetails(id, container);
         }
         else {
