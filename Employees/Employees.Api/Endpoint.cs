@@ -40,6 +40,14 @@ public static class Endpoint
         public const string Create = $"{Base}/create";                                               
     }
 
+    public static class EmploymentDetails
+    {
+        private const string Base = $"/{{id}}/employmentdetails";
+        public const string Get = $"{Base}/get";
+        public const string Create = $"{Base}/create";
+        public const string Update = $"{Base}/update";
+    }
+
     public static class Views
     {
         public class EmployeeViews
@@ -66,6 +74,14 @@ public static class Endpoint
             public const string Get = $"{Base}/{{id}}/get";
             public const string Update = $"{Base}/{{id}}/update";
             public const string Create = $"{Base}/{{id}}/create";
+        }
+
+        public class EmploymentDetailsViews
+        {
+            private const string Base = "/employmentdetails";
+            public const string Get = $"{Base}/get";
+            public const string Create = $"{Base}/create";
+            public const string Update = $"{Base}/update";
         }
     }
 }
