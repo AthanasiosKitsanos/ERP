@@ -18,6 +18,8 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<IFileRepository, FileRepository>();
 
+        services.AddScoped<IEmploymentDetailsRepository, EmploymentDetailsRepository>();
+
         return services;
     }
 }

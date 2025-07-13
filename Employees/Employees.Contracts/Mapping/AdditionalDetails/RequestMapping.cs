@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Employees.Contracts.AdDetails;
 using Employees.Domain.Models;
 using Employees.Shared;
