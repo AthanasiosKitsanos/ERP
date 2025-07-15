@@ -78,7 +78,7 @@ public class EmploymentDetailsRepository : IEmploymentDetailsRepository
             }
         }
 
-        return null!;
+        return new EmploymentDetails();
     }
 
     public async Task<bool> UpdateAsync(EmploymentDetails details, CancellationToken token = default)

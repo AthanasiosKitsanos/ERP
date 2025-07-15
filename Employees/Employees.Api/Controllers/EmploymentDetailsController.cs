@@ -34,6 +34,7 @@ public class EmploymentDetailsController : Controller
     }
 
     [HttpPost(Endpoint.EmploymentDetails.Create)]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestEmploymentDetails.Create request, CancellationToken token)
     {
         bool IsCreate = await _services.CreateAsync(id, request, token);
@@ -53,6 +54,7 @@ public class EmploymentDetailsController : Controller
     }
 
     [HttpPost(Endpoint.EmploymentDetails.Update)]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateEmploymentDetails(int id, RequestEmploymentDetails.Update update, CancellationToken token)
     {
         bool IsUpdated = await _services.UpdateAsync(id, update, token);

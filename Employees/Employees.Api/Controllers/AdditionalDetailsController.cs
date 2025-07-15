@@ -35,6 +35,7 @@ public class AdditionalDetailsController : Controller
     }
 
     [HttpPost(Endpoint.AdditionalDetails.Update)]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateAdditionalDetails(int id, RequestAdditionDetails.Update details, CancellationToken token)
     {
         bool IsUpdated = await _services.UpdateAsync(id, details, token);
@@ -54,6 +55,7 @@ public class AdditionalDetailsController : Controller
     }
 
     [HttpPost(Endpoint.AdditionalDetails.Create)]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestAdditionDetails.Create details, CancellationToken token)
     {
         bool IsCreated = await _services.CreateAsync(id, details, token);

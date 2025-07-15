@@ -27,14 +27,25 @@ async function getView(id: number, container: HTMLDivElement, details: Employmen
     document.getElementById("Position")!.innerHTML = details.position ?? "";
     document.getElementById("Department")!.innerHTML = details.department ?? "";
     document.getElementById("EmploymentStatus")!.innerHTML = details.employmentStatus ?? "";
-    document.getElementById("HireDate")!.innerHTML = formatDate(new Date(details.hireDate!));
+
+    if(formatDate(new Date(details.hireDate!)) === "01/01/1")
+    {
+        document.getElementById("HireDate")!.innerHTML = "";
+    }
+    else
+    {
+        if(details.hireDate)
+        {
+            document.getElementById("HireDate")!.innerHTML = formatDate(new Date(details.hireDate));
+        }
+    }
     document.getElementById("ContractType")!.innerHTML = details.contractType ?? "";
     document.getElementById("WorkLocation")!.innerHTML = details.workLocation ?? "";
 
     const anchotTd = document.getElementById("create-update-EmpDe") as HTMLTableCellElement;
     const anchorPath = document.createElement("a") as HTMLAnchorElement;
 
-    const isEmpty: boolean = !details.position && !details.department && !details.employmentStatus && !details.hireDate && !details.contractType && !details.workLocation;
+    const isEmpty: boolean = !details.position && !details.department && !details.employmentStatus && !details.contractType && !details.workLocation;
 
     anchorPath.href = "#";
     anchorPath.innerText = isEmpty ? "Add" : "Edit";
@@ -98,6 +109,24 @@ async function editEmploymentDetails(id: number, container: HTMLDivElement, deta
     let response = await fetch(`/employmentdetails/update`);
 
     container.innerHTML = await response.text();
+
+    const position = document.getElementById("position") as HTMLInputElement;
+    position.placeholder = details.position ?? "";
+    
+    const department = document.getElementById("department") as HTMLInputElement;
+    department.placeholder = details.department ?? "";
+
+    const employmentstatus = document.getElementById("employmentstatus") as HTMLInputElement;
+    employmentstatus.placeholder = details.employmentStatus ?? "";
+
+    const hiredate = document.getElementById("hiredate") as HTMLInputElement;
+    hiredate.placeholder = formatDate(new Date(details.hireDate!)) ?? "";
+
+    const contracttype = document.getElementById("contracttype") as HTMLInputElement;
+    contracttype.placeholder = details.contractType ?? "";
+    
+    const worklocation = document.getElementById("worklocation") as HTMLInputElement;
+    worklocation.placeholder = details.workLocation ?? "";
 
     const submit = document.getElementById("editEmploymentDetails") as HTMLFormElement;
 

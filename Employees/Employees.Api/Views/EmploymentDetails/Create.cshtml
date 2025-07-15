@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using System.Security.Claims
+
+<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
+
+<form id="createEmploymentDetails">
+    @Html.AntiForgeryToken()
+    <table>
+        <tbody>
+            <tr>
+                <td><b>Position:</b></td>
+                <td>
+                    <input text="text" name="Position">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Department:</b></td>
+                <td>
+                    <input type="text" name="Department">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Employment Status:</b></td>
+                <td>
+                    <input type="text" name="EmploymentStatus">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Hire Date:</b></td>
+                <td>
+                    <input type="date" name="HireDate">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Contract Type:</b></td>
+                <td>
+                    <input type="text" name="ContractType">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Work Location:</b></td>
+                <td>
+                    <input type="text" name="WorkLocation">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
+                <td>
+                    <a id="cancelEmploymentDetails" href="#">Cancel</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
