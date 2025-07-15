@@ -42,16 +42,22 @@ async function getUpdateView(id, container, employee) {
         container.innerHTML = html;
         document.getElementById("FirstName").innerText = employee.firstName ?? "";
         document.getElementById("LastName").innerText = employee.lastName ?? "";
+        const email = document.getElementById("Email");
+        email.placeholder = employee.email ?? "";
         document.getElementById("Age").innerText = employee.age ?? "";
         if (employee.dateOfBirth) {
             document.getElementById("DateOfBirth").innerText = formatDate(new Date(employee.dateOfBirth));
         }
+        const nationality = document.getElementById("Nationality");
+        nationality.placeholder = employee.nationality ?? "";
         document.getElementById("Gender").innerText = employee.gender ?? "";
-        await submitDetails(id, container);
+        const phonenumber = document.getElementById("PhoneNumber");
+        phonenumber.placeholder = employee.phoneNumber ?? "";
+        await submitDetails(id, container, employee);
         await cancelForm(id, container, employee);
     });
 }
-async function submitDetails(id, container) {
+async function submitDetails(id, container, employee) {
     const onSubmit = document.getElementById("employee-update");
     if (!onSubmit) {
         alert("There was something wrong");
@@ -65,9 +71,10 @@ async function submitDetails(id, container) {
         const result = await response.json();
         if (!result.success) {
             alert("Employee details were not updated");
+            await getView(id, container, employee);
             return;
         }
-        const employee = await getEmployee(id);
+        employee = await getEmployee(id);
         await getView(id, container, employee);
     });
 }

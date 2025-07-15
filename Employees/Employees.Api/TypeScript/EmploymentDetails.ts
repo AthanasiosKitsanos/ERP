@@ -56,7 +56,7 @@ async function getView(id: number, container: HTMLDivElement, details: Employmen
 
         if(isEmpty)
         {
-            await createEmploymentDetails(id, container);
+            await createEmploymentDetails(id, container, details);
         }
         else
         {
@@ -67,7 +67,7 @@ async function getView(id: number, container: HTMLDivElement, details: Employmen
     anchotTd.appendChild(anchorPath);
 }
 
-async function createEmploymentDetails(id: number, container: HTMLDivElement): Promise<void>
+async function createEmploymentDetails(id: number, container: HTMLDivElement, details: EmploymentDetails): Promise<void>
 {
     let response: Response = await fetch(`/employmentDetails/create`);
     container.innerHTML = await response.text();
@@ -93,10 +93,11 @@ async function createEmploymentDetails(id: number, container: HTMLDivElement): P
         if(!result.success)
         {
             alert("No employment details added");
+            await getView(id, container, details);
             return;
         }
 
-        const details: EmploymentDetails = await getEmploymentDetails(id);
+        details = await getEmploymentDetails(id);
 
         await getView(id, container, details);
     })
@@ -149,6 +150,7 @@ async function editEmploymentDetails(id: number, container: HTMLDivElement, deta
         if(!result.success)
         {
             alert("No details were updated");
+            await getView(id, container, details);
             return;
         }
 

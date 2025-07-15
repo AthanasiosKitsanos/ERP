@@ -148,13 +148,10 @@ public class EmployeesController : Controller
 
         if (!IsUpdated)
         {
-            _logger.LogWarning($"Employee with Id: {id}, was not updated");
-            return RedirectToAction("Details", new { id });
+            return Json(new { success = false });
         }
 
-        // return RedirectToAction("Details", new { id });
-
-        return new JsonResult(new { success = true });
+        return Json(new { success = true });
     }
 
     [HttpGet(Endpoint.Views.EmployeeViews.Delete)]

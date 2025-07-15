@@ -33,7 +33,7 @@ async function getView(id, container, details) {
     anchorPath.addEventListener("click", async (e) => {
         e.preventDefault();
         if (isEmpty) {
-            await createEmploymentDetails(id, container);
+            await createEmploymentDetails(id, container, details);
         }
         else {
             await editEmploymentDetails(id, container, details);
@@ -41,7 +41,7 @@ async function getView(id, container, details) {
     });
     anchotTd.appendChild(anchorPath);
 }
-async function createEmploymentDetails(id, container) {
+async function createEmploymentDetails(id, container, details) {
     let response = await fetch(`/employmentDetails/create`);
     container.innerHTML = await response.text();
     const submit = document.getElementById("createEmploymentDetails");
@@ -56,9 +56,10 @@ async function createEmploymentDetails(id, container) {
         const result = await response.json();
         if (!result.success) {
             alert("No employment details added");
+            await getView(id, container, details);
             return;
         }
-        const details = await getEmploymentDetails(id);
+        details = await getEmploymentDetails(id);
         await getView(id, container, details);
     });
     await cancelEmploymentDetails(id, container);
@@ -90,6 +91,7 @@ async function editEmploymentDetails(id, container, details) {
         const result = await response.json();
         if (!result.success) {
             alert("No details were updated");
+            await getView(id, container, details);
             return;
         }
         details = await getEmploymentDetails(id);

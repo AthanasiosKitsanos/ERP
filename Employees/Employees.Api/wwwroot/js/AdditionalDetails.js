@@ -53,6 +53,10 @@ async function editAdditionalDetails(id, container, details) {
     const html = await response.text();
     container.innerHTML = html;
     const submit = document.getElementById("editAdditionalDetails");
+    const emergencynumbers = document.getElementById("EmergencyNumbers");
+    emergencynumbers.placeholder = details.emergencyNumbers ?? "";
+    const education = document.getElementById("Education");
+    education.placeholder = details.education ?? "";
     if (!submit) {
         return;
     }

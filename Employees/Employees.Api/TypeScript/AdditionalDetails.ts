@@ -92,6 +92,12 @@ async function editAdditionalDetails(id: number, container: HTMLDivElement, deta
 
     const submit = document.getElementById("editAdditionalDetails") as HTMLFormElement;
 
+    const emergencynumbers =  document.getElementById("EmergencyNumbers") as HTMLInputElement;
+    emergencynumbers.placeholder = details.emergencyNumbers ?? "";
+
+    const education = document.getElementById("Education") as HTMLInputElement;
+    education.placeholder = details.education ?? "";
+
     if(!submit)
     {
         return;

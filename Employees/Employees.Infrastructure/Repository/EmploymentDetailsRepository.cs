@@ -106,8 +106,11 @@ public class EmploymentDetailsRepository : IEmploymentDetailsRepository
             parameters.Add(new SqlParameter("@EmploymentStatus", SqlDbType.NVarChar) { Value = details.EmploymentStatus });
         }
 
-        variables.Add("HireDate = @HireDate");
-        parameters.Add(new SqlParameter("@HireDate", SqlDbType.Date) { Value = details.HireDate });
+        if (details.HireDate != default)
+        {
+            variables.Add("HireDate = @HireDate");
+            parameters.Add(new SqlParameter("@HireDate", SqlDbType.Date) { Value = details.HireDate });   
+        }
 
         if (!string.IsNullOrEmpty(details.ContractType))
         {
@@ -121,7 +124,7 @@ public class EmploymentDetailsRepository : IEmploymentDetailsRepository
             parameters.Add(new SqlParameter("@WorkLocation", SqlDbType.NVarChar) { Value = details.WorkLocation });
         }
 
-        if (variables.Count < 1)
+        if (variables.Count == 0)
         {
             return false;
         }
