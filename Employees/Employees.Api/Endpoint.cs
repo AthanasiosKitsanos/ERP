@@ -27,11 +27,6 @@ public static class Endpoint
         public const string GetPhoto = $"{Base}/photograph";
     }
 
-    public static class Credentials
-    {
-    
-    }
-
     public static class AdditionalDetails
     {
         private const string Base = $"/{{id}}/additionaldetails";
