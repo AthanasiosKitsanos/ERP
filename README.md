@@ -21,7 +21,7 @@
 - [ ] Project assignment logic
 - [x] Logging system with custom middleware
 - [ ] Audit trails for data changes
-- [x] Client-side enhancements with JavaScript
+- [x] Client-side enhancements with TypeScript/JavaScript
 
 
 ### 📦 Projects Separation

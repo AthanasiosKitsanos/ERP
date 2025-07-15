@@ -11,13 +11,12 @@ async function getView(id, container, details) {
     document.getElementById("Education").innerText = details.education ?? "";
     const anchorTd = document.getElementById("create-or-udpate");
     const anchorPath = document.createElement("a");
-    const isEmplty = !details.emergencyNumbers && !details.education;
-    anchorPath.id = isEmplty ? "createAdditionalDetailsForm" : "editAdditionalDetailsForm";
+    const isEmpty = !details.emergencyNumbers && !details.education;
     anchorPath.href = "#";
-    anchorPath.innerText = isEmplty ? "Add" : "Edit";
+    anchorPath.innerText = isEmpty ? "Add" : "Edit";
     anchorPath.addEventListener("click", async (e) => {
         e.preventDefault();
-        if (isEmplty) {
+        if (isEmpty) {
             await createAdditionalDetails(id, container);
         }
         else {
@@ -54,6 +53,10 @@ async function editAdditionalDetails(id, container, details) {
     const html = await response.text();
     container.innerHTML = html;
     const submit = document.getElementById("editAdditionalDetails");
+    const emergencynumbers = document.getElementById("EmergencyNumbers");
+    emergencynumbers.placeholder = details.emergencyNumbers ?? "";
+    const education = document.getElementById("Education");
+    education.placeholder = details.education ?? "";
     if (!submit) {
         return;
     }

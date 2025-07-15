@@ -33,9 +33,5 @@ public class CancellationTokenMiddlewareHandler
             _logger.LogWarning("There was an error during the middleware runtime!");
             throw;
         }
-        finally
-        {
-            await _next(context);
-        }
     }
 }

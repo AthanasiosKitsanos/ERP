@@ -68,20 +68,32 @@ async function getUpdateView(id: number, container: HTMLDivElement, employee: Em
 
         document.getElementById("FirstName")!.innerText = employee.firstName ?? "";
         document.getElementById("LastName")!.innerText = employee.lastName ?? "";
+
+        const email = document.getElementById("Email") as HTMLInputElement;
+        email.placeholder = employee.email ?? "";
+
         document.getElementById("Age")!.innerText = employee.age ?? "";
+
         if(employee.dateOfBirth)
         {
             document.getElementById("DateOfBirth")!.innerText = formatDate(new Date(employee.dateOfBirth));
         }
+
+        const nationality = document.getElementById("Nationality") as HTMLInputElement;
+        nationality.placeholder = employee.nationality ?? "";
+
         document.getElementById("Gender")!.innerText = employee.gender ?? "";
 
-        await submitDetails(id, container);
+        const phonenumber = document.getElementById("PhoneNumber") as HTMLInputElement;
+        phonenumber.placeholder = employee.phoneNumber ?? "";
+
+        await submitDetails(id, container, employee);
 
         await cancelForm(id, container, employee);
     })   
 }
 
-async function submitDetails(id: number, container: HTMLDivElement): Promise<void>
+async function submitDetails(id: number, container: HTMLDivElement, employee: Employee): Promise<void>
 {
     const onSubmit = document.getElementById("employee-update") as HTMLFormElement;
 
@@ -105,10 +117,11 @@ async function submitDetails(id: number, container: HTMLDivElement): Promise<voi
         if(!result.success)
         {
             alert("Employee details were not updated");
+            await getView(id, container, employee);
             return;
         }
         
-        const employee: Employee = await getEmployee(id);
+        employee = await getEmployee(id);
         
         await getView(id, container, employee);
     })

@@ -17,7 +17,7 @@ public class CredentialsController : Controller
         _logger = logger;
     }
 
-    //[HttpGet(Endpoint.Credentials.Create)]
+    [HttpGet(Endpoint.Views.CredentialsViews.Create)]
     public IActionResult Create(int id)
     {
 

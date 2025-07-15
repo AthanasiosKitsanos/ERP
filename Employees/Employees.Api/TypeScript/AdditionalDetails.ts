@@ -22,17 +22,16 @@ async function getView(id: number, container: HTMLDivElement, details: Additiona
     const anchorTd = document.getElementById("create-or-udpate") as HTMLTableCellElement;
     const anchorPath = document.createElement("a") as HTMLAnchorElement;
 
-    const isEmplty: boolean = !details.emergencyNumbers && !details.education;
-
-    anchorPath.id = isEmplty ? "createAdditionalDetailsForm" : "editAdditionalDetailsForm";
+    const isEmpty: boolean = !details.emergencyNumbers && !details.education;
+    
     anchorPath.href = "#";
-    anchorPath.innerText = isEmplty ? "Add" : "Edit";
+    anchorPath.innerText = isEmpty ? "Add" : "Edit";
 
     anchorPath.addEventListener("click", async e =>
     {
         e.preventDefault();
 
-        if(isEmplty)
+        if(isEmpty)
         {
             await createAdditionalDetails(id, container);
         }
@@ -92,6 +91,12 @@ async function editAdditionalDetails(id: number, container: HTMLDivElement, deta
     container.innerHTML = html;
 
     const submit = document.getElementById("editAdditionalDetails") as HTMLFormElement;
+
+    const emergencynumbers =  document.getElementById("EmergencyNumbers") as HTMLInputElement;
+    emergencynumbers.placeholder = details.emergencyNumbers ?? "";
+
+    const education = document.getElementById("Education") as HTMLInputElement;
+    education.placeholder = details.education ?? "";
 
     if(!submit)
     {
