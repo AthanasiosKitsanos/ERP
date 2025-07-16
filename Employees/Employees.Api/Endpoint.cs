@@ -34,7 +34,7 @@ public static class Endpoint
         public const string Update = $"{Base}/update";
         public const string Create = $"{Base}/create";                                               
     }
-
+asdfadsfadfsadsf
     public static class EmploymentDetails
     {
         private const string Base = $"/{{id}}/employmentdetails";
