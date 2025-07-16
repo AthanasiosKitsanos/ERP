@@ -1,9 +1,5 @@
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
+import { formatDate } from "./Global/FormatDate.js";
+import { assignField } from "./Global/FieldUpdate.js";
 async function cancelForm(id, container, employee) {
     const cancel = document.getElementById("cancelDetailsForm");
     if (!cancel) {
@@ -12,7 +8,7 @@ async function cancelForm(id, container, employee) {
     cancel.addEventListener("click", async (e) => {
         e.preventDefault();
         await getView(id, container, employee);
-    });
+    }, { once: true });
 }
 async function getView(id, container, employee) {
     const response = await fetch(`/employees/${id}/getmaindetails`);
@@ -55,7 +51,7 @@ async function getUpdateView(id, container, employee) {
         phonenumber.placeholder = employee.phoneNumber ?? "";
         await submitDetails(id, container, employee);
         await cancelForm(id, container, employee);
-    });
+    }, { once: true });
 }
 async function submitDetails(id, container, employee) {
     const onSubmit = document.getElementById("employee-update");
@@ -71,12 +67,18 @@ async function submitDetails(id, container, employee) {
         const result = await response.json();
         if (!result.success) {
             alert("Employee details were not updated");
-            await getView(id, container, employee);
-            return;
+            return await getView(id, container, employee);
         }
-        employee = await getEmployee(id);
+        const updatedData = result.data;
+        for (const key in updatedData) {
+            const keyType = key;
+            const value = updatedData[keyType];
+            if (value !== "" && value !== null && value !== undefined) {
+                assignField(employee, keyType, value);
+            }
+        }
         await getView(id, container, employee);
-    });
+    }, { once: true });
 }
 async function getEmployee(id) {
     const response = await fetch(`/${id}/getmaindetails`);
@@ -92,4 +94,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     let container = document.getElementById("mainDetails");
     await getView(id, container, employee);
 });
-export {};

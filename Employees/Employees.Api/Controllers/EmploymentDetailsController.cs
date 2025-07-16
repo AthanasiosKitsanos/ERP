@@ -44,7 +44,7 @@ public class EmploymentDetailsController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true });
+        return Json(new { success = true, data = request });
     }
 
     [HttpGet(Endpoint.Views.EmploymentDetailsViews.Update)]
@@ -64,6 +64,6 @@ public class EmploymentDetailsController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true });
+        return Json(new { success = true, data = update });
     }
 }

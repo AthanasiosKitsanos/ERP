@@ -106,7 +106,7 @@ public class EmploymentDetailsRepository : IEmploymentDetailsRepository
             parameters.Add(new SqlParameter("@EmploymentStatus", SqlDbType.NVarChar) { Value = details.EmploymentStatus });
         }
 
-        if (details.HireDate != default)
+        if (details.HireDate != default || details.HireDate is not null)
         {
             variables.Add("HireDate = @HireDate");
             parameters.Add(new SqlParameter("@HireDate", SqlDbType.Date) { Value = details.HireDate });   

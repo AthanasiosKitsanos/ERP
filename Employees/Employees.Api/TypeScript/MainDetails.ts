@@ -1,13 +1,6 @@
 import { Employee } from "./Models/Employee";
-
-function formatDate(date: Date): string
-{
-    const day = String(date.getDate()).padStart(2, "0"); 
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
-}
+import { formatDate } from "./Global/FormatDate.js";
+import { assignField } from "./Global/FieldUpdate.js";
 
 async function cancelForm(id: number, container: HTMLDivElement, employee: Employee): Promise<void>
 {
@@ -22,7 +15,7 @@ async function cancelForm(id: number, container: HTMLDivElement, employee: Emplo
     {
         e.preventDefault();
         await getView(id, container, employee);
-    })
+    }, { once: true })
 } 
 
 async function getView(id: number, container: HTMLDivElement, employee: Employee):Promise<void>
@@ -90,7 +83,7 @@ async function getUpdateView(id: number, container: HTMLDivElement, employee: Em
         await submitDetails(id, container, employee);
 
         await cancelForm(id, container, employee);
-    })   
+    }, { once: true })   
 }
 
 async function submitDetails(id: number, container: HTMLDivElement, employee: Employee): Promise<void>
@@ -102,7 +95,7 @@ async function submitDetails(id: number, container: HTMLDivElement, employee: Em
         alert("There was something wrong");
         return;
     }
-
+    
     onSubmit.addEventListener("submit", async e =>
     {
         e.preventDefault();
@@ -117,14 +110,23 @@ async function submitDetails(id: number, container: HTMLDivElement, employee: Em
         if(!result.success)
         {
             alert("Employee details were not updated");
-            await getView(id, container, employee);
-            return;
+            return await getView(id, container, employee);
         }
         
-        employee = await getEmployee(id);
+        const updatedData: Partial<Employee> = result.data;
+        for(const key in updatedData)
+        {
+            const keyType = key as keyof typeof updatedData;
+            const value = updatedData[keyType];
+            if(value !== "" && value !== null && value !== undefined)
+            {
+                assignField(employee, keyType, value);
+            }
+        }
         
         await getView(id, container, employee);
-    })
+        
+    }, { once: true})
 }
 
 async function getEmployee(id: number):Promise<Employee>

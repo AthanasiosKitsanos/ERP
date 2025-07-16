@@ -1,9 +1,5 @@
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
+import { formatDate } from "./Global/FormatDate.js";
+import { assignField } from "./Global/FieldUpdate.js";
 async function getEmploymentDetails(id) {
     const response = await fetch(`/${id}/employmentdetails/get`);
     const details = await response.json();
@@ -15,14 +11,7 @@ async function getView(id, container, details) {
     document.getElementById("Position").innerHTML = details.position ?? "";
     document.getElementById("Department").innerHTML = details.department ?? "";
     document.getElementById("EmploymentStatus").innerHTML = details.employmentStatus ?? "";
-    if (formatDate(new Date(details.hireDate)) === "01/01/1") {
-        document.getElementById("HireDate").innerHTML = "";
-    }
-    else {
-        if (details.hireDate) {
-            document.getElementById("HireDate").innerHTML = formatDate(new Date(details.hireDate));
-        }
-    }
+    document.getElementById("HireDate").innerHTML = details.hireDate?.toString() === "0001-01-01" || !details.hireDate ? "" : formatDate(new Date(details.hireDate));
     document.getElementById("ContractType").innerHTML = details.contractType ?? "";
     document.getElementById("WorkLocation").innerHTML = details.workLocation ?? "";
     const anchotTd = document.getElementById("create-update-EmpDe");
@@ -33,12 +22,10 @@ async function getView(id, container, details) {
     anchorPath.addEventListener("click", async (e) => {
         e.preventDefault();
         if (isEmpty) {
-            await createEmploymentDetails(id, container, details);
+            return await createEmploymentDetails(id, container, details);
         }
-        else {
-            await editEmploymentDetails(id, container, details);
-        }
-    });
+        await editEmploymentDetails(id, container, details);
+    }, { once: true });
     anchotTd.appendChild(anchorPath);
 }
 async function createEmploymentDetails(id, container, details) {
@@ -56,13 +43,18 @@ async function createEmploymentDetails(id, container, details) {
         const result = await response.json();
         if (!result.success) {
             alert("No employment details added");
-            await getView(id, container, details);
-            return;
+            return await getView(id, container, details);
         }
-        details = await getEmploymentDetails(id);
+        const createdData = result.data;
+        for (const key in createdData) {
+            const value = createdData[key];
+            if (value !== "" && value !== null && value !== undefined) {
+                details[key] = value;
+            }
+        }
         await getView(id, container, details);
     });
-    await cancelEmploymentDetails(id, container);
+    await cancelEmploymentDetails(id, container, details);
 }
 async function editEmploymentDetails(id, container, details) {
     let response = await fetch(`/employmentdetails/update`);
@@ -91,12 +83,18 @@ async function editEmploymentDetails(id, container, details) {
         const result = await response.json();
         if (!result.success) {
             alert("No details were updated");
-            await getView(id, container, details);
-            return;
+            return await getView(id, container, details);
         }
-        details = await getEmploymentDetails(id);
+        const updatedData = result.data;
+        for (const key in updatedData) {
+            const keyType = key;
+            const value = updatedData[keyType];
+            if (value !== "" && value !== null && value !== undefined) {
+                assignField(details, keyType, value);
+            }
+        }
         await getView(id, container, details);
-    });
+    }, { once: true });
     await cancelEmploymentDetails(id, container, details);
 }
 async function cancelEmploymentDetails(id, container, details) {
@@ -106,11 +104,8 @@ async function cancelEmploymentDetails(id, container, details) {
     }
     cancelButton.addEventListener("click", async (e) => {
         e.preventDefault();
-        if (!details) {
-            details = await getEmploymentDetails(id);
-        }
         await getView(id, container, details);
-    });
+    }, { once: true });
 }
 document.addEventListener("DOMContentLoaded", async () => {
     const id = window.Id;
@@ -118,4 +113,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     let container = document.getElementById("employmentDetails");
     await getView(id, container, details);
 });
-export {};
