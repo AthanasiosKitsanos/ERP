@@ -8,7 +8,7 @@ public class EmploymentDetails
 
     public string EmploymentStatus { get; set; } = string.Empty;
 
-    public DateOnly HireDate { get; set; }
+    public DateOnly? HireDate { get; set; } = null;
 
     public string ContractType { get; set; } = string.Empty;
 
