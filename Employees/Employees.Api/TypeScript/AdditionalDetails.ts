@@ -1,4 +1,5 @@
 import { AdditionalDetails } from "./Models/AdditionalDetails";
+import { assignField } from "./Global/FieldUpdate.js";
 
 async function getAdditionalDetails(id: number): Promise<AdditionalDetails>
 {
@@ -33,18 +34,17 @@ async function getView(id: number, container: HTMLDivElement, details: Additiona
 
         if(isEmpty)
         {
-            await createAdditionalDetails(id, container);
+            return await createAdditionalDetails(id, container, details);
         }
-        else
-        {
-            await editAdditionalDetails(id, container, details)
-        }
-    })
+        
+        await editAdditionalDetails(id, container, details)
+        
+    }, { once: true })
 
     anchorTd.appendChild(anchorPath);
 }
 
-async function createAdditionalDetails(id: number, container: HTMLDivElement): Promise<void>
+async function createAdditionalDetails(id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
 {
     let response: Response = await fetch (`/additionaldetails/${id}/create`);
     const html = await response.text();
@@ -72,15 +72,17 @@ async function createAdditionalDetails(id: number, container: HTMLDivElement): P
         if(!result.success)
         {
             alert("No additional details added");
-            return;
+            return await getView(id, container, details);
         }
 
-        const details: AdditionalDetails = await getAdditionalDetails(id);
+        const createdData: Partial<AdditionalDetails> = result.data;
+        Object.assign(details, createdData);
         
         await getView(id, container, details);
-    })
 
-    await cancelAdditionalDetailsForm(id, container);
+    }, { once: true })
+
+    await cancelAdditionalDetailsForm(id, container, details);
 }
 
 async function editAdditionalDetails(id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
@@ -116,20 +118,29 @@ async function editAdditionalDetails(id: number, container: HTMLDivElement, deta
 
         if(!result.success)
         {
-            await getView(id, container, details);
             alert("Additional details not updated");
-            return;
+            return await getView(id, container, details);
         }
 
-        details = await getAdditionalDetails(id);
+        const updatedData: Partial<AdditionalDetails> = result.data;
+        for(const key in updatedData)
+        {
+            const keyType = key as keyof typeof updatedData;
+            const value = updatedData[keyType];
+
+            if(value !== "" && value !== null && value !== undefined)
+            {
+                assignField(details, keyType, value);
+            }
+        }
 
         await getView(id, container, details);
-    })
+    }, { once: true })
 
     await cancelAdditionalDetailsForm(id, container, details);
 }
 
-async function cancelAdditionalDetailsForm(id: number, container: HTMLDivElement, details?: AdditionalDetails): Promise<void>
+async function cancelAdditionalDetailsForm(id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
 {
     const cancelButton = document.getElementById("cancelAdditionalDetails") as HTMLAnchorElement;
 
@@ -142,13 +153,9 @@ async function cancelAdditionalDetailsForm(id: number, container: HTMLDivElement
     {
         e.preventDefault();
 
-        if(!details)
-        {
-            details = await getAdditionalDetails(id);
-        }
-
         await getView(id, container, details);
-    })
+
+    }, { once: true })
 }
 
 

@@ -1,3 +1,4 @@
+import { assignField } from "./Global/FieldUpdate.js";
 async function getAdditionalDetails(id) {
     const response = await fetch(`/${id}/additionaldetails/get`);
     const details = await response.json();
@@ -17,15 +18,13 @@ async function getView(id, container, details) {
     anchorPath.addEventListener("click", async (e) => {
         e.preventDefault();
         if (isEmpty) {
-            await createAdditionalDetails(id, container);
+            return await createAdditionalDetails(id, container, details);
         }
-        else {
-            await editAdditionalDetails(id, container, details);
-        }
-    });
+        await editAdditionalDetails(id, container, details);
+    }, { once: true });
     anchorTd.appendChild(anchorPath);
 }
-async function createAdditionalDetails(id, container) {
+async function createAdditionalDetails(id, container, details) {
     let response = await fetch(`/additionaldetails/${id}/create`);
     const html = await response.text();
     container.innerHTML = html;
@@ -41,12 +40,13 @@ async function createAdditionalDetails(id, container) {
         const result = await response.json();
         if (!result.success) {
             alert("No additional details added");
-            return;
+            return await getView(id, container, details);
         }
-        const details = await getAdditionalDetails(id);
+        const createdData = result.data;
+        Object.assign(details, createdData);
         await getView(id, container, details);
-    });
-    await cancelAdditionalDetailsForm(id, container);
+    }, { once: true });
+    await cancelAdditionalDetailsForm(id, container, details);
 }
 async function editAdditionalDetails(id, container, details) {
     let response = await fetch(`/additionaldetails/${id}/update`);
@@ -67,13 +67,19 @@ async function editAdditionalDetails(id, container, details) {
         response = await fetch(`/${id}/additionaldetails/update`, { method: 'POST', body: data });
         const result = await response.json();
         if (!result.success) {
-            await getView(id, container, details);
             alert("Additional details not updated");
-            return;
+            return await getView(id, container, details);
         }
-        details = await getAdditionalDetails(id);
+        const updatedData = result.data;
+        for (const key in updatedData) {
+            const keyType = key;
+            const value = updatedData[keyType];
+            if (value !== "" && value !== null && value !== undefined) {
+                assignField(details, keyType, value);
+            }
+        }
         await getView(id, container, details);
-    });
+    }, { once: true });
     await cancelAdditionalDetailsForm(id, container, details);
 }
 async function cancelAdditionalDetailsForm(id, container, details) {
@@ -83,11 +89,8 @@ async function cancelAdditionalDetailsForm(id, container, details) {
     }
     cancelButton.addEventListener("click", async (e) => {
         e.preventDefault();
-        if (!details) {
-            details = await getAdditionalDetails(id);
-        }
         await getView(id, container, details);
-    });
+    }, { once: true });
 }
 document.addEventListener("DOMContentLoaded", async () => {
     const id = window.Id;
@@ -95,4 +98,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     let container = document.getElementById("additionalDetails");
     await getView(id, container, details);
 });
-export {};
