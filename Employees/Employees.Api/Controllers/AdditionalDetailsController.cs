@@ -45,7 +45,7 @@ public class AdditionalDetailsController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true });
+        return Json(new { success = true, data = details});
     }
 
     [HttpGet(Endpoint.Views.AdditionalDetailsViews.Create)]
@@ -65,6 +65,6 @@ public class AdditionalDetailsController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true });
+        return Json(new { success = true, data = details });
     }
 }

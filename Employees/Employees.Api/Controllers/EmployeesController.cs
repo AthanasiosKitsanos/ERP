@@ -151,7 +151,7 @@ public class EmployeesController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true });
+        return Json(new { success = true, data = request });
     }
 
     [HttpGet(Endpoint.Views.EmployeeViews.Delete)]
