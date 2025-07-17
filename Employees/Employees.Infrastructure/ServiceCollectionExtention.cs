@@ -20,6 +20,8 @@ public static class ServiceCollectionExtention
 
         services.AddScoped<IEmploymentDetailsRepository, EmploymentDetailsRepository>();
 
+        services.AddScoped<IRolesRepository, RolesRepository>();
+
         return services;
     }
 }
