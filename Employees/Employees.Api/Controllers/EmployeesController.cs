@@ -38,15 +38,6 @@ public class EmployeesController : Controller
             responseList.Add(response);
         }
 
-        if (responseList.Count == 0)
-        {
-            return View("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "List not found"
-            });
-        }
-
         _logger.LogInformation("List of Employees created and was sent as Json.");
         return Json(responseList);
     }
@@ -54,17 +45,6 @@ public class EmployeesController : Controller
     [HttpGet(Endpoint.Views.EmployeeViews.Details)]
     public IActionResult Details(int id)
     {
-        if (id <= 0)
-        {
-            _logger.LogWarning("Status code 404, id was not found");
-
-            return PartialView("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "EmployeesController Details: Id was not found"
-            });
-        }
-
         return View(new EmplooyeeId(id));
     }
 
@@ -73,6 +53,8 @@ public class EmployeesController : Controller
     [HttpGet(Endpoint.Employees.Get)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+
         ResponseEmployee.Get response = await _services.GetByIdAsync(id, token);
 
         if (response is null)
@@ -100,6 +82,8 @@ public class EmployeesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(RequestEmployee.Create request, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         if (!ModelState.IsValid)
         {
             _logger.LogInformation("Model State not valid, returning to Create Page again.");
@@ -144,6 +128,8 @@ public class EmployeesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int id, RequestEmployee.Update request, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+        
         bool IsUpdated = await _services.UpdateAsync(id, request, token);
 
         if (!IsUpdated)
