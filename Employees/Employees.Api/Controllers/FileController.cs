@@ -22,18 +22,9 @@ public class FileController : Controller
     [HttpGet(Endpoint.Files.GetPhoto)]
     public async Task<IActionResult> GetPhoto(int id, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+        
         ResponseFile.GetPhoto photo = await _services.GetPhotoAsync(id, token);
-
-        if (photo is null)
-        {
-            _logger.LogInformation($"Employee {id} photograph was not found");
-
-            return PartialView("Error", new ErrorViewModel
-            {
-                StatusCode = 404,
-                Message = "Photo not found"
-            });
-        }
 
         _logger.LogInformation($"Photo was sent to /employees/{id}/details from /employees/{id}/files/photograph");
 

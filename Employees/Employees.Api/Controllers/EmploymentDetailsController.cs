@@ -22,6 +22,8 @@ public class EmploymentDetailsController : Controller
     [HttpGet(Endpoint.EmploymentDetails.Get)]
     public async Task<IActionResult> GetEmploymentDetails(int id, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+
         ResponseEmploymentDetails.Get details = await _services.GetByIdAsync(id, token);
 
         return Json(details);
@@ -37,9 +39,11 @@ public class EmploymentDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestEmploymentDetails.Create request, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);    
+            return BadRequest(ModelState);
         }
         
         bool IsCreate = await _services.CreateAsync(id, request, token);
@@ -62,6 +66,7 @@ public class EmploymentDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateEmploymentDetails(int id, RequestEmploymentDetails.Update update, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
 
         bool IsUpdated = await _services.UpdateAsync(id, update, token);
 
