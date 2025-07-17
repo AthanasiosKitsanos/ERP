@@ -23,6 +23,8 @@ public class AdditionalDetailsController : Controller
     [HttpGet(Endpoint.AdditionalDetails.Get)]
     public async Task<IActionResult> GetAdditionalDetails(int id, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+
         ResponseAdditionalDetails.Get details = await _services.GetAsyncById(id, token);
 
         return Json(details);
@@ -38,6 +40,8 @@ public class AdditionalDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateAdditionalDetails(int id, RequestAdditionDetails.Update details, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+
         bool IsUpdated = await _services.UpdateAsync(id, details, token);
 
         if (!IsUpdated)
@@ -58,6 +62,8 @@ public class AdditionalDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestAdditionDetails.Create details, CancellationToken token)
     {
+        token.ThrowIfCancellationRequested();
+        
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);

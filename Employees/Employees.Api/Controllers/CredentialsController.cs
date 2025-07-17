@@ -30,6 +30,8 @@ public class CredentialsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(int id, RequestCredentials.Create request, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+        
         if (!ModelState.IsValid)
         {
             return View(request);
