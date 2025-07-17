@@ -15,7 +15,7 @@ async function cancelForm(id: number, container: HTMLDivElement, employee: Emplo
     {
         e.preventDefault();
         await getView(id, container, employee);
-    }, { once: true })
+    })
 } 
 
 async function getView(id: number, container: HTMLDivElement, employee: Employee):Promise<void>
@@ -83,7 +83,7 @@ async function getUpdateView(id: number, container: HTMLDivElement, employee: Em
         await submitDetails(id, container, employee);
 
         await cancelForm(id, container, employee);
-    }, { once: true })   
+    })   
 }
 
 async function submitDetails(id: number, container: HTMLDivElement, employee: Employee): Promise<void>
@@ -126,7 +126,7 @@ async function submitDetails(id: number, container: HTMLDivElement, employee: Em
         
         await getView(id, container, employee);
         
-    }, { once: true})
+    })
 }
 
 async function getEmployee(id: number):Promise<Employee>

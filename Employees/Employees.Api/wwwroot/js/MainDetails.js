@@ -8,7 +8,7 @@ async function cancelForm(id, container, employee) {
     cancel.addEventListener("click", async (e) => {
         e.preventDefault();
         await getView(id, container, employee);
-    }, { once: true });
+    });
 }
 async function getView(id, container, employee) {
     const response = await fetch(`/employees/${id}/getmaindetails`);
@@ -51,7 +51,7 @@ async function getUpdateView(id, container, employee) {
         phonenumber.placeholder = employee.phoneNumber ?? "";
         await submitDetails(id, container, employee);
         await cancelForm(id, container, employee);
-    }, { once: true });
+    });
 }
 async function submitDetails(id, container, employee) {
     const onSubmit = document.getElementById("employee-update");
@@ -78,7 +78,7 @@ async function submitDetails(id, container, employee) {
             }
         }
         await getView(id, container, employee);
-    }, { once: true });
+    });
 }
 async function getEmployee(id) {
     const response = await fetch(`/${id}/getmaindetails`);

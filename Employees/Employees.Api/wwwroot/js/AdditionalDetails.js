@@ -21,32 +21,50 @@ async function getView(id, container, details) {
             return await createAdditionalDetails(id, container, details);
         }
         await editAdditionalDetails(id, container, details);
-    }, { once: true });
+    });
     anchorTd.appendChild(anchorPath);
 }
+let submitBound = null;
 async function createAdditionalDetails(id, container, details) {
     let response = await fetch(`/additionaldetails/${id}/create`);
-    const html = await response.text();
-    container.innerHTML = html;
+    container.innerHTML = await response.text();
     const submit = document.getElementById("createAdditionalDetails");
     if (!submit) {
         return;
     }
-    submit.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
-        response = await fetch(`/${id}/additionaldetails/create`, { method: 'POST', body: data });
-        const result = await response.json();
-        if (!result.success) {
-            alert("No additional details added");
-            return await getView(id, container, details);
-        }
-        const createdData = result.data;
-        Object.assign(details, createdData);
-        await getView(id, container, details);
-    }, { once: true });
+    if (submitBound) {
+        submit.removeEventListener("submit", submitBound);
+    }
+    const newSubmitBound = (e) => handleSubmit(e, id, container, details);
+    submitBound = newSubmitBound;
+    submit.addEventListener("submit", submitBound);
     await cancelAdditionalDetailsForm(id, container, details);
+}
+async function handleSubmit(e, id, container, details) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const response = await fetch(`/${id}/additionaldetails/create`, { method: 'POST', body: data });
+    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    if (!response.ok && response.status === 400) {
+        const errors = await response.json();
+        for (const field in errors) {
+            const errorMessage = errors[field];
+            const errorPlaceholder = document.getElementById(field);
+            if (errorPlaceholder) {
+                errorPlaceholder.placeholder = errorMessage.join(", ");
+            }
+        }
+        return;
+    }
+    const result = await response.json();
+    if (!result.success) {
+        alert("No additional details added");
+        return await getView(id, container, details);
+    }
+    const createdData = result.data;
+    Object.assign(details, createdData);
+    await getView(id, container, details);
 }
 async function editAdditionalDetails(id, container, details) {
     let response = await fetch(`/additionaldetails/${id}/update`);
@@ -79,7 +97,7 @@ async function editAdditionalDetails(id, container, details) {
             }
         }
         await getView(id, container, details);
-    }, { once: true });
+    });
     await cancelAdditionalDetailsForm(id, container, details);
 }
 async function cancelAdditionalDetailsForm(id, container, details) {
@@ -90,7 +108,7 @@ async function cancelAdditionalDetailsForm(id, container, details) {
     cancelButton.addEventListener("click", async (e) => {
         e.preventDefault();
         await getView(id, container, details);
-    }, { once: true });
+    });
 }
 document.addEventListener("DOMContentLoaded", async () => {
     const id = window.Id;

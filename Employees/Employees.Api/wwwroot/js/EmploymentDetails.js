@@ -25,9 +25,10 @@ async function getView(id, container, details) {
             return await createEmploymentDetails(id, container, details);
         }
         await editEmploymentDetails(id, container, details);
-    }, { once: true });
+    });
     anchotTd.appendChild(anchorPath);
 }
+let submitBound = null;
 async function createEmploymentDetails(id, container, details) {
     let response = await fetch(`/employmentDetails/create`);
     container.innerHTML = await response.text();
@@ -35,26 +36,39 @@ async function createEmploymentDetails(id, container, details) {
     if (!submit) {
         return;
     }
-    submit.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
-        response = await fetch(`/${id}/employmentdetails/create`, { method: 'POST', body: data });
-        const result = await response.json();
-        if (!result.success) {
-            alert("No employment details added");
-            return await getView(id, container, details);
-        }
-        const createdData = result.data;
-        for (const key in createdData) {
-            const value = createdData[key];
-            if (value !== "" && value !== null && value !== undefined) {
-                details[key] = value;
+    if (submitBound) {
+        submit.removeEventListener("submit", submitBound);
+    }
+    const newSubmitBound = (e) => submitHandler(e, id, container, details);
+    submitBound = newSubmitBound;
+    submit.addEventListener("submit", submitBound);
+    await cancelEmploymentDetails(id, container, details);
+}
+async function submitHandler(e, id, container, details) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const response = await fetch(`/${id}/employmentdetails/create`, { method: 'POST', body: data });
+    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    if (!response.ok && response.status === 400) {
+        const errors = await response.json();
+        for (const field in errors) {
+            const errorMessage = errors[field];
+            const errorPlaceholder = document.getElementById(field);
+            if (errorPlaceholder) {
+                errorPlaceholder.placeholder = errorMessage.join(", ");
             }
         }
-        await getView(id, container, details);
-    });
-    await cancelEmploymentDetails(id, container, details);
+        return;
+    }
+    const result = await response.json();
+    if (!result.success) {
+        alert("No employment details added");
+        return await getView(id, container, details);
+    }
+    const createdData = result.data;
+    Object.assign(details, createdData);
+    await getView(id, container, details);
 }
 async function editEmploymentDetails(id, container, details) {
     let response = await fetch(`/employmentdetails/update`);
@@ -94,7 +108,7 @@ async function editEmploymentDetails(id, container, details) {
             }
         }
         await getView(id, container, details);
-    }, { once: true });
+    });
     await cancelEmploymentDetails(id, container, details);
 }
 async function cancelEmploymentDetails(id, container, details) {
@@ -105,7 +119,7 @@ async function cancelEmploymentDetails(id, container, details) {
     cancelButton.addEventListener("click", async (e) => {
         e.preventDefault();
         await getView(id, container, details);
-    }, { once: true });
+    });
 }
 document.addEventListener("DOMContentLoaded", async () => {
     const id = window.Id;

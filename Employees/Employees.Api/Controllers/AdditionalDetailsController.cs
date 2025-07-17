@@ -58,6 +58,11 @@ public class AdditionalDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestAdditionDetails.Create details, CancellationToken token)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
         bool IsCreated = await _services.CreateAsync(id, details, token);
 
         if (!IsCreated)

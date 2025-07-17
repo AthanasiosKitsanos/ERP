@@ -37,6 +37,11 @@ public class EmploymentDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateAdditionalDetails(int id, RequestEmploymentDetails.Create request, CancellationToken token)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);    
+        }
+        
         bool IsCreate = await _services.CreateAsync(id, request, token);
 
         if (!IsCreate)
@@ -57,6 +62,7 @@ public class EmploymentDetailsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateEmploymentDetails(int id, RequestEmploymentDetails.Update update, CancellationToken token)
     {
+
         bool IsUpdated = await _services.UpdateAsync(id, update, token);
 
         if (!IsUpdated)

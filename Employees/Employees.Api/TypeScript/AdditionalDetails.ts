@@ -39,17 +39,18 @@ async function getView(id: number, container: HTMLDivElement, details: Additiona
         
         await editAdditionalDetails(id, container, details)
         
-    }, { once: true })
+    })
 
     anchorTd.appendChild(anchorPath);
 }
 
+let submitBound:((e: Event) => void) | null = null;
+
 async function createAdditionalDetails(id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
 {
     let response: Response = await fetch (`/additionaldetails/${id}/create`);
-    const html = await response.text();
 
-    container.innerHTML = html;
+    container.innerHTML = await response.text();
 
     const submit = document.getElementById("createAdditionalDetails") as HTMLFormElement;
 
@@ -58,31 +59,61 @@ async function createAdditionalDetails(id: number, container: HTMLDivElement, de
         return;
     }
 
-    submit.addEventListener("submit", async e =>
+    if(submitBound)
     {
-        e.preventDefault();
+        submit.removeEventListener("submit", submitBound);
+    }
 
-        const form = e.target as HTMLFormElement;
-        const data = new FormData(form);
+    const newSubmitBound = (e: Event) => handleSubmit(e, id, container, details);
+    submitBound = newSubmitBound;
 
-        response = await fetch(`/${id}/additionaldetails/create`, {method: 'POST', body: data});
-
-        const result = await response.json();
-
-        if(!result.success)
-        {
-            alert("No additional details added");
-            return await getView(id, container, details);
-        }
-
-        const createdData: Partial<AdditionalDetails> = result.data;
-        Object.assign(details, createdData);
-        
-        await getView(id, container, details);
-
-    }, { once: true })
+    submit.addEventListener("submit", submitBound);
 
     await cancelAdditionalDetailsForm(id, container, details);
+}
+
+async function handleSubmit(e: Event, id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
+{
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    const response = await fetch(`/${id}/additionaldetails/create`, {method: 'POST', body: data});
+
+    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    
+    if(!response.ok && response.status === 400)
+    {
+        const errors = await response.json();
+
+        for(const field in errors)
+        {
+            const errorMessage = errors[field];
+
+            const errorPlaceholder = document.getElementById(field) as HTMLInputElement;
+
+            if(errorPlaceholder)
+            {
+                errorPlaceholder.placeholder = errorMessage.join(", ");
+            }
+        }
+        
+        return;
+    }
+
+    const result = await response.json();
+
+    if(!result.success)
+    {
+        alert("No additional details added");
+        return await getView(id, container, details);
+    }
+
+    const createdData: Partial<AdditionalDetails> = result.data;
+    Object.assign(details, createdData);
+    
+    await getView(id, container, details);
 }
 
 async function editAdditionalDetails(id: number, container: HTMLDivElement, details: AdditionalDetails): Promise<void>
@@ -135,7 +166,7 @@ async function editAdditionalDetails(id: number, container: HTMLDivElement, deta
         }
 
         await getView(id, container, details);
-    }, { once: true })
+    })
 
     await cancelAdditionalDetailsForm(id, container, details);
 }
@@ -155,7 +186,7 @@ async function cancelAdditionalDetailsForm(id: number, container: HTMLDivElement
 
         await getView(id, container, details);
 
-    }, { once: true })
+    })
 }
 
 

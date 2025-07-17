@@ -43,10 +43,12 @@ async function getView(id: number, container: HTMLDivElement, details: Employmen
         
         await editEmploymentDetails(id, container, details);
         
-    }, { once: true })
+    })
 
     anchotTd.appendChild(anchorPath);
 }
+
+let submitBound: ((e: Event) => void) | null = null;
 
 async function createEmploymentDetails(id: number, container: HTMLDivElement, details: EmploymentDetails): Promise<void>
 {
@@ -60,37 +62,61 @@ async function createEmploymentDetails(id: number, container: HTMLDivElement, de
         return;
     }
 
-    submit.addEventListener("submit", async e =>
+    if(submitBound)
     {
-        e.preventDefault();
+        submit.removeEventListener("submit", submitBound);
+    }
 
-        const form = e.target as HTMLFormElement;
-        const data = new FormData(form);
+    const newSubmitBound = (e: Event) => submitHandler(e, id, container, details)
+    submitBound = newSubmitBound;
 
-        response = await fetch(`/${id}/employmentdetails/create`, {method: 'POST', body: data});
-        
-        const result = await response.json();
+    submit.addEventListener("submit", submitBound);
 
-        if(!result.success)
+    await cancelEmploymentDetails(id, container, details);
+}
+
+async function submitHandler(e: Event, id: number, container: HTMLDivElement, details: EmploymentDetails)
+{
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    const response = await fetch(`/${id}/employmentdetails/create`, {method: 'POST', body: data});
+
+    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    
+    if(!response.ok && response.status === 400)
+    {
+        const errors = await response.json();
+
+        for(const field in errors)
         {
-            alert("No employment details added");
-            return await getView(id, container, details);
-        }
+            const errorMessage = errors[field];
 
-        const createdData: Partial<EmploymentDetails> = result.data;
-        for(const key in createdData)
-        {
-            const value = createdData[key as keyof EmploymentDetails];
-            if(value !== "" && value !== null && value !== undefined)
+            const errorPlaceholder = document.getElementById(field) as HTMLInputElement;
+
+            if(errorPlaceholder)
             {
-                (details as any)[key] = value;
+                errorPlaceholder.placeholder = errorMessage.join(", ");
             }
         }
 
-        await getView(id, container, details);
-    })
+        return;
+    }
 
-    await cancelEmploymentDetails(id, container, details);
+    const result = await response.json();
+
+    if(!result.success)
+    {
+        alert("No employment details added");
+        return await getView(id, container, details);
+    }
+
+    const createdData: Partial<EmploymentDetails> = result.data;
+    Object.assign(details, createdData);
+
+    await getView(id, container, details);
 }
 
 async function editEmploymentDetails(id: number, container: HTMLDivElement, details: EmploymentDetails)
@@ -156,7 +182,7 @@ async function editEmploymentDetails(id: number, container: HTMLDivElement, deta
 
         await getView(id, container, details);
 
-    }, {once: true})
+    })
 
     await cancelEmploymentDetails(id, container, details);
 }
@@ -175,7 +201,7 @@ async function cancelEmploymentDetails(id: number, container: HTMLDivElement, de
         e.preventDefault();
 
         await getView(id, container, details);
-    }, { once: true })
+    })
 }
 document.addEventListener("DOMContentLoaded", async () =>
 {
