@@ -43,9 +43,7 @@ public class CredentialsController : Controller
             return View(request);
         }
 
-        Credentials credentials = request.MapToCreateRequest();
-
-        credentials.EmployeeId = id;
+        Credentials credentials = request.MapToCreateRequest(id);
 
         bool IsCreated = await _services.CreateAsync(credentials, cancellationToken);
 
