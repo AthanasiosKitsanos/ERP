@@ -9,7 +9,7 @@ public static class RequestMapping
     {
         return new Roles
         {
-            Id = create.Id,
+            Id = create.RoleId,
             EmployeeId = id
         };
     }
@@ -18,7 +18,7 @@ public static class RequestMapping
     {
         return new Roles
         {
-            Id = update.Id,
+            Id = update.RoleId,
             EmployeeId = id
         };
     }

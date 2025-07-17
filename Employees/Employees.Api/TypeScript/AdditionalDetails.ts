@@ -39,7 +39,7 @@ async function getView(id: number, container: HTMLDivElement, details: Additiona
         
         await editAdditionalDetails(id, container, details)
         
-    })
+    }   )
 
     anchorTd.appendChild(anchorPath);
 }
