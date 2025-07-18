@@ -65,7 +65,6 @@ public class RolesRepository : IRolesRepository
         string query = @"SELECT r.RoleName
                         FROM Roles AS r
                         JOIN RoleEmployee AS re ON re.RoleId = r.Id
-                        JOIN Employees AS e ON e.EmployeeId = re.EmployeeId
                         WHERE re.EmployeeId = @EmployeeId";
 
         await using (SqlConnection connection = new SqlConnection(_connection.ConnectionString))
