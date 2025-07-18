@@ -68,7 +68,7 @@ public class RolesController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true, data = create });
+        return Json(new { success = true });
     }
 
     [HttpGet(Endpoint.Views.RolesViews.Update)]
@@ -90,6 +90,6 @@ public class RolesController : Controller
             return Json(new { success = false });
         }
 
-        return Json(new { success = true, data = update });
+        return Json(new { success = true });
     }
 }
