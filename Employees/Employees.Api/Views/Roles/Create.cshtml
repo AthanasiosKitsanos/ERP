@@ -1,12 +1,26 @@
 ﻿<link rel="stylesheet" href="~/css/update.css" asp-append-version="true">
 
-<form id="roleForm">
+<form id="createRoleForm">
     @Html.AntiForgeryToken()
     <table>
         <tbody>
             <tr>
                 <td><b>Role:</b></td>
-                <td id="roleselection"></td>
+                <td>
+                    <select name="RoleId" id="roleSelection">
+                        <option id="defaultOption" value="">--Select Role--</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <button type="submit">Save</button>
+                </td>
+
+                <td>
+                    <a href="#" id="cancelRolesForm">Cancel</a>
+                </td>
             </tr>
         </tbody>
     </table>
