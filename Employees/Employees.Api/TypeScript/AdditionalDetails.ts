@@ -81,7 +81,7 @@ async function handleSubmit(e: Event, id: number, container: HTMLDivElement, det
 
     const response = await fetch(`/${id}/additionaldetails/create`, {method: 'POST', body: data});
 
-    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    const clear: void = document.querySelectorAll("input").forEach(input => input.placeholder = "");
     
     if(!response.ok && response.status === 400)
     {
@@ -89,15 +89,23 @@ async function handleSubmit(e: Event, id: number, container: HTMLDivElement, det
 
         for(const field in errors)
         {
-            const errorMessage = errors[field];
+            const input = document.getElementById(field) as HTMLInputElement;
 
-            const errorPlaceholder = document.getElementById(field) as HTMLInputElement;
-
-            if(errorPlaceholder)
+            if(input)
             {
-                errorPlaceholder.placeholder = errorMessage.join(", ");
+                input.placeholder = errors[field].join(", ");
             }
         }
+
+        setTimeout( () =>
+        {
+            for(const field in errors)
+            {   
+                const input = document.getElementById(field) as HTMLInputElement;
+                
+                input.placeholder = "";
+            }
+        }, 1750);
         
         return;
     }

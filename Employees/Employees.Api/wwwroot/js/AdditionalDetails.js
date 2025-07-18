@@ -45,16 +45,21 @@ async function handleSubmit(e, id, container, details) {
     const form = e.target;
     const data = new FormData(form);
     const response = await fetch(`/${id}/additionaldetails/create`, { method: 'POST', body: data });
-    document.querySelectorAll("input").forEach(input => input.placeholder = "");
+    const clear = document.querySelectorAll("input").forEach(input => input.placeholder = "");
     if (!response.ok && response.status === 400) {
         const errors = await response.json();
         for (const field in errors) {
-            const errorMessage = errors[field];
-            const errorPlaceholder = document.getElementById(field);
-            if (errorPlaceholder) {
-                errorPlaceholder.placeholder = errorMessage.join(", ");
+            const input = document.getElementById(field);
+            if (input) {
+                input.placeholder = errors[field].join(", ");
             }
         }
+        setTimeout(() => {
+            for (const field in errors) {
+                const input = document.getElementById(field);
+                input.placeholder = "";
+            }
+        }, 1750);
         return;
     }
     const result = await response.json();

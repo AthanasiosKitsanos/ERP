@@ -53,12 +53,17 @@ async function submitHandler(e, id, container, details) {
     if (!response.ok && response.status === 400) {
         const errors = await response.json();
         for (const field in errors) {
-            const errorMessage = errors[field];
-            const errorPlaceholder = document.getElementById(field);
-            if (errorPlaceholder) {
-                errorPlaceholder.placeholder = errorMessage.join(", ");
+            const input = document.getElementById(field);
+            if (input) {
+                input.placeholder = errors[field].join(", ");
             }
         }
+        setTimeout(() => {
+            for (const field in errors) {
+                const input = document.getElementById(field);
+                input.placeholder = "";
+            }
+        }, 1750);
         return;
     }
     const result = await response.json();

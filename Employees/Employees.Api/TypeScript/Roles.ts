@@ -35,44 +35,98 @@ async function getView(id: number, container: HTMLDivElement, role: Role): Promi
     })
 }
 
+let submitBound: ((e: Event) => void) | null = null;
+
 async function createRole(id: number, container: HTMLDivElement, role: Role): Promise<void>
 {
     let response: Response = await fetch(`/roles/create`);
 
     container.innerHTML = await response.text();
 
-    const form = document.getElementById("roleForm") as HTMLFormElement;
+    const submit = document.getElementById("createRoleForm") as HTMLFormElement;
 
     response = await fetch(`/${id}/roles/getall`);
 
     const roleList = await response.json();
 
-    const td = document.getElementById("roleselection") as HTMLTableRowElement;
-    const selection = document.createElement("select") as HTMLSelectElement;
-    selection.name = "Id";
+    const selection = document.getElementById("roleSelection") as HTMLSelectElement;
     
     roleList.forEach((role: Role) =>
     {
         const option = document.createElement("option") as HTMLOptionElement;
-
-        Object.entries(role).forEach(([key, value]) =>
+        if(role.id)
         {
-            if(key === "id")
-            {
-                option.value = value;
-            }
+            option.value = role.id.toString();
+        }
 
-            if(key === "roleName")
-            {
-                option.text = value;
-            }
-        })
+        if(role.roleName)
+        {
+            option.text = role.roleName;
+        }
 
         selection.appendChild(option);
     })
 
-    td.appendChild(selection);
+    const selectedOption: HTMLOptionElement = selection.options[selection.selectedIndex];
 
+    if(submitBound)
+    {
+        submit.removeEventListener("submit", submitBound);
+    }
+
+    const newSubmitBound = (e: Event) => handleSubmit(e, id, container, role, selection);
+    submitBound = newSubmitBound;
+
+    submit.addEventListener("submit", submitBound);
+
+    await cancelRoleForm(id, container, role);
+}
+
+async function handleSubmit(e: Event, id: number, container: HTMLDivElement, role: Role, selection: HTMLSelectElement): Promise<void>
+{
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    const response = await fetch(`/${id}/roles/create`, { method: 'POST', body: data });
+
+    if(!response.ok && response.status === 400)
+    {
+        const errors = await response.json();
+
+        const defaultOption = document.getElementById("defaultOption") as HTMLOptionElement;
+
+        const defaultText: string = defaultOption.text;
+
+        for(const field in errors)
+        {
+            defaultOption.text = errors[field].join(", ");
+        }
+
+        setTimeout(() => { defaultOption.text = defaultText }, 1750);
+
+        return;
+    }
+
+    const result = await response.json();
+
+    if(!result.success)
+    {
+        return await getView(id, container, role);
+    }
+
+    const selectedOption: HTMLOptionElement = selection.options[selection.selectedIndex]
+
+    if(selectedOption)
+    {
+        role.id = parseInt(selectedOption.value);
+        role.roleName = selectedOption.text;
+
+        console.log(`Role Id = ${role.id} and RoleName = ${role.roleName}`);
+    }
+
+    await getView(id, container, role);
 }
 
 async function editRole(id: number, container: HTMLDivElement, role: Role): Promise<void>
@@ -122,12 +176,12 @@ async function editRole(id: number, container: HTMLDivElement, role: Role): Prom
             return await getView(id, container, role);
         }
 
-        const updatedData : Partial<Role> = result.data;
-        const newRole = roleList.find((r: Role) => r.id === updatedData.id);
+        const selectedOption = selection.options[selection.selectedIndex];
 
-        if(newRole)
-        {
-            role = newRole;
+        if(selectedOption)
+        {   
+            role.id = parseInt(selectedOption.value);
+            role.roleName = selectedOption.text;
         }
 
         await getView(id, container, role);

@@ -18,28 +18,59 @@ async function getView(id, container, role) {
         await editRole(id, container, role);
     });
 }
+let submitBound = null;
 async function createRole(id, container, role) {
     let response = await fetch(`/roles/create`);
     container.innerHTML = await response.text();
-    const form = document.getElementById("roleForm");
+    const submit = document.getElementById("createRoleForm");
     response = await fetch(`/${id}/roles/getall`);
     const roleList = await response.json();
-    const td = document.getElementById("roleselection");
-    const selection = document.createElement("select");
-    selection.name = "Id";
+    const selection = document.getElementById("roleSelection");
     roleList.forEach((role) => {
         const option = document.createElement("option");
-        Object.entries(role).forEach(([key, value]) => {
-            if (key === "id") {
-                option.value = value;
-            }
-            if (key === "roleName") {
-                option.text = value;
-            }
-        });
+        if (role.id) {
+            option.value = role.id.toString();
+        }
+        if (role.roleName) {
+            option.text = role.roleName;
+        }
         selection.appendChild(option);
     });
-    td.appendChild(selection);
+    const selectedOption = selection.options[selection.selectedIndex];
+    if (submitBound) {
+        submit.removeEventListener("submit", submitBound);
+    }
+    const newSubmitBound = (e) => handleSubmit(e, id, container, role, selection);
+    submitBound = newSubmitBound;
+    submit.addEventListener("submit", submitBound);
+    await cancelRoleForm(id, container, role);
+}
+async function handleSubmit(e, id, container, role, selection) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const response = await fetch(`/${id}/roles/create`, { method: 'POST', body: data });
+    if (!response.ok && response.status === 400) {
+        const errors = await response.json();
+        const defaultOption = document.getElementById("defaultOption");
+        const defaultText = defaultOption.text;
+        for (const field in errors) {
+            defaultOption.text = errors[field].join(", ");
+        }
+        setTimeout(() => { defaultOption.text = defaultText; }, 1750);
+        return;
+    }
+    const result = await response.json();
+    if (!result.success) {
+        return await getView(id, container, role);
+    }
+    const selectedOption = selection.options[selection.selectedIndex];
+    if (selectedOption) {
+        role.id = parseInt(selectedOption.value);
+        role.roleName = selectedOption.text;
+        console.log(`Role Id = ${role.id} and RoleName = ${role.roleName}`);
+    }
+    await getView(id, container, role);
 }
 async function editRole(id, container, role) {
     let response = await fetch(`/roles/update`);
@@ -68,10 +99,10 @@ async function editRole(id, container, role) {
             alert(`Role Id = ${role.id} and Selected id = ${selection.value}`);
             return await getView(id, container, role);
         }
-        const updatedData = result.data;
-        const newRole = roleList.find((r) => r.id === updatedData.id);
-        if (newRole) {
-            role = newRole;
+        const selectedOption = selection.options[selection.selectedIndex];
+        if (selectedOption) {
+            role.id = parseInt(selectedOption.value);
+            role.roleName = selectedOption.text;
         }
         await getView(id, container, role);
     });

@@ -92,16 +92,24 @@ async function submitHandler(e: Event, id: number, container: HTMLDivElement, de
 
         for(const field in errors)
         {
-            const errorMessage = errors[field];
+            const input = document.getElementById(field) as HTMLInputElement;
 
-            const errorPlaceholder = document.getElementById(field) as HTMLInputElement;
-
-            if(errorPlaceholder)
+            if(input)
             {
-                errorPlaceholder.placeholder = errorMessage.join(", ");
+                input.placeholder = errors[field].join(", ");
             }
         }
 
+        setTimeout( () =>
+        {
+            for(const field in errors)
+            {
+                const input = document.getElementById(field) as HTMLInputElement;
+
+                input.placeholder = "";
+            }
+        }, 1750);
+        
         return;
     }
 
