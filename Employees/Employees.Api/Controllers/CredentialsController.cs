@@ -52,12 +52,8 @@ public class CredentialsController : Controller
         if (!IsCreated)
         {
             ModelState.AddModelError(string.Empty, "There was something wrong while adding the credentials");
-            _logger.LogWarning("Credentials were not created");
-
             return View(request);
         }
-
-        _logger.LogInformation("Credentials were created");
 
         return RedirectToAction("Index", "Employees");
     }

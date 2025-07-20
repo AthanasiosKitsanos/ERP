@@ -26,8 +26,6 @@ public class FileController : Controller
         
         ResponseFile.GetPhoto photo = await _services.GetPhotoAsync(id, token);
 
-        _logger.LogInformation($"Photo was sent to /employees/{id}/details from /employees/{id}/files/photograph");
-
         return File(photo.Photograph, photo.Mime);
     }
 }
