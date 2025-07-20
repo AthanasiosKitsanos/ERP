@@ -17,7 +17,7 @@ public class AdditionalDetailsController : Controller
     [HttpGet(Endpoint.Views.AdditionalDetailsViews.Get)]
     public IActionResult Get(int id)
     {
-        return PartialView(new EmplooyeeId(id));
+        return PartialView(new EmployeeId(id));
     }
 
     [HttpGet(Endpoint.AdditionalDetails.Get)]

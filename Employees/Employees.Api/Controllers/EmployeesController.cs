@@ -27,28 +27,25 @@ public class EmployeesController : Controller
     {
         if (cancellationToken.IsCancellationRequested)
         {
-            _logger.LogWarning("Get All Employees cancelled by client");
             cancellationToken.ThrowIfCancellationRequested();
         }
 
         List<ResponseEmployee.Get> responseList = new List<ResponseEmployee.Get>();
+
 
         await foreach (ResponseEmployee.Get response in _services.GetAllAsync())
         {
             responseList.Add(response);
         }
 
-        _logger.LogInformation("List of Employees created and was sent as Json.");
         return Json(responseList);
     }
 
     [HttpGet(Endpoint.Views.EmployeeViews.Details)]
     public IActionResult Details(int id)
     {
-        return View(new EmplooyeeId(id));
+        return View(new EmployeeId(id));
     }
-
-
 
     [HttpGet(Endpoint.Employees.Get)]
     public async Task<IActionResult> GetMainDetails(int id, CancellationToken token)
@@ -59,15 +56,12 @@ public class EmployeesController : Controller
 
         if (response is null)
         {
-            _logger.LogInformation($"There was an error while getting the main details");
             return Json(new
             {
                 success = false,
                 error = "Employee details not found"
             });
         }
-
-        _logger.LogInformation($"Main details are sent to /employees/{id}/details");
 
         return Json(response);
     }
@@ -94,7 +88,6 @@ public class EmployeesController : Controller
 
         if (emailExists)
         {
-            _logger.LogInformation($"{request.Email} already exists, returning to the Create View");
             ModelState.AddModelError(nameof(request.Email), "Email already exists");
             return View(request);
         }
@@ -106,8 +99,6 @@ public class EmployeesController : Controller
             _logger.LogWarning("Employee was not created. Id was 0 or smaller");
             return NotFound();
         }
-
-        _logger.LogInformation($"Employee with Id: {employeeId} is created");
 
         return RedirectToAction("Create", "Credentials", new { id = employeeId });
     }
@@ -143,11 +134,7 @@ public class EmployeesController : Controller
     [HttpGet(Endpoint.Views.EmployeeViews.Delete)]
     public async Task<IActionResult> Delete(int id)
     {
-        _logger.LogInformation($"url Id {id}");
-
         ResponseEmployee.Delete response = await _services.GetInfoForDeleteAysnc(id);
-
-        _logger.LogInformation($"Employee Id {response.Id}");
         return View(response);
     }
 
@@ -155,12 +142,10 @@ public class EmployeesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ConfirmDelete(int id)
     {
-        _logger.LogInformation($"Delete Id: {id}");
         bool IsDeleted = await _services.DeleteByIdAsync(id);
 
         if (!IsDeleted)
         {
-            _logger.LogWarning("The Employe was not deleted");
             return RedirectToAction("Index", "Employees");    
         }
 

@@ -1,4 +1,4 @@
 ﻿namespace Employees.Domain;
 
-public record EmplooyeeId(int Id);
+public record EmployeeId(int Id);
 
